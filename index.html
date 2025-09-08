@@ -2,16 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Josephine Student">
-<meta name="author" content="John J. Curtin">
-<meta name="dcterms.date" content="2024-03-11">
-<meta name="keywords" content="Substance use disorders, Precision mental health">
+<meta name="author" content="Stephanie B. Ward">
+<meta name="dcterms.date" content="2025-09-08">
+<meta name="keywords" content="Sexual consent, Sexual assault, Machine learning, College student, Alcohol">
 
-<title>A Super Cool Study - Take 2</title>
+<title>Identifying situational and dispositional predictors of college students’ active consent communication</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -47,21 +46,19 @@ div.csl-indent {
 }</style>
 
 
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -91,184 +88,158 @@ window.Quarto = {
 };
 </script>
 
-<meta name="citation_title" content="A Super Cool Study - Take 2">
-<meta name="citation_abstract" content="This study found some pretty cool results that have both high impact and important clinical implications.  For example ...
-">
-<meta name="citation_keywords" content="Substance use disorders,Precision mental health">
-<meta name="citation_author" content="Josephine Student">
-<meta name="citation_author" content="John J. Curtin">
-<meta name="citation_publication_date" content="2024-03-11">
-<meta name="citation_cover_date" content="2024-03-11">
-<meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-03-11">
-<meta name="citation_language" content="en">
-<meta name="citation_journal_title" content="Journal of Important Findings">
-<meta name="citation_reference" content="citation_title=Literate programming;,citation_author=Donald E. Knuth;,citation_publication_date=1984-05;,citation_cover_date=1984-05;,citation_year=1984;,citation_fulltext_html_url=https://doi.org/10.1093/comjnl/27.2.97;,citation_issue=2;,citation_doi=10.1093/comjnl/27.2.97;,citation_issn=0010-4620;,citation_volume=27;,citation_journal_title=Comput. J.;,citation_publisher=Oxford University Press, Inc.;">
 </head>
 
-<body>
+<body class="quarto-light">
 
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">A Super Cool Study - Take 2</h1>
-          </div>
-
-    
-    <div class="quarto-title-meta-container">
-      <div class="quarto-title-meta-column-start">
-            <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Authors</div>
-          <div class="quarto-title-meta-heading">Affiliation</div>
-          
-                <div class="quarto-title-meta-contents">
-            <p class="author">Josephine Student <a href="https://orcid.org/0000-0002-7859-8394" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        Department of Psychology, University of Wisconsin-Madison
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">John J. Curtin <a href="mailto:jjcurtin@wisc.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-3286-938X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        Department of Psychology, University of Wisconsin-Madison
-                      </p>
-                  </div>
-                    </div>
-        
-        <div class="quarto-title-meta">
-
-                      
-                <div>
-            <div class="quarto-title-meta-heading">Published</div>
-            <div class="quarto-title-meta-contents">
-              <p class="date">March 11, 2024</p>
-            </div>
-          </div>
-          
-                
-              </div>
-      </div>
-      <div class="quarto-title-meta-column-end quarto-other-formats-target">
-      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Other Formats</div><div class="quarto-title-meta-contents"><p><a href="index.docx"><i class="bi bi-file-word"></i>MS Word</a></p></div><div class="quarto-title-meta-contents"><p><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst (apaish-manuscript)</a></p></div></div></div>
-    </div>
-
-    <div>
-      <div class="abstract">
-        <div class="block-title">Abstract</div>
-        <p>This study found some pretty cool results that have both high impact and important clinical implications. For example …</p>
-      </div>
-    </div>
-
-    <div>
-      <div class="keywords">
-        <div class="block-title">Keywords</div>
-        <p>Substance use disorders, Precision mental health</p>
-      </div>
-    </div>
-
-    <div class="quarto-other-links-text-target">
-    </div>  </div>
-</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#sub-heading---level-3" id="toc-sub-heading---level-3" class="nav-link" data-scroll-target="#sub-heading---level-3">Sub-heading - level 3</a></li>
-  <li><a href="#symbols-and-equations" id="toc-symbols-and-equations" class="nav-link" data-scroll-target="#symbols-and-equations">Symbols and Equations</a></li>
-  <li><a href="#citations-references" id="toc-citations-references" class="nav-link" data-scroll-target="#citations-references">Citations &amp; References</a></li>
-  </ul></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
-  <ul class="collapse">
-  <li><a href="#data-figures" id="toc-data-figures" class="nav-link" data-scroll-target="#data-figures">Data Figures</a></li>
-  <li><a href="#figures-from-images" id="toc-figures-from-images" class="nav-link" data-scroll-target="#figures-from-images">Figures from images</a></li>
-  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
-  <li><a href="#analysis-results" id="toc-analysis-results" class="nav-link" data-scroll-target="#analysis-results">Analysis Results</a></li>
-  </ul></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="index-preview.html"><i class="bi bi-journal-code"></i>Article Notebook</a></li><li><a href="notebooks/fig1-preview.html"><i class="bi bi-journal-code"></i>Figure 1</a></li><li><a href="notebooks/lm-preview.html"><i class="bi bi-journal-code"></i>Linear model 1</a></li><li><a href="notebooks/tables-preview.html"><i class="bi bi-journal-code"></i>Tables</a></li></ul></div></nav>
-</div>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="notebooks/fig1.embed-preview.html"><i class="bi bi-journal-code"></i>Figure 1</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Identifying situational and dispositional predictors of college students’ active consent communication</h1>
+<p class="subtitle lead">A micro-longitudinal investigation of verbal and nonverbal sexual consent cues</p>
 </div>
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Stephanie B. Ward <a href="mailto:sbward@wisc.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/https://orcid.org/0000-0002-8191-0158" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 8, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Sexual consent, Sexual assault, Machine learning, College student, Alcohol</p>
+  </div>
+</div>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>You can write your text using markdown.</p>
+</header>
+
+
+<section id="specific-aims" class="level2">
+<h2 class="anchored" data-anchor-id="specific-aims">SPECIFIC AIMS</h2>
+<p>Sexual consent is a multidimensional process made up of thoughts, feelings, and behaviors; the presence of sexual consent distinguishes wanted sexual encounters from sexual assault <span class="citation" data-cites="muehlenhardComplexitiesSexualConsent2016">(<a href="#ref-muehlenhardComplexitiesSexualConsent2016" role="doc-biblioref">Muehlenhard et al. 2016</a>)</span>. People can communicate willingness to engage in sexual activity through the exchange of <strong>active consent cues</strong>, which may be verbal or nonverbal and direct or indirect, ranging from a clear and spoken “yes” to subtle body language <span class="citation" data-cites="willisAssociationsInternalExternal2019">(<a href="#ref-willisAssociationsInternalExternal2019" role="doc-biblioref">Willis, Blunt-Vinti, and Jozkowski 2019</a>)</span>. Research shows that <strong>dispositional factors</strong>, including personal characteristics, histories, attitudes, and traits, are linked to differences in how people communicate consent. Gender, for instance, has emerged as a salient factor, with several studies concluding that women are less likely than men to use direct, verbal cues <span class="citation" data-cites="jozkowskiGenderDifferencesHeterosexual2014 willisSexualConsentDiverse2022">(<a href="#ref-jozkowskiGenderDifferencesHeterosexual2014" role="doc-biblioref">Jozkowski et al. 2014</a>; <a href="#ref-willisSexualConsentDiverse2022" role="doc-biblioref">Willis and Smith 2022</a>)</span>.</p>
+<p>Extant research has addressed <em>who</em> seems more likely to use certain types of active consent communication, but less is known about the encounter-specific factors that influence <em>when</em> individuals use these cues or why they use them in some situations and not others. This is a problem because the situational context of a sexual encounter may be more important than individual differences in how people tend to communicate consent in general. Recent research indicates that within-person variability can account for between 50% and 80% of the variance in active consent communication, suggesting that people are more dynamic than static in their active consent cue usage across sexual encounters <span class="citation" data-cites="willisAssessingWithinPersonVariability2021">(<a href="#ref-willisAssessingWithinPersonVariability2021" role="doc-biblioref">Willis et al. 2021</a>)</span>. <strong>Situational factors</strong> such as co-occurring alcohol consumption also have been shown to moderate associations between dispositional factors and active consent behavior (e.g., heterosexual women appear to use more verbal cues when a sexual encounter follows alcohol use) <span class="citation" data-cites="marcantonioWithinPersonExaminationAlcoholInvolved2024">(<a href="#ref-marcantonioWithinPersonExaminationAlcoholInvolved2024" role="doc-biblioref">Marcantonio et al. 2024</a>)</span>.</p>
+<p>Compared to attitudes or stable traits, factors that vary from one encounter to the next may serve as more readily modifiable targets for consent-focused sexual assault prevention efforts focused on changing behavior <span class="citation" data-cites="porat2024">(<a href="#ref-porat2024" role="doc-biblioref">Porat et al. 2024</a>)</span>. However, progress toward understanding the conditions under which people use more active verbal and nonverbal cues has been limited. Possible reasons for this include widespread reliance on retrospective reports prone to recall bias, as well as analytic strategies that lead to overfitting, inflated effect sizes, and poor reproducibility. To advance the field, the proposed research will leverage micro-longitudinal data and analytic approaches that can reduce dimensionality without becoming too overfit to generalize to new samples.</p>
+<p>To identify robust predictors of active sexual consent communication and evaluate how they interact across levels, I will analyze &gt;500 partnered sexual events reported by ~270 college students over a 28-day daily diary period. Outcomes are verbal and nonverbal cue usage, modeled separately as distinct forms of active consent communication. Predictors fall into two blocks: dispositional (baseline) and situational (encounter-level) factors. Analyses will use elastic net regression (primary) and random forest (secondary robustness check), evaluated with nested, participant-grouped cross-validation. A participant-level bootstrap (or Bayesian bootstrap) will estimate uncertainty in ΔMAE when comparing blocks (dispositional vs.&nbsp;situational) and when adding a small, theory-driven interaction block. The overarching goal of this project is to inform actionable intervention targets by examining active consent communication using mirco-longitudinal data and both regularized and nonparametric machine learning techniques. Thus, I propose the following aims.</p>
+<p><strong>Aim 1: Identify and compare the predictive contributions of dispositional and situational features for active verbal and nonverbal consent cues, and determine which features within each block contribute most strongly.<br>
+</strong><u>Hypotheses</u>: (H1a) Situational features will improve out-of-participant generalization beyond dispositional features (ΔMAE &lt; 0). (H1b) Situational-only will outperform dispositional-only models. (H1c) Combined models will outperform single-block models.</p>
+<p><strong>Aim 2: Evaluate whether a pre-specified, cross-level interaction block improves generalization and examine which interactions, if any, yield reliable improvements under cross-validation.</strong> A small, theory-driven set of interaction terms will be tested as a block. Interactions will be retained only if the block improves model performance under cross-validation.<br>
+<u>Hypotheses:</u> (H3a-e) – –&nbsp;<br>
+(H3f) Interaction gains will differ by outcome for verbal versus nonverbal consent communication.</p>
+</section>
+<section id="background-and-significance" class="level2">
+<h2 class="anchored" data-anchor-id="background-and-significance">BACKGROUND AND SIGNIFICANCE</h2>
+<p>Rates of sexual assault on U.S. college campuses remain virtually unchanged after more than 30 years of dedicated research and intervention <span class="citation" data-cites="kossScopeRapeIncidence1987 kossScopeRapeVictimization2022">(<a href="#ref-kossScopeRapeIncidence1987" role="doc-biblioref">Koss, Gidycz, and Wisniewski 1987</a>; <a href="#ref-kossScopeRapeVictimization2022" role="doc-biblioref">Koss et al. 2022</a>)</span>. Lack of consent is increasingly recognized as defining characteristic of sexual assault, so institutions have incorporated consent-focused education into sexual assault prevention efforts <span class="citation" data-cites="beresSpontaneousSexualConsent2007 beresPerspectivesRapepreventionEducators2020">(<a href="#ref-beresSpontaneousSexualConsent2007" role="doc-biblioref">M. A. Beres 2007</a>; <a href="#ref-beresPerspectivesRapepreventionEducators2020" role="doc-biblioref">M. Beres 2020</a>)</span>. A substantial gap exists between the standards for consent that these programs espouse and the consent practices that people describe themselves using during real-world sexual encounters <span class="citation" data-cites="curtis2017">(<a href="#ref-curtis2017" role="doc-biblioref">Curtis and Burnett 2017</a>)</span>. University policy and consent education promote explicit and enthusiastic consent (e.g., “only yes means yes!”), but many people rely on passive cues (not resisting, not saying no) or assumptions to determine consent. people prefer nonverbal communication and many rely on passive cues (not resisting, not saying no) or assumptions based on context to determine consent <span class="citation" data-cites="marcantonioEffectsTypicalBinge2022 jozkowskiSexualConsentOut2018 jozkowskiPeoplePerceiveTransitioning2020">(<a href="#ref-marcantonioEffectsTypicalBinge2022" role="doc-biblioref">Marcantonio, Willis, and Jozkowski 2022</a>; <a href="#ref-jozkowskiSexualConsentOut2018" role="doc-biblioref">Jozkowski, Manning, and Hunt 2018</a>; <a href="#ref-jozkowskiPeoplePerceiveTransitioning2020" role="doc-biblioref">Jozkowski and Willis 2020</a>)</span>. Clarifying what factors predict which students are more likely to use active consent cues and when they are more likely to use them will be crucial for informing intervention messaging grounded in students’ lived experiences.&nbsp;</p>
+<p>Alcohol is a salient factor in the context of both sexual assault and consensual sexual activity among college students, yet sexual assault prevention and risk-reduction programs rarely include information about how alcohol can affect consent communication <span class="citation" data-cites="leoneBarriersAddressingAlcohol2022">(<a href="#ref-leoneBarriersAddressingAlcohol2022" role="doc-biblioref">Leone et al. 2022</a>)</span>. While scholars and practitioners have started integrating alcohol and sexual assault programming, there is far more research on alcohol-related sexual assault compared to consent involving alcohol use <span class="citation" data-cites="kilpatrickUnderstandingAddressingAlcohol2023">(<a href="#ref-kilpatrickUnderstandingAddressingAlcohol2023" role="doc-biblioref">Kilpatrick and Hahn 2023</a>)</span>. Sexual assault and consent research often examine the same processes from different angles (e.g., how consent is established versus how it breaks down), and experts from both domains have called for a renewed focus on situational factors explored through a behavioral science lens <span class="citation" data-cites="gantmanBehavioralScienceFrameworkUnderstanding2022 burtonTeachingSexualConsent2023 davisUnderstandingAlcoholInvolvedSexual2023">(<a href="#ref-gantmanBehavioralScienceFrameworkUnderstanding2022" role="doc-biblioref">Gantman and Paluck 2022</a>; <a href="#ref-burtonTeachingSexualConsent2023" role="doc-biblioref">Burton et al. 2023</a>; <a href="#ref-davisUnderstandingAlcoholInvolvedSexual2023" role="doc-biblioref">Davis et al. 2023</a>)</span>. These converging frameworks and recommendations present a unique opportunity; to leverage knowledge from the relatively vast sexual assault literature to learn more about active consent communication in the context of alcohol consumption.</p>
+<p>Researchers have examined situational factors in relation to consent by conducting systematic, within-person comparisons of two matched events, or by grounding responses to cross-sectional surveys in each participant’s most recent sexual encounter. While informative, these studies ask people to remember past events and thus risk recall bias. In contrast, intensive longitudinal designs gather repeated observations over days or weeks, capturing behaviors and surrounding factors closer in time to when they occur. Experiential sampling via electronic daily reports or “diaries” can achieve this, allowing for more precise measurement of malleable situational factors while improving ecological validity.</p>
+<p>A key point of alignment across the sexual assault and consent literatures centers on their use of social ecological models, which posit that factors at the individual, interpersonal, community and societal levels interactively influence the incidence of focal outcomes. Using an ecological framework means that researchers can incorporate risk and protective factors derived from different disciplines into the same conceptual model, allowing for consideration of their complex interplay. However, building complex models with multiple predictors and relatively small sample sizes contributes to overfitting. This problem is exacerbated by reliance on analytic approaches that typically develop and validate models in the same sample, capitalizing on noise specific to the sample and inflating effect sizes in the process. Still, because sexual consent is a heterogeneous, multi- determined process, models fit with just a few predictors can only explain a small portion of the variance.&nbsp;</p>
+<p>Tools from the field of machine learning may offer a solution. Regularization, for instance, can be used within resampling methods such as cross-validation to facilitate variable selection, reduce overfitting, and estimate how well models will generalize to new data. Using these complementary techniques can facilitate building more parsimonious and reproducible models, as evidenced by recent studies related to sexual violence <span class="citation" data-cites="walsh2024 cruz-mendoza2025">(<a href="#ref-walsh2024" role="doc-biblioref">Walsh et al. 2024</a>; <a href="#ref-cruz-mendoza2025" role="doc-biblioref">Cruz-Mendoza et al. 2025</a>)</span>.</p>
+<p>The proposed research moves beyond the limitations of prior studies, allowing us to consider many interdisciplinary predictors of active consent behavior and to isolate those most critical across levels of analysis. This rigorous approach enhances the significance of our findings: any dispositional predictors identified as important will have survived penalization, and their relative contributions will be verified in a model that also includes situational predictors, increasing confidence that these are reliable targets for intervention or further theory development.</p>
+</section>
+<section id="approach" class="level2">
+<h2 class="anchored" data-anchor-id="approach">APPROACH</h2>
+<section id="brief-overview" class="level3">
+<h3 class="anchored" data-anchor-id="brief-overview">Brief overview</h3>
+<p>I will conduct the proposed research using data our lab collected from students at a large public university in the midwestern United States. Specifically, we used Sona Systems to recruit participants from an online subject pool of undergraduates taking introductory psychology courses. We invited eligible students to participate via email with messages sent between October and mid-December of 2022. Participants were made aware that the study had two parts: a 30-minute baseline survey, and up to 28 daily diary surveys.&nbsp;</p>
+</section>
+<section id="procedures" class="level3">
+<h3 class="anchored" data-anchor-id="procedures">Procedures</h3>
+<p>The research team used Qualtrics to construct a series of data collection instruments for web-administration, and SurveySignal to send daily text messages with links to each daily diary survey. After providing informed consent, participants gained access to the baseline assessment via Qualtrics.&nbsp;After completing the baseline, each participant received (1.0) class credit as compensation, which translates to an additional percentage point on their final grade in their introductory psychology course. Students were then given the option to participate in the daily diary portion of the study. Every day for 28 days, each participant who opted in received a text message between 11:00 AM and 2:00 PM with a link to that day’s survey. Each day, those who had not yet opened the survey link also received a reminder text message two hours after the initial text was sent. The daily survey asked participants about their behaviors and experiences since the prior survey. For each complete daily diary, participants received 0.25 class credits as compensation. To incentivize responding, participants who completed all 28 daily diary surveys received a $20 Amazon.com gift card in addition to the 7.0 extra credit percentage points (28 x 0.25 class credits).</p>
+</section>
+<section id="participants" class="level3">
+<h3 class="anchored" data-anchor-id="participants">Participants</h3>
+<p>Eligible participants were those 18 years or older who owned a smartphone and reported consuming at least one alcoholic beverage in the past year. A total of 386 students met eligibility criteria and completed at least 20% of the baseline assessment. Of these, 279 students (87% heterosexual; 65% single) participated in the daily diary portion of the study. Of note, participant ages ranged from 18 - 23, with 95% of study participants under the age of 21.</p>
+</section>
+<section id="measures" class="level3">
+<h3 class="anchored" data-anchor-id="measures">Measures</h3>
+<p>The baseline and daily diary surveys were designed to capture theoretically and empirically supported dispositional and situational factors, respectively. Daily diaries asked about experiences and behaviors since the last (i.e., previous day’s) survey, so situational factors (e.g., alcohol use prior to the encounter) are anchored to the context of the same sexual encounter. The measures we selected were drawn from peer-reviewed research examining sexual consent and sexual assault, particularly among young people in adolescence through early adulthood.</p>
+<section id="predictors" class="level4">
+<h4 class="anchored" data-anchor-id="predictors">Predictors</h4>
+<p><u><em>Add broad categories and numbers of raw variables in each.</em></u></p>
+<section id="dispositional" class="level5">
+<h5 class="anchored" data-anchor-id="dispositional">Dispositional</h5>
+<p>Personal characteristics, histories, attitudes, and traits…</p>
+</section>
+<section id="situational" class="level5">
+<h5 class="anchored" data-anchor-id="situational">Situational</h5>
+<p>Relationship to partner, sexual precedence, type of sexual behavior, prior alcohol consumption, subjective intoxication, perceived partner intoxication, prior cannabis use, partner cannabis use, preceding affective states (positive and negative), prior stress level, prior sexual expectancies, condom use behavior, etc.</p>
+</section>
+</section>
+<section id="outcomes" class="level4">
+<h4 class="anchored" data-anchor-id="outcomes">Outcomes</h4>
+<p>Two different types of active consent communication - verbal consent cues and nonverbal consent cues - which were only weakly correlated (r = .13). This empirical distinction justifies modeling them as separate outcomes. The three consent cue items were measured on a scale from 0-10…</p>
+</section>
+</section>
+<section id="analytic-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="analytic-strategy">Analytic Strategy</h3>
+<p>I will model two continuous outcomes reflecting active verbal and nonverbal sexual consent communication. Analyses will include all sexual encounters except those when the participant attempted to elicit some form of sexual contact but the sexual activity did not happen. The objective is to (1) identify features reliably associated with each outcome and (2) quantify the incremental predictive value of dispositional (baseline) vs.&nbsp;situational (daily diary) feature blocks for out-of-sample generalization to new participants. I will characterize associations for concurrent, within-window data, and will not make any claims about prospective or causal prediction.</p>
+<section id="data-pre-processing" class="level4">
+<h4 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h4>
+<p>I will follow recommended practices for data pre-processing and feature engineering in machine learning. All pre-processing will occur within resampling folds to prevent leakage. For each modeling pipeline, I will use within-fold imputation via bagged trees to handle predictors with missing data, then center and scale numeric predictors (unit variances) and dummy code categorical predictors. I will review descriptive statistics for coding errors and screen predictors for near-zero variance and perfect collinearity inside the resampling loop.</p>
+</section>
+<section id="model-development-and-internal-evaluation" class="level4">
+<h4 class="anchored" data-anchor-id="model-development-and-internal-evaluation">Model development and internal evaluation</h4>
+<p>I will develop elastic net linear regression and random forest models for each outcome using the tidymodels ecosystem. I chose to use these tools from the field of machine learning rather than ordinary least squares (OLS) because standard linear regression often yields high variance models when it is used with correlated predictors, and models with high variance do not generalize well to new data–an issue that may help to explain the number of contradictory findings in the sexual consent literature.&nbsp;</p>
+<p>Elastic net regression is an interpretable parametric model; it uses regularization techniques that penalize the parametric model coefficients (parameter estimates) to yield simpler models often less prone to overfitting than OLS linear regression. Instead of using, for example, ridge or LASSO (‘Least absolute shrinkage and selection operator’), I chose elastic net regression from the broader class of linear models because it reaps the benefits of both approaches by blending the penalties that ridge (L2) and LASSO (L1) apply to parameter estimates. However, elastic net regressions may yield biased models that perform poorly if the true data generating process is non-linear, so I elected to include random forest as a robustness check to capture nonlinearity. Random forest is well-suited to this task because it is a flexible, non-parametric model equipped to handle high-dimensional data.</p>
+<p>I will use participant-grouped, nested cross-validation to estimate out of sample performance for dispositional, situational, and combined elastic net models and tune hyperparameters without optimism. Specifically, I will use two repeats of 5-fold cross-validation for the inner loops and four repeats of 5-fold cross-validation for the outer loop, stratified by participant-count bins (1, 2-3, 4+) to balance fold difficulty. I will tune two hyperparameters for elastic net: lambda (λ; the penalty parameter) and alpha (the mixing parameter that dictates the proportion of the L1 vs.&nbsp;L2 penalties). I will also tune two hyperparameters for random forest: `mtry` and minimum node size (`min_n`). I will use 1000 trees for all random forest model configurations. Sensible values for each of the hyperparameters for elastic net and random forest will be derived from relevant tidymodels functions from the tune package.&nbsp;</p>
+<p><u>Situational vs.&nbsp;dispositional value comparison with block ablation.</u> I will implement block ablation using three pipelines fit and evaluated on identical resampling splits: (1) D only for dispositional features, (2) S only for situational features, and (3) D+S for combining both features sets. I will use cross-validated MAE as the primary metric for model selection, block comparisons, and decision rules. Thus, I define incremental value as ΔMAE when comparing D+S vs.&nbsp;D and D+S vs.&nbsp;S. This should yield block-level evidence for whether situational features add value beyond dispositional features, and vice versa.</p>
+<p>Combined models will be extended with a small, theory-driven set of interaction terms; I will apply strong heredity, retaining main effects of predictors with interactive effects regardless of earlier shrinkage. I will evaluate the interaction block as a set via Bayesian resampling (comparing main-effects vs.&nbsp;interaction- augmented models) and interpret retained interactions. Random forest will serve as a sensitivity lens to detect nonlinearities, reported only if corroborated by elastic net interaction models.</p>
+<p><u>Uncertainty estimation with participant-level Bayesian bootstrap.</u> To obtain uncertainty for Δ-metrics that respect within-participant clustering, I will apply a participant-level Bayesian bootstrap: within each outer test fold, I will assign Dirichlet(1,…,1) weights to participants, recompute weighted metrics for D, S, and D+S, and take differences. Repeating this process will produce a posterior sample of Δ; I will summarize with the mean and 95% highest-density interval. Aggregation across outer folds should yield a principled internal-validation distribution of block effects. In addition to ΔMAE, the primary performance metric, Root Mean Squared Error (ΔRMSE), and cross-validated ΔR² will be computed on left-out participants in each outer fold and used as secondary metrics for contextualizing model performance.</p>
+<p><u>Model interpretation and feature importance.</u> Because inference is prediction-oriented and not causal, I will prioritize stability and consistency. For elastic net models, I will report non-zero coefficients and their selection frequency across folds and resamples. I also will summarize median coefficient magnitude and interquartile range for top features. For random forest, I will report conditional permutation importance with rank stability across resamples.</p>
+</section>
+</section>
+<section id="limitations-potential-problems-and-alternative-strategies" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-potential-problems-and-alternative-strategies">Limitations, Potential Problems, and Alternative Strategies</h3>
+<p>This work provides internal validation for generalization to new participants from the same sampling frame. External validation on an independent sample is beyond scope of this dissertation project and planned as a direction for future research. Importantly, all results are interpreted as associational and predictive in the concurrent window, with the exception of dispositional-only models.</p>
 <ul>
-<li>Top level section headings use ## because # is reserved for the manuscript title.</li>
-<li>APA (and other?) formats support ##, ###, and #### at least.</li>
-</ul>
-<section id="sub-heading---level-3" class="level3">
-<h3 class="anchored" data-anchor-id="sub-heading---level-3">Sub-heading - level 3</h3>
-<p>This is the ### level</p>
-<section id="sub-heading---level-4" class="level4">
-<h4 class="anchored" data-anchor-id="sub-heading---level-4">Sub-heading - level 4</h4>
-<p>This is the #### level</p>
-<section id="sub-heading---level-5" class="level5">
-<h5 class="anchored" data-anchor-id="sub-heading---level-5">Sub-heading - level 5</h5>
-<p>This is the ##### level</p>
-</section>
-</section>
-</section>
-<section id="symbols-and-equations" class="level3">
-<h3 class="anchored" data-anchor-id="symbols-and-equations">Symbols and Equations</h3>
-<p>You can use quarto inline or display math equations as needed. Quarto provides <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">details</a> on the use of these equations.</p>
-<p>For example <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are two variables. And here is an important formula:</p>
-<p><span class="math display">\[
-p(x) = \frac{e^{-\lambda} \lambda^{x}}{x !}
-\]</span></p>
-</section>
-<section id="citations-references" class="level3">
-<h3 class="anchored" data-anchor-id="citations-references">Citations &amp; References</h3>
-<p>We can use cite relevant research in multiple formats. The two most common are:</p>
+<li>Measures not included in the data collection efforts supporting this project and that we intend to assess in future studies include:
 <ul>
-<li><span class="citation" data-cites="knuth84">Knuth (<a href="#ref-knuth84" role="doc-biblioref">1984</a>)</span> concluded something.<br>
-</li>
-<li>These are the conclusions<span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref">Knuth 1984</a>)</span>.</li>
-</ul>
-<p>Article references are stored in a .bib file using betterbibtex (BBT) format. We create these references in Zotero collections.</p>
-<p>Although we don’t do this regularly I think, if needed you can reference figures elsewhere using the @ symbol. Here is a reference to <a href="#fig-1" class="quarto-xref">Figure&nbsp;1</a></p>
-</section>
-</section>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>This is the methods section.</p>
-</section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Results include</p>
+<li>Passive “no response” cues</li>
+<li>Refusal cues used to indicate lack of willingness&nbsp;</li>
+<li>Specific behaviors classified fall within each cue type</li>
+<li>Perceptions of partner cue usage and cue effectiveness&nbsp;</li>
+</ul></li>
+<li>Elements of the design that I would change in retrospect:
 <ul>
-<li>Markdown text</li>
-<li>Figures from data</li>
-<li>Figures from images (maybe included table images)</li>
-<li>Analysis output (i.e.&nbsp;statistics)</li>
+<li>Instead of 1 beep 7 days per week, send 2 beeps Thursday-Sunday</li>
+</ul></li>
+<li>Concerns about specifics of this sample type (and how they may limit the proposed research):
+<ul>
+<li>Most participants were first- or second-year students, nearly all underage (&lt;21yo)</li>
+<li>Homogeneous in terms of sexual orientation and race</li>
+</ul></li>
+<li>How might this plan not work? What will I do to address these challenges if they do emerge?</li>
 </ul>
-<p>We demonstrate each (other than markdown text, which you should know!) below</p>
-<section id="data-figures" class="level3">
-<h3 class="anchored" data-anchor-id="data-figures">Data Figures</h3>
-<p>Figures are also generally created in separate notebooks and embedded into your manuscript.</p>
+<section id="content-from-the-study_template-serving-as-placeholders-for-figures-and-equations" class="level4">
+<h4 class="anchored" data-anchor-id="content-from-the-study_template-serving-as-placeholders-for-figures-and-equations">Content from the study_template serving as placeholders for figures and equations:</h4>
+<p>Figures will be created in separate notebooks and embedded in the proposal.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-fig-1" class="cell">
 <div class="cell-output cell-output-display">
-<div id="fig-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/notebooks-fig1-fig-1-output-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/notebooks-fig1-fig-1-output-1.png" width="672" height="480" class="figure-img"></a>
+<img src="index_files/figure-html/notebooks-fig1-fig-1-output-1.png" width="672" height="480" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: A Basic Barplot Figure
@@ -277,341 +248,331 @@ Figure&nbsp;1: A Basic Barplot Figure
 </div>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-1" href="notebooks/fig1-preview.html#cell-fig-1">Source: Figure 1</a></div>
+<a class="quarto-notebook-link" id="nblink-1" href="notebooks/fig1.embed-preview.html#cell-fig-1">Source: Figure 1</a></div>
+<p>I will use quarto inline to display math equations. Quarto provides <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">details</a> on the use of these equations.</p>
+<p>For example <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are two variables. And here is an important formula:</p>
+<p><span class="math display">\[
+p(x) = \frac{e^{-\lambda} \lambda^{x}}{x !}
+\]</span></p>
+<p>To add results that are not figures or tables, I will open the objects I saved from these analyses. See lm.qmd as an example. Generally, I will open csv files that contain tidied results. For example:</p>
+<p>A significant effect was observed (<span class="math inline">\(\beta\)</span> = 3.9, t = 9.46, p = 0.000).</p>
 </section>
-<section id="figures-from-images" class="level3">
-<h3 class="anchored" data-anchor-id="figures-from-images">Figures from images</h3>
-<p>Images from figures can be included using the standard code to insert image files. These images should generally be saved in the image folder at the root of the study template by convention. The quarto website provides <a href="https://quarto.org/docs/authoring/figures.html">additional details</a></p>
-<div id="fig-2" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/arc_logo.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/arc_logo.png" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Arc Logo
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="tables" class="level3">
-<h3 class="anchored" data-anchor-id="tables">Tables</h3>
-<p>We create tables using the kableExtra package. We are working on the optimal method to embed these from notebooks. It may be to save the tables as high res image files and then embed those images. Stay tuned.</p>
-<p>Alternatively, this is an example of a simple table that is hard-coded using markdown table format. We don’t recommend this for tables built from data. Tables values should come directly from data so they don’t need to be typed in and will update if your data change. However, you may have other uses for simple tables where this method is helpful.</p>
-<div id="tbl-history" class="quarto-float anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Recent historic eruptions on La Palma
-</figcaption>
-<div aria-describedby="tbl-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Year</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Current</td>
-<td>2021</td>
-</tr>
-<tr class="even">
-<td>Teneguía</td>
-<td>1971</td>
-</tr>
-<tr class="odd">
-<td>Nambroque</td>
-<td>1949</td>
-</tr>
-<tr class="even">
-<td>El Charco</td>
-<td>1712</td>
-</tr>
-<tr class="odd">
-<td>Volcán San Antonio</td>
-<td>1677</td>
-</tr>
-<tr class="even">
-<td>Volcán San Martin</td>
-<td>1646</td>
-</tr>
-<tr class="odd">
-<td>Tajuya near El Paso</td>
-<td>1585</td>
-</tr>
-<tr class="even">
-<td>Montaña Quemada</td>
-<td>1492</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-</section>
-<section id="analysis-results" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-results">Analysis Results</h3>
-<p>To add results that are not figures or tables, you will need to open the objects you saved from these analyses. See lm.qmd as an example. Generally you will open csv files that contain tidied results. For example</p>
-<p>A significant effect of speed was observed (<span class="math inline">\(\beta\)</span> = 3.9, t = 9.46, p = 0.000).</p>
-<p>NOTES:</p>
-<ul>
-<li>We should write a function that works with tidied coeffs tables and takes the row, column, and number of decimal places to make this code simpler.</li>
-<li>This table doesnt contain df. Need to add that to table when saving in lm</li>
-</ul>
+<section id="section" class="level4">
+<h4 class="anchored" data-anchor-id="section"></h4>
 </section>
 </section>
-<section id="discussion" class="level2">
-<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+<div id="ref-beresPerspectivesRapepreventionEducators2020" class="csl-entry" role="listitem">
+Beres, Melanie. 2020. <span>“Perspectives of Rape-Prevention Educators on the Role of Consent in Sexual Violence Prevention.”</span> <em>Sex Education</em> 20 (2): 227–38. <a href="https://doi.org/10.1080/14681811.2019.1621744">https://doi.org/10.1080/14681811.2019.1621744</a>.
 </div>
+<div id="ref-beresSpontaneousSexualConsent2007" class="csl-entry" role="listitem">
+Beres, Melanie A. 2007. <span>“<span>‘<span>Spontaneous</span>’</span> <span>Sexual Consent</span>: <span>An Analysis</span> of <span>Sexual</span> <span>Consent Literature</span>.”</span> <em>Feminism &amp; Psychology</em> 17 (1): 93–108. <a href="https://doi.org/10.1177/0959353507072914">https://doi.org/10.1177/0959353507072914</a>.
 </div>
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1: A Basic Barplot Figure</span>
-<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;2: Arc Logo</span>
+<div id="ref-burtonTeachingSexualConsent2023" class="csl-entry" role="listitem">
+Burton, Olivia, Patrick Rawstorne, Lucy Watchirs-Smith, Sally Nathan, and Allison Carter. 2023. <span>“Teaching Sexual Consent to Young People in Education Settings: A Narrative Systematic Review.”</span> <em>Sex Education</em> 23 (1): 18–34. <a href="https://doi.org/10.1080/14681811.2021.2018676">https://doi.org/10.1080/14681811.2021.2018676</a>.
+</div>
+<div id="ref-cruz-mendoza2025" class="csl-entry" role="listitem">
+Cruz-Mendoza, Mariana Carolyn, Roberto Angel Melendez-Armenta, Juana Canul-Reich, and Julio Muñoz-Benítez. 2025. <span>“Machine Learning Applied to Improve Prevention of, Response to, and Understanding of Violence Against Women.”</span> <em>Informatics</em> 12 (2): 40. <a href="https://doi.org/10.3390/informatics12020040">https://doi.org/10.3390/informatics12020040</a>.
+</div>
+<div id="ref-curtis2017" class="csl-entry" role="listitem">
+Curtis, Jena Nicols, and Susan Burnett. 2017. <span>“Affirmative Consent: What Do College Student Leaders Think about <span>“</span>Yes Means Yes<span>”</span> as the Standard for Sexual Behavior?”</span> <em>American Journal of Sexuality Education</em> 12 (3): 201–14. <a href="https://doi.org/10.1080/15546128.2017.1328322">https://doi.org/10.1080/15546128.2017.1328322</a>.
+</div>
+<div id="ref-davisUnderstandingAlcoholInvolvedSexual2023" class="csl-entry" role="listitem">
+Davis, Kelly Cue, Elizabeth C. Neilson, Mitchell Kirwan, William H. George, and Cynthia A. Stappenbeck. 2023. <span>“Understanding <span>Alcohol-Involved Sexual Aggression Through</span> the <span>Science</span> of <span>Behavior Change</span>.”</span> In <em>Alcohol and <span>Sexual Violence</span></em>, edited by David DiLillo, Sarah J. Gervais, and Dennis E. McChargue, 75–103. Nebraska <span>Symposium</span> on <span>Motivation</span>. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-24426-1_4">https://doi.org/10.1007/978-3-031-24426-1_4</a>.
+</div>
+<div id="ref-gantmanBehavioralScienceFrameworkUnderstanding2022" class="csl-entry" role="listitem">
+Gantman, Ana P., and Elizabeth Levy Paluck. 2022. <span>“A <span>Behavioral-Science Framework</span> for <span>Understanding College Campus Sexual Assault</span>.”</span> <em>Perspectives on Psychological Science</em> 17 (4): 979–94. <a href="https://doi.org/10.1177/17456916211030264">https://doi.org/10.1177/17456916211030264</a>.
+</div>
+<div id="ref-jozkowskiSexualConsentOut2018" class="csl-entry" role="listitem">
+Jozkowski, Kristen N., Jimmie Manning, and Mary Hunt. 2018. <span>“Sexual <span>Consent In</span> and <span>Out</span> of the <span>Bedroom</span>: <span>Disjunctive Views</span> of <span>Heterosexual College Students</span>.”</span> <em>Women’s Studies in Communication</em> 41 (2): 117–39. <a href="https://doi.org/10.1080/07491409.2018.1470121">https://doi.org/10.1080/07491409.2018.1470121</a>.
+</div>
+<div id="ref-jozkowskiGenderDifferencesHeterosexual2014" class="csl-entry" role="listitem">
+Jozkowski, Kristen N., Zoë D. Peterson, Stephanie A. Sanders, Barbara Dennis, and Michael Reece. 2014. <span>“Gender <span>Differences</span> in <span>Heterosexual College Students</span>’ <span>Conceptualizations</span> and <span>Indicators</span> of <span>Sexual Consent</span>: <span>Implications</span> for <span>Contemporary Sexual Assault Prevention Education</span>.”</span> <em>The Journal of Sex Research</em> 51 (8): 904–16. <a href="https://doi.org/10.1080/00224499.2013.792326">https://doi.org/10.1080/00224499.2013.792326</a>.
+</div>
+<div id="ref-jozkowskiPeoplePerceiveTransitioning2020" class="csl-entry" role="listitem">
+Jozkowski, Kristen N., and Malachi Willis. 2020. <span>“People Perceive Transitioning from a Social to a Private Setting as an Indicator of Sexual Consent.”</span> <em>Psychology &amp; Sexuality</em> 11 (4): 359–72. <a href="https://doi.org/10.1080/19419899.2020.1769162">https://doi.org/10.1080/19419899.2020.1769162</a>.
+</div>
+<div id="ref-kilpatrickUnderstandingAddressingAlcohol2023" class="csl-entry" role="listitem">
+Kilpatrick, Dean G., and Christine K. Hahn. 2023. <span>“Understanding and <span>Addressing Alcohol</span> and <span>Sexual Violence</span>: <span>We Have Made Progress</span> but <span>Still Have Miles</span> to <span>Go</span>.”</span> In <em>Alcohol and <span>Sexual Violence</span></em>, edited by David DiLillo, Sarah J. Gervais, and Dennis E. McChargue, 173–213. Nebraska <span>Symposium</span> on <span>Motivation</span>. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-24426-1_7">https://doi.org/10.1007/978-3-031-24426-1_7</a>.
+</div>
+<div id="ref-kossScopeRapeIncidence1987" class="csl-entry" role="listitem">
+Koss, Mary P., Christine A. Gidycz, and Nadine Wisniewski. 1987. <span>“The Scope of Rape: <span>Incidence</span> and Prevalence of Sexual Aggression and Victimization in a National Sample of Higher Education Students.”</span> <em>Journal of Consulting and Clinical Psychology</em> 55 (2): 162–70. <a href="https://doi.org/10.1037/0022-006X.55.2.162">https://doi.org/10.1037/0022-006X.55.2.162</a>.
+</div>
+<div id="ref-kossScopeRapeVictimization2022" class="csl-entry" role="listitem">
+Koss, Mary P., Kevin M. Swartout, Elise C. Lopez, Raina V. Lamade, Elizabeth J. Anderson, Carolyn L. Brennan, and Robert A. Prentky. 2022. <span>“The <span>Scope</span> of <span>Rape Victimization</span> and <span>Perpetration Among National Samples</span> of <span>College Students Across</span> 30 Years.”</span> <em>Journal of Interpersonal Violence</em> 37 (1-2): NP25–47. <a href="https://doi.org/10.1177/08862605211050103">https://doi.org/10.1177/08862605211050103</a>.
+</div>
+<div id="ref-leoneBarriersAddressingAlcohol2022" class="csl-entry" role="listitem">
+Leone, Ruschelle M., Tiffany Marcantonio, Michelle Haikalis, and Anne Marie Schipani-McLaughlin. 2022. <span>“Barriers to <span>Addressing Alcohol Use</span> in <span>College Sexual Assault Prevention</span>: <span>Where We Stand</span> and <span>Future Steps</span>.”</span> <em>Current Addiction Reports</em> 9 (4): 420–31. <a href="https://doi.org/10.1007/s40429-022-00455-2">https://doi.org/10.1007/s40429-022-00455-2</a>.
+</div>
+<div id="ref-marcantonioWithinPersonExaminationAlcoholInvolved2024" class="csl-entry" role="listitem">
+Marcantonio, Tiffany L., Chunhua Cao, Ruschelle M. Leone, and Karen Cropsey. 2024. <span>“A <span>Within-Person Examination</span> of <span>Alcohol-Involved</span> and <span>Non</span>–<span>Alcohol-Involved Internal</span> and <span>External Sexual Consent Communication</span>.”</span> <em>Journal of Studies on Alcohol and Drugs</em> 85 (5): 627–35. <a href="https://doi.org/10.15288/jsad.23-00260">https://doi.org/10.15288/jsad.23-00260</a>.
+</div>
+<div id="ref-marcantonioEffectsTypicalBinge2022" class="csl-entry" role="listitem">
+Marcantonio, Tiffany L., Malachi Willis, and Kristen N. Jozkowski. 2022. <span>“Effects of <span>Typical</span> and <span>Binge Drinking</span> on <span>Sexual Consent Perceptions</span> and <span>Communication</span>.”</span> <em>Journal of Sex &amp; Marital Therapy</em> 48 (3): 273–84. <a href="https://doi.org/10.1080/0092623X.2021.1986445">https://doi.org/10.1080/0092623X.2021.1986445</a>.
+</div>
+<div id="ref-muehlenhardComplexitiesSexualConsent2016" class="csl-entry" role="listitem">
+Muehlenhard, Charlene L., Terry P. Humphreys, Kristen N. Jozkowski, and Zoe D. Peterson. 2016. <span>“The <span>Complexities</span> of <span>Sexual Consent</span> Among <span>College Students</span>: <span>A Conceptual</span> and <span>Empirical Review</span>.”</span> <em>Journal of Sex Research</em> 53 (4-5): 457–87. <a href="https://doi.org/10.1080/00224499.2016.1146651">https://doi.org/10.1080/00224499.2016.1146651</a>.
+</div>
+<div id="ref-porat2024" class="csl-entry" role="listitem">
+Porat, Roni, Ana Gantman, Seth A. Green, John-Henry Pezzuto, and Elizabeth Levy Paluck. 2024. <span>“Preventing Sexual Violence: A Behavioral Problem Without a Behaviorally Informed Solution.”</span> <em>Psychological Science in the Public Interest</em> 25 (1): 4–29. <a href="https://doi.org/10.1177/15291006231221978">https://doi.org/10.1177/15291006231221978</a>.
+</div>
+<div id="ref-walsh2024" class="csl-entry" role="listitem">
+Walsh, Kate, Nicole Short, Yin Yao Ji, Xin Ming An, Kristen D. Witkemper, Megan Lechner, Kathy Bell, et al. 2024. <span>“Development of a brief bedside tool to screen women sexual assault survivors for risk of persistent posttraumatic stress six months after sexual assault.”</span> <em>Journal of Psychiatric Research</em> 174 (June): 54–61. <a href="https://doi.org/10.1016/j.jpsychires.2024.04.013">https://doi.org/10.1016/j.jpsychires.2024.04.013</a>.
+</div>
+<div id="ref-willisAssociationsInternalExternal2019" class="csl-entry" role="listitem">
+Willis, Malachi, Heather D. Blunt-Vinti, and Kristen N. Jozkowski. 2019. <span>“Associations Between Internal and External Sexual Consent in a Diverse National Sample of Women.”</span> <em>Personality and Individual Differences</em> 149 (October): 37–45. <a href="https://doi.org/10.1016/j.paid.2019.05.029">https://doi.org/10.1016/j.paid.2019.05.029</a>.
+</div>
+<div id="ref-willisAssessingWithinPersonVariability2021" class="csl-entry" role="listitem">
+Willis, Malachi, Kristen N. Jozkowski, Ana J. Bridges, Jennifer C. Veilleux, and Robert E. Davis. 2021. <span>“Assessing the <span>Within-Person Variability</span> of <span>Internal</span> and <span>External Sexual Consent</span>.”</span> <em>The Journal of Sex Research</em> 58 (9): 1173–83. <a href="https://doi.org/10.1080/00224499.2021.1913567">https://doi.org/10.1080/00224499.2021.1913567</a>.
+</div>
+<div id="ref-willisSexualConsentDiverse2022" class="csl-entry" role="listitem">
+Willis, Malachi, and Rebecca Smith. 2022. <span>“Sexual <span>Consent Across Diverse Behaviors</span> and <span>Contexts</span>: <span>Gender Differences</span> and <span>Nonconsensual Sexual Experiences</span>.”</span> <em>Journal of Interpersonal Violence</em> 37 (19-20): NP18908–34. <a href="https://doi.org/10.1177/08862605211044101">https://doi.org/10.1177/08862605211044101</a>.
+</div>
 </div>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{student2024,
-  author = {Student, Josephine and J. Curtin, John},
-  title = {A {Super} {Cool} {Study} - {Take} 2},
-  date = {2024-03-11},
-  langid = {en},
-  abstract = {This study found some pretty cool results that have both
-    high impact and important clinical implications. For example ...}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-student2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Student, Josephine, and John J. Curtin. 2024. <span>“A Super Cool Study
-- Take 2.”</span> Journal of Important Findings. March 11, 2024.
-</div></div></section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -619,211 +580,162 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
-</div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
         }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
       }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
     }
   });
-
-};
-          </script>
+  </script>
+</div> <!-- /content -->
 
 
 

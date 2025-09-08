@@ -1,5 +1,6 @@
 ---
-title: Identifying situational and dispositional predictors of college students' active consent communication: A micro-longitudinal investigation of verbal and nonverbal sexual consent cues
+title: Identifying situational and dispositional predictors of college students' active consent communication
+subtitle: A micro-longitudinal investigation of verbal and nonverbal sexual consent cues
 author:
   - name: Stephanie B. Ward 
     orcid: https://orcid.org/0000-0002-8191-0158
@@ -20,9 +21,9 @@ editor_options:
 
 ## SPECIFIC AIMS
 
-Sexual consent is a multidimensional process made up of thoughts, feelings, and behaviors; the presence of sexual consent distinguishes wanted sexual encounters from sexual assault.[@muehlenhardComplexitiesSexualConsent2016]. People can communicate willingness to engage in sexual activity through the exchange of **active consent cues**, which may be verbal or nonverbal and direct or indirect, ranging from a clear and spoken “yes” to subtle body language.[@willisAssociationsInternalExternal2019]. Research shows that **dispositional factors**, includingpersonal characteristics, histories, attitudes, and traits, are linked to differences in how people communicate consent. Gender, for instance, has emerged as a salient factor, with several studies concluding that women are less likely than men to use direct, verbal cues.[@jozkowskiGenderDifferencesHeterosexual2014; @willisSexualConsentDiverse2022].
+Sexual consent is a multidimensional process made up of thoughts, feelings, and behaviors; the presence of sexual consent distinguishes wanted sexual encounters from sexual assault [@muehlenhardComplexitiesSexualConsent2016]. People can communicate willingness to engage in sexual activity through the exchange of **active consent cues**, which may be verbal or nonverbal and direct or indirect, ranging from a clear and spoken “yes” to subtle body language [@willisAssociationsInternalExternal2019]. Research shows that **dispositional factors**, including personal characteristics, histories, attitudes, and traits, are linked to differences in how people communicate consent. Gender, for instance, has emerged as a salient factor, with several studies concluding that women are less likely than men to use direct, verbal cues [@jozkowskiGenderDifferencesHeterosexual2014; @willisSexualConsentDiverse2022].
 
-Extant research has addressed *who* seems more likely to use certain types of active consent communication, but less is known about the encounter-specific factors that influence *when* individuals use these cues or why they use them in some situations and not others. This is a problem because the situational context of a sexual encounter may be more important than individual differences in how people tend to communicate consent in general. Recent research indicates that within-person variability can account for between 50% and 80% of the variance in active consent communication, suggesting that people are more dynamic than static in their active consent cue usage across sexual encounters.[@willisAssessingWithinPersonVariability2021].**Situational factors** such as co-occurring alcohol consumption also have been shown to moderate associations between dispositional factors and active consent behavior (e.g., heterosexual women appear to use more verbal cues when a sexual encounter follows alcohol use) [@marcantonioWithinPersonExaminationAlcoholInvolved2024].
+Extant research has addressed *who* seems more likely to use certain types of active consent communication, but less is known about the encounter-specific factors that influence *when* individuals use these cues or why they use them in some situations and not others. This is a problem because the situational context of a sexual encounter may be more important than individual differences in how people tend to communicate consent in general. Recent research indicates that within-person variability can account for between 50% and 80% of the variance in active consent communication, suggesting that people are more dynamic than static in their active consent cue usage across sexual encounters [@willisAssessingWithinPersonVariability2021]. **Situational factors** such as co-occurring alcohol consumption also have been shown to moderate associations between dispositional factors and active consent behavior (e.g., heterosexual women appear to use more verbal cues when a sexual encounter follows alcohol use) [@marcantonioWithinPersonExaminationAlcoholInvolved2024].
 
 Compared to attitudes or stable traits, factors that vary from one encounter to the next may serve as more readily modifiable targets for consent-focused sexual assault prevention efforts focused on changing behavior [@porat2024]. However, progress toward understanding the conditions under which people use more active verbal and nonverbal cues has been limited. Possible reasons for this include widespread reliance on retrospective reports prone to recall bias, as well as analytic strategies that lead to overfitting, inflated effect sizes, and poor reproducibility. To advance the field, the proposed research will leverage micro-longitudinal data and analytic approaches that can reduce dimensionality without becoming too overfit to generalize to new samples.
 
@@ -37,7 +38,7 @@ To identify robust predictors of active sexual consent communication and evaluat
 
 ## BACKGROUND AND SIGNIFICANCE
 
-Rates of sexual assault on U.S. college campuses remain virtually unchanged after more than 30 years of dedicated research and intervention.[@kossScopeRapeIncidence1987; @kossScopeRapeVictimization2022]. Lack of consent is increasingly recognized as defining characteristic of sexual assault, so institutions have incorporated consent-focused education into sexual assault prevention efforts. [@beresSpontaneousSexualConsent2007; @beresPerspectivesRapepreventionEducators2020]. A substantial gap exists between the standards for consent that these programs espouse and the consent practices that people describe themselves using during real-world sexual encounters [@curtis2017]. University policy and consent education promote explicit and enthusiastic consent (e.g., “only yes means yes!”), but many people rely on passive cues (not resisting, not saying no) or assumptions to determine consent. people prefer nonverbal communication and many rely on passive cues (not resisting, not saying no) or assumptions based on context to determine consent [@marcantonioEffectsTypicalBinge2022; @jozkowskiSexualConsentOut2018; @jozkowskiPeoplePerceiveTransitioning2020]. Clarifying what factors predict which students are more likely to use active consent cues and when they are more likely to use them will be crucial for informing intervention messaging grounded in students’ lived experiences. 
+Rates of sexual assault on U.S. college campuses remain virtually unchanged after more than 30 years of dedicated research and intervention [@kossScopeRapeIncidence1987; @kossScopeRapeVictimization2022]. Lack of consent is increasingly recognized as defining characteristic of sexual assault, so institutions have incorporated consent-focused education into sexual assault prevention efforts [@beresSpontaneousSexualConsent2007; @beresPerspectivesRapepreventionEducators2020]. A substantial gap exists between the standards for consent that these programs espouse and the consent practices that people describe themselves using during real-world sexual encounters [@curtis2017]. University policy and consent education promote explicit and enthusiastic consent (e.g., “only yes means yes!”), but many people rely on passive cues (not resisting, not saying no) or assumptions to determine consent. people prefer nonverbal communication and many rely on passive cues (not resisting, not saying no) or assumptions based on context to determine consent [@marcantonioEffectsTypicalBinge2022; @jozkowskiSexualConsentOut2018; @jozkowskiPeoplePerceiveTransitioning2020]. Clarifying what factors predict which students are more likely to use active consent cues and when they are more likely to use them will be crucial for informing intervention messaging grounded in students’ lived experiences. 
 
 Alcohol is a salient factor in the context of both sexual assault and consensual sexual activity among college students, yet sexual assault prevention and risk-reduction programs rarely include information about how alcohol can affect consent communication [@leoneBarriersAddressingAlcohol2022]. While scholars and practitioners have started integrating alcohol and sexual assault programming, there is far more research on alcohol-related sexual assault compared to consent involving alcohol use [@kilpatrickUnderstandingAddressingAlcohol2023]. Sexual assault and consent research often examine the same processes from different angles (e.g., how consent is established versus how it breaks down), and experts from both domains have called for a renewed focus on situational factors explored through a behavioral science lens [@gantmanBehavioralScienceFrameworkUnderstanding2022; @burtonTeachingSexualConsent2023; @davisUnderstandingAlcoholInvolvedSexual2023]. These converging frameworks and recommendations present a unique opportunity; to leverage knowledge from the relatively vast sexual assault literature to learn more about active consent communication in the context of alcohol consumption.
 
@@ -51,37 +52,47 @@ The proposed research moves beyond the limitations of prior studies, allowing us
 
 ## APPROACH
 
+### Brief overview 
+
 I will conduct the proposed research using data our lab collected from students at a large public university in the midwestern United States. Specifically, we used Sona Systems to recruit participants from an online subject pool of undergraduates taking introductory psychology courses. We invited eligible students to participate via email with messages sent between October and mid-December of 2022. Participants were made aware that the study had two parts: a 30-minute baseline survey, and up to 28 daily diary surveys. 
 
-### **Procedures**
+### Procedures
 
 The research team used Qualtrics to construct a series of data collection instruments for web-administration, and SurveySignal to send daily text messages with links to each daily diary survey. After providing informed consent, participants gained access to the baseline assessment via Qualtrics. After completing the baseline, each participant received (1.0) class credit as compensation, which translates to an additional percentage point on their final grade in their introductory psychology course. Students were then given the option to participate in the daily diary portion of the study. Every day for 28 days, each participant who opted in received a text message between 11:00 AM and 2:00 PM with a link to that day’s survey. Each day, those who had not yet opened the survey link also received a reminder text message two hours after the initial text was sent. The daily survey asked participants about their behaviors and experiences since the prior survey. For each complete daily diary, participants received 0.25 class credits as compensation. To incentivize responding, participants who completed all 28 daily diary surveys received a \$20 Amazon.com gift card in addition to the 7.0 extra credit percentage points (28 x 0.25 class credits).
 
-### **Participants**
+### Participants
 
 Eligible participants were those 18 years or older who owned a smartphone and reported consuming at least one alcoholic beverage in the past year. A total of 386 students met eligibility criteria and completed at least 20% of the baseline assessment. Of these, 279 students (87% heterosexual; 65% single) participated in the daily diary portion of the study. Of note, participant ages ranged from 18 - 23, with 95% of study participants under the age of 21.
 
 ### Measures
 
-The baseline and daily diary surveys were designed to capture theoretically and empirically supported dispositional and situational factors, respectively. The measures we selected were drawn from peer-reviewed research examining sexual consent and sexual assault, particularly among young people in adolescence through early adulthood. [*Add broad categories and numbers of raw variables in each.*]{.underline}
+The baseline and daily diary surveys were designed to capture theoretically and empirically supported dispositional and situational factors, respectively. Daily diaries asked about experiences and behaviors since the last (i.e., previous day’s) survey, so situational factors (e.g., alcohol use prior to the encounter) are anchored to the context of the same sexual encounter. The measures we selected were drawn from peer-reviewed research examining sexual consent and sexual assault, particularly among young people in adolescence through early adulthood.
 
-**Predictors** fall into two blocks: dispositional factors assessed once at baseline, and situational factors reported via daily diary. Importantly, the diaries asked about experiences and behaviors since the last (i.e., previous day’s) survey, so situational factors (e.g., alcohol use prior to the encounter) are anchored to the context of the same sexual encounter.
+#### Predictors
 
-#### Dispositional
+[*Add broad categories and numbers of raw variables in each.*]{.underline}
 
-#### Situational
+##### Dispositional
 
-**Outcomes** are two different types of active consent communication: (a) verbal consent cues and (b) nonverbal consent cues, each ranging from 0-10 and only weakly correlated (r = .13). This empirical distinction justifies modeling them as separate outcomes.
+Personal characteristics, histories, attitudes, and traits...
+
+##### Situational
+
+Relationship to partner, sexual precedence, type of sexual behavior, prior alcohol consumption, subjective intoxication, perceived partner intoxication, prior cannabis use, partner cannabis use, preceding affective states (positive and negative), prior stress level, prior sexual expectancies, condom use behavior, etc.
+
+#### Outcomes 
+
+Two different types of active consent communication - verbal consent cues and nonverbal consent cues - which were only weakly correlated (r = .13). This empirical distinction justifies modeling them as separate outcomes. The three consent cue items were measured on a scale from 0-10...
 
 ### Analytic Strategy
 
-I will model two continuous outcomes reflecting active verbal and nonverbal sexual consent communication. Analyses will include all sexual encounters except those when the participant attempted to elicit some form of sexual contact but the sexual activity did not happen. The objective is to (1) identify features reliably associated with each outcome and (2) quantify the incremental predictive value of dispositional (baseline) vs. situational (daily diary) feature blocks for out-of-sample generalization to new participants. We characterize associations for concurrent, within-window data; we do not make any claims about prospective or causal prediction.
+I will model two continuous outcomes reflecting active verbal and nonverbal sexual consent communication. Analyses will include all sexual encounters except those when the participant attempted to elicit some form of sexual contact but the sexual activity did not happen. The objective is to (1) identify features reliably associated with each outcome and (2) quantify the incremental predictive value of dispositional (baseline) vs. situational (daily diary) feature blocks for out-of-sample generalization to new participants. I will characterize associations for concurrent, within-window data, and will not make any claims about prospective or causal prediction.
 
-#### **Data pre-processing and feature engineering**
+#### Data pre-processing
 
 I will follow recommended practices for data pre-processing and feature engineering in machine learning. All pre-processing will occur within resampling folds to prevent leakage. For each modeling pipeline, I will use within-fold imputation via bagged trees to handle predictors with missing data, then center and scale numeric predictors (unit variances) and dummy code categorical predictors. I will review descriptive statistics for coding errors and screen predictors for near-zero variance and perfect collinearity inside the resampling loop.
 
-#### **Model development and internal evaluation**
+#### Model development and internal evaluation
 
 I will develop elastic net linear regression and random forest models for each outcome using the tidymodels ecosystem. I chose to use these tools from the field of machine learning rather than ordinary least squares (OLS) because standard linear regression often yields high variance models when it is used with correlated predictors, and models with high variance do not generalize well to new data–an issue that may help to explain the number of contradictory findings in the sexual consent literature. 
 
@@ -89,14 +100,11 @@ Elastic net regression is an interpretable parametric model; it uses regularizat
 
 I will use participant-grouped, nested cross-validation to estimate out of sample performance for dispositional, situational, and combined elastic net models and tune hyperparameters without optimism. Specifically, I will use two repeats of 5-fold cross-validation for the inner loops and four repeats of 5-fold cross-validation for the outer loop, stratified by participant-count bins (1, 2-3, 4+) to balance fold difficulty. I will tune two hyperparameters for elastic net: lambda (λ; the penalty parameter) and alpha (the mixing parameter that dictates the proportion of the L1 vs. L2 penalties). I will also tune two hyperparameters for random forest: \`mtry\` and minimum node size (\`min_n\`). I will use 1000 trees for all random forest model configurations. Sensible values for each of the hyperparameters for elastic net and random forest will be derived from relevant tidymodels functions from the tune package. 
 
-[Situational vs. dispositional value comparison with block ablation]{.underline}
-
-I will implement block ablation using three pipelines fit and evaluated on identical resampling splits: \
-(1) D only for dispositional features, (2) S only for situational features, and (3) D+S for combining both features sets. I will use cross-validated MAE as the primary metric for model selection, block comparisons, and decision rules. Thus, I define incremental value as ΔMAE when comparing D+S vs. D and D+S vs. S. This should yield block-level evidence for whether situational features add value beyond dispositional features, and vice versa.
-
-[Uncertainty estimation with participant-level Bayesian bootstrap.]{.underline} To obtain uncertainty for Δ-metrics that respect within-participant clustering, I will apply a participant-level Bayesian bootstrap: within each outer test fold, I will assign Dirichlet(1,…,1) weights to participants, recompute weighted metrics for D, S, and D+S, and take differences. Repeating this process will produce a posterior sample of Δ; I will summarize with the mean and 95% highest-density interval. Aggregation across outer folds should yield a principled internal-validation distribution of block effects. In addition to ΔMAE, the primary performance metric, Root Mean Squared Error (ΔRMSE), and cross-validated ΔR² will be computed on left-out participants in each outer fold and used as secondary metrics for contextualizing model performance.
+[Situational vs. dispositional value comparison with block ablation.]{.underline} I will implement block ablation using three pipelines fit and evaluated on identical resampling splits: (1) D only for dispositional features, (2) S only for situational features, and (3) D+S for combining both features sets. I will use cross-validated MAE as the primary metric for model selection, block comparisons, and decision rules. Thus, I define incremental value as ΔMAE when comparing D+S vs. D and D+S vs. S. This should yield block-level evidence for whether situational features add value beyond dispositional features, and vice versa.
 
 Combined models will be extended with a small, theory-driven set of interaction terms; I will apply strong heredity, retaining main effects of predictors with interactive effects regardless of earlier shrinkage. I will evaluate the interaction block as a set via Bayesian resampling (comparing main-effects vs. interaction- augmented models) and interpret retained interactions. Random forest will serve as a sensitivity lens to detect nonlinearities, reported only if corroborated by elastic net interaction models.
+
+[Uncertainty estimation with participant-level Bayesian bootstrap.]{.underline} To obtain uncertainty for Δ-metrics that respect within-participant clustering, I will apply a participant-level Bayesian bootstrap: within each outer test fold, I will assign Dirichlet(1,…,1) weights to participants, recompute weighted metrics for D, S, and D+S, and take differences. Repeating this process will produce a posterior sample of Δ; I will summarize with the mean and 95% highest-density interval. Aggregation across outer folds should yield a principled internal-validation distribution of block effects. In addition to ΔMAE, the primary performance metric, Root Mean Squared Error (ΔRMSE), and cross-validated ΔR² will be computed on left-out participants in each outer fold and used as secondary metrics for contextualizing model performance.
 
 [Model interpretation and feature importance.]{.underline} Because inference is prediction-oriented and not causal, I will prioritize stability and consistency. For elastic net models, I will report non-zero coefficients and their selection frequency across folds and resamples. I also will summarize median coefficient magnitude and interquartile range for top features. For random forest, I will report conditional permutation importance with rank stability across resamples.
 
@@ -116,9 +124,9 @@ This work provides internal validation for generalization to new participants fr
     -   Homogeneous in terms of sexual orientation and race
 -   How might this plan not work? What will I do to address these challenges if they do emerge?
 
-#### Leaving the following study_template content here to use for figures and equations:
+#### Content from the study_template serving as placeholders for figures and equations:
 
-Figures will be created in separate notebooks and/or (external png objects) embedded in the proposal.
+Figures will be created in separate notebooks and embedded in the proposal.
 
 {{< embed notebooks/fig1.qmd#fig-1 >}}
 
@@ -132,7 +140,7 @@ $$
 
 To add results that are not figures or tables, I will open the objects I saved from these analyses. See lm.qmd as an example. Generally, I will open csv files that contain tidied results. For example:
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse)
 
 coeffs <- read_csv(here::here("objects/coeff_table.csv"),
