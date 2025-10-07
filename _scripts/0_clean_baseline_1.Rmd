@@ -1,0 +1,1812 @@
+---
+title: "Cleaning baseline, part 1."
+author: "Stephanie Ward"
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo = FALSE}
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+```
+
+### Notes
+-   n = 7 identified as gender fluid, non-binary, or two-spirit. As of now, `gend` includes all categories and `gend_di` is a dichotomized version that includes Gender-nonconforming (GNC) students with women considering the heightened risk for n=7 GNC students' identities being linked to their responses, as well as the heightened risk for sexual victimization among women and GNC individuals. 
+-   For sexual orientation: Bisexual (n=29), Gay (n=7), Hetero (n=333), Lesbian (n=3), Pan (n=6), and Queer (n=8). As of now, `sx_ori` includes all categories and `hetero` is the dichotomized version, within which students who do not conform to heteronormativity are grouped together.
+-   The name of the residence variable was changed from `res` to `dorm` and recoded such that 1 = dormitory, 0 = not a dorm (e.g., apartment, house).
+-   SSS items 5, 7, 8, 10, 11, 17, 22 not endorsed (n=0), SSS item 9 had a standard deviation = 0.05; 8 items dropped. 
+
+Inputs:
+
+-   baseline.raw.csv
+
+Outputs:
+
+-   baseline_cln.csv
+
+### Packages
+```{r}
+# to detect and warn about conflicts
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+
+# to read in the data
+library(readr)
+
+path_raw <- "_data/data_raw"
+path_nids <- "_data/data_process"
+
+# for data wrangling
+
+library(tidyverse)  # always need this
+library(janitor) # cleaning and EDA
+
+source(here::here("_scripts/functions.R"))
+```
+
+```{r,  message = FALSE, echo = FALSE}
+# Global Settings
+theme_set(theme_classic())
+options(tibble.width = Inf)
+options(tibble.print_max = Inf)
+```
+
+### Read in data
+```{r, warning=FALSE}
+d <- read_csv(here::here(path_raw, "baseline.raw.csv"), col_types = cols(
+  StartDate = col_double(),
+  EndDate = col_double(),
+  Status = col_double(),
+  Progress = col_double(),
+  `Duration (in seconds)` = col_double(),
+  Finished = col_double(),
+  RecordedDate = col_double(),
+  ResponseId = col_character(),
+  DistributionChannel = col_double(),
+  UserLanguage = col_double(),
+  Consent = col_double(),
+  SQAGE18 = col_double(),
+  SQ1 = col_double(),
+  SONAID = col_character(),
+  SONAID_confirm = col_double(),
+  DEM1 = col_double(),
+  DEM2 = col_double(),
+  DEM2_9_TEXT = col_character(),
+  DEM3 = col_double(),
+  DEM3_5_TEXT = col_character(),
+  DEM4 = col_double(),
+  DEM4_6_TEXT = col_character(),
+  DEM4_7_TEXT = col_character(),
+  DEM5 = col_double(),
+  Disability1 = col_double(),
+  Disability2_1 = col_double(),
+  Disability2_2 = col_double(),
+  Disability2_3 = col_double(),
+  Disability2_4 = col_double(),
+  Disability2_5 = col_double(),
+  Disability2_6 = col_double(),
+  Disability2_7 = col_double(),
+  Disability2_7_TEXT = col_character(),
+  DEM6 = col_double(),
+  DEM6_8_TEXT = col_character(),
+  DEM7 = col_double(),
+  DEM8 = col_double(),
+  DEM8_6_TEXT = col_character(),
+  DEM9 = col_double(),
+  DEM9_4_TEXT = col_character(),
+  DEM12 = col_double(),
+  DEM13 = col_double(),
+  DEM14 = col_double(),
+  DEM15 = col_double(),
+  DEM16 = col_double(),
+  DEM17 = col_double(),
+  SMU_1 = col_double(),
+  SMU_2 = col_double(),
+  SMU_3 = col_double(),
+  SMU_4 = col_double(),
+  SMU_5 = col_double(),
+  SMU_6 = col_double(),
+  SMU_7 = col_double(),
+  SMU_8 = col_double(),
+  SMU_9 = col_double(),
+  SMU_10 = col_double(),
+  SMU_11 = col_double(),
+  SMU_12 = col_double(),
+  SMU_12_TEXT = col_character(),
+  DERS1 = col_double(),
+  DERS2 = col_double(),
+  DERS3 = col_double(),
+  DERS4 = col_double(),
+  DERS5 = col_double(),
+  DERS6 = col_double(),
+  DERS7 = col_double(),
+  DERS8 = col_double(),
+  DERS9 = col_double(),
+  DERS10 = col_double(),
+  DERS11 = col_double(),
+  DERS12 = col_double(),
+  DERS13 = col_double(),
+  DERS14 = col_double(),
+  DERS15 = col_double(),
+  DERS16 = col_double(),
+  DERS17 = col_double(),
+  DERS18 = col_double(),
+  PN1 = col_double(),
+  PN2 = col_double(),
+  PN3 = col_double(),
+  PN4 = col_double(),
+  JRS1 = col_double(),
+  JRS2 = col_double(),
+  RSS1 = col_double(),
+  FASC = col_double(),
+  PBCS1 = col_double(),
+  AlAtt = col_double(),
+  ASC1 = col_double(),
+  ASC2 = col_double(),
+  ASC3 = col_double(),
+  ASC4 = col_double(),
+  SCS1 = col_double(),
+  SCS2 = col_double(),
+  SCS5 = col_double(),
+  SCS3 = col_double(),
+  SCS4 = col_double(),
+  SCS6 = col_double(),
+  SCS7 = col_double(),
+  SCS8 = col_double(),
+  SCS9 = col_double(),
+  SCS10 = col_double(),
+  PBCS_7 = col_double(),
+  PBCS_8 = col_double(),
+  PBCS_9 = col_double(),
+  PBCS_10 = col_double(),
+  coercion_1 = col_double(),
+  coercion_2 = col_double(),
+  coercion_3 = col_double(),
+  coercion_4 = col_double(),
+  coercion_5 = col_double(),
+  coercion_6 = col_double(),
+  AC1 = col_double(),
+  AC2 = col_double(),
+  AC3 = col_double(),
+  AC4 = col_double(),
+  SSS_1 = col_double(),
+  SSS_2 = col_double(),
+  SSS_3 = col_double(),
+  SSS_4 = col_double(),
+  SSS_5 = col_double(),
+  SSS_6 = col_double(),
+  SSS_7 = col_double(),
+  SSS_8 = col_double(),
+  SSS_9 = col_double(),
+  SSS_10 = col_double(),
+  SSS_11 = col_double(),
+  SSS_12 = col_double(),
+  SSS_13 = col_double(),
+  SSS_14 = col_double(),
+  SSS_15 = col_double(),
+  SSS_16 = col_double(),
+  SSS_17 = col_double(),
+  SSS_18 = col_double(),
+  SSS_19 = col_double(),
+  SSS_20 = col_double(),
+  SSS_21 = col_double(),
+  SSS_22 = col_double(),
+  SSS_23 = col_double(),
+  CUR_since_14_1 = col_double(),
+  CUR_since_14_2 = col_double(),
+  CUR_since_14_3 = col_double(),
+  SRS1 = col_double(),
+  SRS2 = col_double(),
+  SRS3 = col_double(),
+  SRS4 = col_double(),
+  SRS5 = col_double(),
+  SRS6 = col_double(),
+  Hookup_since_UW = col_double(),
+  SRS8 = col_double(),
+  SRS7 = col_double(),
+  SRS9 = col_double(),
+  SRS9a = col_double(),
+  SRS10_1 = col_double(),
+  SRS10_2 = col_double(),
+  CTQ_PA_1 = col_double(),
+  CTQ_PA_2 = col_double(),
+  CTQ_PA_3 = col_double(),
+  CTQ_PA_4 = col_double(),
+  CTQ_PA_5 = col_double(),
+  CTQ_SA_1 = col_double(),
+  CTQ_SA_2 = col_double(),
+  CTQ_SA_3 = col_double(),
+  CTQ_SA_4 = col_double(),
+  CTQ_SA_5 = col_double(),
+  SES1_1 = col_double(),
+  SES1_2 = col_double(),
+  SES1_3 = col_double(),
+  SES1_4 = col_double(),
+  SES1_5 = col_double(),
+  SES1_6 = col_double(),
+  SES1_6_TEXT = col_character(),
+  AdultSA2_1 = col_double(),
+  AdultSA2_2 = col_double(),
+  AdultSA2_3 = col_double(),
+  AdultSA2_4 = col_double(),
+  AdultSA2_5 = col_double(),
+  AdultSA2_6 = col_double(),
+  AdultSA2_6_TEXT = col_character(),
+  AdultSA3_1 = col_double(),
+  AdultSA3_2 = col_double(),
+  AdultSA3_3 = col_double(),
+  AdultSA3_4 = col_double(),
+  AdultSA3_5 = col_double(),
+  AdultSA3_6 = col_double(),
+  AdultSA3_6_TEXT = col_character(),
+  ASAnum = col_double(),
+  ASAperpgen = col_double(),
+  Porn1 = col_double(),
+  Porn2 = col_double(),
+  Porn2_8_TEXT = col_character(),
+  IRMA1 = col_double(),
+  IRMA2 = col_double(),
+  IRMA3 = col_double(),
+  IRMA4 = col_double(),
+  IRMA5 = col_double(),
+  IRMA6 = col_double(),
+  IRMA7 = col_double(),
+  SOI1 = col_double(),
+  SOI2 = col_double(),
+  SOI3 = col_double(),
+  SOI4 = col_double(),
+  AUDIT_1 = col_double(),
+  AUDIT_2 = col_double(),
+  AUDIT_3 = col_double(),
+  AUDIT_4 = col_double(),
+  AUDIT_5 = col_double(),
+  AUDIT_6 = col_double(),
+  AUDIT_7 = col_double(),
+  AUDIT_8 = col_double(),
+  AUDIT_9 = col_double(),
+  AUDIT_10 = col_double(),
+  SD1 = col_double(),
+  SD2 = col_double(),
+  SD3 = col_double(),
+  SD3_6_TEXT = col_character(),
+  PNALC1 = col_double(),
+  PNALC2 = col_double(),
+  PNALC3 = col_double(),
+  PNALC4 = col_double(),
+  ABOM_1 = col_double(),
+  ABOM_2 = col_double(),
+  ABOM_3 = col_double(),
+  ABOM_4 = col_double(),
+  ABOM_5 = col_double(),
+  cannabis_lifetime = col_double(),
+  cudit_screen = col_double(),
+  cudit_1 = col_double(),
+  cudit_2 = col_double(),
+  cudit_3 = col_double(),
+  cudit_4 = col_double(),
+  cudit_5 = col_double(),
+  cudit_6 = col_double(),
+  cudit_7 = col_double(),
+  cudit_8 = col_double(),
+  BIDR_1 = col_double(),
+  BIDR_2 = col_double(),
+  BIDR_3 = col_double(),
+  BIDR_4 = col_double(),
+  BIDR_5 = col_double(),
+  BIDR_6 = col_double(),
+  BIDR_7 = col_double(),
+  BIDR_8 = col_double(),
+  BIDR_9 = col_double(),
+  BIDR_10 = col_double(),
+  BIDR_11 = col_double(),
+  BIDR_12 = col_double(),
+  BIDR_13 = col_double(),
+  BIDR_14 = col_double(),
+  BIDR_15 = col_double(),
+  BIDR_16 = col_double(),
+  APB1 = col_double(),
+  APB2 = col_double(),
+  APB3 = col_double(),
+  APB4 = col_double(),
+  APB5 = col_double(),
+  APB6 = col_double(),
+  PHQ8_1 = col_double(),
+  PHQ8_2 = col_double(),
+  PHQ8_3 = col_double(),
+  PHQ8_4 = col_double(),
+  PHQ8_5 = col_double(),
+  PHQ8_6 = col_double(),
+  PHQ8_7 = col_double(),
+  PHQ8_8 = col_double(),
+  PHQ8_FU = col_double(),
+  GAD7_1 = col_double(),
+  GAD7_2 = col_double(),
+  GAD7_3 = col_double(),
+  GAD7_4 = col_double(),
+  GAD7_5 = col_double(),
+  GAD7_6 = col_double(),
+  GAD7_7 = col_double(),
+  Q1 = col_double(),
+  Q2 = col_double(),
+  Q3 = col_double(),
+  Q4 = col_double(),
+  Q4_6_TEXT = col_character(),
+  Q5 = col_double(),
+  Q6 = col_double(),
+  Q6_2_TEXT = col_character(),
+  PCL_1 = col_double(),
+  PCL_2 = col_double(),
+  PCL_3 = col_double(),
+  PCL_4 = col_double(),
+  PCL_5 = col_double(),
+  PCL_6 = col_double(),
+  PCL_7 = col_double(),
+  PCL_8 = col_double(),
+  PCL_9 = col_double(),
+  PCL_10 = col_double(),
+  PCL_11 = col_double(),
+  PCL_12 = col_double(),
+  PCL_13 = col_double(),
+  PCL_14 = col_double(),
+  PCL_15 = col_double(),
+  PCL_16 = col_double(),
+  PCL_17 = col_double(),
+  PCL_18 = col_double(),
+  PCL_19 = col_double(),
+  PCL_20 = col_double(),
+  asrs_1 = col_double(),
+  asrs_2 = col_double(),
+  asrs_3 = col_double(),
+  asrs_4 = col_double(),
+  asrs_5 = col_double(),
+  asrs_6 = col_double(),
+  TB1 = col_double(),
+  TB2 = col_double(),
+  Q96 = col_double(),
+  SC0 = col_double(),
+  addcode = col_double())) %>% clean_names()
+```
+
+### Initial cleaning
+```{r}
+# Remove header rows
+d <- d[-c(1, 2), ]
+
+# Remove columns when only unique value == -99 or NA
+single_var_columns <- colnames(d)[sapply(d, function(x) length(unique(x)) == 1)]
+
+columns_to_keep <- !(colnames(d) %in% single_var_columns)
+
+d <- d[, columns_to_keep]
+
+rm(single_var_columns, columns_to_keep)
+
+# Filter out responses with less than 20% progress
+d <- d %>% filter(progress > 20)
+```
+
+### Renaming
+```{r}
+## Demographics 
+d <- d %>% rename(
+  response_id = response_id,
+  sona_id = sonaid,
+  sona_id_confirm = sonaid_confirm, 
+  age = dem1,
+  res = dem2,
+  sch_yr = dem3,
+  race = dem4,
+  disabl = disability1,
+  hisp = dem5,
+  gend = dem6,
+  trans = dem7,
+  sx_ori = dem8,
+  rela = dem9,
+  s_life = dem12,
+  f_aid = dem13,
+  p_grnt = dem14,
+  job = dem15,
+  f_need = dem16,
+  fgen = dem17
+)
+
+## Peer Attitudes
+d <- d %>% rename(
+  pa1 = jrs1,
+  pa2 = jrs2,
+  pa3 = rss1,
+  pa4 = fasc,
+  pa5 = pbcs1,
+  pa6 = al_att
+)
+
+## PBCS
+d <- d %>% rename(
+  ong1 = pbcs_7,
+  ong2 = pbcs_8,
+  ong3 = pbcs_9,
+  ong4 = pbcs_10,
+  coer1 = coercion_1,
+  coer2 = coercion_2,
+  coer3 = coercion_3,
+  coer4 = coercion_4,
+  coer5 = coercion_5,
+  coer6 = coercion_6
+)
+
+## SSS
+d <- d %>% rename(
+  sss1 = sss_1,
+  sss2 = sss_2,
+  sss3 = sss_3,
+  sss4 = sss_4,
+  sss5 = sss_5,
+  sss6 = sss_6,
+  sss7 = sss_7,
+  sss8 = sss_8,
+  sss9 = sss_9,
+  sss10 = sss_10,
+  sss11 = sss_11,
+  sss12 = sss_12,
+  sss13 = sss_13,
+  sss14 = sss_14,
+  sss15 = sss_15,
+  sss16 = sss_16,
+  sss17 = sss_17,
+  sss18 = sss_18,
+  sss19 = sss_19,
+  sss20 = sss_20,
+  sss21 = sss_21,
+  sss22 = sss_22,
+  sss23 = sss_23
+)
+
+## Sexual Risk Behavior
+d <- d %>% rename(
+  srb1 = srs1,
+  srb2 = srs2,
+  srb3 = srs3,
+  srb4 = srs4,
+  srb5 = srs5,
+  srb6 = srs6,
+  srb7 = sd1,
+  srb8 = sd2,
+  srb9 = hookup_since_uw,
+  srb10 = srs8,
+  sx_trade1 = srs9,
+  sx_trade2 = srs9a,
+  dx_sti = srs10_1,
+  un_prg = srs10_2,
+  uw_prt = srs7,
+  au_ven = sd3,
+)
+
+## AUDIT
+d <- d %>% rename(
+  aud1 = audit_1,
+  aud2 = audit_2,
+  aud3 = audit_3,
+  aud4 = audit_4,
+  aud5 = audit_5,
+  aud6 = audit_6,
+  aud7 = audit_7,
+  aud8 = audit_8,
+  aud9 = audit_9,
+  aud10 = audit_10
+)
+
+## Peer Alcohol Norms
+d <- d %>% rename(
+  pn_a1 = pnalc1,
+  pn_a2 = pnalc2,
+  pn_a3 = pnalc3,
+  pn_a4 = pnalc4
+)
+
+## CUDIT
+d <- d %>% rename(
+  cud_l = cannabis_lifetime,
+  cud_6m = cudit_screen,
+  cud1 = cudit_1,
+  cud2 = cudit_2,
+  cud3 = cudit_3,
+  cud4 = cudit_4,
+  cud5 = cudit_5,
+  cud6 = cudit_6,
+  cud7 = cudit_7,
+  cud8 = cudit_8
+)
+
+## Condom Use Resistance
+d <- d %>% rename(
+  cur1 = cur_since_14_1,
+  cur2 = cur_since_14_2,
+  cur3 = cur_since_14_3
+)
+
+## CTQ
+d <- d %>% rename(
+  cpa1 = ctq_pa_1,
+  cpa2 = ctq_pa_2,
+  cpa3 = ctq_pa_3,
+  cpa4 = ctq_pa_4,
+  cpa5 = ctq_pa_5,
+  csa1 = ctq_sa_1,
+  csa2 = ctq_sa_2,
+  csa3 = ctq_sa_3,
+  csa4 = ctq_sa_4,
+  csa5 = ctq_sa_5
+)
+
+## SES-Victimization since age 14
+d <- d %>% rename(
+  v_uc1 = ses1_1,
+  v_uc2 = ses1_2,
+  v_uc3 = ses1_3,
+  v_uc4 = ses1_4,
+  v_uc5 = ses1_5,
+  v_uc6 = ses1_6,
+  uc_txt = ses1_6_text,
+  v_ar1 = adult_sa3_1,
+  v_ar2 = adult_sa3_2,
+  v_ar3 = adult_sa3_3,
+  v_ar4 = adult_sa3_4,
+  v_ar5 = adult_sa3_5,
+  v_ar6 = adult_sa3_6,
+  ar_txt = adult_sa3_6_text,
+  v_r1 = adult_sa2_1,
+  v_r2 = adult_sa2_2,
+  v_r3 = adult_sa2_3,
+  v_r4 = adult_sa2_4,
+  v_r5 = adult_sa2_5,
+  v_r6 = adult_sa2_6,
+  r_txt = adult_sa2_6_text,
+  v_prpg = as_aperpgen,
+  v_num = as_anum
+)
+
+## Trauma specifiers
+d <- d %>% rename(
+  pcl = q1,
+  pcl_txt = q2,
+  pcl_wh = q3,
+  pcl_hw = q4,
+  pcl_ca = q5,
+  pcl_co = q6
+)
+
+## Text-entry, etc.
+d <- d %>% 
+  rename(mu_txt = dem4_6_text,
+         ra_txt = dem4_7_text,
+         sx_txt = dem8_6_text,
+         re_txt = dem9_4_text,
+         sm_txt = smu_12_text,
+         po_txt = porn2_8_text,
+         sd_txt = sd3_6_text,
+         hw_txt = q4_6_text,
+         co_txt = q6_2_text,
+         part2 = q96)
+```
+
+
+### Demographics
+
+#### Categorical
+```{r}
+#### Gender
+# 1 = Man, 2 = Woman, 3 = Non-binary, 4 = Gender fluid, 5 = Two-Spirit, 6 = Agender, 7 = Pangender, 8 = Write-in
+d <- d %>%
+  mutate(gend = case_when(
+    gend == 1 ~ "Man",
+    gend == 2 ~ "Woman",
+    gend == 3 ~ "Non-conforming",
+    gend == 4 ~ "Non-conforming",
+    gend == 5 ~ "Non-conforming",
+    TRUE ~ as.character(gend)))
+
+#### Sexual orientation
+d <- d %>%
+  mutate(across(
+    c(sx_ori),
+    ~ case_when(
+      . == "1" ~ "Gay",
+      . == "2" ~ "Lesbian",
+      . == "3" ~ "Bisexual",
+      . == "4" ~ "Pansexual",
+      . == "5" ~ "Heterosexual",
+      . == "6" ~ "Queer")))
+
+#### Year in school
+d <- d %>%
+  mutate(across(
+    c(sch_yr),
+    ~ case_when(
+      . == "1" ~ "Freshman",
+      . == "2" ~ "Sophomore",
+      . == "3" ~ "Junior",
+      . == "4" ~ "Senior")))
+
+#### Race
+# Recognizing that race is complex, which of the following classifications of race best describe how you identify?
+# 1 = Black, 2 = White, 3 = Asian, 4 = Native American, 5 = Hawaiian/Pacific Islander, 6 = Multiracial [Write in], 7 = Not listed here [Write in]
+
+d <- d %>%
+  mutate(across(
+    c(race),
+    ~ case_when(
+      . == "-99" ~ "Other or multiracial",
+      . == "1" ~ "Black or African American",
+      . == "2" ~ "White",
+      . == "3" ~ "Asian",
+      . == "4" ~ "Native American",
+      . == "5" ~ "Hawaiian/Pacific Islander",
+      . == "6" ~ "Other or multiracial",
+      . == "7" ~ "Other or multiracial")))
+
+
+#### Relationship statues
+# 1 = Single, 2 = Partnered, 4 = Other [describe]
+d <- d %>%
+  mutate(across(
+    c(rela),
+    ~ case_when(
+      . == "1" ~ "Single", # Yes
+      . == "2" ~ "Partnered", # No
+      . == "4" ~ "Single", # Open-text descriptions aligned with "Single" classification 
+    )
+  ))
+
+#### Student Life
+# 1 = Athletics; 2 = Club sports; 3 = Greek life; 4 = Registered student orgs; 5 = Volunteer work; 6 = Associated Students of Madison; 7 = Work-Study; 8 = Research involvement (RA positions); 9 = Religious-affiliated student organizations
+d <- d %>%
+  mutate(across(
+    c(s_life),
+    ~ case_when(
+      . == "-99" ~ NA,
+      . == "1" ~ "Athletics",
+      . == "2" ~ "Club sports",
+      . == "3" ~ "Greek life",
+      . == "4" ~ "Student organizations",
+      . == "5" ~ "Volunteer work",
+      . == "7" ~ "Work-Study",
+      . == "8" ~ "Research involvement",
+      . == "9" ~ "Religious organizations")))
+
+#### Financial Need
+# Since you have been a student at UW-Madison, how often have you had difficulty paying for basic necessities like food, clothing, or rent?
+d <- d %>%
+  mutate(across(
+    c(f_need),
+    ~ case_when(
+      . == "1" ~ "Never",
+      . == "2" ~ "Rarely",
+      . == "3" ~ "Sometimes",
+      . == "4" ~ "Often",
+      . == "5" ~ "All the time")))
+
+# First-gen
+d <- d %>%
+  mutate(across(
+    c(fgen),
+    ~ case_when(
+      . == -99 ~ NA ,
+      . == 1 ~ "Yes",
+      . == 2 ~ "No",
+      . == 3 ~ "Not sure",
+    )
+  ))
+
+#### Disability
+d <- d %>%
+  mutate(across(
+    c(disabl),
+    ~ case_when(
+      . == 1 ~ "Yes", # Yes
+      . == 2 ~ "No", # No
+      . == 3 ~ "Prefer not to say",
+    )
+  ))
+
+d <- d %>% 
+  subset(select = -c(disability2_1:disability2_7_text))
+
+#### Hispanic or Latino/a/x
+d <- d %>%
+  mutate(across(
+    c(hisp),
+    ~ case_when(
+      . == 1 ~ "Yes",
+      . == 2 ~ "No",
+    )
+  ))
+
+#### Review
+d %>% select(gend, sx_ori, sch_yr, race, rela, s_life,
+             f_need, fgen, disabl, hisp) %>% map(tabyl)
+```
+
+
+#### Dichotomous
+```{r}
+# Dichotomized gender variable
+d <- d %>%  
+  mutate(gend_di = ifelse(gend == "Man", 1, 0)) # Woman + GNC = 0 
+
+#### Dichotomized sexual orientation variable
+d <- d %>%  
+  mutate(hetero = ifelse(sx_ori == "Heterosexual", 1, 0))
+
+#### Transgender
+d <- d %>%
+  mutate(across(
+    c(trans),
+    ~ case_when(
+      . == 1 ~ 1, # Yes
+      . == 2 ~ 0, # No
+    )
+  ))
+
+# Do you receive financial aid?
+# Have you ever received a Pell grant?
+# Do you work for pay during the school year?
+d <- d %>%
+  mutate(across(
+    c(f_aid, p_grnt, job),
+    ~ case_when(
+      . == "1" ~ 1, # Yes
+      . == "2" ~ 0, # No
+      . == "-99" ~ NA,
+      TRUE ~ as.numeric(.)
+    )
+  ))
+
+#### Residence 
+# 1 = On campus in a dorm , 2 = On campus in an apartment, 3 = Other on campus arrangement, 4 = Off campus apartment, 5 = Off campus house, 6 = Off campus with parents, 7 = On campus fraternity/sorority house, 8 = Off campus fraternity/sorority house,  9 = Other
+d <- d %>%
+  mutate(across(
+    c(res),
+    ~ case_when(
+      . == 1 ~ 1,
+      . == 2 ~ 0,
+      . == 4 ~ 0,
+      . == 5 ~ 0,
+      . == 6 ~ 0,
+      . == 8 ~ 0,
+    )
+  ))
+
+d <- d %>% rename(dorm = res)
+
+#### Review
+d %>% select(gend_di, hetero, trans, f_aid, p_grnt, job) %>% map(tabyl)
+```
+
+### Social Media
+```{r}
+d <- d %>%   
+  mutate(across(c(smu_1:smu_12),
+                ~dplyr::recode(., 
+                               "-99" = 0, 
+                               "0" = 0, 
+                               "1" = 1,
+                               "2" = 2,
+                               "3" = 3, 
+                               "4" = 4))) 
+d <- d %>%   
+  mutate(across(c(sm_txt),
+                ~dplyr::recode(., 
+                               "-99" = "Not applicable", 
+                               "BeReal"  = "BeReal", 
+                               "Bereal"  = "BeReal",
+                               "be real" = "BeReal",
+                               "bereal"  = "BeReal", 
+                               "GroupMe" = "GroupMe",
+                               "Groupme" = "GroupMe",
+                               "Messages" = "Messages (e.g., iMessage)",
+                               "iMessage" = "Messages (e.g., iMessage)",
+                               "imessage" = "Messages (e.g., iMessage)",
+                               "Github" = "Github",
+                               "Line" = "LINE",
+                               "N/A" = "Not applicable",
+                               "Netflix" = "Not applicable",
+                               "None" = "Not applicable",
+                               "n/a" = "Not applicable",
+                               "na" = "Not applicable",
+                               "none" = "Not applicable",
+                               "QQ" = "QQ",
+                               "Telegram" = "Telegram",
+                               "TikTok" = "Not applicable",
+                               "tumblr" = "Tumblr",
+                               "VSCO" = "VSCO",
+                               "vsco" = "VSCO",
+                               "YikYak" = "YikYak",
+                               "Yik Yak" = "YikYak",
+                               "Yikyak" = "YikYak",
+                               "yik yak" = "YikYak",
+                               "pinterest" = "Pinterest",
+                               "xbox live" = "Xbox Live",
+                               "YouTube" = "YouTube",
+                               "youtube" = "YouTube",
+                               "Youtube" = "YouTube",
+                               "-" = "Not applicable")))
+
+```
+
+### Substance Use
+
+#### AUDIT (a = .79)
+```{r}
+# AUDIT (a = .79)
+  
+# (1.) Item 1 prefer not to respond option coded -1 (n = 9); recode -9 respondents who don't drink as 0.   
+# (2.) Retain all data and compute total scores with the items that are present   
+d <- d %>%   
+mutate(across(c(aud1),
+                ~dplyr::recode(., 
+                              "-1" = 0,
+                               "0" = 0,
+                               "1" = 1,
+                               "2" = 2,
+                               "3" = 3,
+                               "4" = 4)))
+
+d %>% select(aud1:aud10) %>% glimpse()
+
+# AUDIT summed score 
+d <- d %>% 
+rowwise() %>% dplyr::mutate(aud_s = sum(aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8,aud9,aud10,na.rm = T))
+
+# AUDIT score centered
+d$aud_sc <- d$aud_s - mean(d$aud_s, na.rm = T)
+
+# AUDIT summed score descriptives
+psych::describe(d$aud_s)
+
+# create a character vector for the audit items
+audit_vector <- c("aud1","aud2","aud3","aud4","aud5", # Item 2 (n=358)
+                  "aud6","aud7","aud8","aud9","aud10")
+
+psych::alpha(d[, audit_vector], check.keys = T, na.rm = TRUE) # alpha = .79
+hist(d$aud_s)
+```
+
+#### AUDIT-C (a = .82)
+```{r}
+# AUDIT-C summed score 
+d <- d %>% 
+rowwise() %>% 
+  mutate(audc_s = sum(aud1,aud2,aud3,na.rm = T))
+
+# AUDIT-C score centered
+d$audc_sc <- d$audc_s - mean(d$audc_s, na.rm = T)
+
+# AUDIT-C summed score descriptives
+psych::describe(d$audc_s)
+
+# create a character vector for the audit-c items
+audc_vector <- c("aud1","aud2","aud3")
+
+psych::alpha(d[, audc_vector], check.keys = T, na.rm = TRUE)
+```
+
+#### ABOM (a = .89)
+```{r}
+## ABOM (a = .89)
+#d %>% select(abom_1:abom_5) %>% map(tabyl)
+
+# abom mean score
+d <- d %>% rowwise() %>% mutate(abomm = mean(c(abom_1,abom_2,abom_3,abom_4,abom_5)))
+
+# abom mean score centered
+d$abomm_c <- d$abomm - mean(d$abomm, na.rm = T)
+
+# abom summed score 
+d <- d %>% 
+rowwise() %>% 
+  mutate(abom_s = sum(abom_1,abom_2,abom_3,abom_4,abom_5))
+
+# abom summed score centered
+d$abom_sc <- d$abom_s - mean(d$abom_s, na.rm = T)
+
+# create a character vector for the abom items
+abom_vector <- c("abom_1","abom_2","abom_3","abom_4","abom_5")
+
+# alpha = .89, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, abom_vector], check.keys = T, na.rm = TRUE)
+
+# ABOM descriptives
+psych::describe(d$abom_s)
+hist(d$abom_s)
+```
+
+#### Protective Behaviors (a = .77)
+```{r}
+#### Alcohol Protective Behaviors
+# APB (a = .77): 1 = never, 2 = rarely, 3 = sometimes, 4 = often, 5 = always
+d %>% select(apb1:apb6) %>% map(tabyl) # *n=3 viewed but didn't respond to apb3, apb4, apb5, and/or apb6
+
+d <- d %>% # recode missing values from -99 to NA
+  dplyr::mutate(across(  
+    c(apb3, apb4, apb5, apb6),
+    ~ na_if(., -99)
+  ))
+
+# summed total score
+d <- d %>% 
+rowwise() %>% 
+  mutate(apb_s = sum(apb1,apb2,apb3,apb4,apb5,apb6))
+
+# descriptives 
+psych::describe(d$apb_s)
+
+# center
+d$apb_sc <- d$apb_s - mean(d$apb_s, na.rm = T)
+
+# create a character vector for the APB items
+apb_vector <- c("apb1","apb2","apb3","apb4","apb5","apb6")
+
+# alpha = .77, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, apb_vector], check.keys = T, na.rm = TRUE)
+
+# summed score for limiting/stopping drinking subscale
+d <- d %>% 
+rowwise() %>% 
+  mutate(apb_lim = sum(apb1,apb4,apb5))
+
+# center
+d$lim_c <- d$apb_lim - mean(d$apb_lim, na.rm = T)
+
+# summed score for manner of drinking subscale
+d <- d %>% 
+rowwise() %>% 
+  mutate(apb_man = sum(apb2,apb3,apb6))
+
+# center
+d$man_c <- d$apb_man - mean(d$apb_man, na.rm = T)
+
+# item 6 = "avoid mixing alcohol with other drugs"
+psych::describe(d$apb6)
+```
+
+#### CUDIT (a = .75)
+```{r}
+## CUDIT (a = .75)
+# Scored by calculating summed total; Range 0-32  
+# Questions 1-7 are scored on a 0-4 scale - Question 8 is scored 0, 2, or 4.
+d %>% select(cud1:cud8) %>% map(tabyl)
+
+d <- d %>%
+  rowwise() %>% mutate(across(c(cud1:cud2),
+                              ~dplyr::recode(., 
+                                             "1" = 0,
+                                             "2" = 1,
+                                             "3" = 2,
+                                             "4" = 3,
+                                             "5" = 4)))
+
+d <- d %>% # cudit summed total score
+  rowwise() %>%
+  mutate(cud_s = sum(cud1, cud2, cud3, cud4, cud5, cud6, cud7, cud8))
+
+d$cud_sc <- d$cud_s - mean(d$cud_s, na.rm = T) # center
+
+# create a character vector for the cudit items
+cudit_vector <- c("cud1","cud2","cud3","cud4","cud5","cud6","cud7", "cud8")
+
+# alpha = .75, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, cudit_vector], check.keys = T, na.rm = TRUE)
+
+psych::describe(d$cud_s) # describe
+hist(d$cud_s) # view distribution
+```
+
+### "Mental Health"
+
+#### ASRS (a = .82)
+```{r}
+## ADHD Symptom Rating Scale
+# 5-item Likert scale to indicate the frequency of occurrence of ADHD symptoms 
+d %>% select(asrs_1:asrs_6) %>% map(tabyl)
+
+d <- d %>%   
+  mutate(across(c(asrs_1:asrs_6),
+                ~dplyr::recode(., 
+                               "0" = 0, # never
+                               "1" = 1, # rarely
+                               "2" = 2, # sometimes
+                               "3" = 3, # often
+                               "4" = 5) # very often (Gray et al., 2014)
+                )) 
+
+d <- d %>%
+  rowwise() %>%
+  mutate(asrs_s = sum(asrs_1,asrs_2,asrs_3,asrs_4,asrs_5,asrs_6))
+
+# center
+d$asrs_sc <- d$asrs_s - mean(d$asrs_s, na.rm = T)
+
+# create a character vector for the asrs items
+asrs_vector <- c("asrs_1","asrs_2","asrs_3","asrs_4","asrs_5","asrs_6")
+
+# alpha = .82, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, asrs_vector], na.rm = T) 
+
+# describe
+psych::describe(d$asrs_s)
+hist(d$asrs_s)
+```
+
+#### DERS  (a = .89)
+```{r}
+# DERS (a = .89) 
+
+d <- d %>% ## n=1 viewed but didn't respond to ders4 and ders11
+  mutate(across(
+    c(ders4, ders11),
+    ~ na_if(., -99) ## recode as missing
+  ))
+
+d %>% select(ders1:ders18) %>% glimpse()
+
+## reverse-code items 1, 4 and 6
+d <- d %>%
+  mutate(across(
+    c(ders1, ders4, ders6),
+    ~ recode(., 
+             "1" = 5,
+             "2" = 4,
+             "3" = 3,
+             "4" = 2,
+             "5" = 1)
+  ))
+
+d <- d %>% ## ders summed total score
+rowwise() %>% 
+  mutate(ders_s = sum(ders1,ders2,ders3,ders4,ders5,ders6,ders7,ders8,ders9,
+                        ders10,ders11,ders12,ders13,ders14,ders15,ders16,ders17,ders18))
+
+d$ders_sc <- d$ders_s - mean(d$ders_s, na.rm = T) ### center
+
+psych::describe(d$ders_s) ### describe
+hist(d$ders_s)
+
+## create a character vector for the ders items
+ders_vector <- c("ders1","ders2","ders3","ders4","ders5","ders6","ders7","ders8","ders9",
+                 "ders10","ders11","ders12","ders13","ders14","ders15","ders16","ders17","ders18")
+
+## alpha = .89, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, ders_vector], check.keys = T, na.rm = TRUE)
+
+# DERS Subscales
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_clr = sum(ders2,ders3,ders5)) ## Clarity
+
+d$clar_c <- d$ders_clr - mean(d$ders_clr, na.rm = T) ### centered
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_aw = sum(ders1,ders4,ders6)) ## Awareness
+
+d$awar_c <- d$ders_aw - mean(d$ders_aw, na.rm = T) ### centered
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_non = sum(ders7,ders13,ders14)) ## Nonacceptance
+
+d$nonax_c <- d$ders_non - mean(d$ders_non, na.rm = T) ### centered
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_g = sum(ders8,ders12,ders15)) ## Goals
+
+d$goals_c <- d$ders_g - mean(d$ders_g, na.rm = T) ### centered
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_im = sum(ders9,ders16,ders18)) ## Impulse
+
+d$impl_c <- d$ders_im - mean(d$ders_im, na.rm = T) ### centered
+
+d <- d %>% 
+rowwise() %>% 
+  mutate(ders_st = sum(ders10,ders11,ders17)) ## Strategies
+
+d$strg_c <- d$ders_st - mean(d$ders_st, na.rm = T) ### centered
+```
+
+#### GAD (a = .92)
+```{r}
+## GAD (a = .92)
+d %>% select(gad7_1:gad7_7) %>% map(tabyl)
+
+d <- d %>%  # gad summed total score
+  rowwise() %>%
+  mutate(gad_s = sum(gad7_1, gad7_2, gad7_3, gad7_4, gad7_5, gad7_6, gad7_7))
+
+d$gad_sc <- d$gad_s - mean(d$gad_s, na.rm = T) # center
+
+psych::describe(d$gad_s) # describe
+hist(d$gad_s) # view distribution
+
+# create a character vector for the gad items
+gad_vector <- c("gad7_1","gad7_2","gad7_3","gad7_4","gad7_5","gad7_6","gad7_7")
+
+# alpha = .92, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, gad_vector], check.keys = T, na.rm = TRUE)
+```
+
+#### PHQ (a = .90)
+```{r}
+## PHQ (a = .90):
+d %>% select(phq8_1:phq8_fu) %>% map(tabyl) # n=1 viewed but did not respond to PHQ8_3 or PHQ8_7
+
+d <- d %>%
+  mutate(across(
+    c(phq8_1:phq8_fu),
+    ~ dplyr::recode(., 
+                    "0" = 0, # 0 = Not at all
+                    "1" = 1, # 1 = Several days
+                    "2" = 2, # 2 = More than half the days
+                    "3" = 3) # 3 = Nearly every day
+  )) %>%
+  mutate(across(
+    c(phq8_1:phq8_fu),
+    ~ na_if(., -99) # Recode obs = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%  # phq summed total score
+  rowwise() %>% # confirm phq8_fu should be included in total scores
+  mutate(phq_s = sum(phq8_1, phq8_2, phq8_3, phq8_4, phq8_5, phq8_6, phq8_7, phq8_8, phq8_fu)) 
+
+d$phq_sc <- d$phq_s - mean(d$phq_s, na.rm = T) # center
+
+# create a character vector for the phq items
+phq_vector <- c("phq8_1", "phq8_2", "phq8_3", "phq8_4", "phq8_5", "phq8_6", "phq8_7", "phq8_8", "phq8_fu")
+
+# alpha = .90, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, phq_vector], check.keys = T, na.rm = TRUE)
+
+psych::describe(d$phq_s) # describe
+hist(d$phq_s) # view distribution
+```
+
+#### PCL-5 (a = .96)
+```{r}
+## PCL-5 (a = .96):
+d %>% select(pcl_1:pcl_20) %>% map(tabyl) # n=1 viewed but did not respond to pcl_1
+# Still need to recode prelim PCL items (e.g., criterion A, trauma type)  ?
+
+d <- d %>%
+  mutate(across(
+    c(pcl_1:pcl_20),
+    ~ dplyr::recode(., 
+                    "1" = 0, # Not at all
+                    "2" = 1, # A little bit
+                    "3" = 2, # Moderately
+                    "4" = 3, # Quite a bit
+                    "5" = 4) # Extremely 
+  )) %>%
+  mutate(across(
+    c(pcl_1:pcl_20),
+    ~ na_if(., -99) # Recode ob = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%  # PCL-5 summed total score
+  rowwise() %>%
+  mutate(pcl_s = sum(pcl_1, pcl_2, pcl_3, pcl_4, pcl_5, pcl_6, pcl_7, pcl_8, pcl_9, pcl_10,pcl_11,
+                     pcl_12, pcl_13, pcl_14, pcl_15, pcl_16, pcl_17, pcl_18, pcl_19, pcl_20))
+
+d$pcl_sc <- d$pcl_s - mean(d$pcl_s, na.rm = T) # center
+
+# create a character vector for the pcl items
+pcl_vector <- c("pcl_1", "pcl_2", "pcl_3", "pcl_4", "pcl_5", "pcl_6", "pcl_7", "pcl_8", "pcl_9","pcl_10","pcl_11",
+                "pcl_12", "pcl_13", "pcl_14", "pcl_15", "pcl_16", "pcl_17", "pcl_18", "pcl_19", "pcl_20")
+
+# alpha = .96, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, pcl_vector], check.keys = T, na.rm = TRUE)
+
+psych::describe(d$pcl_s) # outliers? run case analysis
+hist(d$pcl_s) # view distribution
+
+### PCL-5 Subscales
+ 
+d <- d %>% # Reexperiencing
+  rowwise() %>% 
+  mutate(pcl_reexp = sum(pcl_1,pcl_2,pcl_3,pcl_4,pcl_5))
+
+d$reexp_c <- d$pcl_reexp - mean(d$pcl_reexp, na.rm = T) # centered
+
+d <- d %>% # Avoidance
+  rowwise() %>% 
+  mutate(pcl_av = sum(pcl_6,pcl_7))
+
+d$av_c <- d$pcl_av - mean(d$pcl_av, na.rm = T) # centered
+
+d <- d %>% # Negative Alterations in Cognitions and Mood
+  rowwise() %>% 
+  mutate(pcl_neg = sum(pcl_8,pcl_9,pcl_10,pcl_11,pcl_12,pcl_13,pcl_14))
+
+d$neg_c <- d$pcl_neg - mean(d$pcl_neg, na.rm = T) # centered
+
+d <- d %>% # Hyperarousal
+  rowwise() %>% 
+  mutate(pcl_hyp = sum(pcl_15,pcl_16,pcl_17,pcl_18,pcl_19,pcl_20))
+
+d$hyp_c <- d$pcl_hyp - mean(d$pcl_hyp, na.rm = T) # centered
+```
+
+### Social Desirability
+
+#### BIDR (a = .75)
+```{r}
+## BIDR (a = .75): (1-8) 1 = totally disagree, 8 = totally agree
+#  Higher scores reflect greater social desirability bias
+
+### Self-Deceptive Enhancement (a = .68)
+
+# reverse-code items 1, 3, 5, 8
+d <- d %>%   
+  mutate(across(c(bidr_1,bidr_3,bidr_5,bidr_8),
+                ~dplyr::recode(., 
+                               "1" = 8,
+                               "2" = 7,
+                               "3" = 6,
+                               "4" = 5,
+                               "5" = 4,
+                               "6" = 3,
+                               "7" = 2,
+                               "8" = 1)))
+
+d <- d %>%
+  rowwise() %>%
+  mutate(sde_s = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8))
+
+# create a character vector for the bidr items
+sde_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7","bidr_8")
+
+# alpha = .68, i.e. < .70, doesn't meet standard criterion for reliability
+psych::alpha(d[, sde_vector], na.rm = T) 
+
+# describe
+psych::describe(d$sde_s)
+hist(d$sde_s)
+
+### Impression Management (a = .68)
+
+d <- d %>%   # reverse-code items 9, 11, 12, 13
+  mutate(across(c(bidr_9,bidr_11,bidr_12,bidr_13),
+                ~dplyr::recode(., 
+                               "1" = 8,
+                               "2" = 7,
+                               "3" = 6,
+                               "4" = 5,
+                               "5" = 4,
+                               "6" = 3,
+                               "7" = 2,
+                               "8" = 1)))
+
+d <- d %>%
+  rowwise() %>%
+  mutate(im_s = sum(bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
+
+# create a character vector for the bidr items
+im_vector <- c("bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .68, i.e. < .70, doesn't meet standard criterion for reliability
+psych::alpha(d[, im_vector], na.rm = T) 
+
+# describe
+psych::describe(d$im_s)
+hist(d$im_s)
+
+### Total Scale
+d <- d %>%
+  rowwise() %>%
+  mutate(bidr_s = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8,
+                      bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
+# center
+d$bidr_sc <- d$bidr_s - mean(d$bidr_s, na.rm = T)
+
+# create a character vector for the bidr items
+bidr_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7","bidr_8",
+                 "bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .75, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, bidr_vector], na.rm = T) 
+
+# describe
+psych::describe(d$bidr_s)
+hist(d$bidr_s)
+```
+
+### Sexual History
+
+#### Childhood Abuse (n = 59)
+```{r}
+## CTQ: Childhood Abuse
+### Physical Abuse (a = .87; n = 38)
+d <- d %>% 
+  rowwise() %>%
+  mutate(cpa_s = sum(cpa1,cpa2,cpa3,cpa4,cpa5))
+
+d$cpa_sc <- d$cpa_s - mean(d$cpa_s, na.rm = T) # center
+
+# create a character vector for the cpa subscale
+cpa_vector <- c("cpa1","cpa2","cpa3","cpa4","cpa5")
+
+# alpha = .87, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, cpa_vector], na.rm = T) 
+
+# describe
+psych::describe(d$cpa_s) # potential outliers - run case analysis 
+hist(d$cpa_s)
+
+# copy cpa_s to cpa_v
+d$cpa_v <- d$cpa_s
+
+# Recode cpa_v based on the cutoff = sub-scale summed score greater than or equal to 8
+d <- d %>%
+  mutate(cpa_v = if_else(cpa_v >= 8, 1, 0))
+
+# cpa_v = dichotimized history of childhood physical abuse 
+d %>% dplyr::select(cpa_v) %>% map(tabyl)
+
+### Sexual Abuse (a = .94; n = 51)
+d  %>% dplyr::select(csa1:csa5) %>% map(tabyl)
+d <- d %>% 
+  rowwise() %>%
+  mutate(csa_s = sum(csa1,csa2,csa3,csa4,csa5))
+
+# center
+d$csa_sc <- d$csa_s - mean(d$csa_s, na.rm = T)
+
+# create a character vector for the csa subscale
+csa_vector <- c("csa1","csa2","csa3","csa4","csa5")
+
+# alpha = .94, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, csa_vector], na.rm = T) 
+
+# describe
+psych::describe(d$csa_s)
+hist(d$csa_s)
+
+# copy csa_s to csa_v
+d$csa_v <- d$csa_s 
+
+# recode csa_v based on the cutoff = sub-scale summed score greater than or equal to 6
+d <- d %>%
+  mutate(csa_v = if_else(csa_v >= 6, 1, 0))
+
+# csa_v = dichotimized history of childhood sexual abuse 
+d %>% dplyr::select(csa_v) %>% map(tabyl)
+
+### ACES 
+d <- d %>% 
+  rowwise() %>%
+  mutate(aces = sum(cpa_v,csa_v))
+
+d %>% tabyl(aces)
+```
+
+
+#### Sexual Assault (n = 88)
+```{r}
+## SES: "Adult" SA (since age 14)
+
+### Unwanted Contact: v_uc (n = 72)
+d  %>% dplyr::select(v_uc1:uc_txt) %>% map(tabyl)
+
+d <- d %>%
+  mutate(across(
+    c(v_uc1:v_uc5),
+    ~ dplyr::recode(., 
+                    "0" = 0,  # No, this hasn't happened since I turned 14
+                    "1" = 1,  # Yes, Since I turned 14
+                    "2" = 2,  # Yes, After starting at [university]
+  ))) %>%
+  mutate(across(
+    c(v_uc1:v_uc6),
+    ~ na_if(., -99) # Recode obs = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%
+  rowwise() %>% # sum subscale items
+  mutate(v_uc = sum(v_uc1,v_uc2,v_uc3,v_uc4,v_uc5,v_uc6))
+
+d$v_uc_s <- d$v_uc # v_uc_s = subscale summed score
+
+d$v_uc <- ifelse(d$v_uc > 0, 1, 0) # v_uc = dichotomized across tactics and timeframes
+
+d %>% dplyr::select(v_uc) %>% map(tabyl)
+
+### Rape: v_r (n = 35)
+d %>% dplyr::select(v_r1:r_txt) %>% map(tabyl)
+
+d <- d %>%
+  mutate(across(
+    c(v_r1:v_r6),
+    ~ dplyr::recode(., 
+                    "0" = 0,  # No, this hasn't happened since I turned 14
+                    "1" = 1,  # Yes, Since I turned 14
+                    "2" = 2,  # Yes, After starting at [university]
+  ))) %>%
+  mutate(across(
+    c(v_r1:v_r6),
+    ~ na_if(., -99) # Recode obs = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%
+  rowwise() %>%
+  mutate(v_r = sum(v_r1,v_r2,v_r3,v_r4,v_r5,v_r6))
+
+d$v_r_s <- d$v_r  # v_r_s = sub-scale summed score
+
+d$v_r <- ifelse(d$v_r > 0, 1, 0) # v_r = dichotomized across tactics and timeframes
+
+d %>% dplyr::select(v_r) %>% map(tabyl)
+
+### Attempted Rape: v_ar (n = 52)
+# d  %>% dplyr::select(adult_sa3_6_text) %>% map(tabyl)
+d %>% dplyr::select(v_ar1:ar_txt) %>% map(tabyl)
+
+d <- d %>%
+  mutate(across(
+    c(v_ar1:v_ar6),
+    ~ dplyr::recode(., 
+                    "0" = 0,  # No, this hasn't happened since I turned 14
+                    "1" = 1,  # Yes, Since I turned 14
+                    "2" = 2,  # Yes, After starting at [university]
+  ))) %>%
+  mutate(across(
+    c(v_ar1:v_ar6),
+    ~ na_if(., -99) # Recode obs = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%
+  rowwise() %>%
+  mutate(v_ar = sum(v_ar1,v_ar2,v_ar3,v_ar4,v_ar5,v_ar6))
+
+d$v_ar_s <- d$v_ar # v_ar_s = subscale summed score 
+
+d$v_ar <- ifelse(d$v_ar > 0, 1, 0) # v_ar = dichotomized across tactics and timeframes
+
+d %>% dplyr::select(v_ar) %>% map(tabyl)
+
+### Any Sexual Assault: v_asa (n = 88)
+# v_asa = 1 = has experienced some form of SA since age 14 
+# v_asa = 0 = no sexual victimization since age 14
+
+d <- d %>%
+  rowwise() %>%
+  mutate(v_asa = sum(v_uc,v_r,v_ar))
+
+d$v_poly <- d$v_asa # for calculating polyvictimization 
+
+d$v_asa <- ifelse(d$v_asa > 0, 1, 0)
+
+d %>% dplyr::select(v_asa) %>% map(tabyl)
+
+## Assault Characteristics
+
+### SA events/subject in college 
+# *On how many separate occasions has this occurred since you've been at [name of university]?*
+# 1 = once, 2 = twice, 3 = three or more
+# check branching logic, more people should have received this question
+
+d <- d %>% # recode (n=1) -99 to NA
+  dplyr::mutate(across(  
+    c(v_num),
+    ~ na_if(., -99)
+  ))
+
+d %>% dplyr::select(v_num) %>% map(tabyl)
+
+### Perp Gender (reported by victim):     
+# 1 = cis man (n = 27)   
+# 3 = cis woman (n = 9)
+# check branching logic, more people should have received this question
+
+d <- d %>% # recode (n=1) -99 to NA
+  dplyr::mutate(across(  
+    c(v_prpg),
+    ~ na_if(., -99)
+  ))
+
+d %>% dplyr::select(v_prpg) %>% map(tabyl)
+
+## Victimization Characteristics
+
+### Polyvicx: v_poly*
+# v_poly = 1 = has experienced multiple forms of adult sexual assault    
+# v_poly = 0 = has experienced one OR zero forms of adult sexual assault 
+d$v_poly <- ifelse(d$v_poly > 1, 1, 0)
+
+d %>% dplyr::select(v_poly) %>% map(tabyl) # could include people who experienced >1 type within 1 event?
+
+### Lifetime Revicx: v_rev
+# v_rev = 2 = has experienced childhood sexual abuse AND some form of adult sexual assault    
+# v_rev = 1 = history of CSA or ASA   
+# v_rev = 0 = no hx of sexual victimization   
+
+d <- d %>%
+  rowwise() %>%
+  mutate(v_rev = sum(csa_v,v_asa))
+
+d %>% dplyr::select(v_rev) %>% map(tabyl)
+
+# run line of code below to dichotomize so 1 = revicx and 0 = CSA *OR* ASA *OR* zero sexual vicx
+# d$v_rev <- ifelse(d$v_rev > 1, 1, 0)
+
+
+### Substance-Facilitated: v_sub (n = 49)
+# calculated from the following variables: v_uc3, v_r3, v_ar3. 
+# v_sub = 1 = unwanted contact, rape, and/or attempted rape via incapacitation since age 14   
+# v_sub = 0 = ASA via other tactic(s) OR zero forms of adult sexual assault 
+
+d <- d %>%
+  rowwise() %>%
+  mutate(v_sub = sum(v_uc3,v_r3,v_ar3))
+
+d$v_sub_s <- d$v_sub # v_sub_s = subscale summed score
+
+d$v_sub <- ifelse(d$v_sub > 0, 1, 0) # v_sub = dichotomized across assault types and timeframes
+
+d %>% dplyr::select(v_sub) %>% map(tabyl)
+```
+
+#### Ambiguous Consent (n = 46)
+```{r}
+## Ambiguous Consent. (n=46)
+# ac1 = Have you ever had sexual contact with someone (touching or intercourse) when they may not have consented?
+# ac2 = Have you ever had sexual contact with someone (touching or intercourse) and realized later that they did not consent?
+# 1 = Yes, 0 = No, 3 = Not sure
+d <- d %>%   # re-code
+  mutate(across(c(ac1:ac3),
+                ~dplyr::recode(., 
+                               "1" = 1, # Yes
+                               "2" = 0, # No
+                               "3" = 3))) # Not sure
+d$aib1 <- d$ac3
+
+d <- d %>%
+  rowwise() %>% 
+  mutate(ac_s = sum(c(ac1,ac2)))
+
+d$ac_di <- d$ac_s
+
+d$ac_di <- ifelse(d$ac_di > 0, 1, 0) # dichotomize including "Not sure" as 1
+
+d %>% select(ac_di) %>% map(tabyl)
+```
+
+#### Sexual Aggression (n = 56)
+```{r}
+## SSS (n=56)
+d %>% select(sss1:sss23) %>% map(tabyl)
+
+d <- d %>%
+  mutate(across(
+    c(sss1:sss23),
+    ~ dplyr::recode(., 
+                    "0" = 0,  # No, this hasn't happened since I turned 14
+                    "1" = 1,  # Yes, Since I turned 14
+                    "2" = 2,  # Yes, After starting at [university]
+  ))) %>%
+  mutate(across(
+    c(sss1:sss23),
+    ~ na_if(., -99) # Recode (n=8) obs = -99 (participant saw and skipped item) as missing
+  ))
+
+d <- d %>%
+  rowwise() %>%
+  mutate(sss_s = sum(sss1,sss2,sss3,sss4,sss5,sss6,sss7,sss8,sss9,
+                     sss10,sss11,sss12,sss13,sss14,sss15,sss16,sss17,
+                     sss18,sss19,sss20,sss21,sss22))
+
+d$sss_di <- d$sss_s # copy sss_sum to make sss_dichotomous
+d$sss_di <- ifelse(d$sss_di > 0, 1, 0) # sss_di = dichotomized across tactics and timeframes
+
+d %>% select(sss_di) %>% map(tabyl)
+
+# SSS items 5, 7, 8, 10, 11, 17, 22 not endorsed (n=0)
+# SSS item 9 has a standard deviation = 0.05
+
+sss <- c("sss1","sss2","sss3","sss4","sss6","sss12","sss13",
+         "sss14","sss15","sss16","sss18","sss19","sss20","sss21")
+
+### Verbal coercion. (n=32) 
+
+d <- d %>%  # + one "Authority" item recoded with verbal coercion 
+  rowwise() %>% # (sss3, "Using your older age to convince them")
+  mutate(sss_v = sum(sss2,sss3,sss6,sss15,sss16,sss20,sss21)) 
+
+d$sss_v <- ifelse(d$sss_v > 0, 1, 0) # sss_v = dichotomized across verbal items and timeframes
+d %>% select(sss_v) %>% map(tabyl)
+
+### Intoxication: sss4, sss9, aib2 (n=26)
+d <- d %>% rename(aib2 = ac4) # rename (aib2= "Has a partner ever asked you about, or been surprised to learn of, a sexual experience they had with you but did not remember due to alcohol?")
+
+d <- d %>%   
+  mutate(across(c(aib2),
+                ~dplyr::recode(., 
+                               "1" = 1, # Yes
+                               "2" = 0, # No
+                               "3" = 3))) # Not sure
+d <- d %>%
+  rowwise() %>%
+  mutate(sss_i = sum(sss4,sss9,aib2))
+
+d$sss_i <- ifelse(d$sss_i > 0, 1, 0) # sss_v = dichotomized across intoxication items and timeframes
+
+d %>% select(sss_i) %>% map(tabyl)
+
+#### Enticement: sss1, sss12, sss13 (n=35)
+d <- d %>%
+  rowwise() %>%
+  mutate(sss_e = sum(sss1,sss12,sss13))
+
+d$sss_e <- ifelse(d$sss_e > 0, 1, 0) # sss_e = dichotomized across enticement items and timeframes
+d %>% select(sss_e) %>% map(tabyl)
+
+#### Threats or force: sss14, sss18, sss19 (n=3)
+d <- d %>%
+  rowwise() %>%
+  mutate(sss_tf = sum(sss14,sss18,sss19))
+
+d$sss_tf <- ifelse(d$sss_tf > 0, 1, 0) # sss_tf = dichotomized across force items and timeframes
+d %>% select(sss_tf) %>% map(tabyl)
+
+# Subtle Coercion (a = .81) from PBCS
+d %>% select(coer1:coer6) %>% glimpse()
+
+d <- d %>%
+  rowwise() %>%   # calculate mean scores
+  mutate(coer_m = mean(c(coer1,coer2,coer3,coer4,coer5,coer6)))
+
+d <- d %>%
+  rowwise() %>%   # sum total scores
+  mutate(coer_s = sum(c(coer1,coer2,coer3,coer4,coer5,coer6)))
+
+d$coer_sc <- d$coer_s - mean(d$coer_s, na.rm = T) # mean-center summed total scores
+
+# create a character vector for the coercion items
+coer_vector <- c("coer1","coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .81, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, coer_vector], na.rm = T) 
+
+psych::describe(d$coer_s) # describe
+hist(d$coer_s) # view distribution
+```
+
+#### Condom Use Resistance (n = 44)
+```{r}
+## CUR (n=44; a = .76) *items re-labeled in naming script
+d %>% select(cur1:cur3) %>% map(tabyl)
+
+d <- d %>%   
+  mutate(across(c(cur1:cur3),
+                ~dplyr::recode(., 
+                               "1" = 0,
+                               "2" = 1,
+                               "3" = 2,
+                               "4" = 3,
+                               "5" = 4,
+                               "6" = 5,
+                               "7" = 6,
+                               "8" = 7,
+                               "9" = 8,
+                               "10" = 9,
+                               "11" = 10)))
+
+d <- d %>%
+  rowwise() %>%  # sum total score
+  mutate(cur_s = sum(c(cur1,cur2,cur3)))
+
+d <- d %>%
+  rowwise() %>%  # calculate mean score
+  mutate(cur_m = mean(c(cur1,cur2,cur3)))
+
+d$cur_di <- d$cur_s
+
+d$cur_di <- ifelse(d$cur_di > 0, 1, 0) # dichotomized across frequencies of cur
+d %>% select(cur_di) %>% map(tabyl)
+
+# create a character vector for the coercion items
+cur_vector <- c("cur1","cur2","cur3")
+
+# alpha = .76, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, cur_vector], na.rm = T)
+```
+
+#### Nonconsensual Sexual Behavior (n = 107)
+```{r}
+## Nonconsensual Sexual Behavior (n=107)
+# "agg" = any sexually aggressive behavior (i.e., condom use resistance, ambiguous consent, verbal coercion, intoxication, enticement)
+d <- d %>%
+  rowwise() %>% 
+  mutate(agg_s = sum(c(cur_di,ac_di,sss_v,sss_i,sss_e,sss_tf)))
+
+d %>% select(agg_s) %>% map(tabyl) # summed scores indicate endorsement across multiple sexual aggression types 
+
+d$agg_di <- d$agg_s # copy agg_s to agg_di
+d$agg_di <- ifelse(d$agg_di > 0, 1, 0) # dichotomize agg_di
+
+d %>% select(agg_di) %>% map(tabyl) # dichotomized such that 1=any history of sexual aggression
+```
+
+#### IRMA (a = .82)
+```{r}
+## IRMA (a = .82)
+# 5 = strongly disagree, 4 = Somewhat disagree, 3 = Neither disagree nor agree, 2 = Somewhat agree, 1 = strongly agree 
+# Item values summed for total score, with higher scores reflecting greater rejection of rape myths
+
+d <- d %>%
+  rowwise() %>%
+  mutate(rma_s = sum(irma1,irma2,irma3,irma4,irma5,irma6,irma7))
+
+# create a character vector for the irma items
+rma_vector <- c("irma1","irma2","irma3","irma4","irma5","irma6","irma7")
+
+# alpha = .82, i.e. > .70, meets standard criterion for reliability
+psych::alpha(d[, rma_vector], na.rm = T) 
+
+psych::describe(d$rma_s) # describe
+hist(d$rma_s) # view distribution
+```
+
+```{r,echo=FALSE,message=FALSE}
+#### Sexual Risk Behavior
+d %>% select(srb1:srb8) %>% map(tabyl)
+
+d <- d %>%
+  mutate(srb8 = replace_na(srb8, 0))
+
+d <- d %>%
+  mutate(across(
+    c(srb7),
+    ~ case_when(
+      . == 1 ~ 0,
+      . == 2 ~ 1,
+      . == 3 ~ 2,
+      . == 4 ~ 3,
+      . == 5 ~ 4,
+      . == -1 ~ 4,
+    )
+  ))
+```
+
+### Tech
+```{r}
+d <- d %>%
+  mutate(across(
+    c(tb1, tb2, part2),
+    ~ case_when(
+      . == "1" ~ 1, # Yes
+      . == "2" ~ 0, # No
+      TRUE ~ as.numeric(.)
+    )
+  ))
+
+d %>% select(tb1, tb2, part2) %>% map(tabyl)
+```
+
+### Export
+```{r}
+d |> 
+  write_csv(here::here(path_nids, "baseline_sona_id.csv"))
+```
+

@@ -1,0 +1,254 @@
+---
+title: "Cleaning baseline data, part 2."
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+# to detect and warn about conflicts
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+```
+
+```{r}
+# to read in data
+library(readr)
+
+path_nids <- "_data/data_process"
+path_ready <- "_data/data_ready"
+
+# for data wrangling and cleaning
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(psych)
+
+source(here::here("_scripts/functions.R"))
+```
+
+Read in data
+```{r,warning=FALSE}
+baseline <- read_csv(here::here(path_nids,"baseline_nid.csv"), 
+                     show_col_types = FALSE) %>% glimpse()
+
+data <- read_csv(here::here(path_ready, "ready_cues.csv"), show_col_types = FALSE)
+```
+
+## Subset data
+
+Subset baseline to only include obs for which the same participant ID (`nid`) 
+also appears in the diary data
+```{r}
+baseline_subset <- baseline %>%
+  semi_join(data, by = "nid")
+```
+
+Check that it worked
+```{r}
+all(baseline_subset$nid %in% data$nid)
+n_distinct(baseline_subset$nid)
+```
+
+Subset diary data to only include obs for which the partnered sexual behavior 
+daily screener (`psb1`) was endorsed AND sexual contact (`psb_di`) was reported.
+```{r}
+data %>% select(psb1, psb_di) %>% map(tabyl)
+
+data_subset <- data %>%
+  filter(psb1 == 1 & psb_di == 1)
+
+data_subset %>%
+  summarise(
+    n_obs = n(),
+    n_participants = n_distinct(nid)
+  )
+```
+
+Further subset baseline to only include obs for participants who reported 
+partnered sexual behavior (`psb1`) involving sexual contact (`psb_di`) at least 
+once during the daily diary portion of the study by removing rows from 
+`baseline_subset` where that `nid` does not appear in `data_subset` (i.e., remove 
+participants from baseline who do not have any psb1 == 1 & psb_di == 1 events.)
+```{r}
+base_ana <- baseline_subset %>%
+  semi_join(data_subset, by = "nid")
+```
+
+## Remove unnecessary vars
+```{r}
+b <- base_ana %>% 
+  select(-c(smu_1:sm_txt, ders1:ders18, sd_txt, po_txt, sss1:sss23, cpa1:v_ar6, 
+            apb1:apb6, phq8_1:phq8_fu, gad7_1:gad7_7, pcl_txt:pcl_20, sd3,
+            pcl_s:hyp_c, ar_txt, v_uc1:v_ar6, v_num, v_rev, v_poly, sss_tf, 
+            asrs_1:asrs_6, cud_6m:cud8)) %>% glimpse()
+```
+
+## Prepare between-subjects predictors
+
+### Social Desirability
+
+#### BIDR (a = .73)
+```{r}
+## BIDR (a = .73): (1-8) 1 = totally disagree, 8 = totally agree
+#  Higher scores reflect greater social desirability bias
+
+### Self-Deceptive Enhancement (a = .63)
+
+# reverse-code items 1, 3, 5, 8
+b <- b %>%   
+  mutate(across(c(bidr_1,bidr_3,bidr_5,bidr_8),
+                ~dplyr::recode(., 
+                               "1" = 8,
+                               "2" = 7,
+                               "3" = 6,
+                               "4" = 5,
+                               "5" = 4,
+                               "6" = 3,
+                               "7" = 2,
+                               "8" = 1)))
+
+b <- b %>%
+  rowwise() %>%
+  mutate(sde_s = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8))
+
+# create a character vector for the bidr items
+sde_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7","bidr_8")
+
+# alpha = .63, i.e. < .70, doesn't meet standard criterion for reliability
+psych::alpha(b[, sde_vector], na.rm = T) 
+
+# describe
+psych::describe(b$sde_s)
+hist(b$sde_s)
+
+### Impression Management (a = .72)
+
+b <- b %>%   # reverse-code items 9, 11, 12, 13
+  mutate(across(c(bidr_9,bidr_11,bidr_12,bidr_13),
+                ~dplyr::recode(., 
+                               "1" = 8,
+                               "2" = 7,
+                               "3" = 6,
+                               "4" = 5,
+                               "5" = 4,
+                               "6" = 3,
+                               "7" = 2,
+                               "8" = 1)))
+
+b <- b %>%
+  rowwise() %>%
+  mutate(im_s = sum(bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
+
+# create a character vector for the bidr items
+im_vector <- c("bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .72, i.e. < .70, doesn't meet standard criterion for reliability
+psych::alpha(b[, im_vector], na.rm = T) 
+
+# describe
+psych::describe(b$im_s)
+hist(b$im_s)
+
+### Total Scale
+b <- b %>%
+  rowwise() %>%
+  mutate(bidr_s = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8,
+                      bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
+# center
+b$bidr_sc <- b$bidr_s - mean(b$bidr_s, na.rm = T)
+
+# create a character vector for the bidr items
+bidr_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7","bidr_8",
+                 "bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .73, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, bidr_vector], na.rm = T) 
+
+# describe
+psych::describe(b$bidr_s)
+hist(b$bidr_s)
+```
+
+
+### IRMA (a = .80)
+```{r}
+## IRMA (a = .80)
+# 5 = strongly disagree, 4 = Somewhat disagree, 3 = Neither disagree nor agree, 2 = Somewhat agree, 1 = strongly agree 
+# Item values summed for total score, with higher scores reflecting greater rejection of rape myths
+
+b <- b %>%
+  rowwise() %>%
+  mutate(rma_s = sum(irma1,irma2,irma3,irma4,irma5,irma6,irma7))
+
+# create a character vector for the irma items
+rma_vector <- c("irma1","irma2","irma3","irma4","irma5","irma6","irma7")
+
+# alpha = .80, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, rma_vector], na.rm = T) 
+
+psych::describe(d$rma_s) # describe
+hist(d$rma_s) # view distribution
+```
+
+#### AUDIT (a = .80)
+```{r}
+b %>% select(aud1:aud10) %>% glimpse()
+
+# AUDIT summed score 
+b <- b %>% 
+rowwise() %>% dplyr::mutate(aud_s = sum(aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8,aud9,aud10,na.rm = T))
+
+# AUDIT score centered
+b$aud_sc <- b$aud_s - mean(b$aud_s, na.rm = T)
+
+# AUDIT descriptives
+psych::describe(b$aud_s)
+
+# create a character vector for the audit items
+audit_vector <- c("aud1","aud2","aud3","aud4","aud5",
+                  "aud6","aud7","aud8","aud9","aud10")
+
+psych::alpha(b[, audit_vector], check.keys = T, na.rm = TRUE) # alpha = .80
+hist(b$aud_s)
+```
+
+#### Sexual Risk Behavior
+```{r}
+b %>% select(srb1:srb10) %>% map(tabyl)
+
+# create a character vector for the srb items
+srb_vector <- c("srb1","srb2","srb3","srb4","srb5","srb6","srb7","srb8")
+
+psych::alpha(b[, srb_vector], na.rm = T) 
+
+# drop srb2 and srb5
+srb_vector <- c("srb1","srb3","srb4","srb6","srb7","srb8")
+
+# a = .68
+psych::alpha(b[, srb_vector], na.rm = T) 
+
+# create sum total score
+b <- b %>%
+  rowwise() %>%
+  mutate(srb_s = sum(srb1, srb3, srb4, srb6, srb7, srb8))
+
+# view descriptive statistics
+psych::describe(b$srb_s)
+
+# view distribution
+hist(b$srb_s)
+```
+ 
+
+
+```{r}
+
+```
+

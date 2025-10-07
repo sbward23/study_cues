@@ -1,28 +1,45 @@
 ---
-title: Figure 1
-author: John Curtin
+title: Histograms
+author: Stephanie Ward
 editor_options: 
   chunk_output_type: console
 ---
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse)
 theme_set(theme_classic())
+
+library(readr)
+path_ready <- "_data/data_ready"
+
+source(here::here("_scripts/functions.R"))
 ```
 
 ```{r}
-
-# Create data
-data <- tibble(
-  name = c("A","B","C","D","E") ,  
-  value = c(3,12,5,18,45)
-  )
+d <- read_csv(here::here(path_ready, "ready_cues.csv"), show_col_types = FALSE)
 ```
 
 ```{r}
 #| label: fig-1
-#| fig-cap: "A Basic Barplot Figure"
+#| fig-cap: "Verbal Cue Use Distribution"
 
-ggplot(data, aes(x=name, y=value)) + 
-  geom_bar(stat = "identity")
+d %>%
+  pull(ver_pc) %>%
+  hist(main = "Histogram of Verbal Cues",
+       xlab = "Verbal Self-Report",
+       col = "lightblue",
+       breaks = 10)
+```
+
+```{r}
+#| label: fig-2
+#| fig-cap: "Verbal Cue Use - Behavior Type Subset"
+
+d %>%
+  filter(psb1 == 1, psb_act == "Penetration") %>%
+  pull(ver_pc) %>%
+  hist(main = "Histogram of Verbal Consent (Penetration Only)",
+       xlab = "Verbal Consent Score",
+       col = "lightblue",
+       breaks = 10)
 ```
