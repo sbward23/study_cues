@@ -5,6 +5,8 @@ author:
     orcid: https://orcid.org/0000-0002-8191-0158
     corresponding: true
     email: sbward@wisc.edu
+    affiliations:
+      - Department of Psychology, University of Wisconsin-Madison
 keywords:
   - Sexual consent
   - Sexual assault
@@ -16,6 +18,9 @@ csl: american-medical-association.csl
 number-sections: false 
 editor_options: 
   chunk_output_type: console
+editor:
+  markdown:
+  wrap: 12
 ---
 
 ## SPECIFIC AIMS
