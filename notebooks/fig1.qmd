@@ -15,7 +15,7 @@ path_ready <- "_data/data_ready"
 source(here::here("_scripts/functions.R"))
 ```
 
-```{r}
+```{r,warning=FALSE}
 d <- read_csv(here::here(path_ready, "ready_cues.csv"), show_col_types = FALSE)
 ```
 
