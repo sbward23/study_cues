@@ -27,59 +27,70 @@ editor:
 Sexual consent is a complex process involving thoughts, feelings, and
 behaviors used to determine and express willingness to engage in sexual
 activity with a particular person in a particular context; the presence
-of consent distinguishes wanted sexual encounters from sexual assault
-[@muehlenhardComplexitiesSexualConsent2016] 1 People can communicate
+of consent distinguishes wanted sexual encounters from sexual assault.
+[@muehlenhardComplexitiesSexualConsent2016]1 People can communicate
 consent using active consent cues, which may be verbal or nonverbal and
 direct or indirect, ranging from a clear and spoken “yes” to subtle body
-language.[@willisAssessingWithinPersonVariability2021]2 Programs
-designed to prevent sexual assault often target consent communication,
-but a substantial gap exists between their curriculum and the varied
-consent practices that young people use during sexual encounters.3
-Individual factors such as demographics, attitudes,4 and typical
-behavior5 are linked to differences in consent cue use. Gender, for
-instance, is a significant factor,6 but there is mixed evidence
+language. [@willisAssociationsInternalExternal2019]2 Programs designed
+to prevent sexual assault often target consent communication, but a
+substantial gap exists between their curriculum and the varied consent
+practices that young people use during sexual encounters. [@curtis2017]3
+Individual factors such as demographics, attitudes,
+[@wardAlcoholUseHostility2025] 4 and typical behavior
+[@marcantonioEffectsTypicalBinge2022] 5 are linked to differences in
+consent cue use. Gender, for instance, is a significant factor,
+[@willisBarriersSuccessAffirmative2018] 6 but there is mixed evidence
 regarding its associations with consent cues. Some research suggests men
 are more likely than women to use verbal cues relative to indirect,
-nonverbal cues,7 while other studies observe interactions or trends that
-imply gender differences hinge on context.8,9 Unpacking the complexity
-around person-level and situational factors could illuminate more
-information about the conditions under which particular individuals are
-likely to use certain types of consent cues.
+nonverbal cues, 7 while other studies observe interactions or trends
+that imply gender differences hinge on
+context.\[@marcantonioWithinPersonExaminationAlcoholInvolved2024,
+@willisSexualConsentCommitted2021\] 8,9 Unpacking the complexity around
+person-level and situational factors could illuminate more information
+about the conditions under which particular individuals are likely to
+use certain types of consent cues.
 
 Research on the contexts in which individuals use certain consent cues
 has been limited. This is a problem because situational factors such as
 sexual behavior type, co-occurring intoxication, and feelings of arousal
-and pleasure are linked to within-person differences in consent cue
-use.10,11 Within-person variability has been shown to account for more
-than 70% of the variance in sexual consent cues,12 indicating that
-context may be more informative than individual differences in how
-people communicate consent in general. Researchers examining situational
+and pleasure are linked to within-person differences in consent cue use.
+[@willisInternalExternalSexual2021, @rinioloRoleAlcoholContext2025]
+10,11 Within-person variability has been shown to account for more than
+70% of the variance in sexual consent cues,
+[@willisAssessingWithinPersonVariability2021] 12 indicating that context
+may be more informative than individual differences in how people
+communicate consent in general. Researchers examining situational
 factors related to consent have done so by conducting systematic,
-within-person comparisons of two matched events,8 or by grounding
-responses to each person’s most recent sexual encounter, which could
-have occurred weeks to months in the past.13 By asking people to
-remember past events, these studies risk greater recall bias relative to
+within-person comparisons of two matched events,
+[@marcantonioWithinPersonExaminationAlcoholInvolved2024] 8 or by
+grounding responses to each person’s most recent sexual encounter, which
+could have occurred weeks to months in the past.
+[@walshSexualVictimizationEmotion2024] 13 By asking people to remember
+past events, these studies risk greater recall bias relative to
 micro-longitudinal studies, which assess situational factors closer in
 time to when consent communication occurs.
 
 Although diaries and ecological momentary assessment have been used
 extensively in other behavioral science research to illuminate important
-time-varying situational predictors of health-risk behaviors,14–16 only
-one published investigation of this kind has been conducted in the
-sexual consent research space. Willis and colleagues surveyed
-participants three times per day for 28 days and found that those
-engaging in more intimate sexual behavior  (i.e., vaginal or anal
-penetration) reported more active consent communication than those
-engaging in less intimate behaviors, while no significant event-level
-associations between alcohol use and verbal or nonverbal consent cue use
-were observed.10,12 However, this research examined a limited set of
-predictors and reflected a specific subpopulation of adults in committed
-relationships; the current project builds on their findings by probing
-person- and event-level associations with consent cue use among college
-students while expanding the range of possible predictors. Examining
-these associations in different samples and in relation to a wider array
-of variables is a crucial next step toward isolating more actionable
-targets for consent communication interventions. 
+time-varying situational predictors of health-risk behaviors,
+[@serreEcologicalMomentaryAssessment2015] 14–16 only one published
+investigation of this kind has been conducted in the sexual consent
+research space. Willis and colleagues surveyed participants three times
+per day for 28 days and found that those engaging in more intimate
+sexual behavior  (i.e., vaginal or anal penetration) reported more
+active consent communication than those engaging in less intimate
+behaviors, while no significant event-level associations between alcohol
+use and verbal or nonverbal consent cue use were observed.
+[@willisInternalExternalSexual2021,
+@willisAssessingWithinPersonVariability2021] 10,12 However, this
+research examined a limited set of predictors and reflected a specific
+subpopulation of adults in committed relationships; the current project
+builds on their findings by probing person- and event-level associations
+with consent cue use among college students while expanding the range of
+possible predictors. Examining these associations in different samples
+and in relation to a wider array of variables is a crucial next step
+toward isolating more actionable targets for consent communication
+interventions. 
 
 To advance the field, this project leverages micro-longitudinal data to
 identify proximal situational correlates of verbal and nonverbal consent
@@ -133,73 +144,89 @@ alcohol use across the study period.
 
 Rates of sexual assault on U.S. college campuses remain virtually
 unchanged after more than 30 years of dedicated research and
-intervention.17,18 Lack of consent is increasingly recognized as
-defining characteristic of sexual assault, leading institutions to
-incorporate consent-focused education into violence prevention
-efforts.19,20 University policy and educational initiatives promote
-explicit and enthusiastic consent communication (“only yes means yes!”),
-while young people often rely instead on passive cues (not resisting,
-not saying no) and assumptions (“We love each other”)9 to determine
-consent.5,21 Sexual consent education aims to promote the use of active
-cues by enhancing consent knowledge and positive attitudes while
-decreasing rape-supportive attitudes, presuming that attitudes shape
-consent behavior. However, these interventions do not have a clear
-underlying mechanism of behavior change, and they rarely assess
-behavioral outcomes.19,23 A prerequisite to improving upon the value of
-consent education is testing whether these attitudinal intervention
-targets predict actual in-the-moment cue use and contrasting their
-explanatory power with that of other between-subjects factors.
+intervention. [@kossScopeRapeIncidence1987,
+@kossScopeRapeVictimization2022] 17,18 Lack of consent is increasingly
+recognized as defining characteristic of sexual assault, leading
+institutions to incorporate consent-focused education into violence
+prevention efforts. [@beresPerspectivesRapepreventionEducators2020,
+@beresRethinkingConceptConsent2014] 19,20 University policy and
+educational initiatives promote explicit and enthusiastic consent
+communication (“only yes means yes!”), while young people often rely
+instead on passive cues (not resisting, not saying no) and assumptions
+(“We love each other”) [@willisSexualConsentCommitted2021] 9 to
+determine consent. [@marcantonioEffectsTypicalBinge2022,
+@jozkowskiGenderDifferencesHeterosexual2014] 5,21 Sexual consent
+education aims to promote the use of active cues by enhancing consent
+knowledge and positive attitudes while decreasing rape-supportive
+attitudes, presuming that attitudes shape consent behavior. However,
+these interventions do not have a clear underlying mechanism of behavior
+change, and they rarely assess behavioral outcomes.
+[@beresPerspectivesRapepreventionEducators2020,
+@burtonTeachingSexualConsent2023] 19,23 A prerequisite to improving upon
+the value of consent education is testing whether these attitudinal
+intervention targets predict actual in-the-moment cue use and
+contrasting their explanatory power with that of other between-subjects
+factors.
 
 ### Attitudes and adherence to social norms
 
 #### Individual differences
 
 Rape-supportive attitudes and beliefs have been theorized to explain
-variability in how individuals approach consent communication.43 Perhaps
-the most prominent example in the sexual assault and consent literatures
-concerns Rape Myth Acceptance (RMA), the endorsement of widely-held
-false beliefs that justify sexual aggression and place blame on
-victims.44,45 RMA is a robust predictor of sexual violence perpetration;
-it also has been used as an outcome measure in several sexual consent
-interventions delivered to young people in educational settings.23,46
-Individuals with high levels of RMA often hold the belief that victims
-of sexual assault “led the other person on” (e.g., with what could be
-conceived through this lens as nonverbal consent cues) or provided
-verbal agreement and “later regretted it.” These pervasive schemas
-suggest individuals with high levels of RMA may pursue sexual contact
-without first communicating their willingness or looking for indications
-of the other person’s openness to their advances.47,48 There also are
-rape myths that specifically excuse perpetrator behavior in the context
-of alcohol intoxication (e.g., “It shouldn't be considered rape if the
-person is drunk and didn't know what they were doing”). Rape myths are
-distinct from but related to permissive Alcohol and Sexual Consent (ASC)
-attitudes,48 both of which contradict sexual assault programming
-messages about, for example, how communication signals are easily
-misinterpreted when alcohol is involved in a sexual situation.
-Permissive ASC attitudes reflect social norms that are prevalent on
-college campuses (e.g., “Consensual drunk sex is a normal and harmless
-part of college life”) and reinforce approval of intoxicated sexual
-activity without regard for the associated risks. Our previous research
-found that permissive ASC attitudes were negatively related to ongoing
-and communicative (i.e., “process-based”) consent behavior among college
-men.4,49 *Highlight interaction with perceived peer attitudes to
-facilitate transition*
+variability in how individuals approach consent communication.
+[@jozkowskiChapter9Sexual2022] 43 Perhaps the most prominent example in
+the sexual assault and consent literatures concerns Rape Myth Acceptance
+(RMA), the endorsement of widely-held false beliefs that justify sexual
+aggression and place blame on victims.
+[@lonswayAttitudinalAntecedentsRape1995, @payneRapeMythAcceptance1999]
+44,45 RMA is a robust predictor of sexual violence perpetration; it also
+has been used as an outcome measure in several sexual consent
+interventions delivered to young people in educational settings.
+[@burtonTeachingSexualConsent2023] 23,46 Individuals with high levels of
+RMA often hold the belief that victims of sexual assault “led the other
+person on” (e.g., with what could be conceived through this lens as
+nonverbal consent cues) or provided verbal agreement and “later
+regretted it.” These pervasive schemas suggest individuals with high
+levels of RMA may pursue sexual contact without first communicating
+their willingness or looking for indications of the other person’s
+openness to their advances. [@mcmahonUpdatedMeasureAssessing2011] 47,48
+There also are rape myths that specifically excuse perpetrator behavior
+in the context of alcohol intoxication (e.g., “It shouldn't be
+considered rape if the person is drunk and didn't know what they were
+doing”). Rape myths are distinct from but related to permissive Alcohol
+and Sexual Consent (ASC) attitudes,
+[@mcmahonUpdatedMeasureAssessing2011] 48 both of which contradict sexual
+assault programming messages about, for example, how communication
+signals are easily misinterpreted when alcohol is involved in a sexual
+situation. Permissive ASC attitudes reflect social norms that are
+prevalent on college campuses (e.g., “Consensual drunk sex is a normal
+and harmless part of college life”) and reinforce approval of
+intoxicated sexual activity without regard for the associated risks. Our
+previous research found that permissive ASC attitudes were negatively
+related to ongoing and communicative (i.e., “process-based”) consent
+behavior among college men. [@wardAlcoholUseHostility2025,
+@wardAlcoholSexualConsent2012] 4,49 *Highlight interaction with
+perceived peer attitudes to facilitate transition*
 
 #### Perceived-peer differences
 
 Among college men, peer relationships can be critical to their risk of
-perpetrating sexual aggression37,38 and male peer support for abuse and
-coercion have been linked to lower comprehension of sexual consent and
-less communicative sexuality.4,39 The relevance of a person’s beliefs
-about their peers’ ideas of what is normal and acceptable is best
-contextualized by the “sociality of consent,” which refers to a
+perpetrating sexual aggression [@swartoutCompanyTheyKeep2013,
+@swartoutTrajectoryAnalysisCampus2015] 37,38 and male peer support for
+abuse and coercion have been linked to lower comprehension of sexual
+consent and less communicative sexuality. [@wardAlcoholUseHostility2025,
+@warrenComprehensionSexualConsent2015] 4,39 The relevance of a person’s
+beliefs about their peers’ ideas of what is normal and acceptable is
+best contextualized by the “sociality of consent,” which refers to a
 phenomenon wherein sexual consent is not determined privately between
-partners but rather extended into the peer group.40 Qualitative research
-assessing how young adults use relational and social contexts to
-determine consent further underscores the salience of peer influence, as
-participants–particularly college women–described their friends asking
-them to help interpret and even make judgments about consent on their
-behalf after consuming alcohol or other drugs.31,40–42
+partners but rather extended into the peer group. 40 Qualitative
+research assessing how young adults use relational and social contexts
+to determine consent further underscores the salience of peer influence,
+as participants–particularly college women–described their friends
+asking them to help interpret and even make judgments about consent on
+their behalf after consuming alcohol or other drugs.
+[@huntBlurringLineIntoxication2022, @marcantonioWeRelyOthers,
+@marcantonioWhatWouldYou2025] 31,40–42
 
 ### Typical and historical behavior
 
@@ -208,36 +235,39 @@ behalf after consuming alcohol or other drugs.31,40–42
 Alcohol is a salient factor in the context of both sexual assault and
 consensual sex among college students, yet sexual assault prevention and
 risk-reduction programs rarely include information about how alcohol can
-affect consent communication.21 While scholars and practitioners have
-started integrating alcohol and sexual assault programming,27,28 there
-is far more research on alcohol-related sexual assault compared to
-consent involving alcohol use.22 Some research suggests that young
-adults who engage in binge drinking generally use less active consent
-communication than those who do not binge drink,5 but the intensity of
-alcohol consumption at the encounter level may be more directly relevant
-to in-the-moment. Still, cross-sectional surveys cannot establish
-whether real-world drinking events decrease the incidence of active
-consent cues, and few micro-longitudinal studies have explicitly
-investigated situational factors linked to within-person differences in
-consent communication.
+affect consent communication.
+[@jozkowskiGenderDifferencesHeterosexual2014] 21 While scholars and
+practitioners have started integrating alcohol and sexual assault
+programming, [@orchowskiIntegratedAlcoholSexual2023] 27,28 there is far
+more research on alcohol-related sexual assault compared to consent
+involving alcohol use. 22 Some research suggests that young adults who
+engage in binge drinking generally use less active consent communication
+than those who do not binge drink, [@marcantonioEffectsTypicalBinge2022]
+5 but the intensity of alcohol consumption at the encounter level may be
+more directly relevant to in-the-moment. Still, cross-sectional surveys
+cannot establish whether real-world drinking events decrease the
+incidence of active consent cues, and few micro-longitudinal studies
+have explicitly investigated situational factors linked to within-person
+differences in consent communication.
 
 ### Situational correlates of within-person variability in consent cue usage
 
 #### Event-level alcohol consumption
 
 As previously mentioned, Willis and colleagues found no significant
-event-level associations between alcohol use and consent cues.10 A daily
-diary dissertation study found that, among college women engaging in
-casual sex, Blood Alcohol Estimate was negatively associated with
-consent expression, but this relationship was no longer significant when
-the sexual behavior type was included in the model.11 One potential
+event-level associations between alcohol use and consent cues.
+[@willisInternalExternalSexual2021] 10 A daily diary dissertation study
+found that, among college women engaging in casual sex, Blood Alcohol
+Estimate was negatively associated with consent expression, but this
+relationship was no longer significant when the sexual behavior type was
+included in the model. [@rinioloRoleAlcoholContext2025] 11 One potential
 explanation is that an individual’s alcohol consumption is more likely
 to result in them communicating consent differently than they typically
 would on days when their alcohol use is also atypical–representing a
 deviation from their own personal norm. This hypothesis is supported by
 previous research which shows that, on days when women drink more than
 their own average, they are more likely to experience negative sexual
-consequences later that day.29,30
+consequences later that day. [@fordUsingDailyDiary2021] 29,30
 
 #### Event-level perceived intoxication
 
@@ -245,7 +275,8 @@ Young adults also recognize and describe themselves adjusting the
 strategies they use to communicate sexual consent based on their
 perceptions of their own intoxication relative to that of a potential
 partner, but this recurring theme in qualitative and vignette-based
-research has proven difficult to explicate quantitatively.31,32 One
+research has proven difficult to explicate quantitatively.
+[@huntBlurringLineIntoxication2022, @laughlinJustOneShot2023] 31,32 One
 hypothesis is that the extent to which perceived differences between
 one’s own and their partner's intoxication relate to their use of verbal
 consent cues depends on their level of familiarity with that partner.
@@ -257,7 +288,8 @@ degree of intoxication and capacity to consent before proceeding with
 sexual activity. This hypothesis is supported by the ‘date rape’
 literature, which indicates that sexual assaults involving mutual
 alcohol consumption are more likely to take place outside the home and
-involve someone less well known to the victim.33
+involve someone less well known to the victim.
+[@lorenzAlcoholSexualAssault2016] 33
 
 #### Relationship to partner and sexual precedence
 
@@ -269,19 +301,20 @@ precedence–the idea that engaging in consensual sex at one point in time
 implies consent can be assumed for future encounters with that same
 person–is supported by research showing people perceive a greater need
 to directly communicate about consent when partners are not in a
-committed relationship.24 Yet, cross-sectional survey research among
-U.S. college students indicates that explicit verbal consent cues are
-less likely to be used when the sexual relationship is casual.7 Internal
-consent feelings (safety, comfort) tend to be higher for encounters with
-committed dating partners and lower for one-time partners,25 and
+committed relationship. [@humphreysPerceptionsSexualConsent2007] 24 Yet,
+cross-sectional survey research among U.S. college students indicates
+that explicit verbal consent cues are less likely to be used when the
+sexual relationship is casual. 7 Internal consent feelings (safety,
+comfort) tend to be higher for encounters with committed dating partners
+and lower for one-time partners, [@walshDualMeasuresSexual2019] 25 and
 internal consent feelings are strong predictors of consent cue use, but
 patterns observed over time within relationships suggest a complex
 relationship between shared sexual history and consent communication
-that warrants further evaluation.26 …This disconnect is one of many
-highlighting the need for research grounded in university students’
-real-time lived experiences that can help to explain what relational and
-situational contexts are related to differences in how they use cues to
-communicate sexual consent.
+that warrants further evaluation. [@willisSexualPrecedentsEffect2019] 26
+…This disconnect is one of many highlighting the need for research
+grounded in university students’ real-time lived experiences that can
+help to explain what relational and situational contexts are related to
+differences in how they use cues to communicate sexual consent.
 
 ### Significance of method and defense of measures
 
@@ -292,7 +325,7 @@ Knowledge of these contextual factors can then be used to inform
 ecological momentary interventions designed to be delivered when and
 where the evidence suggests they will be most effective–an approach that
 has shown promise for reducing risk of sexual revictimization among
-college women.22
+college women. 22
 
 Despite the need for and potential benefits of conducting sexual consent
 research using experience sampling methods (ESM), there also are
@@ -306,7 +339,8 @@ only one or two items are often criticized by researchers with
 well-founded concerns that they might be more susceptible to measurement
 error or fail to capture complex constructs (Fisher & To, 2021). Others
 claim that repeatedly administering assessments yields multiple
-indicators that decrease random measurement error (Csikszentmihalyi &
+indicators that decrease random measurement error
+\[@shiffmanEcologicalMomentaryAssessment2008\] (Csikszentmihalyi &
 Larson, 2014; Shiffman et al., 2008), and that relying on single-item
 measures is acceptable when these items are carefully developed and
 evaluated for multiple sources of measurement validity.
@@ -329,9 +363,9 @@ behavior. Although prior research reviewed in this proposal suggests
 that sexual consent varies from one encounter to the next, the only
 validated consent measures that existed until recently were those
 developed for cross-sectional research. As such, Willis and colleagues
-(2021) used a two-phase procedure to develop and evaluate brief measures
-of internal consent feelings and external consent cues specifically
-designed for use in ESM studies.
+used a two-phase procedure to develop and evaluate brief measures of
+internal consent feelings and external consent cues specifically
+designed for use in ESM studies. [@willisDevelopingValidFeasible2021]
 
 In Phase I, the research team sought to develop items that best
 represented the constructs of interest while demonstrating both face
@@ -362,26 +396,27 @@ readiness; verbal cue use was also positively associated with internal
 feelings of agreement/want, while nonverbal cue use was not. Further,
 replicating prior work, external consent communication was not
 associated with alcohol use at the encounter level for participants in
-committed relationships (Jozkowski & Wiersma, 2015). We contextualize
-these results and the pilot participants' feedback in the sections that
-follow, which concern gaps in validity evidence addressed in subsequent
-research, as well as the use of these external consent measures and
-their psychometric properties in the current sample.
+committed relationships. [@jozkowskiDoesDrinkingAlcohol2015] We
+contextualize these results and the pilot participants' feedback in the
+sections that follow, which concern gaps in validity evidence addressed
+in subsequent research, as well as the use of these external consent
+measures and their psychometric properties in the current sample.
 
 #### Validity indicators in subsequent research
 
-Willis and colleagues (2021) established feasibility for ESM
-administration and solid content and response-process foundations for
-their external consent cue items. However, gaps remained in the evidence
-base for these measures' validity following their initial publication,
-some of which have since been addressed in subsequent research. For
-example, the concurrent, within-person associations between internal and
-external consent were consistent with preexisting theory and research
-that asserts these are separable but related facets of a
-multidimensional sexual consent process. Still, the pilot study used
-simple event-level correlations and did not offer support for
-between-person convergent or concurrent validity. Subsequent research
-provides further evidence that the consent cue items' are valid.
+Willis and colleagues established feasibility for ESM administration and
+solid content and response-process foundations for their external
+consent cue items. [@willisDevelopingValidFeasible2021] However, gaps
+remained in the evidence base for these measures' validity following
+their initial publication, some of which have since been addressed in
+subsequent research. For example, the concurrent, within-person
+associations between internal and external consent were consistent with
+preexisting theory and research that asserts these are separable but
+related facets of a multidimensional sexual consent process. Still, the
+pilot study used simple event-level correlations and did not offer
+support for between-person convergent or concurrent validity. Subsequent
+research provides further evidence that the consent cue items' are
+valid.
 
 Recent recommendations for validating single-item measures for
 experience sampling studies call for concurrent within-person
@@ -395,8 +430,8 @@ with a standardized effect size greater than .09 (Wolfers & Baumgartner,
 2025). This was the case in subsequent research by Willis and
 colleagues, who fit multilevel models and found that a composite
 internal consent feelings score significantly predicted verbal (β = .53,
-p \< .001) and nonverbal (β = .45, p \< .001) consent cue use (Willis,
-Jozkowski, et al. 2021, AssessingWithinPerson). The same study
+p \< .001) and nonverbal (β = .45, p \< .001) consent cue use
+[@willisAssessingWithinPersonVariability2021]. The same study
 demonstrated event-level situational sensitivity to type of sexual
 behavior within the same person with the finding that encounters
 involving more intimate sexual behaviors predicted higher consent
@@ -418,10 +453,12 @@ general sexual satisfaction (β = .13, SE = .01, R2 = .08, p \< .001).
 #### Outcome Measures
 
 Verbal and nonverbal consent cue use was measured with items developed
-for use in studies employing experience sampling methods,60 which
-require more brief assessments due to the increased burden on
-participants. These measures were based on items previously validated
-for use in cross-sectional survey.25,61  After reading the question
+for use in studies employing experience sampling methods,
+[@willisDevelopingValidFeasible2021] 60 which require more brief
+assessments due to the increased burden on participants. These measures
+were based on items previously validated for use in cross-sectional
+survey. [@walshDualMeasuresSexual2019,
+@jozkowskiConsentingSexualActivity2014] 25,61 After reading the question
 stem, “To what extent did you do the following during sexual activity?”
 participants rated the following three items on a unipolar, 11-point
 sliding scale ranging from 0 (“Not at all”) to 10 (“Very much”).
@@ -440,10 +477,11 @@ partner about consent for the sexual activity.” The ‘direct’ and
 ‘indirect’ nonverbal items were highly correlated and thus averaged to
 create a composite nonverbal score. Consistent with prior research
 finding internal reliability was not strong for a composite including
-Verbal, Nonverbal, Direct, and Indirect consent cues,12 Verbal and
-Nonverbal cue use were only weakly correlated (r = .13) in the current
-sample, so this study will use a composite ‘Nonverbal’ item and examine
-Verbal cue use separately.
+Verbal, Nonverbal, Direct, and Indirect consent cues,
+[@willisAssessingWithinPersonVariability2021] 12 Verbal and Nonverbal
+cue use were only weakly correlated (r = .13) in the current sample, so
+this study will use a composite ‘Nonverbal’ item and examine Verbal cue
+use separately.
 
 ![Mobile view of consent cue items in daily
 survey.](images/cues_mobile.png){width="315"}
@@ -520,15 +558,20 @@ Demographic measures assessed gender, age, race, sexual orientation,
 year in school, relationship status, campus involvement (e.g., Greek
 life, athletics), residence (e.g., dormitories), disability status, and
 socioeconomic status. Individual attitudes: assessed with the Illinois
-Rape Myths Acceptance scale (7 items);48 Sociosexual Orientation
-Inventory (3 items);50 and the subtle coercion subscale of the
-Process-Based Consent scale.51 Perceived peer attitudes: assessed with
+Rape Myths Acceptance scale (7
+items);[@mcmahonUpdatedMeasureAssessing2011]48 Sociosexual Orientation
+Inventory (3 items);[@simpsonIndividualDifferencesSociosexuality1991] 50
+and the subtle coercion subscale of the Process-Based Consent scale.
+[@glaceMovingNewModel2020] 51 Perceived peer attitudes: assessed with
 the Rape Attitudes and Beliefs Scale (2 items)52 and Alcohol and Sexual
-Consent scale (2 items).49 Individual behavior: assessed with the
-Alcohol Use Disorders Identification Test (10 items);53 original and
-adapted Sexual Risk Behavior Scale (6 items);54,55 and Sexual Consent
-Scale-Revised (3 items).56 Trait emotion dysregulation was assessed with
-the Difficulties in Emotion Regulation Scale (16 items).57
+Consent scale (2 items). [@wardAlcoholSexualConsent2012] 49 Individual
+behavior: assessed with the Alcohol Use Disorders Identification Test
+(10 items);[@saundersDevelopmentAlcoholUse1993] 53 original and adapted
+Sexual Risk Behavior Scale (6 items);[@davisIntersectionMensSexual2018]
+54,55 and Sexual Consent Scale-Revised (3 items).
+[@humphreysSexualConsentScalerevised2010] 56 Trait emotion dysregulation
+was assessed with the Difficulties in Emotion Regulation Scale (16
+items).57
 
 ### Daily Dairy
 
