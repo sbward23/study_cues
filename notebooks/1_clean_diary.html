@@ -58,17 +58,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="0_clean_diary_files/libs/clipboard/clipboard.min.js"></script>
-<script src="0_clean_diary_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="0_clean_diary_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="0_clean_diary_files/libs/quarto-html/popper.min.js"></script>
-<script src="0_clean_diary_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="0_clean_diary_files/libs/quarto-html/anchor.min.js"></script>
-<link href="0_clean_diary_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="0_clean_diary_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="0_clean_diary_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="0_clean_diary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="0_clean_diary_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="1_clean_diary_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1_clean_diary_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="1_clean_diary_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="1_clean_diary_files/libs/quarto-html/popper.min.js"></script>
+<script src="1_clean_diary_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="1_clean_diary_files/libs/quarto-html/anchor.min.js"></script>
+<link href="1_clean_diary_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1_clean_diary_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="1_clean_diary_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="1_clean_diary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="1_clean_diary_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -99,6 +99,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="cell">
+<style type="text/css">
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+</style>
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to detect and warn about conflicts</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -115,12 +125,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to read in data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>path_raw <span class="ot">&lt;-</span> <span class="st">"_data/data_raw"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>path_nids <span class="ot">&lt;-</span> <span class="st">"_data/data_process"</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>path_ready <span class="ot">&lt;-</span> <span class="st">"_data/data_ready"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for data wrangling and cleaning</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>path_nids <span class="ot">&lt;-</span> <span class="st">"_data/data_process"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>path_ready <span class="ot">&lt;-</span> <span class="st">"_data/data_ready"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for data wrangling and cleaning</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ purrr     1.0.4
@@ -2262,7 +2271,7 @@ $ time_zone           &lt;dbl&gt; -6, -6, -6, -6, -6, -6, -6, -6, -6, -6, -6, -6
 <section id="verbal" class="level3">
 <h3 class="anchored" data-anchor-id="verbal">Verbal</h3>
 <p>To what extent did you do the following during the sexual activity?</p>
-<p><code>ver_pc</code>: Directly asked your partner or communicated verbally with your partner about consent?</p>
+<p><code>ver_pc</code>: Directly asked your partner or communicated verbally with your partner about consent</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>ver_pc) <span class="co"># verbal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2280,7 +2289,7 @@ X1    1 501 5.63 4.12      7    5.79 4.45   0  10    10 -0.28     -1.6 0.18</cod
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2308,7 +2317,7 @@ X1    1 501 7.05 3.43      8    7.56 2.97   0  10    10 -0.96     -0.4 0.15</cod
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2318,7 +2327,7 @@ X1    1 501 7.05 3.43      8    7.56 2.97   0  10    10 -0.96     -0.4 0.15</cod
 <h3 class="anchored" data-anchor-id="indirect-nonverbal">Indirect nonverbal</h3>
 <p>To what extent did you do the following during the sexual activity?<br>
 </p>
-<p><code>inon_pc</code>: Used subtle signals to communicate with your partner about consent for the sexual activity?</p>
+<p><code>inon_pc</code>: Used subtle signals to communicate with your partner about consent for the sexual activity</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>inon_pc) <span class="co"># implicit nonverbal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2336,7 +2345,7 @@ X1    1 501 6.78 3.64      8    7.23 2.97   0  10    10 -0.81    -0.84 0.16</cod
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2345,12 +2354,12 @@ X1    1 501 6.78 3.64      8    7.23 2.97   0  10    10 -0.81    -0.84 0.16</cod
 <section id="nonverbal-corr" class="level3">
 <h3 class="anchored" data-anchor-id="nonverbal-corr">Nonverbal corr</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>enon_pc, d<span class="sc">$</span>inon_pc, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>enon_pc, d<span class="sc">$</span>inon_pc, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.736</code></pre>
+<pre><code>[1] 0.74</code></pre>
 </div>
 </div>
-<p>The correlation between the <code>direct</code> and <code>indirect nonverbal</code> consent cue items was <em>r</em> = .736, indicating a strong positive relationship that suggests these items reflect a shared underlying construct. For parsimony and theoretical clarity, these items will be averaged to create a continuous composite score representing overall nonverbal consent communication.</p>
+<p>The correlation between the <code>direct</code> and <code>indirect nonverbal</code> consent cue items was <em>r</em> = .73, indicating a strong positive relationship that suggests these items reflect a shared underlying construct. For parsimony and theoretical clarity, these items will be averaged to create a continuous composite score representing overall nonverbal consent communication.</p>
 </section>
 <section id="nonverbal-composite" class="level3">
 <h3 class="anchored" data-anchor-id="nonverbal-composite">Nonverbal composite</h3>
@@ -2370,9 +2379,9 @@ X1    1 501 6.91 3.29      8    7.38 2.97   0  10    10 -0.85    -0.51 0.15</cod
 <h3 class="anchored" data-anchor-id="verbal---nonverbal-correlation">Verbal - Nonverbal Correlation</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check correlation between verbal and nonverbal </span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>ver_pc, d<span class="sc">$</span>non_verb, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>ver_pc, d<span class="sc">$</span>non_verb, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.134</code></pre>
+<pre><code>[1] 0.13</code></pre>
 </div>
 </div>
 </section>
@@ -2494,6 +2503,8 @@ X1    1 501 6.91 3.29      8    7.38 2.97   0  10    10 -0.85    -0.51 0.15</cod
        1  406 0.06217458     0.8103792
       NA 6029 0.92327718            NA</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> </span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">precedence =</span> psb5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="partner-familiarity" class="level2">
@@ -2502,7 +2513,7 @@ X1    1 501 6.91 3.29      8    7.38 2.97   0  10    10 -0.85    -0.51 0.15</cod
 <p>I didn’t, we just met that day = 1; They are a friend = 2; They are an acquaintance = 3;<br>
 They are my current or past dating/intimate partner = 4</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb6) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb6) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$psb6
  .x[[i]]    n     percent valid_percent
@@ -2513,6 +2524,70 @@ They are my current or past dating/intimate partner = 4</p>
       NA 6030 0.923430322            NA</code></pre>
 </div>
 </div>
+<section id="level-with-stranger-acquaintance-grouped-together" class="level4">
+<h4 class="anchored" data-anchor-id="level-with-stranger-acquaintance-grouped-together">3-level with Stranger &amp; Acquaintance grouped together</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new variable 'fam_rank' for familiarity stratified across 3 ordered levels</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_rank =</span> <span class="fu">case_when</span>(</span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Friend"</span>,</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Stranger/Acq"</span>,</span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Romantic"</span>,</span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_rank =</span> <span class="fu">factor</span>(fam_rank,</span>
+<span id="cb113-11"><a href="#cb113-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Stranger/Acq"</span>, <span class="st">"Friend"</span>, <span class="st">"Romantic"</span>)))</span>
+<span id="cb113-12"><a href="#cb113-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-13"><a href="#cb113-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the conversion</span></span>
+<span id="cb113-14"><a href="#cb113-14" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(d<span class="sc">$</span>fam_rank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stranger/Acq" "Friend"       "Romantic"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.ordered</span>(d<span class="sc">$</span>fam_rank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>fam_rank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Stranger/Acq       Friend     Romantic 
+          68           96          336 </code></pre>
+</div>
+</div>
+</section>
+<section id="level-with-friend-acquaintance-grouped-together" class="level4">
+<h4 class="anchored" data-anchor-id="level-with-friend-acquaintance-grouped-together">3-level with Friend &amp; Acquaintance grouped together</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_lev =</span> <span class="fu">case_when</span>(</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Stranger"</span>,</span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Friend/Acq"</span>,</span>
+<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>      psb6 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Romantic"</span>,</span>
+<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb119-9"><a href="#cb119-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fam_lev =</span> <span class="fu">factor</span>(fam_lev,</span>
+<span id="cb119-10"><a href="#cb119-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Stranger"</span>, <span class="st">"Friend/Acq"</span>, <span class="st">"Romantic"</span>)))</span>
+<span id="cb119-11"><a href="#cb119-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-12"><a href="#cb119-12" aria-hidden="true" tabindex="-1"></a> <span class="co"># ordered = TRUE))</span></span>
+<span id="cb119-13"><a href="#cb119-13" aria-hidden="true" tabindex="-1"></a> <span class="co"># Verify the order</span></span>
+<span id="cb119-14"><a href="#cb119-14" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(d<span class="sc">$</span>fam_lev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stranger"   "Friend/Acq" "Romantic"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.ordered</span>(d<span class="sc">$</span>fam_lev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>fam_lev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Stranger Friend/Acq   Romantic 
+        41        123        336 </code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="sexual-feelings" class="level2">
 <h2 class="anchored" data-anchor-id="sexual-feelings">Sexual feelings</h2>
@@ -2521,28 +2596,28 @@ They are my current or past dating/intimate partner = 4</p>
 <p>To what extent did you feel the following during the sexual activity?<br>
 <code>aro_pf</code>: I felt aroused.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>aro_pf) <span class="co"># arousal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>aro_pf) <span class="co"># arousal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n mean   sd median trimmed  mad min max range  skew kurtosis   se
 X1    1 501 6.92 3.19      8    7.34 2.97   0  10    10 -0.78    -0.63 0.14</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aro_pf) <span class="sc">%&gt;%</span></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Subjective Arousal"</span>,</span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Arousal Self-Report"</span>,</span>
-<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aro_pf) <span class="sc">%&gt;%</span></span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Subjective Arousal"</span>,</span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Arousal Self-Report"</span>,</span>
+<span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(aro_pf) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(aro_pf) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$aro_pf
  .x[[i]]    n     percent valid_percent
@@ -2566,24 +2641,24 @@ X1    1 501 6.92 3.19      8    7.34 2.97   0  10    10 -0.78    -0.63 0.14</cod
 <p>To what extent did you feel the following during the sexual activity?<br>
 <code>pls_pf</code>: I felt pleasure</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>pls_pf) <span class="co"># pleasure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>pls_pf) <span class="co"># pleasure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n mean   sd median trimmed  mad min max range  skew kurtosis   se
 X1    1 501 7.24 2.84      8    7.66 2.97   0  10    10 -0.97     0.15 0.13</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aro_pf) <span class="sc">%&gt;%</span></span>
-<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Subjective Pleasure"</span>,</span>
-<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Pleasure Self-Report"</span>,</span>
-<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aro_pf) <span class="sc">%&gt;%</span></span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Subjective Pleasure"</span>,</span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Pleasure Self-Report"</span>,</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2592,7 +2667,7 @@ X1    1 501 7.24 2.84      8    7.66 2.97   0  10    10 -0.97     0.15 0.13</cod
 <section id="correlation" class="level3">
 <h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>aro_pf, d<span class="sc">$</span>pls_pf, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(d<span class="sc">$</span>aro_pf, d<span class="sc">$</span>pls_pf, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.828</code></pre>
 </div>
@@ -2601,11 +2676,11 @@ X1    1 501 7.24 2.84      8    7.66 2.97   0  10    10 -0.97     0.15 0.13</cod
 <section id="composite" class="level3">
 <h3 class="anchored" data-anchor-id="composite">Composite</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>  <span class="co"># calculate mean score</span></span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_feel =</span> <span class="fu">mean</span>(<span class="fu">c</span>(pls_pf,aro_pf)))</span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>psb_feel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>  <span class="co"># calculate mean score</span></span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_feel =</span> <span class="fu">mean</span>(<span class="fu">c</span>(pls_pf,aro_pf)))</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>psb_feel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n mean   sd median trimmed  mad min max range  skew kurtosis   se
 X1    1 501 7.08 2.88    7.5    7.46 3.71   0  10    10 -0.81    -0.31 0.13</code></pre>
@@ -2619,20 +2694,20 @@ X1    1 501 7.08 2.88    7.5    7.46 3.71   0  10    10 -0.81    -0.31 0.13</cod
 <br>
 <code>con_pf</code>: The sexual activity felt consensual.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># psych::describe(d$con_pf) # consent evaluation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># psych::describe(d$con_pf) # consent evaluation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(con_pf) <span class="sc">%&gt;%</span></span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Consent Appraisals"</span>,</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"'Felt consensual' Self-Report"</span>,</span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(con_pf) <span class="sc">%&gt;%</span></span>
+<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Consent Appraisals"</span>,</span>
+<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"'Felt consensual' Self-Report"</span>,</span>
+<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2642,32 +2717,46 @@ X1    1 501 7.08 2.88    7.5    7.46 3.71   0  10    10 -0.81    -0.31 0.13</cod
 <h2 class="anchored" data-anchor-id="substance-use">Substance use</h2>
 <section id="participant-drink-count" class="level3">
 <h3 class="anchored" data-anchor-id="participant-drink-count">Participant drink count</h3>
-<p><code>psb7</code>: How many drinks did you consume prior to or during this activity?</p>
+<p><code>psb7</code> <strong>renamed</strong> <code>drinks</code>: How many drinks did you consume prior to or during this activity?</p>
 <p>Response options: 0 = 1; 1-2 = 2, 3-4 = 3, 5-6 = 4, 7-9 = 5, 10+ = 6</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb7) <span class="sc">%&gt;%</span></span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Participant Drinks"</span>,</span>
-<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Self-Reported Drink Count"</span>,</span>
-<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_di <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb7) <span class="sc">%&gt;%</span></span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Participant Drinks"</span>,</span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Self-Reported Drink Count"</span>,</span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb7) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$psb7
+ .x[[i]]    n     percent valid_percent
+       1  312 0.047779479         0.624
+       2   39 0.005972435         0.078
+       3   50 0.007656968         0.100
+       4   48 0.007350689         0.096
+       5   27 0.004134763         0.054
+       6   24 0.003675345         0.048
+      NA 6030 0.923430322            NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> </span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">drinks =</span> psb7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Recode <code>psb_alc</code> from <code>psb7</code> such that 0 drinks = 0 and &gt;0 drinks = 1</li>
+<li>Recode <code>psb_alc</code> from <code>drinks</code> such that 0 drinks = 0 and &gt;0 drinks = 1</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_alc =</span> <span class="fu">if_else</span>(psb7 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">if_else</span>(psb7 <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, psb7)))</span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_alc) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_alc =</span> <span class="fu">if_else</span>(drinks <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">if_else</span>(drinks <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, drinks)))</span>
+<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_alc) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$psb_alc
  .x[[i]]    n    percent valid_percent
@@ -2683,107 +2772,22 @@ X1    1 501 7.08 2.88    7.5    7.46 3.71   0  10    10 -0.81    -0.31 0.13</cod
 <p><code>psb8</code>: How intoxicated did you feel right before or during this sexual activity?</p>
 <p>Least intoxicated ever felt in life (0) - Most intoxication ever felt in life (100) VAS</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb8) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$psb8
- .x[[i]]    n      percent valid_percent
-       0  254 0.0388973966   0.504970179
-       1   15 0.0022970904   0.029821074
-       2   10 0.0015313936   0.019880716
-       3    7 0.0010719755   0.013916501
-       4    7 0.0010719755   0.013916501
-       5    8 0.0012251149   0.015904573
-       6    4 0.0006125574   0.007952286
-       7    4 0.0006125574   0.007952286
-       8    7 0.0010719755   0.013916501
-       9    1 0.0001531394   0.001988072
-      10    8 0.0012251149   0.015904573
-      11    3 0.0004594181   0.005964215
-      12    3 0.0004594181   0.005964215
-      13    2 0.0003062787   0.003976143
-      14    1 0.0001531394   0.001988072
-      15    3 0.0004594181   0.005964215
-      16    3 0.0004594181   0.005964215
-      17    4 0.0006125574   0.007952286
-      18    2 0.0003062787   0.003976143
-      19    3 0.0004594181   0.005964215
-      20    2 0.0003062787   0.003976143
-      21    3 0.0004594181   0.005964215
-      22    1 0.0001531394   0.001988072
-      23    5 0.0007656968   0.009940358
-      25    3 0.0004594181   0.005964215
-      27    3 0.0004594181   0.005964215
-      28    1 0.0001531394   0.001988072
-      30   11 0.0016845329   0.021868787
-      31    3 0.0004594181   0.005964215
-      32    1 0.0001531394   0.001988072
-      33    3 0.0004594181   0.005964215
-      34    2 0.0003062787   0.003976143
-      35    3 0.0004594181   0.005964215
-      36    5 0.0007656968   0.009940358
-      38    4 0.0006125574   0.007952286
-      39    1 0.0001531394   0.001988072
-      40    6 0.0009188361   0.011928429
-      41    1 0.0001531394   0.001988072
-      42    1 0.0001531394   0.001988072
-      43    2 0.0003062787   0.003976143
-      44    1 0.0001531394   0.001988072
-      46    2 0.0003062787   0.003976143
-      47    1 0.0001531394   0.001988072
-      48    3 0.0004594181   0.005964215
-      49    1 0.0001531394   0.001988072
-      50   13 0.0019908116   0.025844930
-      51    1 0.0001531394   0.001988072
-      53    1 0.0001531394   0.001988072
-      54    4 0.0006125574   0.007952286
-      55    3 0.0004594181   0.005964215
-      56    3 0.0004594181   0.005964215
-      57    1 0.0001531394   0.001988072
-      58    2 0.0003062787   0.003976143
-      60    2 0.0003062787   0.003976143
-      61    6 0.0009188361   0.011928429
-      63    3 0.0004594181   0.005964215
-      65    3 0.0004594181   0.005964215
-      66    3 0.0004594181   0.005964215
-      67    2 0.0003062787   0.003976143
-      68    3 0.0004594181   0.005964215
-      70    6 0.0009188361   0.011928429
-      71    2 0.0003062787   0.003976143
-      72    2 0.0003062787   0.003976143
-      73    2 0.0003062787   0.003976143
-      74    1 0.0001531394   0.001988072
-      75    1 0.0001531394   0.001988072
-      76    1 0.0001531394   0.001988072
-      77    2 0.0003062787   0.003976143
-      78    1 0.0001531394   0.001988072
-      79    1 0.0001531394   0.001988072
-      80    2 0.0003062787   0.003976143
-      81    1 0.0001531394   0.001988072
-      82    2 0.0003062787   0.003976143
-      83    1 0.0001531394   0.001988072
-      86    2 0.0003062787   0.003976143
-      88    2 0.0003062787   0.003976143
-      91    2 0.0003062787   0.003976143
-      98    1 0.0001531394   0.001988072
-     100    3 0.0004594181   0.005964215
-      NA 6027 0.9229709035            NA</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>psb8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>psb8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n  mean    sd median trimmed mad min max range skew kurtosis   se
 X1    1 503 17.25 25.84      0   12.14   0   0 100   100 1.37     0.64 1.15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_alc <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb8) <span class="sc">%&gt;%</span></span>
-<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Participant Intoxication"</span>,</span>
-<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Self-Reported Intoxication"</span>,</span>
-<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb_alc <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb8) <span class="sc">%&gt;%</span></span>
+<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Participant Intoxication"</span>,</span>
+<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Self-Reported Intoxication"</span>,</span>
+<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb147-7"><a href="#cb147-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2794,132 +2798,50 @@ X1    1 503 17.25 25.84      0   12.14   0   0 100   100 1.37     0.64 1.15</cod
 <p><code>psb9</code>: How intoxicated do you think the other person felt right before or during this sexual activity?</p>
 <p>Least intoxicated ever felt in life (0) - Most intoxication ever felt in life (100) VAS</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb9) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$psb9
- .x[[i]]    n      percent valid_percent
-       0  250 0.0382848392   0.497017893
-       1   18 0.0027565084   0.035785288
-       2   10 0.0015313936   0.019880716
-       3   10 0.0015313936   0.019880716
-       4    8 0.0012251149   0.015904573
-       5    8 0.0012251149   0.015904573
-       6    5 0.0007656968   0.009940358
-       7    4 0.0006125574   0.007952286
-       8    3 0.0004594181   0.005964215
-       9    3 0.0004594181   0.005964215
-      10   12 0.0018376723   0.023856859
-      11    3 0.0004594181   0.005964215
-      12    2 0.0003062787   0.003976143
-      13    4 0.0006125574   0.007952286
-      14    5 0.0007656968   0.009940358
-      15    1 0.0001531394   0.001988072
-      16    3 0.0004594181   0.005964215
-      17    1 0.0001531394   0.001988072
-      18    4 0.0006125574   0.007952286
-      19    1 0.0001531394   0.001988072
-      20    4 0.0006125574   0.007952286
-      21    2 0.0003062787   0.003976143
-      22    2 0.0003062787   0.003976143
-      23    2 0.0003062787   0.003976143
-      24    2 0.0003062787   0.003976143
-      25    4 0.0006125574   0.007952286
-      26    5 0.0007656968   0.009940358
-      27    3 0.0004594181   0.005964215
-      28    3 0.0004594181   0.005964215
-      29    1 0.0001531394   0.001988072
-      30    9 0.0013782542   0.017892644
-      31    3 0.0004594181   0.005964215
-      32    3 0.0004594181   0.005964215
-      34    2 0.0003062787   0.003976143
-      35    4 0.0006125574   0.007952286
-      36    4 0.0006125574   0.007952286
-      37    2 0.0003062787   0.003976143
-      38    3 0.0004594181   0.005964215
-      39    1 0.0001531394   0.001988072
-      40    4 0.0006125574   0.007952286
-      41    2 0.0003062787   0.003976143
-      42    4 0.0006125574   0.007952286
-      43    2 0.0003062787   0.003976143
-      44    3 0.0004594181   0.005964215
-      45    3 0.0004594181   0.005964215
-      46    1 0.0001531394   0.001988072
-      47    1 0.0001531394   0.001988072
-      48    3 0.0004594181   0.005964215
-      50   11 0.0016845329   0.021868787
-      51    1 0.0001531394   0.001988072
-      53    2 0.0003062787   0.003976143
-      54    3 0.0004594181   0.005964215
-      55    1 0.0001531394   0.001988072
-      56    2 0.0003062787   0.003976143
-      59    1 0.0001531394   0.001988072
-      60    3 0.0004594181   0.005964215
-      61    3 0.0004594181   0.005964215
-      64    1 0.0001531394   0.001988072
-      65    2 0.0003062787   0.003976143
-      66    1 0.0001531394   0.001988072
-      67    1 0.0001531394   0.001988072
-      68    2 0.0003062787   0.003976143
-      69    1 0.0001531394   0.001988072
-      70    5 0.0007656968   0.009940358
-      71    3 0.0004594181   0.005964215
-      72    3 0.0004594181   0.005964215
-      73    1 0.0001531394   0.001988072
-      75    2 0.0003062787   0.003976143
-      76    1 0.0001531394   0.001988072
-      78    1 0.0001531394   0.001988072
-      79    2 0.0003062787   0.003976143
-      83    2 0.0003062787   0.003976143
-      85    1 0.0001531394   0.001988072
-      86    1 0.0001531394   0.001988072
-      87    1 0.0001531394   0.001988072
-      89    2 0.0003062787   0.003976143
-      90    1 0.0001531394   0.001988072
-      91    2 0.0003062787   0.003976143
-     100    3 0.0004594181   0.005964215
-      NA 6027 0.9229709035            NA</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb9 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb9) <span class="sc">%&gt;%</span></span>
-<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Partner Intoxication"</span>,</span>
-<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Perceived Partner Intoxication"</span>,</span>
-<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb9 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(psb9) <span class="sc">%&gt;%</span></span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">"Histogram of Partner Intoxication"</span>,</span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Perceived Partner Intoxication"</span>,</span>
+<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb148-7"><a href="#cb148-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="0_clean_diary_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="drug-use-cannabis" class="level2">
-<h2 class="anchored" data-anchor-id="drug-use-cannabis">Drug use (cannabis)</h2>
-<p><code>psb10</code>: Which of the following drugs were you using prior to or during this sexual activity?</p>
+<section id="intoxication-parity" class="level3">
+<h3 class="anchored" data-anchor-id="intoxication-parity">Intoxication parity</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>psb_cub <span class="ot">&lt;-</span> d<span class="sc">$</span>psb10</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span>   </span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(psb_cub),</span>
-<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">recode</span>(., </span>
-<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"0"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"1"</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
-<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"4"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb137-10"><a href="#cb137-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7,1"</span> <span class="ot">=</span> <span class="dv">1</span>)))</span>
-<span id="cb137-11"><a href="#cb137-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-12"><a href="#cb137-12" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_cub) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl) <span class="co"># participant cannabis use</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$psb_cub
- .x[[i]]    n     percent valid_percent
-       0   57 0.008728943       0.59375
-       1   39 0.005972435       0.40625
-      NA 6434 0.985298622            NA</code></pre>
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous parity = absolute difference between self and partner intoxication</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>parity_con <span class="ot">&lt;-</span> <span class="fu">abs</span>(d<span class="sc">$</span>psb8 <span class="sc">-</span> d<span class="sc">$</span>psb9)</span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d<span class="sc">$</span>parity_con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1_clean_diary_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">parity_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>      parity_con <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Equal"</span>,</span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>      psb8 <span class="sc">&gt;</span> psb9   <span class="sc">~</span> <span class="st">"Self-Higher"</span>,</span>
+<span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a>      psb8 <span class="sc">&lt;</span> psb9   <span class="sc">~</span> <span class="st">"Partner-Higher"</span>,</span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">parity_cat =</span> <span class="fu">factor</span>(parity_cat,</span>
+<span id="cb150-10"><a href="#cb150-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Equal"</span>,<span class="st">"Self-Higher"</span>,<span class="st">"Partner-Higher"</span>))</span>
+<span id="cb150-11"><a href="#cb150-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="drug-use-cannabis" class="level3">
+<h3 class="anchored" data-anchor-id="drug-use-cannabis">Drug use (cannabis)</h3>
 <p>Response options endorsed:</p>
 <ul>
 <li>0 = None;</li>
@@ -2928,19 +2850,43 @@ X1    1 503 17.25 25.84      0   12.14   0   0 100   100 1.37     0.64 1.15</cod
 <li>9 = Xanax, or another sedative</li>
 <li>7 = Other prescription medication.</li>
 </ul>
+<p><code>psb10</code>: Which of the following drugs were you using prior to or during this sexual activity?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>psb_cub <span class="ot">&lt;-</span> d<span class="sc">$</span>psb10</span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span>   </span>
+<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(psb_cub),</span>
+<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">recode</span>(., </span>
+<span id="cb151-6"><a href="#cb151-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"0"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb151-7"><a href="#cb151-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"1"</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
+<span id="cb151-8"><a href="#cb151-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"4"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb151-9"><a href="#cb151-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb151-10"><a href="#cb151-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7,1"</span> <span class="ot">=</span> <span class="dv">1</span>)))</span>
+<span id="cb151-11"><a href="#cb151-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-12"><a href="#cb151-12" aria-hidden="true" tabindex="-1"></a><span class="co"># participant cannabis use pre-encounter</span></span>
+<span id="cb151-13"><a href="#cb151-13" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_cub) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$psb_cub
+ .x[[i]]    n     percent valid_percent
+       0   57 0.008728943       0.59375
+       1   39 0.005972435       0.40625
+      NA 6434 0.985298622            NA</code></pre>
+</div>
+</div>
 <p><code>psb11</code>: Which of the following drugs was the other person using prior to or during this sexual activity?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>partner_cub <span class="ot">&lt;-</span> d<span class="sc">$</span>psb11</span>
-<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span>   </span>
-<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(partner_cub),</span>
-<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">recode</span>(., </span>
-<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"0"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"1"</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
-<span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"9"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7"</span> <span class="ot">=</span> <span class="dv">0</span>)))</span>
-<span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb11, partner_cub) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl) <span class="co"># partner cannabis use</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>partner_cub <span class="ot">&lt;-</span> d<span class="sc">$</span>psb11</span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span>   </span>
+<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(partner_cub),</span>
+<span id="cb153-5"><a href="#cb153-5" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">recode</span>(., </span>
+<span id="cb153-6"><a href="#cb153-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"0"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb153-7"><a href="#cb153-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"1"</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
+<span id="cb153-8"><a href="#cb153-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"9"</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb153-9"><a href="#cb153-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"7"</span> <span class="ot">=</span> <span class="dv">0</span>)))</span>
+<span id="cb153-10"><a href="#cb153-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-11"><a href="#cb153-11" aria-hidden="true" tabindex="-1"></a><span class="co"># partner cannabis use pre-encounter</span></span>
+<span id="cb153-12"><a href="#cb153-12" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb11, partner_cub) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$psb11
  .x[[i]]    n      percent valid_percent
@@ -2958,6 +2904,7 @@ $partner_cub
 </div>
 </div>
 </section>
+</section>
 <section id="affect" class="level2">
 <h2 class="anchored" data-anchor-id="affect">Affect</h2>
 <p>Just before the encounter, how were you feeling? Not at all (0) - Very much (4) VAS<br>
@@ -2970,22 +2917,22 @@ $partner_cub
 - <code>pa2_p</code> Calm</p>
 <p>Dichotomous var representing presence vs.&nbsp;absence of negative affect pre-event</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>  <span class="co"># calculate mean score</span></span>
-<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neg_sum =</span> <span class="fu">sum</span>(<span class="fu">c</span>( irri_p, dist_p, angr_p, empt_p, asha_p)))</span>
-<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb141-6"><a href="#cb141-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(irri_p, dist_p, angr_p, empt_p, asha_p),</span>
-<span id="cb141-7"><a href="#cb141-7" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span> <span class="fu">as.integer</span>(. <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
-<span id="cb141-8"><a href="#cb141-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{sub('_p$', '_di', .col)}"</span>))</span>
-<span id="cb141-9"><a href="#cb141-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb141-10"><a href="#cb141-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb141-11"><a href="#cb141-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_neg =</span> <span class="fu">sum</span>(irri_di, dist_di, angr_di, empt_di, asha_di))</span>
-<span id="cb141-12"><a href="#cb141-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-13"><a href="#cb141-13" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb141-14"><a href="#cb141-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_neg_di =</span> <span class="fu">if_else</span>(psb_neg <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="fu">if_else</span>(psb_neg <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, psb_neg)))</span>
-<span id="cb141-15"><a href="#cb141-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-16"><a href="#cb141-16" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_neg_di) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>  <span class="co"># calculate mean score</span></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neg_sum =</span> <span class="fu">sum</span>(<span class="fu">c</span>( irri_p, dist_p, angr_p, empt_p, asha_p)))</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(irri_p, dist_p, angr_p, empt_p, asha_p),</span>
+<span id="cb155-7"><a href="#cb155-7" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span> <span class="fu">as.integer</span>(. <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb155-8"><a href="#cb155-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{sub('_p$', '_di', .col)}"</span>))</span>
+<span id="cb155-9"><a href="#cb155-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb155-10"><a href="#cb155-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb155-11"><a href="#cb155-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_neg =</span> <span class="fu">sum</span>(irri_di, dist_di, angr_di, empt_di, asha_di))</span>
+<span id="cb155-12"><a href="#cb155-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-13"><a href="#cb155-13" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb155-14"><a href="#cb155-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">psb_neg_di =</span> <span class="fu">if_else</span>(psb_neg <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="fu">if_else</span>(psb_neg <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, psb_neg)))</span>
+<span id="cb155-15"><a href="#cb155-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-16"><a href="#cb155-16" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb_neg_di) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$psb_neg_di
  .x[[i]]    n    percent valid_percent
@@ -2994,14 +2941,14 @@ $partner_cub
       NA 6029 0.92327718            NA</code></pre>
 </div>
 </div>
-<p>Emotion regulation:</p>
+<p><strong>Emotion regulation:</strong></p>
 <p>Thinking about your strongest emotion, how did you respond to the feeling?<br>
 - <code>er1_p</code>: I tried to get rid of negative thoughts, feelings, or sensations<br>
 - <code>er2_p</code>: I couldn’t stop thinking about my feelings<br>
 - <code>er3_p</code>: I avoided expressing my feelings<br>
 - <code>er4_p</code>: I changed the way I thought about what caused my feelings</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(er1_p<span class="sc">:</span>er4_p) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(er1_p<span class="sc">:</span>er4_p) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$er1_p
  .x[[i]]    n    percent valid_percent
@@ -3028,13 +2975,13 @@ $er4_p
       NA 6031 0.923583461            NA</code></pre>
 </div>
 </div>
-<p>Pre-encounter expectations and stress:</p>
+<p><strong>Pre-encounter expectations and stress:</strong></p>
 <p>- <code>exp_p</code>: Earlier in the day, how likely did you think it was that you would have sexual activity?<br>
 - <code>st_p</code>: How stressful had the day been for you?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(exp_p, <span class="co"># Very unlikey (1) - Very likely (5) VAS</span></span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>             st_p   <span class="co"># Not at all stressful (1) - Extremely Stressful (5) VAS</span></span>
-<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(exp_p, <span class="co"># Very unlikey (1) - Very likely (5) VAS</span></span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>             st_p   <span class="co"># Not at all stressful (1) - Extremely Stressful (5) VAS</span></span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$exp_p
  .x[[i]]    n    percent valid_percent
@@ -3054,36 +3001,45 @@ $st_p
        5   22 0.003369066    0.04166667
       NA 6002 0.919142420            NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expectations</span></span>
-<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>exp_p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expectations</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>exp_p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n mean   sd median trimmed  mad min max range  skew kurtosis   se
 X1    1 528  3.1 1.44      3    3.12 1.48   1   5     4 -0.08    -1.29 0.06</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stress</span></span>
-<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>st_p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stress</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(d<span class="sc">$</span>st_p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
 X1    1 528 1.95 1.14      2    1.76 1.48   1   5     4 1.07     0.23 0.05</code></pre>
 </div>
 </div>
-<p>Online and solo sexual behavior blocks</p>
+</section>
+<section id="remove-unnecessary-measures" class="level2">
+<h2 class="anchored" data-anchor-id="remove-unnecessary-measures">Remove unnecessary measures</h2>
+<p>Vars from online and solo sexual behavior blocks</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> </span>
-<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(osb2, osb2.txt, osb6<span class="sc">:</span>osbb10_11_10_text, osbb15, osbb15_5_text,</span>
-<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>            aro_of, pls_of, pss, exp_o, str_o<span class="sc">:</span>er4_o, ssb3, ssb3.txt,</span>
-<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a>            ssb6<span class="sc">:</span>er4_s, dub2.txt, med1_d<span class="sc">:</span>exp_d, dub3_bf.txt, dub3_du.txt,</span>
-<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a>            dub3_af.txt, status, q186_8_text, au_l<span class="sc">:</span>au_pbs.txt, </span>
-<span id="cb151-6"><a href="#cb151-6" aria-hidden="true" tabindex="-1"></a>            start_date<span class="sc">:</span>end_date, ip_address, recorded_date, </span>
-<span id="cb151-7"><a href="#cb151-7" aria-hidden="true" tabindex="-1"></a>            location_latitude, location_longitude, psb3, psb5a, psb6a<span class="sc">:</span>str_p.txt, </span>
-<span id="cb151-8"><a href="#cb151-8" aria-hidden="true" tabindex="-1"></a>            psb7a<span class="sc">:</span>psb15_tried_10_text, psb16_10_text<span class="sc">:</span>psb16_tried_10_text)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> </span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(osb2, osb2.txt, osb6<span class="sc">:</span>osbb10_11_10_text, osbb15, osbb15_5_text,</span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>            aro_of, pls_of, pss, exp_o, str_o<span class="sc">:</span>er4_o, ssb3, ssb3.txt,</span>
+<span id="cb165-4"><a href="#cb165-4" aria-hidden="true" tabindex="-1"></a>            ssb6<span class="sc">:</span>er4_s, dub2.txt, med1_d<span class="sc">:</span>exp_d, dub3_bf.txt, dub3_du.txt,</span>
+<span id="cb165-5"><a href="#cb165-5" aria-hidden="true" tabindex="-1"></a>            dub3_af.txt, status, q186_8_text, au_l<span class="sc">:</span>au_pbs.txt, </span>
+<span id="cb165-6"><a href="#cb165-6" aria-hidden="true" tabindex="-1"></a>            start_date<span class="sc">:</span>end_date, ip_address, recorded_date, </span>
+<span id="cb165-7"><a href="#cb165-7" aria-hidden="true" tabindex="-1"></a>            location_latitude, location_longitude, psb3, psb5a, psb6a<span class="sc">:</span>str_p.txt, </span>
+<span id="cb165-8"><a href="#cb165-8" aria-hidden="true" tabindex="-1"></a>            psb7a<span class="sc">:</span>psb15_tried_10_text, psb16_10_text<span class="sc">:</span>psb16_tried_10_text)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="save-updated-dataframe-for-diary-data" class="level2">
 <h2 class="anchored" data-anchor-id="save-updated-dataframe-for-diary-data">Save updated dataframe for diary data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"ready_cues.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">is.list</span>(.x) <span class="sc">|</span> <span class="fu">is.matrix</span>(.x))) <span class="sc">%&gt;%</span></span>
+<span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb166-4"><a href="#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"ready_cues.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

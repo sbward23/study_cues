@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Cleaning baseline, part 2.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="2_clean_baseline_files/libs/clipboard/clipboard.min.js"></script>
+<script src="2_clean_baseline_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="2_clean_baseline_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="2_clean_baseline_files/libs/quarto-html/popper.min.js"></script>
+<script src="2_clean_baseline_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="2_clean_baseline_files/libs/quarto-html/anchor.min.js"></script>
+<link href="2_clean_baseline_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="2_clean_baseline_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="2_clean_baseline_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="2_clean_baseline_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="2_clean_baseline_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cleaning baseline, part 2.</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to detect and warn about conflicts</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[conflicted] Will prefer dplyr::filter over any other package.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[conflicted] Will prefer dplyr::select over any other package.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to read in data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>path_nids <span class="ot">&lt;-</span> <span class="st">"_data/data_process"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>path_ready <span class="ot">&lt;-</span> <span class="st">"_data/data_ready"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for data wrangling and cleaning</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ purrr     1.0.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_scripts/functions.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Read in data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_nids,<span class="st">"baseline_nid.csv"</span>), </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>base_sona  <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_nids,<span class="st">"baseline_sona_id.csv"</span>), </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"ready_cues.csv"</span>), </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Replace <code>sona_id</code> with new ID (<code>nid</code>) to ensure participant data remains de-identified.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(base_sona)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "progress"            "duration_in_seconds" "finished"           
+  [4] "response_id"         "sona_id"             "sona_id_confirm"    
+  [7] "age"                 "dorm"                "sch_yr"             
+ [10] "race"                "mu_txt"              "ra_txt"             
+ [13] "hisp"                "disabl"              "gend"               
+ [16] "trans"               "sx_ori"              "sx_txt"             
+ [19] "rela"                "re_txt"              "s_life"             
+ [22] "f_aid"               "p_grnt"              "job"                
+ [25] "f_need"              "fgen"                "smu_1"              
+ [28] "smu_2"               "smu_3"               "smu_4"              
+ [31] "smu_5"               "smu_6"               "smu_7"              
+ [34] "smu_8"               "smu_9"               "smu_10"             
+ [37] "smu_11"              "smu_12"              "sm_txt"             
+ [40] "ders1"               "ders2"               "ders3"              
+ [43] "ders4"               "ders5"               "ders6"              
+ [46] "ders7"               "ders8"               "ders9"              
+ [49] "ders10"              "ders11"              "ders12"             
+ [52] "ders13"              "ders14"              "ders15"             
+ [55] "ders16"              "ders17"              "ders18"             
+ [58] "pn1"                 "pn2"                 "pn3"                
+ [61] "pn4"                 "pa1"                 "pa2"                
+ [64] "pa3"                 "pa4"                 "pa5"                
+ [67] "pa6"                 "asc1"                "asc2"               
+ [70] "asc3"                "asc4"                "scs1"               
+ [73] "scs2"                "scs5"                "scs3"               
+ [76] "scs4"                "scs6"                "scs7"               
+ [79] "scs8"                "scs9"                "scs10"              
+ [82] "ong1"                "ong2"                "ong3"               
+ [85] "ong4"                "coer1"               "coer2"              
+ [88] "coer3"               "coer4"               "coer5"              
+ [91] "coer6"               "ac1"                 "ac2"                
+ [94] "ac3"                 "aib2"                "sss1"               
+ [97] "sss2"                "sss3"                "sss4"               
+[100] "sss5"                "sss6"                "sss7"               
+[103] "sss8"                "sss9"                "sss10"              
+[106] "sss11"               "sss12"               "sss13"              
+[109] "sss14"               "sss15"               "sss16"              
+[112] "sss17"               "sss18"               "sss19"              
+[115] "sss20"               "sss21"               "sss22"              
+[118] "sss23"               "cur1"                "cur2"               
+[121] "cur3"                "srb1"                "srb2"               
+[124] "srb3"                "srb4"                "srb5"               
+[127] "srb6"                "uw_hup"              "uw_prt"             
+[130] "life_prt"            "sx_trade1"           "sx_trade2"          
+[133] "dx_sti"              "un_prg"              "cpa1"               
+[136] "cpa2"                "cpa3"                "cpa4"               
+[139] "cpa5"                "csa1"                "csa2"               
+[142] "csa3"                "csa4"                "csa5"               
+[145] "v_uc1"               "v_uc2"               "v_uc3"              
+[148] "v_uc4"               "v_uc5"               "v_uc6"              
+[151] "uc_txt"              "v_r1"                "v_r2"               
+[154] "v_r3"                "v_r4"                "v_r5"               
+[157] "v_r6"                "r_txt"               "v_ar1"              
+[160] "v_ar2"               "v_ar3"               "v_ar4"              
+[163] "v_ar5"               "v_ar6"               "ar_txt"             
+[166] "v_num"               "v_prpg"              "porn1"              
+[169] "porn2"               "po_txt"              "irma1"              
+[172] "irma2"               "irma3"               "irma4"              
+[175] "irma5"               "irma6"               "irma7"              
+[178] "soi1"                "soi2"                "soi3"               
+[181] "soi4"                "aud1"                "aud2"               
+[184] "aud3"                "aud4"                "aud5"               
+[187] "aud6"                "aud7"                "aud8"               
+[190] "aud9"                "aud10"               "srb7"               
+[193] "srb8"                "au_ven"              "sd_txt"             
+[196] "pn_a1"               "pn_a2"               "pn_a3"              
+[199] "pn_a4"               "abom_1"              "abom_2"             
+[202] "abom_3"              "abom_4"              "abom_5"             
+[205] "cud_l"               "cud_6m"              "cud1"               
+[208] "cud2"                "cud3"                "cud4"               
+[211] "cud5"                "cud6"                "cud7"               
+[214] "cud8"                "bidr_1"              "bidr_2"             
+[217] "bidr_3"              "bidr_4"              "bidr_5"             
+[220] "bidr_6"              "bidr_7"              "bidr_8"             
+[223] "bidr_9"              "bidr_10"             "bidr_11"            
+[226] "bidr_12"             "bidr_13"             "bidr_14"            
+[229] "bidr_15"             "bidr_16"             "apb1"               
+[232] "apb2"                "apb3"                "apb4"               
+[235] "apb5"                "apb6"                "phq8_1"             
+[238] "phq8_2"              "phq8_3"              "phq8_4"             
+[241] "phq8_5"              "phq8_6"              "phq8_7"             
+[244] "phq8_8"              "phq8_fu"             "gad7_1"             
+[247] "gad7_2"              "gad7_3"              "gad7_4"             
+[250] "gad7_5"              "gad7_6"              "gad7_7"             
+[253] "pcl"                 "pcl_txt"             "pcl_wh"             
+[256] "pcl_hw"              "hw_txt"              "pcl_ca"             
+[259] "pcl_co"              "co_txt"              "pcl_1"              
+[262] "pcl_2"               "pcl_3"               "pcl_4"              
+[265] "pcl_5"               "pcl_6"               "pcl_7"              
+[268] "pcl_8"               "pcl_9"               "pcl_10"             
+[271] "pcl_11"              "pcl_12"              "pcl_13"             
+[274] "pcl_14"              "pcl_15"              "pcl_16"             
+[277] "pcl_17"              "pcl_18"              "pcl_19"             
+[280] "pcl_20"              "asrs_1"              "asrs_2"             
+[283] "asrs_3"              "asrs_4"              "asrs_5"             
+[286] "asrs_6"              "tb1"                 "tb2"                
+[289] "part2"               "sc0"                 "gend_di"            
+[292] "hetero"              "aud_s"               "aud_sc"             
+[295] "audc_s"              "audc_sc"             "abomm"              
+[298] "abomm_c"             "abom_s"              "abom_sc"            
+[301] "apb_s"               "apb_sc"              "apb_lim"            
+[304] "lim_c"               "apb_man"             "man_c"              
+[307] "cud_s"               "cud_sc"              "asrs_s"             
+[310] "asrs_sc"             "ders_s"              "ders_sc"            
+[313] "ders_clr"            "clar_c"              "ders_aw"            
+[316] "awar_c"              "ders_non"            "nonax_c"            
+[319] "ders_g"              "goals_c"             "ders_im"            
+[322] "impl_c"              "ders_st"             "strg_c"             
+[325] "gad_s"               "gad_sc"              "phq_s"              
+[328] "phq_sc"              "pcl_s"               "pcl_sc"             
+[331] "pcl_reexp"           "reexp_c"             "pcl_av"             
+[334] "av_c"                "pcl_neg"             "neg_c"              
+[337] "pcl_hyp"             "hyp_c"               "sde_s"              
+[340] "im_s"                "bidr_s"              "bidr_sc"            
+[343] "cpa_s"               "cpa_sc"              "cpa_v"              
+[346] "csa_s"               "csa_sc"              "csa_v"              
+[349] "aces"                "v_uc"                "v_uc_s"             
+[352] "v_r"                 "v_r_s"               "v_ar"               
+[355] "v_ar_s"              "v_asa"               "v_poly"             
+[358] "v_rev"               "v_sub"               "v_sub_s"            
+[361] "aib1"                "ac_s"                "ac_di"              
+[364] "sss_s"               "sss_di"              "sss_v"              
+[367] "sss_i"               "sss_e"               "sss_tf"             
+[370] "coer_m"              "coer_s"              "coer_sc"            
+[373] "cur_s"               "cur_m"               "cur_di"             
+[376] "agg_s"               "agg_di"              "rma_s"              </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(baseline<span class="sc">$</span>response_id, base_sona<span class="sc">$</span>response_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>base_sona_updated <span class="ot">&lt;-</span> base_sona <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    baseline <span class="sc">%&gt;%</span> <span class="fu">select</span>(response_id, nid),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">"response_id"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> base_sona_updated <span class="sc">%&gt;%</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(sona_id, sona_id_confirm))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(baseline<span class="sc">$</span>nid))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Confirm number of unique participants and events (<code>pid</code>) in diary data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>nid)) <span class="co"># 278 - nid derived from sona_id; links baseline to daily surveys</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 278</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>response_id)) <span class="co"># 6530 - event_id for daily surveys</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6530</code></pre>
+</div>
+</div>
+<section id="subset-data" class="level2">
+<h2 class="anchored" data-anchor-id="subset-data">Subset data</h2>
+<p>Subset baseline to only include obs for which the same participant ID (<code>nid</code>) also appears in the diary data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>baseline_subset <span class="ot">&lt;-</span> baseline <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(data, <span class="at">by =</span> <span class="st">"nid"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that it worked</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(baseline_subset<span class="sc">$</span>nid <span class="sc">%in%</span> data<span class="sc">$</span>nid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Subset diary data to only include obs for which the partnered sexual behavior daily screener (<code>psb1</code>) was endorsed AND sexual contact (<code>psb_di</code>) was reported.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">select</span>(psb1, psb_di) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$psb1
+ .x[[i]]    n     percent
+       0 5942 0.909954058
+       1  531 0.081316998
+       3   57 0.008728943
+
+$psb_di
+ .x[[i]]    n     percent valid_percent
+       0   27 0.004134763    0.05113636
+       1  501 0.076722818    0.94886364
+      NA 6002 0.919142420            NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(psb1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> psb_di <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data_subset <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_participants =</span> <span class="fu">n_distinct</span>(nid)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  n_obs n_participants
+  &lt;int&gt;          &lt;int&gt;
+1   501            152</code></pre>
+</div>
+</div>
+<p>Further subset baseline to only include obs for participants who reported partnered sexual behavior (<code>psb1</code>) involving sexual contact (<code>psb_di</code>) at least once during the daily diary portion of the study by removing rows from <code>baseline_subset</code> where that <code>nid</code> does not appear in <code>data_subset</code> (i.e., remove participants from baseline who do not have any psb1 == 1 &amp; psb_di == 1 events.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>base_ana <span class="ot">&lt;-</span> baseline_subset <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(data_subset, <span class="at">by =</span> <span class="st">"nid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="remove-unnecessary-vars" class="level3">
+<h3 class="anchored" data-anchor-id="remove-unnecessary-vars">Remove unnecessary vars</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> base_ana <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(smu_1<span class="sc">:</span>sm_txt, sx_txt, re_txt, ders1<span class="sc">:</span>ders18, sd_txt, po_txt, mu_txt,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>            sss1<span class="sc">:</span>sss23, cpa1<span class="sc">:</span>v_ar6, apb1<span class="sc">:</span>apb6, phq8_1<span class="sc">:</span>phq8_fu, gad7_1<span class="sc">:</span>gad7_7, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>            pcl_txt<span class="sc">:</span>pcl_20, sx_trade1<span class="sc">:</span>porn2, au_ven, pcl, sc0, tb2, pcl_s<span class="sc">:</span>hyp_c, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>            ar_txt, v_uc1<span class="sc">:</span>v_ar6, v_num, v_rev, v_poly, sss_tf, asrs_1<span class="sc">:</span>asrs_6, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            ra_txt, cud_6m<span class="sc">:</span>cud8, aud_s<span class="sc">:</span>rma_s))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up environment</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(base_sona)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(base_sona_updated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="prepare-between-subjects-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-between-subjects-predictors">Prepare between-subjects predictors</h2>
+<section id="social-desirability" class="level3">
+<h3 class="anchored" data-anchor-id="social-desirability">Social Desirability</h3>
+<section id="bidr-a-.73" class="level4">
+<h4 class="anchored" data-anchor-id="bidr-a-.73">BIDR (a = .73)</h4>
+<ul>
+<li>Note that items 1, 3, 5, and 8 are already reverse-coded</li>
+<li>Note that items 9, 11, 12 and 13 are already reverse-coded</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">## BIDR (a = .73): (1-8) 1 = totally disagree, 8 = totally agree</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  Higher scores reflect greater social desirability bias</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="do">### Self-Deceptive Enhancement subscale (a = .63)</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sde_s =</span> <span class="fu">sum</span>(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8))</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the bidr items</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>sde_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bidr_1"</span>,<span class="st">"bidr_2"</span>,<span class="st">"bidr_3"</span>,<span class="st">"bidr_4"</span>,<span class="st">"bidr_5"</span>,<span class="st">"bidr_6"</span>,<span class="st">"bidr_7"</span>,<span class="st">"bidr_8"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = .63, i.e. &lt; .70, doesn't meet standard criterion for reliability</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, sde_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, sde_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.63      0.64    0.66      0.18 1.7 0.046  4.7 0.97     0.16
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.53  0.63  0.71
+Duhachek  0.54  0.63  0.71
+
+ Reliability if an item is dropped:
+       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+bidr_1      0.61      0.62    0.64      0.19 1.6    0.048 0.019  0.17
+bidr_2      0.63      0.64    0.65      0.20 1.8    0.046 0.014  0.18
+bidr_3      0.58      0.60    0.62      0.18 1.5    0.052 0.017  0.15
+bidr_4      0.60      0.60    0.63      0.18 1.5    0.050 0.019  0.15
+bidr_5      0.60      0.61    0.63      0.18 1.6    0.050 0.017  0.15
+bidr_6      0.59      0.59    0.59      0.17 1.4    0.050 0.013  0.17
+bidr_7      0.56      0.55    0.54      0.15 1.2    0.054 0.011  0.14
+bidr_8      0.58      0.60    0.62      0.18 1.5    0.052 0.019  0.15
+
+ Item statistics 
+         n raw.r std.r r.cor r.drop mean  sd
+bidr_1 152  0.52  0.48  0.34   0.28  4.7 2.1
+bidr_2 152  0.35  0.40  0.26   0.16  5.0 1.5
+bidr_3 152  0.58  0.54  0.43   0.36  4.8 2.1
+bidr_4 152  0.51  0.53  0.41   0.31  3.3 1.8
+bidr_5 152  0.54  0.50  0.38   0.31  4.7 2.0
+bidr_6 152  0.52  0.57  0.51   0.34  5.4 1.6
+bidr_7 152  0.62  0.68  0.68   0.49  5.7 1.5
+bidr_8 152  0.57  0.53  0.42   0.35  4.1 2.0
+
+Non missing response frequency for each item
+          1    2    3    4    5    6    7    8 miss
+bidr_1 0.11 0.06 0.14 0.16 0.15 0.12 0.14 0.11    0
+bidr_2 0.00 0.03 0.16 0.22 0.20 0.23 0.09 0.07    0
+bidr_3 0.06 0.08 0.17 0.18 0.12 0.14 0.12 0.12    0
+bidr_4 0.14 0.18 0.34 0.11 0.07 0.13 0.01 0.03    0
+bidr_5 0.07 0.06 0.20 0.18 0.12 0.14 0.14 0.09    0
+bidr_6 0.02 0.01 0.11 0.18 0.14 0.30 0.15 0.09    0
+bidr_7 0.01 0.01 0.06 0.11 0.21 0.32 0.16 0.12    0
+bidr_8 0.09 0.14 0.24 0.12 0.15 0.08 0.11 0.07    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># describe</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>sde_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean   sd median trimmed  mad min max range skew kurtosis   se
+X1    1 152 37.66 7.74     37    37.4 7.41  19  58    39 0.34    -0.05 0.63</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>sde_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Impression Management subscale (a = .72)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">im_s =</span> <span class="fu">sum</span>(bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the bidr items</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>im_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bidr_9"</span>,<span class="st">"bidr_10"</span>,<span class="st">"bidr_11"</span>,<span class="st">"bidr_12"</span>,<span class="st">"bidr_13"</span>,<span class="st">"bidr_14"</span>,<span class="st">"bidr_15"</span>,<span class="st">"bidr_16"</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = .72, i.e. &lt; .70, doesn't meet standard criterion for reliability</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, im_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, im_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.72      0.71    0.73      0.23 2.4 0.034  4.8 1.1     0.23
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.65  0.72  0.78
+Duhachek  0.65  0.72  0.78
+
+ Reliability if an item is dropped:
+        raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+bidr_9       0.68      0.66    0.69      0.22 2.0    0.039 0.026  0.17
+bidr_10      0.72      0.72    0.73      0.27 2.6    0.034 0.020  0.27
+bidr_11      0.72      0.71    0.71      0.26 2.5    0.034 0.017  0.27
+bidr_12      0.68      0.67    0.68      0.22 2.0    0.038 0.024  0.22
+bidr_13      0.67      0.66    0.67      0.22 1.9    0.040 0.020  0.21
+bidr_14      0.69      0.68    0.69      0.24 2.2    0.037 0.017  0.24
+bidr_15      0.69      0.68    0.70      0.23 2.1    0.037 0.025  0.21
+bidr_16      0.66      0.65    0.65      0.21 1.9    0.041 0.012  0.22
+
+ Item statistics 
+          n raw.r std.r r.cor r.drop mean  sd
+bidr_9  152  0.64  0.63  0.55   0.47  4.5 2.1
+bidr_10 152  0.38  0.41  0.25   0.22  3.7 1.5
+bidr_11 152  0.41  0.45  0.33   0.25  7.0 1.6
+bidr_12 152  0.61  0.61  0.54   0.44  6.0 1.9
+bidr_13 152  0.67  0.66  0.61   0.51  3.8 2.0
+bidr_14 152  0.56  0.56  0.48   0.41  3.2 1.7
+bidr_15 152  0.60  0.58  0.48   0.41  5.9 2.2
+bidr_16 152  0.70  0.68  0.67   0.55  4.1 2.1
+
+Non missing response frequency for each item
+           1    2    3    4    5    6    7    8 miss
+bidr_9  0.10 0.09 0.16 0.17 0.11 0.14 0.16 0.07    0
+bidr_10 0.04 0.18 0.31 0.25 0.07 0.07 0.06 0.01    0
+bidr_11 0.01 0.01 0.03 0.06 0.05 0.06 0.23 0.56    0
+bidr_12 0.02 0.03 0.10 0.07 0.14 0.12 0.26 0.26    0
+bidr_13 0.19 0.07 0.22 0.18 0.12 0.07 0.09 0.05    0
+bidr_14 0.16 0.22 0.25 0.16 0.08 0.07 0.05 0.01    0
+bidr_15 0.03 0.07 0.09 0.09 0.07 0.09 0.23 0.33    0
+bidr_16 0.11 0.16 0.20 0.14 0.14 0.07 0.11 0.07    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># describe</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>im_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n mean   sd median trimmed   mad min max range  skew kurtosis   se
+X1    1 152 38.2 8.85     37   38.21 10.38  12  60    48 -0.03    -0.24 0.72</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>im_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Total Scale</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bidr_s =</span> <span class="fu">sum</span>(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                      bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the bidr items</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>bidr_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bidr_1"</span>,<span class="st">"bidr_2"</span>,<span class="st">"bidr_3"</span>,<span class="st">"bidr_4"</span>,<span class="st">"bidr_5"</span>,<span class="st">"bidr_6"</span>,<span class="st">"bidr_7"</span>,<span class="st">"bidr_8"</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"bidr_9"</span>,<span class="st">"bidr_10"</span>,<span class="st">"bidr_11"</span>,<span class="st">"bidr_12"</span>,<span class="st">"bidr_13"</span>,<span class="st">"bidr_14"</span>,<span class="st">"bidr_15"</span>,<span class="st">"bidr_16"</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = .73, i.e. &gt; .70, meets standard criterion for reliability</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, bidr_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, bidr_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.73      0.73    0.79      0.14 2.6 0.032  4.7 0.83     0.13
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.66  0.73  0.79
+Duhachek  0.67  0.73  0.79
+
+ Reliability if an item is dropped:
+        raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+bidr_1       0.71      0.71    0.78      0.14 2.5    0.034 0.020  0.14
+bidr_2       0.73      0.73    0.79      0.15 2.7    0.031 0.018  0.14
+bidr_3       0.72      0.71    0.77      0.14 2.5    0.033 0.019  0.13
+bidr_4       0.73      0.72    0.78      0.15 2.6    0.032 0.020  0.13
+bidr_5       0.73      0.73    0.78      0.15 2.6    0.031 0.019  0.14
+bidr_6       0.72      0.71    0.77      0.14 2.5    0.033 0.019  0.14
+bidr_7       0.71      0.70    0.76      0.14 2.4    0.034 0.018  0.13
+bidr_8       0.71      0.71    0.77      0.14 2.4    0.034 0.020  0.13
+bidr_9       0.70      0.70    0.76      0.14 2.4    0.035 0.018  0.13
+bidr_10      0.73      0.72    0.78      0.15 2.6    0.032 0.020  0.14
+bidr_11      0.72      0.72    0.78      0.15 2.6    0.033 0.019  0.13
+bidr_12      0.70      0.70    0.76      0.13 2.3    0.035 0.019  0.12
+bidr_13      0.70      0.70    0.76      0.13 2.3    0.035 0.018  0.13
+bidr_14      0.72      0.72    0.78      0.15 2.6    0.033 0.017  0.14
+bidr_15      0.71      0.71    0.77      0.14 2.4    0.034 0.020  0.13
+bidr_16      0.71      0.71    0.76      0.14 2.4    0.034 0.016  0.14
+
+ Item statistics 
+          n raw.r std.r r.cor r.drop mean  sd
+bidr_1  152  0.48  0.46  0.39   0.34  4.7 2.1
+bidr_2  152  0.24  0.28  0.20   0.13  5.0 1.5
+bidr_3  152  0.46  0.45  0.40   0.33  4.8 2.1
+bidr_4  152  0.36  0.37  0.30   0.23  3.3 1.8
+bidr_5  152  0.32  0.32  0.23   0.18  4.7 2.0
+bidr_6  152  0.40  0.44  0.39   0.29  5.4 1.6
+bidr_7  152  0.49  0.53  0.52   0.40  5.7 1.5
+bidr_8  152  0.49  0.47  0.42   0.36  4.1 2.0
+bidr_9  152  0.56  0.53  0.51   0.43  4.5 2.1
+bidr_10 152  0.31  0.35  0.27   0.20  3.7 1.5
+bidr_11 152  0.36  0.37  0.30   0.26  7.0 1.6
+bidr_12 152  0.57  0.57  0.54   0.46  6.0 1.9
+bidr_13 152  0.60  0.58  0.57   0.48  3.8 2.0
+bidr_14 152  0.38  0.36  0.31   0.26  3.2 1.7
+bidr_15 152  0.51  0.49  0.44   0.37  5.9 2.2
+bidr_16 152  0.52  0.50  0.49   0.39  4.1 2.1
+
+Non missing response frequency for each item
+           1    2    3    4    5    6    7    8 miss
+bidr_1  0.11 0.06 0.14 0.16 0.15 0.12 0.14 0.11    0
+bidr_2  0.00 0.03 0.16 0.22 0.20 0.23 0.09 0.07    0
+bidr_3  0.06 0.08 0.17 0.18 0.12 0.14 0.12 0.12    0
+bidr_4  0.14 0.18 0.34 0.11 0.07 0.13 0.01 0.03    0
+bidr_5  0.07 0.06 0.20 0.18 0.12 0.14 0.14 0.09    0
+bidr_6  0.02 0.01 0.11 0.18 0.14 0.30 0.15 0.09    0
+bidr_7  0.01 0.01 0.06 0.11 0.21 0.32 0.16 0.12    0
+bidr_8  0.09 0.14 0.24 0.12 0.15 0.08 0.11 0.07    0
+bidr_9  0.10 0.09 0.16 0.17 0.11 0.14 0.16 0.07    0
+bidr_10 0.04 0.18 0.31 0.25 0.07 0.07 0.06 0.01    0
+bidr_11 0.01 0.01 0.03 0.06 0.05 0.06 0.23 0.56    0
+bidr_12 0.02 0.03 0.10 0.07 0.14 0.12 0.26 0.26    0
+bidr_13 0.19 0.07 0.22 0.18 0.12 0.07 0.09 0.05    0
+bidr_14 0.16 0.22 0.25 0.16 0.08 0.07 0.05 0.01    0
+bidr_15 0.03 0.07 0.09 0.09 0.07 0.09 0.23 0.33    0
+bidr_16 0.11 0.16 0.20 0.14 0.14 0.07 0.11 0.07    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># describe</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>bidr_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean    sd median trimmed   mad min max range skew kurtosis   se
+X1    1 152 75.87 13.33     75    75.8 13.34  34 114    80 0.07     0.11 1.08</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>bidr_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand-mean center for modeling (Level-2 predictor)</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>bidr_sc <span class="ot">&lt;-</span> b<span class="sc">$</span>bidr_s <span class="sc">-</span> <span class="fu">mean</span>(b<span class="sc">$</span>bidr_s, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="individual-attitudes" class="level2">
+<h2 class="anchored" data-anchor-id="individual-attitudes">Individual attitudes</h2>
+<section id="irma-a-.80" class="level3">
+<h3 class="anchored" data-anchor-id="irma-a-.80">IRMA (a = .80)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## IRMA (a = .80)</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 = strongly disagree, 4 = Somewhat disagree, 3 = Neither disagree nor agree, 2 = Somewhat agree, 1 = strongly agree </span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Item values summed for total score, with higher scores reflecting greater rejection of rape myths</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rma_s =</span> <span class="fu">sum</span>(irma1,irma2,irma3,irma4,irma5,irma6,irma7))</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the irma items</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>rma_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"irma1"</span>,<span class="st">"irma2"</span>,<span class="st">"irma3"</span>,<span class="st">"irma4"</span>,<span class="st">"irma5"</span>,<span class="st">"irma6"</span>,<span class="st">"irma7"</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha = .80, i.e. &gt; .70, meets standard criterion for reliability</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, rma_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, rma_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+       0.8       0.8    0.81      0.36   4 0.023  4.4 0.62     0.36
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.75   0.8  0.84
+Duhachek  0.76   0.8  0.84
+
+ Reliability if an item is dropped:
+      raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+irma1      0.80      0.80    0.80      0.40 4.1    0.023 0.024  0.41
+irma2      0.80      0.80    0.79      0.40 3.9    0.024 0.023  0.41
+irma3      0.75      0.75    0.76      0.34 3.0    0.029 0.020  0.29
+irma4      0.75      0.75    0.75      0.34 3.1    0.028 0.020  0.29
+irma5      0.74      0.74    0.74      0.32 2.9    0.030 0.015  0.28
+irma6      0.79      0.78    0.79      0.38 3.6    0.024 0.028  0.39
+irma7      0.77      0.78    0.78      0.37 3.5    0.026 0.022  0.29
+
+ Item statistics 
+        n raw.r std.r r.cor r.drop mean   sd
+irma1 152  0.47  0.54  0.41   0.34  4.7 0.64
+irma2 152  0.47  0.57  0.46   0.37  4.8 0.52
+irma3 152  0.79  0.76  0.72   0.66  4.1 1.07
+irma4 152  0.76  0.75  0.72   0.63  4.2 1.02
+irma5 152  0.82  0.80  0.80   0.73  4.5 0.88
+irma6 152  0.66  0.63  0.53   0.48  4.3 1.06
+irma7 152  0.72  0.66  0.59   0.55  4.0 1.11
+
+Non missing response frequency for each item
+         1    2    3    4    5 miss
+irma1 0.00 0.02 0.05 0.12 0.82    0
+irma2 0.00 0.02 0.01 0.09 0.89    0
+irma3 0.02 0.06 0.23 0.20 0.49    0
+irma4 0.03 0.04 0.15 0.26 0.53    0
+irma5 0.01 0.04 0.10 0.20 0.66    0
+irma6 0.01 0.09 0.10 0.18 0.62    0
+irma7 0.02 0.08 0.24 0.17 0.49    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>rma_s) <span class="co"># describe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean   sd median trimmed  mad min max range  skew kurtosis   se
+X1    1 152 30.66 4.36     32   31.25 4.45  14  35    21 -1.04     0.53 0.35</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>rma_s) <span class="co"># view distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand-mean center for modeling (Level-2 predictor)</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>rma_sc <span class="ot">&lt;-</span> b<span class="sc">$</span>rma_s <span class="sc">-</span> <span class="fu">mean</span>(b<span class="sc">$</span>rma_s, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="baseline-behavior" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-behavior">Baseline behavior</h2>
+<section id="audit-a-.80" class="level4">
+<h4 class="anchored" data-anchor-id="audit-a-.80">AUDIT (a = .80)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">%&gt;%</span> <span class="fu">select</span>(aud1<span class="sc">:</span>aud10) <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 152
+Columns: 10
+Rowwise: 
+$ aud1  &lt;dbl&gt; 2, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 1, 2, 3, 2, 4, 3, 3, 1, 3, 4, 0…
+$ aud2  &lt;dbl&gt; 1, 1, 0, 2, 2, 2, 1, 1, 0, 1, 1, 0, 2, 2, 1, 1, 3, 2, 0, 3, 3, N…
+$ aud3  &lt;dbl&gt; 2, 3, 1, 4, 4, 4, 1, 3, 1, 2, 2, 1, 3, 4, 2, 1, 4, 4, 1, 4, 4, 3…
+$ aud4  &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 2, 0, 0, 0, 0, 1…
+$ aud5  &lt;dbl&gt; 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2…
+$ aud6  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ aud7  &lt;dbl&gt; 0, 1, 0, 0, 1, 3, 0, 1, 1, 1, 0, 1, 0, 0, 0, 3, 2, 0, 4, 1, 0, 1…
+$ aud8  &lt;dbl&gt; 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 3, 0, 0, 1, 1, 2…
+$ aud9  &lt;dbl&gt; 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0…
+$ aud10 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AUDIT summed score </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">aud_s =</span> <span class="fu">sum</span>(aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8,aud9,aud10,<span class="at">na.rm =</span> T))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># AUDIT descriptives</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>aud_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean   sd median trimmed  mad min max range skew kurtosis   se
+X1    1 152 10.13 5.76      9    9.58 5.93   1  34    33 0.97     1.36 0.47</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the audit items</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>audit_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"aud1"</span>,<span class="st">"aud2"</span>,<span class="st">"aud3"</span>,<span class="st">"aud4"</span>,<span class="st">"aud5"</span>,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"aud6"</span>,<span class="st">"aud7"</span>,<span class="st">"aud8"</span>,<span class="st">"aud9"</span>,<span class="st">"aud10"</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, audit_vector], <span class="at">check.keys =</span> T, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># alpha = .80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, audit_vector], na.rm = TRUE, check.keys = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+       0.8      0.82    0.85      0.31 4.5 0.024    1 0.58     0.27
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.75   0.8  0.85
+Duhachek  0.75   0.8  0.85
+
+ Reliability if an item is dropped:
+      raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+aud1       0.78      0.80    0.83      0.31 4.1    0.026 0.030  0.27
+aud2       0.77      0.80    0.82      0.30 3.9    0.027 0.026  0.26
+aud3       0.76      0.79    0.80      0.29 3.7    0.029 0.022  0.26
+aud4       0.77      0.79    0.82      0.29 3.7    0.028 0.030  0.23
+aud5       0.77      0.79    0.81      0.29 3.7    0.028 0.029  0.23
+aud6       0.81      0.83    0.85      0.35 4.8    0.024 0.028  0.37
+aud7       0.79      0.81    0.84      0.32 4.2    0.025 0.033  0.28
+aud8       0.76      0.79    0.81      0.29 3.7    0.028 0.026  0.23
+aud9       0.83      0.83    0.86      0.35 4.8    0.019 0.029  0.37
+aud10      0.79      0.81    0.84      0.32 4.2    0.025 0.032  0.26
+
+ Item statistics 
+        n raw.r std.r r.cor r.drop  mean   sd
+aud1  152  0.61  0.60  0.55   0.49 2.428 0.90
+aud2  148  0.66  0.66  0.64   0.55 1.399 0.99
+aud3  152  0.75  0.73  0.74   0.64 2.658 1.13
+aud4  152  0.73  0.75  0.72   0.66 0.454 0.82
+aud5  152  0.72  0.74  0.73   0.64 0.599 0.86
+aud6  152  0.30  0.40  0.29   0.25 0.039 0.28
+aud7  152  0.58  0.58  0.51   0.44 0.954 1.05
+aud8  152  0.74  0.73  0.72   0.66 0.757 0.87
+aud9  152  0.47  0.41  0.29   0.25 0.671 1.44
+aud10 152  0.52  0.56  0.49   0.40 0.211 0.87
+
+Non missing response frequency for each item
+         0    1    2    3    4 miss
+aud1  0.03 0.11 0.38 0.40 0.09 0.00
+aud2  0.18 0.39 0.30 0.10 0.03 0.03
+aud3  0.00 0.22 0.21 0.27 0.30 0.00
+aud4  0.72 0.15 0.09 0.04 0.00 0.00
+aud5  0.61 0.24 0.11 0.05 0.00 0.00
+aud6  0.97 0.02 0.00 0.01 0.00 0.00
+aud7  0.42 0.33 0.15 0.07 0.03 0.00
+aud8  0.48 0.33 0.14 0.05 0.00 0.00
+aud9  0.81 0.00 0.05 0.00 0.14 0.00
+aud10 0.94 0.00 0.01 0.00 0.05 0.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>aud_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand-mean center for modeling (Level-2 predictor)</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>aud_sc <span class="ot">&lt;-</span> b<span class="sc">$</span>aud_s <span class="sc">-</span> <span class="fu">mean</span>(b<span class="sc">$</span>aud_s, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sexual-risk-behavior" class="level4">
+<h4 class="anchored" data-anchor-id="sexual-risk-behavior">Sexual Risk Behavior</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">%&gt;%</span> <span class="fu">select</span>(srb1, srb2, srb3, srb4, srb5, srb6, srb7, srb8) <span class="sc">%&gt;%</span> <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$srb1
+ .x[[i]]  n    percent
+       0 59 0.38815789
+       1 15 0.09868421
+       2 35 0.23026316
+       3 18 0.11842105
+       4 25 0.16447368
+
+$srb2
+ .x[[i]]   n    percent
+       0 140 0.92105263
+       1   5 0.03289474
+       2   2 0.01315789
+       3   2 0.01315789
+       4   3 0.01973684
+
+$srb3
+ .x[[i]]  n    percent
+       0 34 0.22368421
+       1  6 0.03947368
+       2 33 0.21710526
+       3 33 0.21710526
+       4 46 0.30263158
+
+$srb4
+ .x[[i]]  n    percent
+       0 60 0.39473684
+       1 28 0.18421053
+       2 33 0.21710526
+       3 21 0.13815789
+       4 10 0.06578947
+
+$srb5
+ .x[[i]]   n     percent
+       0 142 0.934210526
+       1   4 0.026315789
+       2   5 0.032894737
+       3   1 0.006578947
+
+$srb6
+ .x[[i]]   n    percent
+       0 110 0.72368421
+       1  14 0.09210526
+       2  19 0.12500000
+       3   4 0.02631579
+       4   5 0.03289474
+
+$srb7
+ .x[[i]]  n    percent
+       0 50 0.32894737
+       1 61 0.40131579
+       2 22 0.14473684
+       3 17 0.11184211
+       4  2 0.01315789
+
+$srb8
+ .x[[i]]  n     percent
+       0 51 0.335526316
+       1 79 0.519736842
+       2 18 0.118421053
+       3  3 0.019736842
+       4  1 0.006578947</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># neglible variability for srb2 and srb5</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector for the srb items</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>srb_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"srb1"</span>,<span class="st">"srb2"</span>,<span class="st">"srb3"</span>,<span class="st">"srb4"</span>,<span class="st">"srb5"</span>,<span class="st">"srb6"</span>,<span class="st">"srb7"</span>,<span class="st">"srb8"</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co"># a = .65</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, srb_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, srb_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.65      0.63     0.7      0.17 1.7 0.038    1 0.59     0.12
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.56  0.65  0.73
+Duhachek  0.58  0.65  0.73
+
+ Reliability if an item is dropped:
+     raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+srb1      0.58      0.56    0.63      0.16 1.3    0.048 0.043  0.12
+srb2      0.67      0.67    0.73      0.23 2.1    0.037 0.038  0.13
+srb3      0.62      0.59    0.66      0.17 1.4    0.042 0.044  0.12
+srb4      0.52      0.51    0.59      0.13 1.0    0.054 0.036  0.12
+srb5      0.66      0.64    0.71      0.20 1.8    0.039 0.051  0.14
+srb6      0.63      0.60    0.68      0.18 1.5    0.040 0.049  0.12
+srb7      0.63      0.58    0.62      0.17 1.4    0.038 0.031  0.12
+srb8      0.63      0.58    0.62      0.17 1.4    0.040 0.032  0.12
+
+ Item statistics 
+       n raw.r std.r r.cor r.drop mean   sd
+srb1 152  0.72  0.62 0.572  0.497 1.57 1.50
+srb2 152  0.22  0.26 0.052  0.071 0.18 0.70
+srb3 152  0.65  0.55 0.461  0.395 2.34 1.50
+srb4 152  0.79  0.75 0.754  0.649 1.30 1.30
+srb5 152  0.27  0.40 0.204  0.175 0.11 0.45
+srb6 152  0.50  0.51 0.390  0.306 0.55 1.03
+srb7 152  0.50  0.56 0.543  0.309 1.08 1.02
+srb8 152  0.48  0.57 0.548  0.343 0.84 0.76
+
+Non missing response frequency for each item
+        0    1    2    3    4 miss
+srb1 0.39 0.10 0.23 0.12 0.16    0
+srb2 0.92 0.03 0.01 0.01 0.02    0
+srb3 0.22 0.04 0.22 0.22 0.30    0
+srb4 0.39 0.18 0.22 0.14 0.07    0
+srb5 0.93 0.03 0.03 0.01 0.00    0
+srb6 0.72 0.09 0.12 0.03 0.03    0
+srb7 0.33 0.40 0.14 0.11 0.01    0
+srb8 0.34 0.52 0.12 0.02 0.01    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop srb2 and srb5</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>srb_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"srb1"</span>,<span class="st">"srb3"</span>,<span class="st">"srb4"</span>,<span class="st">"srb6"</span>,<span class="st">"srb7"</span>,<span class="st">"srb8"</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a = .68</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, srb_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, srb_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.68      0.69    0.75      0.27 2.2 0.039  1.3 0.75     0.22
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.59  0.68  0.75
+Duhachek  0.60  0.68  0.76
+
+ Reliability if an item is dropped:
+     raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+srb1      0.62      0.65    0.70      0.27 1.9    0.049 0.052  0.29
+srb3      0.67      0.69    0.73      0.31 2.2    0.042 0.043  0.30
+srb4      0.53      0.56    0.63      0.20 1.3    0.058 0.055  0.12
+srb6      0.67      0.68    0.74      0.30 2.2    0.041 0.061  0.37
+srb7      0.66      0.65    0.66      0.27 1.8    0.040 0.036  0.25
+srb8      0.66      0.65    0.67      0.27 1.9    0.042 0.035  0.29
+
+ Item statistics 
+       n raw.r std.r r.cor r.drop mean   sd
+srb1 152  0.71  0.62  0.53   0.47 1.57 1.50
+srb3 152  0.63  0.53  0.39   0.36 2.34 1.50
+srb4 152  0.82  0.81  0.78   0.68 1.30 1.30
+srb6 152  0.51  0.54  0.39   0.31 0.55 1.03
+srb7 152  0.53  0.64  0.60   0.34 1.08 1.02
+srb8 152  0.50  0.62  0.58   0.36 0.84 0.76
+
+Non missing response frequency for each item
+        0    1    2    3    4 miss
+srb1 0.39 0.10 0.23 0.12 0.16    0
+srb3 0.22 0.04 0.22 0.22 0.30    0
+srb4 0.39 0.18 0.22 0.14 0.07    0
+srb6 0.72 0.09 0.12 0.03 0.03    0
+srb7 0.33 0.40 0.14 0.11 0.01    0
+srb8 0.34 0.52 0.12 0.02 0.01    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create sum total score</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">srb_s =</span> <span class="fu">sum</span>(srb1, srb3, srb4, srb6, srb7, srb8))</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="co"># view descriptive statistics</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>srb_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
+X1    1 152 7.68 4.52      8    7.49 5.93   0  17    17 0.24    -0.82 0.37</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view distribution</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>srb_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand-mean center for modeling (Level-2 predictor)</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>srb_sc <span class="ot">&lt;-</span> b<span class="sc">$</span>srb_s <span class="sc">-</span> <span class="fu">mean</span>(b<span class="sc">$</span>srb_s, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="verbal-consent-a-.77" class="level4">
+<h4 class="anchored" data-anchor-id="verbal-consent-a-.77">Verbal Consent (a = .77)</h4>
+<ul>
+<li><code>scs8</code>: <strong>verbb_init:</strong> I always ask verbally for consent before I initiate a sexual encounter</li>
+<li><code>scs9</code>: <strong>verbb_ong:</strong> I always ask verbally for consent at each step of a sexual encounter</li>
+<li><code>ong1</code>: If my partner seems less than excited about sex, I will stop and ask if they want to be sexual with me</li>
+<li><code>ong2</code>: If my partner is not expressing physical affection toward me during sex, I check in with them to make sure they want to have sex, even if they verbally agreed to sex</li>
+<li><code>ong3</code>: If I am unclear about my partner’s body language I make sure to verbally check in with them to be sure that they want to have sex</li>
+<li><code>ong4</code>: I pay attention to my partner’s body language during sexual encounters to be sure that they want to have sex</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">%&gt;%</span> <span class="fu">select</span>(scs8, scs9, ong1, ong2, ong3, ong4) <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(tabyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$scs8
+ .x[[i]]  n    percent
+       1  2 0.01315789
+       2 16 0.10526316
+       3 16 0.10526316
+       4 26 0.17105263
+       5 32 0.21052632
+       6 34 0.22368421
+       7 26 0.17105263
+
+$scs9
+ .x[[i]]  n    percent
+       1  7 0.04605263
+       2 22 0.14473684
+       3 24 0.15789474
+       4 33 0.21710526
+       5 32 0.21052632
+       6 22 0.14473684
+       7 12 0.07894737
+
+$ong1
+ .x[[i]]  n     percent
+       3  1 0.006578947
+       4  6 0.039473684
+       5 19 0.125000000
+       6 54 0.355263158
+       7 72 0.473684211
+
+$ong2
+ .x[[i]]  n     percent
+       3  1 0.006578947
+       4  6 0.039473684
+       5 18 0.118421053
+       6 52 0.342105263
+       7 75 0.493421053
+
+$ong3
+ .x[[i]]  n     percent
+       1  1 0.006578947
+       4  7 0.046052632
+       5 15 0.098684211
+       6 53 0.348684211
+       7 76 0.500000000
+
+$ong4
+ .x[[i]]  n     percent
+       2  1 0.006578947
+       3  1 0.006578947
+       4  9 0.059210526
+       5 12 0.078947368
+       6 53 0.348684211
+       7 76 0.500000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">verbb_init =</span> scs8,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">verbb_ong =</span> scs9)</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a character vector</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>vrb_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"verbb_init"</span>, <span class="st">"verbb_ong"</span>, <span class="st">"ong1"</span>, <span class="st">"ong2"</span>, <span class="st">"ong3"</span>, <span class="st">"ong4"</span>)</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># a = .77</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(b[, vrb_vector], <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = b[, vrb_vector], na.rm = T)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.77      0.82    0.86      0.43 4.5 0.029  5.7 0.82     0.32
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.71  0.77  0.83
+Duhachek  0.72  0.77  0.83
+
+ Reliability if an item is dropped:
+           raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+verbb_init      0.75      0.81    0.81      0.47 4.4    0.035 0.047  0.58
+verbb_ong       0.76      0.82    0.82      0.48 4.6    0.033 0.042  0.58
+ong1            0.73      0.77    0.80      0.40 3.3    0.033 0.045  0.30
+ong2            0.72      0.76    0.80      0.38 3.1    0.035 0.047  0.28
+ong3            0.74      0.78    0.83      0.41 3.5    0.033 0.058  0.31
+ong4            0.75      0.79    0.83      0.43 3.7    0.031 0.045  0.31
+
+ Item statistics 
+             n raw.r std.r r.cor r.drop mean   sd
+verbb_init 152  0.75  0.63  0.57   0.54  4.8 1.63
+verbb_ong  152  0.73  0.60  0.53   0.51  4.2 1.63
+ong1       152  0.70  0.79  0.76   0.59  6.2 0.87
+ong2       152  0.74  0.82  0.80   0.64  6.3 0.87
+ong3       152  0.69  0.76  0.69   0.56  6.3 0.94
+ong4       152  0.63  0.73  0.66   0.49  6.3 0.96
+
+Non missing response frequency for each item
+              1    2    3    4    5    6    7 miss
+verbb_init 0.01 0.11 0.11 0.17 0.21 0.22 0.17    0
+verbb_ong  0.05 0.14 0.16 0.22 0.21 0.14 0.08    0
+ong1       0.00 0.00 0.01 0.04 0.12 0.36 0.47    0
+ong2       0.00 0.00 0.01 0.04 0.12 0.34 0.49    0
+ong3       0.01 0.00 0.00 0.05 0.10 0.35 0.50    0
+ong4       0.00 0.01 0.01 0.06 0.08 0.35 0.50    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create sum total score</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">verbb_s =</span> <span class="fu">sum</span>(verbb_init, verbb_ong, ong1, ong2, ong3, ong4))</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="co"># view descriptive statistics</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(b<span class="sc">$</span>verbb_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n  mean   sd median trimmed  mad min max range  skew kurtosis  se
+X1    1 152 34.03 4.92     35   34.29 4.45  21  42    21 -0.45    -0.62 0.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view distribution</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b<span class="sc">$</span>verbb_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_clean_baseline_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grand-mean center for modeling (Level-2 predictor)</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>verbb_sc <span class="ot">&lt;-</span> b<span class="sc">$</span>verbb_s <span class="sc">-</span> <span class="fu">mean</span>(b<span class="sc">$</span>verbb_s, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="save-updated-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="save-updated-dataframe">Save updated dataframe</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>b <span class="sc">|&gt;</span> </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"ready_base.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>data_subset <span class="sc">|&gt;</span> </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"diary_sub.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

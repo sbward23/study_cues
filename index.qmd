@@ -822,7 +822,7 @@ is.ordered(d$verb_bins)
 table(d$verb_bins, useNA = "ifany")
 ```
 
-```{r,echo=FALSE}
+```{r}
 # Create ordered bins for nonverbal consent cues
 d <- d %>%
   mutate(
@@ -848,15 +848,9 @@ use consistent with the scale anchors.
 
 {{< embed notebooks/fig1.qmd#fig-2 >}}
 
-```{r}
-table(d$verb_bins, useNA = "ifany")
-```
 
 {{< embed notebooks/fig1.qmd#fig-4 >}}
 
-```{r}
-table(d$nonvb_bins, useNA = "ifany")
-```
 
 ## Analytic Strategy
 
