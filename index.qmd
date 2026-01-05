@@ -96,55 +96,40 @@ interventions. 
 To advance the field, this project leverages micro-longitudinal data to
 identify proximal situational correlates of verbal and nonverbal consent
 cues that explain variance above and beyond the effects of significant
-individual factors. I will approximately 500 sexual events reported by
-152 college students to extend previous research investigating between-
-and within-person variation in consent communication, with the goal of
-informing future research and sexual assault prevention efforts focused
-on changing consent behavior. Specifically, I propose the following
-aims. 
+individual factors. I will analyze approximately 500 sexual events
+reported by 152 college students to extend previous research
+investigating between- and within-person variation in consent
+communication, with the goal of informing future research and sexual
+assault prevention efforts focused on changing consent behavior.
+Specifically, I propose the following aims. 
 
-**Aim 1:** Characterize between-person differences in consent cue usage.
+**Primary Aim:** To investigate the cognitive (attitudes, perceptions)
+and behavioral between- and within-person correlates of consent cue
+usage to communicate sexual consent.
 
-We will examine attitudinal and behavioral of consent cue usage and
-whether use varies by gender. **Hypotheses:** *(H1a):* More permissive
-individual and perceived peer attitudes toward alcohol-involved consent
-and sexual coercion/rape will be negatively related to verbal and
-nonverbal cue use, particularly among men vs. women. *(H1b):* Sexual
-risk behavior, hazardous alcohol use, and typical nonverbal approach to
-consent will be negatively related to verbal consent cue use, and these
-associations will not differ by gender.
+*Hypotheses:* (H1a): Permissive individual attitudes toward
+alcohol-involved consent and sexual coercion/rape will be negatively
+related to consent cue use, and this effect will be stronger for events
+involving alcohol use. (H1b) Sexual risk behavior, hazardous alcohol
+use, and adherence to sexual consent norms will be negatively related to
+consent cue use when controlling for sexual precedence. (H1c) Discrepant
+participant-partner intoxication levels ("disparity") will be negatively
+related to consent cue use, and this association will be stronger for
+events involving less-familiar partners relative to current/former
+dating partners. (H1d) Pre-encounter alcohol consumption (-), sexual
+behavior type (+), will be significantly related to verbal consent when
+controlling for social desirability bias, such that lower drink counts
+and more intimate sexual acts (involving penetration \> kissing,
+touching) will positively predict verbal cue use within the concurrent,
+24-hour window.
 
-**Aim 2:** Estimate within-person associations between situational factors
-and consent cue usage.
-
-We will examine relational, perceptual, and behavioral time-varying
-correlates of consent cue usage. **Hypotheses:** *(H2a)* Greater
-differences in participant vs. perceived partner intoxication will be
-positively related to consent cue use for encounters involving more
-familiar partners (current/former dating partner \> friend \>
-stranger).  *(H2b)* On days when participants drink more than their own
-average, consent cue use will be significantly reduced after accounting
-for the effects of aggregate alcohol use across the study period.
-
-**Aim 3:** Test cross-level hypotheses and evaluate whether interactions
-improve model fit.
-
-Considering the relative nascency of this literature, we will use
-findings from Aims 1 and 2 to determine whether there are interactions
-that should be considered in addition to the following
-theoretically-driven   **Hypotheses:** *(H3a)* The negative association
-between permissive individual attitudes toward alcohol-involved consent
-and cue use will be stronger for encounters involving alcohol use.
-*(H3b)* Pre-encounter alcohol consumption (-), sexual behavior type (+),
-and social desirability bias (+) will be significantly related to verbal
-consent, such that lower drink counts, more intimate sexual acts
-(involving penetration \> kissing, touching), and higher levels of
-impression management/self-deceptive enhancement will positively predict
-verbal cue use within the concurrent, 24-hour window.
+**Secondary Aim:** To extend primary analyses to consider the role of
+peer influence (e.g., perceived peer attitudes and norm, peer network
+gender diversity).
 
 ## BACKGROUND AND SIGNIFICANCE
 
-### Understanding between-person predictors of active consent cues.
+### Between-person predictors of active consent cues.
 
 Rates of sexual assault on U.S. college campuses remain virtually
 unchanged after more than 30 years of dedicated research and
@@ -209,8 +194,7 @@ intoxicated sexual activity without regard for the associated risks. Our
 previous research found that permissive ASC attitudes were negatively
 related to ongoing and communicative (i.e., “process-based”) consent
 behavior among college men. [@wardAlcoholUseHostility2025,
-@wardAlcoholSexualConsent2012] *Time permitting, highlight interaction
-with perceived peer attitudes to facilitate transition.*
+@wardAlcoholSexualConsent2012]
 
 #### Perceived-peer differences
 
@@ -240,14 +224,14 @@ Alcohol is a salient factor in the context of both sexual assault and
 consensual sex among college students, yet sexual assault prevention and
 risk-reduction programs rarely include information about how alcohol can
 affect consent communication.
-[@jozkowskiGenderDifferencesHeterosexual2014] 21 While scholars and
+[@jozkowskiGenderDifferencesHeterosexual2014] While scholars and
 practitioners have started integrating alcohol and sexual assault
-programming, [@orchowskiIntegratedAlcoholSexual2023, @gilmore2025] 27,28
-there is far more research on alcohol-related sexual assault compared to
-consent involving alcohol use. 22 Some research suggests that young
-adults who engage in binge drinking generally use less active consent
+programming, [@orchowskiIntegratedAlcoholSexual2023, @gilmore2025] there
+is far more research on alcohol-related sexual assault compared to
+consent involving alcohol use. Some research suggests that young adults
+who engage in binge drinking generally use less active consent
 communication than those who do not binge drink,
-[@marcantonioEffectsTypicalBinge2022] 5 but the intensity of alcohol
+[@marcantonioEffectsTypicalBinge2022] but the intensity of alcohol
 consumption at the encounter level may be more directly relevant to
 in-the-moment. Still, cross-sectional surveys cannot establish whether
 real-world drinking events decrease the incidence of active consent
@@ -442,8 +426,8 @@ No (= 0), Prefer not to respond (= 3). 
 
 #### Relational
 
-**Partner familiarity:** Participants responded to the question,
-"How did you know this other person?" by selecting one of the following
+**Partner familiarity:** Participants responded to the question, "How
+did you know this other person?" by selecting one of the following
 familiarity levels from a list of response options: “I didn’t, we just
 met that day;” “They are an acquaintance;” “They are a friend;” and
 “They are my current or past dating/intimate partner.”
@@ -498,7 +482,8 @@ and 10+ drinks.
 **Consent cue use:** After reading the question stem, “To what extent
 did you do the following during the sexual activity?” participants rated
 the following three items on a unipolar, 11-point sliding scale ranging
-from 0 (“Not at all”) to 10 (“Very much”). [@willisDevelopingValidFeasible2021]
+from 0 (“Not at all”) to 10 (“Very much”).
+[@willisDevelopingValidFeasible2021]
 
 ![Mobile view of consent cue items in daily
 survey.](images/cues_mobile.png){width="315"}
@@ -514,130 +499,80 @@ survey.](images/cues_mobile.png){width="315"}
 
 Despite the need for and potential benefits of using experience sampling
 methods (ESM) to examine alcohol-involved sexual consent experiences,
-[@marcantonioHowDoes2025] there also are unique challenges associated
-with this approach. One such challenge is the increased commitment and
-investment of effort that repeatedly completing assessments requires
-from participants.[@vanhooff2007] ESM researchers can mitigate
-participant burden by making surveys brief, a common but imperfect
-solution that frequently necessitates measuring variables with just a
-few items per construct.[@fisher2012] Measures composed of only one or
-two items are often criticized by researchers with well-founded concerns
-that they might be unreliable, more susceptible to measurement error, or
-fail to capture complex constructs. [@robins2001] Still, other
-researchers demonstrate that repeatedly administering assessments yields
-multiple indicators, decreasing random measurement
-error,[@shiffmanEcologicalMomentaryAssessment2008,
-@csikszentmihalyi2014] and argue that relying on single-item measures is
-acceptable when these items are carefully developed and evaluated for
-multiple sources of measurement validity.[@vanhooff2007, @wolfers]
+there also are unique challenges associated with this approach. One such
+challenge is the increased commitment and investment of effort that
+repeatedly completing assessments requires from
+participants.[@vanhooff2007] ESM researchers can mitigate participant
+burden by making surveys brief, a common but imperfect solution that
+frequently necessitates measuring variables with one or just a few items
+per construct.[@fisher2012] Measures composed of only one or two items
+are often criticized by researchers with well-founded concerns that they
+might be unreliable, more susceptible to measurement error, or fail to
+capture complex constructs. [@robins2001] Still, other researchers argue
+that relying on single-item measures is acceptable when these items are
+carefully developed and evaluated for multiple sources of measurement
+validity.[@vanhooff2007, @wolfers]
 
-In the sections that follow, I review literature detailing how the items
-used to measure verbal and nonverbal consent cue use for the proposed
-research were originally developed and tested by a separate research
-team. I then discuss evidence of measurement validity from previous
-research before describing the use of these items and their psychometric
-properties in the current sample.
+Recent recommendations from the field of communication science propose
+three central criteria for validating single-item measures in an ESM
+context.
 
-#### Initial development & evaluation
+The item must:
+
+1.  Fit the core of a construct’s definition to ensure that it reflects
+    the construct well.
+2.  Be sensitive to situational changes that demonstrate predictable
+    within-person variability
+3.  Be sensitive to differences between groups at the between-person
+    level
+
+In the sections that follow, I present findings aligned with these
+criteria that offer support for the validity of the brief outcome
+measures used in the current research.
+
+#### 1) Definitional correspondence
 
 Active consent communication is the use of words or behaviors (i.e.,
 cues) to communicate to another person agreement to engage in sexual
-activity. It is also referred to as "external" consent communication
-because these words and behaviors are used to outwardly express one's
+activity. It is also referred to as “external” consent communication
+because these words and behaviors are used to outwardly express one’s
 internal feelings of willingness to participate in the sexual behavior.
-Although prior research reviewed in this proposal suggests that sexual
-consent varies from one encounter to the next, the only validated
-consent measures that existed until recently were those developed for
-cross-sectional research [@jozkowskiConsentingSexualActivity2014,
-@walshDualMeasuresSexual2019]. As such, Willis and colleagues used a
-two-phase procedure to develop and evaluate brief measures of internal
-consent feelings and external consent cues specifically designed for use
-in ESM studies. [@willisDevelopingValidFeasible2021]
+The only validated external consent measure that existed until recently
+was the 18-item External Consent Scale, which was developed for
+cross-sectional research to ask about the respondent’s most recent
+sexual encounter (which could have been days to weeks in the
+past).[@jozkowskiConsentingSexualActivity2014,
+@walshDualMeasuresSexual2019] Because including 18 items in ESM studies
+would be time-intensive and burdensome, Willis and colleagues used a
+two-phase procedure to develop and evaluate brief measures of external
+consent cues specifically designed for use in ESM
+studies.[@willisDevelopingValidFeasible2021]
 
 In Phase I, the research team sought to develop items that best
 represented the constructs of interest while demonstrating both face
 validity and content validity. To do so, operational definitions for the
 external and internal consent were derived from seminal theoretical
-research and systematic reviews of the sexual consent literature.
-Cognitive interviews were then conducted with sexually active adults
-(*n* = 10) using concurrent probing to assess sample item comprehension,
-preferred wording, and interpretation. Three content-matter experts from
-the field of sexual consent research and three measurement experts with
-doctoral training in psychometrics also provided ratings to determine
-the degree to which sample items captured their corresponding
-operational definitions. The research team then calculated IIOC values
-for content alignment (cutoff .75) to establish which prospective items
-had higher content validity. Items were selected for Phase II by
-balancing participants' judgments and experts' IIIOC
+research and systematic reviews of the sexual consent literature
+(cites). Cognitive interviews were then conducted with sexually active
+adults (n = 10) using concurrent probing to assess sample item
+comprehension, preferred wording, and interpretation. Three
+content-matter experts from the field of sexual consent research and
+three measurement experts with doctoral training in psychometrics also
+provided ratings to determine the degree to which sample items captured
+their corresponding operational definitions. The research team then
+calculated item-objective congruence (IIOC) values for content alignment
+(cutoff .75) to establish which prospective items had higher content
+validity.[@turner2003] Items were selected for Phase II by balancing
+participants’ judgments and experts’ IIIOC
 ratings.[@willisDevelopingValidFeasible2021]
-
-In Phase II, items derived and refined in Phase I were administered in a
-seven-day pilot study, with the ESM survey sent to participants (*n* =
-12) four times per day. Following the study period, pilot participants
-completed an exit survey that collected feedback on the sexual consent
-measures and assessed their acceptability in the broader context of the
-ESM study design. Findings included within-person associations between
-internal and external sexual consent that were consistent with
-preexisting theory and research asserting these are separable but
-related facets of a multidimensional process 
-[@muehlenhardComplexitiesSexualConsent2016]. For instance,
-verbal and nonverbal consent cues were both positively associated with
-internal consent feelings of safety/comfort and readiness; verbal cue
-use was also positively associated with internal feelings of
-agreement/want, while nonverbal cue use was not.
-[@willisDevelopingValidFeasible2021] Further, external
-consent communication was not associated with alcohol use at the
-encounter level for participants in committed relationships, replicating
-discriminant patterns observed in previous research.
-[@jozkowskiDoesDrinkingAlcohol2015] We contextualize these findings and
-the pilot participants' feedback in the sections that follow.
-
-#### Preexisting validity evidence
-
-Willis and colleagues established feasibility for ESM administration and
-solid content and response-process foundations for their external
-consent cue items. [@willisDevelopingValidFeasible2021] However, gaps
-remained in the evidence base for these measures' validity following
-their initial publication, some of which have since been addressed.
-
-Recent recommendations for validating single-item ESM measures call for
-concurrent associations at the within-person level, as well as
-situational sensitivity that demonstrates predictable within-person
-changes linked to theory-driven contextual correlates.[@wolfers] These
-guidelines from the field of communication science suggest evidence
-concerning within-person concurrent validity is present when a distinct
-but theoretically-related variable significantly predicts the focal
-outcome with a standardized effect size greater than .09.[@wolfers] This
-was the case in an ESM study wherein the researchers fit multilevel
-models and found that a composite internal consent feelings score
-significantly predicted verbal (β = .53, *p* \< .001) and nonverbal (β =
-.45, *p* \< .001) consent cue use
-[@willisAssessingWithinPersonVariability2021]. The same study
-demonstrated event-level situational sensitivity to type of sexual
-behavior within the same person. Specifically, encounters involving more
-intimate sexual behaviors predicted higher consent communication scores
-compared to encounters reported by the same person involving less
-intimate behaviors (β = .32, *p* \< .001).
-
-To establish multi-level validity of single-item ESM measures, evidence
-is required both within and between-persons.[@wolfers] Recent research
-by Shi and colleagues offers support for between-person concurrent
-validity in a sample of Chinese adults in mixed-gender
-relationships.[@shiImpactSexualConsent2025] Specifically,
-explicit-verbal consent communication significantly predicted greater
-sexual satisfaction during participants' most recent sexual event with
-their partner (β = .31, SE = .01, $R^2$ = .10, *p* \< .001), and
-implict-nonverbal consent communication significantly predicted greater
-sexual satisfaction in general (β = .13, SE = .01, $R^2$ = .08, *p* \<
-.001).[@shiImpactSexualConsent2025]
 
 The brief measure of external
 consent[@willisDevelopingValidFeasible2021] consists of four items that
 were developed to measure four types of active consent cues identified
-through previous research: verbal (“I verbally communicated..."),
-nonverbal ("I nonverbally communicated..."), explicit (i.e., direct; "I
-used straightforward signals to communicate...") and implicit (ie.,
-indirect; "I used subtle signals to communicate..."). Researchers using
+through previous research: verbal (“I verbally communicated…”),
+nonverbal (“I nonverbally communicated…”), explicit (i.e., direct; “I
+used straightforward signals to communicate…”) and implicit (ie.,
+indirect; “I used subtle signals to communicate…”). Researchers using
 the measure have tried to operationalize active external consent using a
 composite score derived from participants’ responses to these four
 items, with variable success. Across three studies by Shi and colleagues
@@ -648,83 +583,88 @@ that of another study by Willis and colleagues, wherein internal
 reliability was not strong for a composite including verbal, nonverbal,
 explicit, and implicit consent cues.
 [@willisAssessingWithinPersonVariability2021] Moreover, across the
-Shi\[@shiImpactSexualConsent2025\] and
-Willis\[@willisAssessingWithinPersonVariability2021\] studies, verbal
-cues were highly positively correlated with explicit cues, and nonverbal
-cues were highly positively correlated with implicit cues.
+Shi[@shiImpactSexualConsent2025] and
+Willis[@willisAssessingWithinPersonVariability2021] studies, verbal cues
+were highly positively correlated with explicit cues, and nonverbal cues
+were highly positively correlated with implicit cues.
 
-#### Consent cue items in the current sample
-
-In the pilot study that was initially conducted to validate the internal
-and external consent measures, the research team solicited open-ended
-feedback from participants. When queried about whether any of the survey
-questions sounded awkward or lacked clarity, a few participants
-expressed confusion regarding the explicit item's phrasing (e.g., "It is
-unclear to me what this question (on straightforward signals) means"),
-as well as uncertainty about the distinction between ‘nonverbal’ and
-‘subtle’ communication (e.g., "how is nonverbal different than ‘subtle’
-communication?", "What differentiates the
-two?").[@willisDevelopingValidFeasible2021]
-
-Considering pilot participant feedback, strong positive correlations
-between verbal and explicit cues reported in previous
-studies,[@shiImpactSexualConsent2025,
+In the pilot study that was initially conducted to validate the external
+consent measure, the research team solicited open-ended feedback from
+participants. When queried about whether any of the survey questions
+sounded awkward or lacked clarity, a few participants expressed
+confusion regarding the explicit item’s phrasing (e.g., “It is unclear
+to me what this question (on straightforward signals) means”), as well
+as uncertainty about the distinction between ‘nonverbal’ and ‘subtle’
+communication (e.g., “how is nonverbal different than ‘subtle’
+communication?”, “What differentiates the
+two?”).[@willisDevelopingValidFeasible2021] Considering pilot
+participant feedback, strong positive correlations between verbal and
+explicit cues reported in previous studies,[@shiImpactSexualConsent2025,
 @willisAssessingWithinPersonVariability2021] and the goals of the
 current research, we decided against including the
-explicit/"straightforward" cue item in our daily diary. We did include
+explicit/“straightforward” cue item in our daily diary. We did include
 both the nonverbal and implicit cue items, but we observed the same
 pattern described in previous research. Specifically, nonverbal cues
 were highly positively correlated with implicit cues $(r = .73)$.
 Considering this strong correlation and the preregistered strategy for
 addressing it reported in prior work,[@shiImpactSexualConsent2025] the
 nonverbal and implicit cue items were averaged to create a composite
-Nonverbal score.
+Nonverbal score. Finally, the internal consistency for the verbal,
+nonverbal, and implicit cue items was \< .6 (α = 0.57), while the
+Nonverbal (composite) and Verbal (single-item) scores were only weakly
+correlated (r = .12). Given the insufficient empirical support for
+combining all three items and the goals of the current research, this
+dissertation will examine Nonverbal and Verbal cue use separately.
+Higher scores indicate greater use of each type of cue to communicate
+consent.
 
-Finally, the internal consistency for the verbal, nonverbal, and
-implicit cue items was \< .6 (α = 0.57), while the Nonverbal (composite)
-and Verbal (single-item) scores were only weakly correlated $(r = .12)$.
-Given the insufficient empirical support for combining all three items
-and the goals of the current research, this dissertation will examine
-Nonverbal and Verbal cue use separately. Higher scores indicate greater
-use of each type of cue to communicate consent.
+#### 2) Situational sensitivity and within-person validity
 
-#### Validity in the current sample
+To meet this criterion, event-level scores should change in predictable
+ways across situations within the same person.
 
-To evaluate between-person convergent validity in the current sample, I
-examined the associations between participants’ baseline reports of
-verbal (`verbb_ong`; "I always ask verbally for consent at each step of
-a sexual encounter") and nonverbal (`non_vrb_bsl`; "Typically, I
-communicate sexual consent to my partner using nonverbal signals and
-body language") consent, and their average levels of verbal and
-nonverbal cue use, respectively, across all sexual encounters reported
-in the daily diaries. Higher correlations between corresponding baseline
-and diary measures would indicate that individuals who report more
-frequent use of a particular type of consent cue in general also tend to
-report greater use of that cue across diary-reported events. I
-aggregated the event-level diary data to the person level by computing
-each participant’s mean verbal (`verbal_means`) and nonverbal
-(`mean_nonverb`) cue use, thereby aligning the level of analysis
-(between-person) with the baseline measure and respecting the
-hierarchical structure of the diary data.
+In Phase II, items derived and refined in Phase I were administered in a
+seven-day pilot study, with the ESM survey sent to participants (*n* =
+12) four times per day. Following the study period, pilot participants
+completed an exit survey that collected feedback on the sexual consent
+measures and assessed their acceptability in the broader context of the
+ESM study design. Findings included within-person associations between
+internal and external sexual consent that were consistent with
+preexisting theory and research asserting these are separable but
+related facets of a multidimensional process
+[@muehlenhardComplexitiesSexualConsent2016]. For instance, verbal and
+nonverbal consent cues were both positively associated with internal
+consent feelings of safety/comfort and readiness; verbal cue use was
+also positively associated with internal feelings of agreement/want,
+while nonverbal cue use was not. [@willisDevelopingValidFeasible2021]
+Further, external consent communication was not associated with alcohol
+use at the encounter level for participants in committed relationships,
+replicating discriminant patterns observed in previous research.
+[@jozkowskiDoesDrinkingAlcohol2015]
 
-Between-person convergent validity was supported for both verbal and
-nonverbal consent cue use. Participants who reported greater use of
-verbal consent cues at baseline also tended to report higher average
-verbal cue use across diary-reported encounters,
-$r(152) = .54, p < .001$. The corresponding association for nonverbal
-consent cues was smaller but significant, $r(152) = .20, p < .001$,
-indicating a consistent—albeit weaker—relationship between baseline and
-event-level nonverbal consent communication.
+Recent recommendations for validating single-item ESM measures call for
+concurrent associations at the within-person level, as well as
+situational sensitivity that demonstrates predictable within-person
+changes linked to theory-driven contextual correlates.[@wolfers] As a
+benchmark, within-person concurrent validity is present when a distinct
+but theoretically related variable significantly predicts the focal
+outcome with a standardized effect size greater than .09.[@wolfers] For
+example, one ESM study using multilevel models found that a composite
+internal consent feelings score significantly predicted both verbal and
+nonverbal consent cue use and that more intimate encounters predicted
+higher consent communication within persons (verbal β = .53, p \< .001;
+nonverbal β = .45, p \< .001; situational effect β = .32, p \<
+.001).[@willisAssessingWithinPersonVariability2021].
 
-To evaluate within-person concurrent validity, we examined whether
-event-level sexual feelings (a composite of subjective arousal and
-pleasure; `psb_feel_wp`) predicted same-event verbal and nonverbal
-consent cue use. Results indicated that when participants reported
-higher-than-usual sexual feelings during a sexual encounter, they also
-reported using more verbal, β = 0.17, SE = 0.03, t(348) = 5.77,
-*p*\<.001, 95% CI \[0.11, 0.23\], and nonverbal, β = 0.13, SE = 0.03,
-t(345) = 5.27, *p*\<.001, 95% CI \[0.08, 0.18\], consent cues. These
-findings provide evidence of within-person concurrent validity,
+To evaluate within-person concurrent validity in the current sample, we
+examined whether event-level sexual feelings (a composite of subjective
+arousal and pleasure; psb_feel_wp) predicted same-event verbal and
+nonverbal consent cue use. Results indicated that when participants
+reported higher-than-usual sexual feelings during a sexual encounter,
+they also reported using more verbal, β = 0.17, SE = 0.03, t(348) =
+5.77, p \< .001, 95% CI \[0.11, 0.23\], and nonverbal, β = 0.13, SE =
+0.03, t(345) = 5.27, p \< .001, 95% CI \[0.08, 0.18\], consent cues.
+These findings provide evidence of within-person concurrent validity,
 suggesting that higher situational sexual arousal and pleasure co-occur
 with greater active consent communication.
 
@@ -732,11 +672,57 @@ To test event-level situational sensitivity, we examined whether type of
 sexual behavior (Contact vs. Penetration; act_c) predicted verbal and
 nonverbal consent cue use. Encounters involving penetration (vs.
 contact-only) were associated with greater verbal cue use, β = 0.24, SE
-= 0.04, t(488) = 5.78, *p*\<.001, 95% CI \[0.16, 0.32\], and greater
-nonverbal cue use, β = 0.10, SE = 0.04, t(459) = 2.80, *p* = .005, 95%
-CI \[0.03, 0.17\]. These results support situational sensitivity by
-showing that participants’ consent communication varies appropriately
-with the intimacy of the sexual behavior reported.
+= 0.04, t(488) = 5.78, p \< .001, 95% CI \[0.16, 0.32\], and greater
+nonverbal cue use, β = 0.10, SE = 0.04, t(459) = 2.80, p = .005, 95% CI
+\[0.03, 0.17\]. These results support situational sensitivity by showing
+that participants’ consent communication varies appropriately with the
+intimacy of the sexual behavior reported.
+
+#### 3) Between-person validity evidence
+
+To satisfy multi-level validity, evidence should demonstrate that the
+measure functions between persons—distinguishing individuals who
+generally use more vs. fewer cues—and within persons. Section 2 offered
+within-person evidence; here we present between-person evidence and then
+integrate across levels.
+
+Recent research by Shi and colleagues offers support for between-person
+concurrent validity in a sample of Chinese adults in mixed-gender
+relationships.[@shiImpactSexualConsent2025] Specifically,
+explicit-verbal consent communication significantly predicted greater
+sexual satisfaction during participants' most recent sexual event with
+their partner (β = .31, SE = .01, $R^2$ = .10, *p* \< .001), and
+implict-nonverbal consent communication significantly predicted greater
+sexual satisfaction in general (β = .13, SE = .01, $R^2$ = .08, *p* \<
+.001).[@shiImpactSexualConsent2025] These findings indicate that
+individuals who report higher levels of external consent communication
+also report higher sexual satisfaction, consistent with theoretical
+expectations.
+
+To evaluate between-person convergent validity in the current sample,
+participants’ baseline reports of verbal (verbb_ong; “I always ask
+verbally for consent at each step of a sexual encounter”) and nonverbal
+(non_vrb_bsl; “Typically, I communicate sexual consent to my partner
+using nonverbal signals and body language”) consent were correlated with
+person-level aggregates of the same behaviors from the diary (mean
+verbal cue use across events: *verbal_means*; mean nonverbal cue use
+across events: *mean_nonverb*). Aggregating event-level data to the
+person level aligns the level of analysis for the baseline measures and
+respects the hierarchical structure of the diary.
+
+**Verbal cues.** Participants who reported greater use of verbal consent
+cues at baseline also tended to report higher average verbal cue use
+across diary-reported encounters, *r*(152) = .54, *p* \< .001.
+
+**Nonverbal cues.** The corresponding association for nonverbal consent
+cues was smaller but significant, *r*(152) = .20, *p* \< .001,
+indicating a consistent—albeit weaker—relationship between baseline and
+event-level nonverbal consent communication.
+
+Collectively, the findings presented in sections 1 and 2 that the
+measures differentiate both individualsand situations in theoretically
+coherent ways—fulfilling the requirement for validation at multiple
+levels.
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 # Detect and manage conflicts
@@ -749,6 +735,7 @@ library(tidyverse)
 library(readr)
 library(dplyr)
 library(ordinal)
+library(glmmTMB)
 library(tidyr)
 library(ggplot2)
 library(lubridate)
@@ -776,10 +763,15 @@ source(here::here("_scripts/functions.R"))
 
 The continuous event-level outcome variables representing verbal
 (ver_pc) and nonverbal (non_verb) consent cue use were visually and
-statistically evaluated for distributional properties. Each variable was
-measured on a 0–10 scale, reflecting how much participants used verbal
-and nonverbal cues to communicate consent during a given sexual
-encounter.
+statistically evaluated for distributional properties. The research team
+that developed the consent cue items elected to measure each variable on
+a unipolar 11-point sliding scale in accordance with preexisting
+recommendations for selecting response formats for ESM
+measures.[@willisDevelopingValidFeasible2021, @fisher2012] We used the
+same response format, such that each variable was measured on an
+11-point sliding scale (0–10; “Not at all” to “Very much”), reflecting
+how much participants used verbal and nonverbal cues to communicate
+consent during a given sexual encounter.
 
 Histograms, density plots, and summary statistics were inspected to
 assess normality, skewness, and potential ceiling or floor effects. Both
@@ -798,10 +790,9 @@ reporting high levels of cue use.
 
 Because the response scales were both bounded (0–10) and anchor-labeled
 (“Not at all” to “Very much”), the continuous treatment of these data
-risked overstating precision and violating linear model assumptions. To
-accommodate the non-normal distribution, both outcomes were recoded into
-five ordered categories (i.e., Not at all, A little, Somewhat, Quite a
-bit, Very much).
+would violate linear model assumptions. To accommodate the non-normal
+distribution, both outcomes were recoded into five ordered categories
+(i.e., Not at all, A little, Somewhat, Quite a bit, Very much).
 
 ```{r}
 d <- d %>%
@@ -848,9 +839,7 @@ use consistent with the scale anchors.
 
 {{< embed notebooks/fig1.qmd#fig-2 >}}
 
-
 {{< embed notebooks/fig1.qmd#fig-4 >}}
-
 
 ## Analytic Strategy
 
@@ -937,6 +926,42 @@ For verbal cue use, the ICC was 0.575, indicating that approximately
 confirm that participants’ verbal consent communication varied both
 across individuals and within individuals across contexts, supporting
 the use of multilevel modeling for subsequent analyses.
+
+```{r,eval=FALSE,echo=FALSE}
+if ("conflicted" %in% loadedNamespaces()) {
+  detach("package:conflicted", unload = TRUE, character.only = TRUE)
+}
+library(brms)
+library(posterior)
+
+# m0_b is the unconditional model fit with brm()
+m0_b <- brm(
+  bf(verb_bins ~ 1 + (1 | nid)),
+  data = d,
+  family = cumulative(link = "logit"),
+  chains = 4, iter = 4000, cores = 4,
+  control = list(adapt_delta = 0.95), save_pars = save_pars(all = TRUE)
+)
+
+# extract posterior draws
+draws <- as_draws_df(m0_b)
+
+names(draws)[grepl("^sd_.*__Intercept$", names(draws))]
+sd_u0 <- draws$sd_nid__Intercept
+
+# convert to variance and compute ICC on latent logit scale
+var_u0 <- sd_u0^2
+icc    <- var_u0 / (var_u0 + (pi^2 / 3))
+
+# summarize
+mean_icc <- mean(icc)
+ci_icc   <- quantile(icc, probs = c(.025, .975))
+
+list(
+  icc_mean = mean_icc,
+  icc_ci95 = ci_icc
+)
+```
 
 ### Variable preparation and centering
 
@@ -1074,10 +1099,12 @@ prop_tst <- clm(
 nominal_test(prop_tst)
 ```
 
-For predictors flagged during the global screen, such as the between-person effect of sexual behavior type (i.e., high v. low level of physical intimacy), we will then fit
-threshold-specific binary logistic mixed models (GLMMs) to examine
-whether fixed-effect slopes vary substantially across cutpoints (e.g.,
-“Not at all → A little,” “A little → Somewhat,” etc.).
+For predictors flagged during the global screen, such as the
+between-person effect of sexual behavior type (i.e., high v. low level
+of physical intimacy), we will then fit threshold-specific binary
+logistic mixed models (GLMMs) to examine whether fixed-effect slopes
+vary substantially across cutpoints (e.g., “Not at all → A little,” “A
+little → Somewhat,” etc.).
 
 ```{r}
 d_thr <- d %>%
@@ -1200,21 +1227,26 @@ components were significant ($|z|≤ 1.49$, $p ≥ .13$), suggesting no
 reliable linear, quadratic, or cubic change in verbal cue ratings across
 days.
 
-#### Specifying fixed-effects
-
-*Need to fill this in without being dreadfully repetitive.*
-```{r}
-fe_formula <- verb_bins ~ drinks_wp + act_wp + 
-  drinks_pm_c + act_pm_c + bidr_sc
-```
-
 #### Evaluating random slopes
 
 To determine the appropriate random-effects structure, preliminary CLMMs
 were fit with and without random slopes for within-person predictors
-(`drinks_wp` and `act_wp`).
+(`drinks_wp` and `act_wp`). Although clmm() in the ordinal package can
+estimate random slopes via the Laplace approximation, such models can be
+unstable or unidentifiable—particularly with multiple ordinal categories
+or correlated within-person predictors. For this reason, random slopes
+will be explored in clmm() when the model converges cleanly and the
+variance components are estimable. If convergence issues arise, the same
+model will be re-estimated in brms, which provides more flexible and
+robust inference for random slopes in cumulative link mixed models. In
+the case of brms, model comparisons will then rely on leave-one-out
+cross-validation (Bayesian) to assess improvements in fit.
 
 ```{r}
+# specify fixed effects
+fe_formula <- verb_bins ~ drinks_wp + act_wp + 
+  drinks_pm_c + act_pm_c + bidr_sc
+
 # 1) Random intercept only (full fixed effects in place)
 m0 <- clmm(update(fe_formula, . ~ . + (1 | nid)),
            data = d, link = "logit", Hess = TRUE)
@@ -1230,6 +1262,33 @@ m2 <- clmm(update(fe_formula, . ~ . + (1 + act_wp | nid)),
 # Compare nested models (fixed effects held constant)
 anova(m0, m1)
 anova(m0, m2)
+```
+
+```{r,eval=FALSE,echo=FALSE}
+m_int  <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
+                   (1 | nid)),
+              data = d, family = cumulative("logit"),
+              chains = 4, iter = 4000, cores = 4, 
+              control = list(adapt_delta = 0.95), save_pars = save_pars(all = TRUE))
+
+m_rs1 <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
+                   (1 + drinks_wp | nid)),
+              data = d, family = cumulative("logit"),
+              chains = 4, iter = 4000, cores = 4, 
+             control = list(adapt_delta = 0.99), save_pars = save_pars(all = TRUE))
+
+m_rs2 <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
+                   (1 + act_wp | nid)),
+              data = d, family = cumulative("logit"),
+              chains = 4, iter = 4000, cores = 4, 
+             control = list(adapt_delta = 0.99), save_pars = save_pars(all = TRUE))
+
+m_int <- add_criterion(m_int, "loo", moment_match = TRUE, reloo=TRUE) 
+m_rs1 <- add_criterion(m_rs1, "loo", moment_match = TRUE, reloo=TRUE) 
+m_rs2 <- add_criterion(m_rs2, "loo", moment_match = TRUE, reloo=TRUE) 
+
+library(loo)
+loo(m_int, m_rs1, m_rs2) |> loo_compare()
 ```
 
 Likelihood-ratio tests indicated that allowing slopes to vary by
@@ -1278,11 +1337,11 @@ anova(clmm_null_cc, m_pre)
 ```
 
 A likelihood-ratio test indicated that the inclusion of these
-conditional effects significantly improved model fit, 
-$\chi^2(5) = 48.19$, $p < .001$, with a corresponding decrease in AIC from
-1379.3 to 1341.1. These results suggest that the set of predictors
-collectively explained significant between- and within-person
-variation in ordinal verbal consent cue use.
+conditional effects significantly improved model fit,
+$\chi^2(5) = 48.19$, $p < .001$, with a corresponding decrease in AIC
+from 1379.3 to 1341.1. These results suggest that the set of predictors
+collectively explained significant between- and within-person variation
+in ordinal verbal consent cue use.
 
 #### Examining fixed-effects
 
@@ -1304,15 +1363,99 @@ model’s fixed effects explained about 14% of total variance, with
 substantial additional variation accounted for by individual
 differences.
 
-#### Potential Problems and Alternative Strategies
+#### Addressing convergence problems
 
-Considering the multiple subscales and items per domain in Aim 1, if
-diagnostics reveal predictors are highly correlated, we will prioritize
-individual attitudes over perceived peer attitudes and drop the latter
-when indicated by $|r|$ ≥ .7 - .8.
+Convergence problems occur when the estimation routine fails to identify
+a stable solution for model parameters (e.g., fixed effects, cutpoints,
+or random-effect variance). Because the primary outcomes are ordinal and
+event-level observations (Level 1) are nested within participants (Level
+2), achieving convergence will be essential to ensure parameters are
+identifiable and that inferences about within- and between-person
+effects are valid.
 
-If models do not converge in a maximum likelihood framework, they will
-be estimated in a Bayesian framework using the brms package in R. 
+Our approach to addressing potential convergence issues will follow the
+structured framework outlined by Brauer and Curtin (2018), adapted from
+LMMs to the CLMM context. This framework prioritizes *preventive* and
+*nonintrusive* steps that preserve the intended model specification
+before moving to *classic* or *corrective* remedies that alter the model
+structure. When convergence difficulties arise, we will proceed through
+the following steps in order.
+
+**Preventive steps**
+
+Because all data for the proposed analyses have already been collected,
+few preventive remedies—those typically implemented at the design or
+data-collection stage—remain relevant. Nevertheless, in keeping with
+Brauer and Curtin’s framework, we will adhere conceptually to preventive
+principles by ensuring that analyses use the full, cleaned dataset,
+retain all available cases following multiple imputation, and maximize
+between-person variability through careful data quality verification.
+
+**Nonintrusive strategies**
+
+We will prioritize nonintrusive strategies that preserve the intended
+model specification, several of which have previously been specified in
+the analytic plan and demonstrated in the exemplar analysis. These steps
+will be repeated and expanded during primary analyses.
+
+1.  **Model specification and random-effects structure.** All predictors
+    and covariates will be modeled as fixed effects (per Brauer &
+    Curtin). A participant random intercept will be included in all
+    models to account for nonindependence. As previously demonstrated
+    for the verbal outcome, we will compute intraclass correlation
+    coefficients (ICCs) for each ordinal outcome to confirm non-trivial
+    between-person variance and justify a mixed-effects framework (i.e.,
+    the random intercept).
+2.  **Centering and rescaling predictors.** As previously described,
+    Level-1 predictors will be person-mean centered and Level-2 means
+    will be grand-mean centered. We will additionally standardize
+    predictors when scale differences impede conditioning.
+3.  **Proportional-odds (PO) diagnostics.** As previously demonstrated,
+    we will first screen PO using ordinal::clm (independence case) via
+    built-in nominal/scale tests and visual checks of predicted vs
+    observed category probabilities. For mixed models, Brant-type tests
+    are not appropriate; if PO appears violated, we will refit with
+    category-specific effects in `brms` (via cs()), then compare
+    fit/predictions to the PO model.
+4.  **Inspection of data and ordered categories.** We will re-examine
+    outcomes for miscoding, empty or extremely sparse categories,
+    and—where justified—collapse adjacent anchor-consistent categories
+    to stabilize estimation. Collapsing rules will respect measurement
+    anchors and be documented; sensitivity checks will compare models
+    with and without collapsing.
+5.  **Optimization and starting values.** For ordinal::clmm() we will
+    increase `maxIter` and tune `gradTol` via `clmm.control()` to
+    promote stable convergence; we will also try improved starting
+    values for fixed effects/thresholds. If instability persists, we
+    will move to brms (HMC with adapt_delta/max_treedepth tuning).
+6.  **Bayesian estimation.** If convergence issues remain, we will fit
+    the same cumulative (logit) model in `brms` with weakly informative
+    priors on fixed effects (Normal\[0, 1–2\]), random-effect SDs
+    (half-Student-t), and ordered thresholds, and raise adapt_delta
+    (and, as needed, max_treedepth). Bayesian regularization can resolve
+    near-boundary problems without altering the intended model.
+7.  **Data-level corrections.** We will address data-level issues by
+    correcting miscoding, collapsing adjacent categories when justified,
+    and using multiple imputation for predictors rather than listwise
+    deletion. Ordinal outcomes will not be imputed.
+8.  **Classic & corrective steps (only if-needed)**
+    1.  **Simplify fixed-effects structure.** If convergence problems
+        persist, we will temporarily remove non-focal interactions and
+        test them in separate models, retaining the appropriate
+        within-person slope for each predictor when inclusion is
+        indicated.
+    2.  **Reduce random-effects complexity** (only in `brms`). When
+        random slopes are indicated but correlated structures hinder
+        convergence, we will first set uncorrelated random effects (\|\|
+        syntax). If problems persist, we will retain only the
+        theoretically essential slope(s).
+
+**Model comparison and checks**
+
+For frequentist models we will use LRTs and AIC/BIC; for Bayesian models
+we will use LOO and posterior predictive checks (and Bayes factors where
+appropriate) to evaluate added complexity (e.g., random slopes or
+category-specific effects). All changes will be reported transparently.
 
 #### Limitations and Future Directions
 
@@ -1322,7 +1465,7 @@ prioritize in the future. Considering this project focuses on active
 consent communication, we did not measure passive “no response” signals,
 which are commonly reported cues used to infer and communicate consent
 among young adults despite risks associated with their ambiguity and
-inconsistent associations with internal willingness.2 Also, we did not
+inconsistent associations with internal willingness. Also, we did not
 assess refusal cues that participants may have used to indicate lack of
 willingness, so it is possible that participants were also reflecting on
 behaviors they used to assert boundaries when responding to items

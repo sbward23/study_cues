@@ -188,7 +188,7 @@ duplicates %>%
   count() %>% 
   arrange(desc(n))
 
-# 1 nid has 2 mostly blank duplicates - check to see if they have another survey on that day
+# 1 nid has 2 mostly blank duplicates - do they have another survey that day?
 # they do!
 duplicates %>% 
   filter(nid == "5140108" & date == "2022-11-16")
@@ -235,7 +235,7 @@ data %>%
 
 5/8 Duplicate surveys taken at midnight and later that night and are missing survey day before- determined midnight survey was for previous day. Correcting new date variable here.
 
-Note: this date variable lines up roughly to day on study but will not be used for making labels/prediction windows. The raw end survey time will be used for this.
+Note: this date variable lines up roughly to day on study
 
 ```{r}
 # data |> 
@@ -646,6 +646,11 @@ d <- d %>%
                ~case_when(. == 2 ~ 0, 
                           . == 4 ~ 3,
                           TRUE ~ .)))
+
+# checked 9128298 for aud1:aud10, aub module, and psb module; nid does not drink
+# d <- d %>%
+#  mutate(bpa = if_else(nid == 9128298 & bpa == 3, 0, bpa))
+
 ```
 
 Dichotomous variables
@@ -655,7 +660,7 @@ Dichotomous variables
 ```{r}
 d <- d %>%
   mutate(across(
-    c(au_pg, au_dg, psb3, psb5, psb5a, er1_p, er2_p, 
+    c(au_pg, au_dg, psb3, prec, psb5a, er1_p, er2_p, 
       er3_p, er4_p, osb4, osb5, osb8, pss, er1_o, er2_o, 
       er3_o, er4_o, ssb2, er1_s, er2_s, er3_s, er4_s),
     ~ case_when(
@@ -672,53 +677,53 @@ d <- d %>%
 
 To what extent did you do the following during the sexual activity?
 
-`ver_pc`: Directly asked your partner or communicated verbally with your partner about consent
+`verb`: Directly asked your partner or communicated verbally with your partner about consent
 
 ```{r}
-psych::describe(d$ver_pc) # verbal
+psych::describe(d$verb) # verbal
 ```
 
 ```{r}
 d %>%
-  pull(ver_pc) %>%
+  pull(verb) %>%
   hist(main = "Histogram of Verbal Cues",
        xlab = "Verbal Self-Report",
        col = "lightblue",
        breaks = 10)
 ```
 
-### Direct nonverbal
+### Explicit nonverbal
 
 To what extent did you do the following during the sexual activity?\
 
-`enon_pc`: Used direct non-verbal signals to communicate with your partner about consent for the sexual activity
+`enon`: Used direct non-verbal signals to communicate with your partner about consent for the sexual activity
 
 ```{r}
-psych::describe(d$enon_pc) # explicit nonverbal 
+psych::describe(d$enon)
 ```
 
 ```{r}
 d %>%
-  pull(enon_pc) %>%
+  pull(enon) %>%
   hist(main = "Histogram of Direct Nonverbal",
        xlab = "Direct Nonverbal Self-Report",
        col = "lightblue",
        breaks = 10)
 ```
 
-### Indirect nonverbal
+### Implicit nonverbal
 
 To what extent did you do the following during the sexual activity?\
 
 `inon_pc`: Used subtle signals to communicate with your partner about consent for the sexual activity
 
 ```{r}
-psych::describe(d$inon_pc) # implicit nonverbal
+psych::describe(d$inon) # implicit nonverbal
 ```
 
 ```{r}
 d %>%
-  pull(inon_pc) %>%
+  pull(inon) %>%
   hist(main = "Histogram of Indirect Nonverbal",
        xlab = "Indirect Nonverbal Self-Report",
        col = "lightblue",
@@ -728,31 +733,32 @@ d %>%
 ### Nonverbal corr
 
 ```{r}
-round(cor(d$enon_pc, d$inon_pc, use = "pairwise.complete.obs"), 2)
+round(cor(d$enon, d$inon, use = "pairwise.complete.obs"), 2)
 ```
 
 The correlation between the `direct` and `indirect nonverbal` consent cue items was *r* = .73, indicating a strong positive relationship that suggests these items reflect a shared underlying construct. For parsimony and theoretical clarity, these items will be averaged to create a continuous composite score representing overall nonverbal consent communication.
 
 ### Nonverbal composite
 
+*Re-calculate post-imputation*
 ```{r}
 d <- d %>%
   rowwise() %>%  # calculate mean score
-  mutate(non_verb = mean(c(enon_pc,inon_pc)))
+  mutate(nvrb = mean(c(enon,inon)))
 
-psych::describe(d$non_verb)
+psych::describe(d$nvrb)
 ```
 
 ### Verbal - Nonverbal Correlation
 
 ```{r}
 # Check correlation between verbal and nonverbal 
-round(cor(d$ver_pc, d$non_verb, use = "pairwise.complete.obs"), 2)
+round(cor(d$verb, d$nvrb, use = "pairwise.complete.obs"), 2)
 ```
 
-## Type of sexual behavior
+## Type of sexual activity
 
-`psb2`: What activities occurred? (check all that apply)
+`sact`: What activities occurred? (check all that apply)
 
 Response options:
 
@@ -765,26 +771,24 @@ Response options:
 -   I tried but no sexual contact happened = 7
 
 ```{r}
-d %>% select(psb2) %>% map(tabyl)
-
-d$psb_act <- d$psb2
+d %>% select(sact) %>% map(tabyl)
 
 d <- d %>%
-  mutate(psb_act = as.character(psb_act),
-         psb_act = case_when(
-           psb_act %in% c("1", "1,2", "2") ~ "Contact",
-           psb_act == "7" ~ "Attempt",
-           grepl("3", psb_act) | grepl("4", psb_act) | 
-             grepl("5", psb_act) | grepl("6", psb_act) ~ "Penetration",
-           TRUE ~ as.character(psb_act)))
+  mutate(sact = as.character(sact),
+         sact = case_when(
+           sact %in% c("1", "1,2", "2") ~ "Contact",
+           sact == "7" ~ "Attempt",
+           grepl("3", sact) | grepl("4", sact) | 
+             grepl("5", sact) | grepl("6", sact) ~ "Penetration",
+           TRUE ~ as.character(sact)))
 
-d %>% select(psb_act) %>% map(tabyl)
+d %>% select(sact) %>% map(tabyl)
 ```
 
 `psb_di` 0 = Attempted sexual contact; 1 = Contact and/or penetration
 
 ```{r}
-d$psb_di <- d$psb_act
+d$psb_di <- d$sact
 
 d <- d %>%   
 mutate(across(c(psb_di),
@@ -806,28 +810,25 @@ Cisgender Man = 1; Cisgender Woman = 2; Trans, Queer, or Non-binary person = 3; 
 d %>% select(psb4) %>% map(tabyl)
 ```
 
-## Sexual precedence
+## Sexual precedent
 
-`psb_5`: Had you ever had sexual contact with this person in the past?
+`prec`: Had you ever had sexual contact with this person in the past?
 
 No = 0; Yes = 1
 
 ```{r}
-d %>% select(psb5) %>% map(tabyl)
-
-d <- d %>% 
-    rename(precedence = psb5)
+d %>% select(prec) %>% map(tabyl)
 ```
 
-## Partner familiarity
+## Partner familiarity (raw)
 
-`psb_6`: How did you know this other person?
+`fm_r`: How did you know this other person?
 
 I didn’t, we just met that day = 1; They are a friend = 2; They are an acquaintance = 3;\
 They are my current or past dating/intimate partner = 4
 
 ```{r}
-d %>% select(psb6) %>% map(tabyl)
+d %>% select(fm_r) %>% map(tabyl)
 ```
 
 #### 3-level with Stranger & Acquaintance grouped together  
@@ -836,9 +837,9 @@ d %>% select(psb6) %>% map(tabyl)
 d <- d %>%
   mutate(
     fam_rank = case_when(
-      psb6 == 2 ~ "Friend",
-      psb6 %in% c(1, 3) ~ "Stranger/Acq",
-      psb6 == 4 ~ "Romantic",
+      fm_r == 2 ~ "Friend",
+      fm_r %in% c(1, 3) ~ "Stranger/Acq",
+      fm_r == 4 ~ "Romantic",
       TRUE ~ NA_character_
     ),
     fam_rank = factor(fam_rank,
@@ -855,9 +856,9 @@ table(d$fam_rank)
 d <- d %>%
   mutate(
     fam_lev = case_when(
-      psb6 == 1 ~ "Stranger",
-      psb6 %in% c(2, 3) ~ "Friend/Acq",
-      psb6 == 4 ~ "Romantic",
+      fm_r == 1 ~ "Stranger",
+      fm_r %in% c(2, 3) ~ "Friend/Acq",
+      fm_r == 4 ~ "Romantic",
       TRUE ~ NA_character_
     ),
     fam_lev = factor(fam_lev,
@@ -953,48 +954,46 @@ d %>%
 
 ### Participant drink count
 
-`psb7` **renamed** `drinks`: How many drinks did you consume prior to or during this activity?
+`drnk`: How many drinks did you consume prior to or during this activity?
 
 Response options: 0 = 1; 1-2 = 2, 3-4 = 3, 5-6 = 4, 7-9 = 5, 10+ = 6
 
 ```{r}
 d %>%
   filter(psb_di == 1) %>%
-  pull(psb7) %>%
+  pull(drnk) %>%
   hist(main = "Histogram of Participant Drinks",
        xlab = "Self-Reported Drink Count",
        col = "lightblue",
        breaks = 10)
 
-d %>% select(psb7) %>% map(tabyl)
-
-d <- d %>% 
-    rename(drinks = psb7)
+d %>% select(drnk) %>% map(tabyl)
 ```
 
--   Recode `psb_alc` from `drinks` such that 0 drinks = 0 and \>0 drinks = 1
+-   Recode `psb_alc` from `drnk` such that zero drinks = 0 and \>0 drinks = 1
 
 ```{r}
 d <- d %>%
-  mutate(psb_alc = if_else(drinks == 1, 0, if_else(drinks > 1, 1, drinks)))
+  mutate(psb_alc = if_else(drnk == 1, 0, if_else(drnk > 1, 1, drnk)))
 
 d %>% select(psb_alc) %>% map(tabyl)
 ```
 
-Participants endorsed `r nrow(subset(d, psb_alc == 1))` partnered sexual events following alcohol consumption.
+Participants endorsed `r nrow(subset(d, psb_alc == 1))` partnered sexual events 
+following alcohol consumption.
 
-### Participant intoxication
+### Self-reported intoxication
 
-`psb8`: How intoxicated did you feel right before or during this sexual activity?
+`s_tx`: How intoxicated did you feel right before or during this sexual activity?
 
 Least intoxicated ever felt in life (0) - Most intoxication ever felt in life (100) VAS
 
 ```{r}
-psych::describe(d$psb8)
+psych::describe(d$s_tx)
 
 d %>%
   filter(psb_alc == 1) %>%
-  pull(psb8) %>%
+  pull(s_tx) %>%
   hist(main = "Histogram of Participant Intoxication",
        xlab = "Self-Reported Intoxication",
        col = "lightblue",
@@ -1003,14 +1002,14 @@ d %>%
 
 ### Perceived partner intoxication
 
-`psb9`: How intoxicated do you think the other person felt right before or during this sexual activity?
+`p_tx`: How intoxicated do you think the other person felt right before or during this sexual activity?
 
 Least intoxicated ever felt in life (0) - Most intoxication ever felt in life (100) VAS
 
 ```{r}
 d %>%
-  filter(psb9 > 0) %>%
-  pull(psb9) %>%
+  filter(p_tx > 0) %>%
+  pull(p_tx) %>%
   hist(main = "Histogram of Partner Intoxication",
        xlab = "Perceived Partner Intoxication",
        col = "lightblue",
@@ -1020,15 +1019,15 @@ d %>%
 ### Intoxication parity 
 ```{r}
 # Continuous parity = absolute difference between self and partner intoxication
-d$parity_con <- abs(d$psb8 - d$psb9)
+d$parity_con <- abs(d$s_tx - d$p_tx)
 hist(d$parity_con)
 
 d <- d %>%
   mutate(
     parity_cat = case_when(
       parity_con == 0 ~ "Equal",
-      psb8 > psb9   ~ "Self-Higher",
-      psb8 < psb9   ~ "Partner-Higher",
+      s_tx > p_tx   ~ "Self-Higher",
+      s_tx < p_tx   ~ "Partner-Higher",
       TRUE ~ NA_character_
     ),
     parity_cat = factor(parity_cat,
@@ -1154,17 +1153,10 @@ d <- d %>%
             dub3_af.txt, status, q186_8_text, au_l:au_pbs.txt, 
             start_date:end_date, ip_address, recorded_date, 
             location_latitude, location_longitude, psb3, psb5a, psb6a:str_p.txt, 
-            psb7a:psb15_tried_10_text, psb16_10_text:psb16_tried_10_text)) 
+            psb7a:psb15_tried_10_text, psb16_10_text:psb16_tried_10_text))
 ```
 
 ## Save updated dataframe for diary data
-
-```{r,eval=FALSE}
-d %>%
-  summarise(across(everything(), ~ is.list(.x) | is.matrix(.x))) %>%
-  pivot_longer(everything()) %>%
-  filter(value == TRUE)
-```
 
 ```{r}
 d |> 

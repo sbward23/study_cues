@@ -1,22 +1,29 @@
+# RStudio / R session files
 .Rproj.user
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
-_data/
-_scripts/
+.RDataTmp
+.RDataTmp/
+
+# macOS
 .DS_Store
-_csl/
-# Ignore template artifacts (3+ months old)
-notebooks/fig1-preview.html
-notebooks/lm-preview.html
-notebooks/lm.embed.ipynb
-notebooks/lm.out.ipynb
-notebooks/tables-preview.html
-notebooks/tables.embed.ipynb
-notebooks/tables.out.ipynb
-site_libs/
-index.out.ipynb
-index.embed.ipynb
-.nojekyll
-index-preview.html
-notebooks/.DS_Store
+
+# Private data and scripts (keep out of Git history)
+_data/
+*.xlsx
+_scripts/
+
+# Quarto knitr rendered artifacts
+*_files/
+index_files/
+**/figure-html/
+**/cache/
+
+# Preview HTML files
+*-preview.html
+
+# Jupyter artifacts from template
+*.embed.ipynb
+*.out.ipynb

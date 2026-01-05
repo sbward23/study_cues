@@ -6,12 +6,16 @@ editor_options:
 ---
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(lme4)
+library(lmerTest)
+library(emmeans)
 ```
 
 Fit the model
 ```{r}
-m <- lm (ders_s ~ aud_sc, data = base_ana)
+m <- lm (aud_s ~ ders_sc, data = base_ana)
 summary(m)
 
 # Tidied version of coeffs table is preferred over summary for saving.  

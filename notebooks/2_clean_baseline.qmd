@@ -1,5 +1,5 @@
 ---
-title: "Cleaning baseline, part 2."
+title: "Cleaning baseline data"
 output: 
   html_document:
     toc: true 
@@ -131,6 +131,11 @@ rm(base_sona)
 rm(base_sona_updated)
 ```
 
+### Check for missing data
+```{r}
+colSums(is.na(b))[colSums(is.na(b)) > 0] # aud2 missing 4 obs
+```
+
 ## Prepare between-subjects predictors
 
 ### Social Desirability
@@ -154,7 +159,7 @@ b <- b %>%
 sde_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7","bidr_8")
 
 # alpha = .63, i.e. < .70, doesn't meet standard criterion for reliability
-psych::alpha(b[, sde_vector], na.rm = T) 
+psych::alpha(b[, sde_vector]) 
 
 # describe
 psych::describe(b$sde_s)
@@ -170,7 +175,7 @@ b <- b %>%
 im_vector <- c("bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
 
 # alpha = .72, i.e. < .70, doesn't meet standard criterion for reliability
-psych::alpha(b[, im_vector], na.rm = T) 
+psych::alpha(b[, im_vector]) 
 
 # describe
 psych::describe(b$im_s)
@@ -179,7 +184,7 @@ hist(b$im_s)
 ### Total Scale
 b <- b %>%
   rowwise() %>%
-  mutate(bidr_s = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8,
+  mutate(bidr = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,bidr_6,bidr_7,bidr_8,
                       bidr_9,bidr_10,bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
 
 # create a character vector for the bidr items
@@ -187,17 +192,19 @@ bidr_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5","bidr_6","bidr_7",
                  "bidr_9","bidr_10","bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
 
 # alpha = .73, i.e. > .70, meets standard criterion for reliability
-psych::alpha(b[, bidr_vector], na.rm = T) 
+psych::alpha(b[, bidr_vector]) 
 
 # describe
-psych::describe(b$bidr_s)
-hist(b$bidr_s)
+psych::describe(b$bidr)
+hist(b$bidr)
 
 # Grand-mean center for modeling (Level-2 predictor)
-b$bidr_sc <- b$bidr_s - mean(b$bidr_s, na.rm = T)
+b$bidr_c <- b$bidr - mean(b$bidr)
+
+b %>% select(bidr_1:bidr_16) %>% map(tabyl)
 ```
 
-## Individual attitudes
+## Attitudes
 
 ### IRMA (a = .80)
 
@@ -208,51 +215,108 @@ b$bidr_sc <- b$bidr_s - mean(b$bidr_s, na.rm = T)
 
 b <- b %>%
   rowwise() %>%
-  mutate(rma_s = sum(irma1,irma2,irma3,irma4,irma5,irma6,irma7))
+  mutate(irma = sum(irma1,irma2,irma3,irma4,irma5,irma6,irma7))
 
 # create a character vector for the irma items
 rma_vector <- c("irma1","irma2","irma3","irma4","irma5","irma6","irma7")
 
 # alpha = .80, i.e. > .70, meets standard criterion for reliability
-psych::alpha(b[, rma_vector], na.rm = T) 
+psych::alpha(b[, rma_vector]) 
 
-psych::describe(b$rma_s) # describe
-hist(b$rma_s) # view distribution
+psych::describe(b$irma) # describe
+hist(b$irma) # view distribution
 
 # Grand-mean center for modeling (Level-2 predictor)
-b$rma_sc <- b$rma_s - mean(b$rma_s, na.rm = T)
+b$irma_c <- b$irma - mean(b$irma)
 ```
+
+### Alcohol and sexual coercion - Individual (personal) attitudes
+```{r}
+b %>% select(asc1:asc4, coer1:coer6) %>% map(tabyl)
+
+b <- b %>%
+  rowwise() %>%
+  mutate(asco = sum(asc1, asc2, asc3, asc4, 
+                      coer1, coer2, coer3, coer4, coer5, coer6))
+
+# Grand-mean center for modeling (Level-2 predictor)
+b$asco_c <- b$asco - mean(b$asco)
+
+# create a character vector for the pa items
+ascoer_vec <- c("asc1", "asc2", "asc3", "asc4", 
+                "coer1", "coer2","coer3","coer4","coer5","coer6")
+
+# alpha > .70 meets standard criterion for reliability
+psych::alpha(b[, ascoer_vec], check.keys=TRUE) 
+```
+
+Coercion PBCS items separate from ASC items
+```{r}
+b %>% select(coer1:coer6) %>% map(tabyl)
+
+b <- b %>%
+  rowwise() %>%
+  mutate(coer_s = sum(coer1,coer2,coer3,coer4,coer5,coer6))
+
+# create a character vector
+coer_vec <- c("coer1","coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .88, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, coer_vec], na.rm = T) 
+```
+
+### Alcohol and sexual coercion - Perceived peer attitudes
+```{r}
+b %>% select(pa1:pa6) %>% map(tabyl)
+
+b <- b %>%
+  rowwise() %>%
+  mutate(ppat = sum(pa1, pa2, pa3, pa4, pa5, pa6))
+
+# Grand-mean center for modeling (Level-2 predictor)
+b$ppat_c <- b$ppat - mean(b$ppat)
+
+# create a character vector
+pa_vec <- c("pa1","pa2","pa3","pa4","pa5","pa6")
+
+# alpha i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, pa_vec], check.keys=TRUE)
+
+cor.test(b$ppat_c, b$asco_c)
+```
+
 
 ## Baseline behavior
 
 #### AUDIT (a = .80)
 
+*recalculate summed total post-imputation since aud2 is missing 4 obs*
 ```{r}
-b %>% select(aud1:aud10) %>% glimpse()
+b %>% select(aud1:aud10) %>% map(tabyl)
 
 # AUDIT summed score 
 b <- b %>% 
-rowwise() %>% dplyr::mutate(aud_s = sum(aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8,aud9,aud10,na.rm = T))
+rowwise() %>% dplyr::mutate(auds = sum(aud1,aud2,aud3,aud4,aud5,aud6,aud7,aud8,aud9,aud10,na.rm = T))
 
 # AUDIT descriptives
-psych::describe(b$aud_s)
+psych::describe(b$auds)
 
 # create a character vector for the audit items
 audit_vector <- c("aud1","aud2","aud3","aud4","aud5",
                   "aud6","aud7","aud8","aud9","aud10")
 
 psych::alpha(b[, audit_vector], check.keys = T, na.rm = TRUE) # alpha = .80
-hist(b$aud_s)
+hist(b$auds)
 
 # Grand-mean center for modeling (Level-2 predictor)
-b$aud_sc <- b$aud_s - mean(b$aud_s, na.rm = T)
+b$auds_c <- b$auds - mean(b$auds, na.rm = T)
 ```
 
 #### Sexual Risk Behavior
 
 ```{r}
-b %>% select(srb1, srb2, srb3, srb4, srb5, srb6, srb7, srb8) %>% map(tabyl)
-# neglible variability for srb2 and srb5
+b %>% select(srb1, srb2, srb3, # neglible variability for srb2 and srb5
+             srb4, srb5, srb6, srb7, srb8) %>% map(tabyl)
 
 # create a character vector for the srb items
 srb_vector <- c("srb1","srb2","srb3","srb4","srb5","srb6","srb7","srb8")
@@ -269,23 +333,23 @@ psych::alpha(b[, srb_vector], na.rm = T)
 # create sum total score
 b <- b %>%
   rowwise() %>%
-  mutate(srb_s = sum(srb1, srb3, srb4, srb6, srb7, srb8))
+  mutate(srbs = sum(srb1, srb3, srb4, srb6, srb7, srb8))
 
 # view descriptive statistics
-psych::describe(b$srb_s)
+psych::describe(b$srbs)
 
 # view distribution
-hist(b$srb_s)
+hist(b$srbs)
 
-# Grand-mean center for modeling (Level-2 predictor)
-b$srb_sc <- b$srb_s - mean(b$srb_s, na.rm = T)
+# grand-mean center
+b$srbs_c <- b$srbs - mean(b$srbs, na.rm = T)
 ```
 
 #### Verbal Consent (a = .77)
 
--   `scs8`: **verbb_init:** I always ask verbally for consent before I
+-   `scs8`: **v_in:** I always ask verbally for consent before I
     initiate a sexual encounter
--   `scs9`: **verbb_ong:** I always ask verbally for consent at each
+-   `scs9`: **v_on:** I always ask verbally for consent at each
     step of a sexual encounter
 -   `ong1`: If my partner seems less than excited about sex, I will stop
     and ask if they want to be sexual with me
@@ -302,11 +366,11 @@ b %>% select(scs8, scs9, ong1, ong2, ong3, ong4) %>%
   map(tabyl)
 
 b <- b %>% 
-    rename(verbb_init = scs8,
-           verbb_ong = scs9)
+    rename(v_in = scs8,
+           v_on = scs9)
 
 # create a character vector
-vrb_vector <- c("verbb_init", "verbb_ong", "ong1", "ong2", "ong3", "ong4")
+vrb_vector <- c("v_in", "v_on", "ong1", "ong2", "ong3", "ong4")
 
 # a = .77
 psych::alpha(b[, vrb_vector], na.rm = T) 
@@ -314,16 +378,16 @@ psych::alpha(b[, vrb_vector], na.rm = T)
 # create sum total score
 b <- b %>%
   rowwise() %>%
-  mutate(verbb_s = sum(verbb_init, verbb_ong, ong1, ong2, ong3, ong4))
+  mutate(ver_b = sum(v_in, v_on, ong1, ong2, ong3, ong4))
 
 # view descriptive statistics
-psych::describe(b$verbb_s)
+psych::describe(b$ver_b)
 
 # view distribution
-hist(b$verbb_s)
+hist(b$ver_b)
 
 # Grand-mean center for modeling (Level-2 predictor)
-b$verbb_sc <- b$verbb_s - mean(b$verbb_s, na.rm = T)
+b$ver_bc <- b$ver_b - mean(b$ver_b, na.rm = T)
 ```
 
 ## Save updated dataframe
