@@ -15,7 +15,7 @@ keywords:
   - Alcohol
 date: last-modified
 bibliography: zotero_lib.bib
-csl: american-medical-association.csl
+csl: _csl/american-medical-association.csl
 number-sections: false 
 editor_options: 
   chunk_output_type: console
