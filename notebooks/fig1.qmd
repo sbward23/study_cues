@@ -1,35 +1,112 @@
 ---
-title: Figure 1
-author: John Curtin
+title: Histograms
+author: Stephanie Ward
 editor_options: 
   chunk_output_type: console
 ---
 
-```{r}
-# set up environment
-options(conflicts.policy = "depends.ok")
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse)
-theme_set(theme_classic()) 
+theme_set(theme_classic())
 
-# Paths
-# not needed for this demo but included as example for lab scripts
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
-path_models <- format_path("studydata/risk/models/ema")
-path_data_shared <- format_path("studydata/risk/data_processed/shared")
-path_data_ema <- format_path("studydata/risk/data_processed/ema")
-```{r}
+library(readr)
+path_ready <- "_data/data_ready"
 
-# Create data
-data <- tibble(
-  name = c("A","B","C","D","E") ,  
-  value = c(3,12,5,18,45)
-  )
+source(here::here("_scripts/functions.R"))
+```
+
+```{r,warning=FALSE}
+d <- read_csv(here::here(path_ready, "ready_merg.csv"), show_col_types = FALSE)
 ```
 
 ```{r}
 #| label: fig-1
-#| fig-cap: "A Basic Barplot Figure"
+#| fig-cap: "Raw, continuous verbal cue distribution."
 
-ggplot(data, aes(x=name, y=value)) + 
-  geom_bar(stat = "identity")
+d %>%
+  pull(ver_pc) %>%
+  hist(main = "Histogram of Verbal Cues - Raw",
+       xlab = "Verbal Self-Report",
+       col = "lightgreen",
+       breaks = 10)
 ```
+
+```{r}
+d <- d %>%
+  mutate(
+    verb_bins = cut(
+      ver_pc,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE
+    ),
+    verb_bins = ordered(verb_bins,
+                        levels = c("Not at all", "A little", "Somewhat", "Quite a bit", "Very much"))
+  )
+
+# Verify
+is.ordered(d$verb_bins)
+levels(d$verb_bins)
+table(d$verb_bins, useNA = "ifany")
+```
+
+
+```{r}
+#| label: fig-2
+#| fig-cap: "Ordinal, binned verbal consent (anchor-informed)."
+
+d %>%
+  ggplot(aes(x = verb_bins)) +
+  geom_bar(fill = "darkgreen", color = "black") +
+  labs(title = "Distribution of Verbal Consent (Ordinal)",
+       x = "Verbal Cue Endorsement",
+       y = "Count")
+```
+
+
+```{r}
+#| label: fig-3
+#| fig-cap: "Raw, continuous nonverbal cue distribution."
+
+d %>%  
+  pull(non_verb) %>%
+  hist(main = "Histogram of Continuous Nonverbal (0-10)",
+       xlab = "Nonverbal Composite Score",
+       col = "lightblue",
+       breaks = 10)
+```
+
+```{r}
+# Create ordered bins for nonverbal consent cues
+d <- d %>%
+  mutate(
+    nonvb_bins = cut(
+      non_verb,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE
+    ),
+    nonvb_bins = ordered(nonvb_bins,
+                         levels = c("Not at all", "A little", "Somewhat", "Quite a bit", "Very much"))
+  )
+
+# Verify
+is.ordered(d$nonvb_bins)
+levels(d$nonvb_bins)
+table(d$nonvb_bins, useNA = "ifany")
+```
+
+```{r}
+#| label: fig-4
+#| fig-cap: "Ordinal, binned nonverbal consent (anchor-informed)."
+
+d %>%
+  ggplot(aes(x = nonvb_bins)) +
+  geom_bar(fill = "darkblue", color = "black") +
+  labs(title = "Distribution of Nonverbal Consent (Ordinal)",
+       x = "Nonverbal Cue Endorsement",
+       y = "Count")
+```
+

@@ -1,6 +1,29 @@
+# RStudio / R session files
 .Rproj.user
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
+.RDataTmp
+.RDataTmp/
 
-/.quarto/
+# macOS
+.DS_Store
+
+# Private data and scripts (keep out of Git history)
+_data/
+*.xlsx
+_scripts/
+
+# Quarto knitr rendered artifacts
+*_files/
+index_files/
+**/figure-html/
+**/cache/
+
+# Preview HTML files
+*-preview.html
+
+# Jupyter artifacts from template
+*.embed.ipynb
+*.out.ipynb

@@ -1,27 +1,21 @@
 ---
-title: Linear model 1
-author: John Curtin
+title: Preliminary Analysis 
+author: Stephanie Ward
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r}
-# set up environment
-options(conflicts.policy = "depends.ok")
-library(tidyverse)
-theme_set(theme_classic()) 
-
-# Paths
-# not needed for this demo but included as example for lab scripts
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
-path_models <- format_path("studydata/risk/models/ema")
-path_data_shared <- format_path("studydata/risk/data_processed/shared")
-path_data_ema <- format_path("studydata/risk/data_processed/ema")
+library(dplyr)
+library(tidyr)
+library(lme4)
+library(lmerTest)
+library(emmeans)
 ```
 
-Fit the lm to our data
+Fit the model
 ```{r}
-m <- lm (dist ~ speed, data = cars)
+m <- lm (aud_s ~ ders_sc, data = base_ana)
 summary(m)
 
 # Tidied version of coeffs table is preferred over summary for saving.  
@@ -41,5 +35,5 @@ NOTES:
 coeff_table |> write_csv(here::here("objects", "coeff_table.csv"))
 
 # There may be situations where you need access to the model itself in index.qmd.  If so, model objects should be saved with saveRDS()
-m |> saveRDS(here::here("objects", "lm.rds"))
+m |> saveRDS(here::here("objects", "lm_test.rds"))
 ```
