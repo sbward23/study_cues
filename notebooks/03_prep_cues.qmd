@@ -1,0 +1,727 @@
+---
+title: "Variable construction and model preparation"
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo = FALSE}
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+```
+
+```{r}
+# to detect and warn about conflicts
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+conflicts_prefer(lmerTest::lmer)
+```
+
+```{r}
+# to read in data
+library(readr)
+
+path_ready <- "_data/data_ready"
+
+# for data wrangling and cleaning
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(psych)
+library(recipes)
+library(dplyr)
+library(lme4)
+library(ordinal)
+library(lmerTest)
+library(kableExtra)
+
+source(here::here("_scripts/functions.R"))
+```
+
+```{r}
+d <- read_csv(here::here(path_ready, "imputed_1.csv"), show_col_types = FALSE)
+```
+
+### Variable preparation
+
+#### Verbal
+
+Create ordered bins for verbal consent cues
+
+```{r}
+d <- d %>%
+  mutate(
+    verb_bins = cut(
+      verb,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", 
+                 "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE),
+    verb_bins = ordered(verb_bins,
+                        levels = c("Not at all", "A little", 
+                                   "Somewhat", "Quite a bit", "Very much")))
+
+# Verify
+is.ordered(d$verb_bins)
+table(d$verb_bins, useNA = "ifany")
+```
+
+#### Nonverbal
+
+Composite
+
+```{r}
+d <- d %>%
+  rowwise() %>%  # calculate mean score
+  mutate(nvrb = mean(c(enon, inon)))
+
+psych::describe(d$nvrb)
+```
+
+Create ordered bins for nonverbal consent cues
+
+```{r}
+d <- d %>%
+  mutate(
+    nonvb_bins = cut(
+      nvrb,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", 
+                 "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE
+    ),
+    nonvb_bins = ordered(nonvb_bins,
+                         levels = c("Not at all", "A little", 
+                                    "Somewhat", "Quite a bit", "Very much")))
+# Verify
+is.ordered(d$nonvb_bins)
+table(d$nonvb_bins, useNA = "ifany")
+```
+
+#### Familiarity
+
+Friend and acquaintance categories showed sparse coverage across several
+ordinal outcome bins.
+
+```{r}
+d <- d %>%
+  mutate(
+    fam_lev = case_when(
+      fm_r == 1 ~ "Stranger",
+      fm_r %in% c(2, 3) ~ "Friend/Acq",
+      fm_r == 4 ~ "Romantic"),
+    fam_lev = factor(fam_lev,
+                     levels = c("Stranger", "Friend/Acq", "Romantic")))
+
+levels(d$fam_lev)     # Stranger is referent
+is.ordered(d$fam_lev) # Should not be ordered 
+table(d$fam_lev)
+
+# table(d$fam_lev, d$verb_bins)
+# table(d$fam_lev, d$nonvb_bins)
+```
+
+Two-level partner familiarity variable. Are encounters embedded in a
+romantic relational context higher in nonverbal cue use overall?
+
+```{r}
+d <- d %>%
+  mutate(
+    fam_rank = case_when(
+      fm_r %in% c(1, 2, 3) ~ "Less",  # Friend, Stranger, or Acquaintance
+      fm_r %in% c(4) ~ "More"), # Romantic 
+    fam_rank = factor(fam_rank,
+                     levels = c("Less", "More")))
+
+levels(d$fam_rank)     # Stranger is referent
+is.ordered(d$fam_rank) # Should not be ordered 
+table(d$fam_rank)
+```
+
+#### Intoxication "disparity"
+
+```{r}
+# Continuous parity = absolute difference between self and partner intoxication
+d$parity_con <- abs(d$intox - d$p_tox)
+
+psych::describe(d$parity_con)
+
+d <- d %>%
+  mutate(
+    parity_cat = case_when(
+      parity_con == 0 ~ "Equal",
+      intox > p_tox   ~ "Self-Higher",
+      intox < p_tox   ~ "Partner-Higher",
+      TRUE ~ NA_character_
+    ),
+    parity_cat = factor(parity_cat,
+                        levels = c("Equal","Self-Higher","Partner-Higher")))
+
+table(d$parity_cat)
+```
+
+#### AUDIT
+
+*Calculate total score post-imputation (4 obs = NA for aud2).*
+
+```{r}
+# AUDIT summed score 
+d <- d %>% 
+rowwise() %>% dplyr::mutate(auds = sum(aud1,aud2,aud3,aud4,aud5,
+                                       aud6,aud7,aud8,aud9,aud10))
+
+# AUDIT descriptives
+psych::describe(d$auds)
+
+# create a character vector for the audit items
+audit_vector <- c("aud1","aud2","aud3","aud4","aud5",
+                  "aud6","aud7","aud8","aud9","aud10")
+
+psych::alpha(d[, audit_vector], check.keys = T) # alpha = .81
+```
+
+### Set factor levels
+
+```{r}
+d <- d %>%
+  mutate(
+    # Binary contextual indicators
+    prec = factor(prec,
+                  levels = c(0, 1),
+                  labels = c("No_history", "Precedent")),
+    
+    bpa  = factor(bpa,
+                  levels = c(0, 1),
+                  labels = c("No_venues", "Bar_party")),
+    
+    # Sexual activity type
+    s_act = factor(s_act,
+                   levels = c("Contact", "Penetration")),
+
+    # Gender (time-invariant)
+    gend_di = factor(gend_di,
+                     levels = c(0, 1),
+                     labels = c("Women_GNC", "Men"))
+  )
+
+# Drinks if ordered factor (likely untenable?)
+d <- d %>%
+  mutate(
+    drk_ord = factor(
+      drink,
+      levels = 1:6,
+      labels = c("0", "1–2", "3–4", "5–6", "7–9", "10+"),
+      ordered = TRUE))
+```
+
+### Decompose
+
+#### L1 Numeric
+
+```{r}
+d <- decompose_num(
+  df   = d,
+  id   = "nid",
+  vars = c("intox", "parity_con", "drink","p_tox"))
+```
+
+Check decomposition
+
+```{r}
+d %>%
+  group_by(nid) %>%
+  summarise(m_wp = mean(parity_con_wp), .groups="drop") %>%
+  summarise(max_abs = max(abs(m_wp)),
+            overall = mean(m_wp))
+
+d %>%
+  summarise(max_abs_err = max(abs(parity_con - (parity_con_wp + parity_con_pm))))
+```
+
+#### L1 factors
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "prec",
+  baseline = "No_history",
+  prefix   = "prec")
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "bpa",
+  baseline = "No_venues",
+  prefix   = "bpa"
+)
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "s_act",
+  baseline = "Contact",
+  prefix   = "act"
+)
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "fam_rank",
+  baseline = "Less",
+  prefix   = "fam2"
+)
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "fam_lev",
+  baseline = "Stranger",
+  prefix   = "fam3"
+)
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
+  var      = "parity_cat",
+  baseline = "Equal",
+  prefix   = "par"
+)
+
+levels(d$parity_cat)
+```
+
+### Center
+
+```{r}
+pm_cols <- names(d)[grepl("_pm$", names(d))]
+d <- grand_mean_center(d, cols = pm_cols)
+```
+
+```{r, eval=FALSE}
+names(d)[grepl("^prec_", names(d))]
+names(d)[grepl("^bpa_",  names(d))]
+names(d)[grepl("^act_", names(d))]
+names(d)[grepl("^fam3_", names(d))]
+names(d)[grepl("^par_", names(d))]
+```
+
+#### + Standardize
+
+```{r}
+# person-level predictors (baseline)
+d <- grand_mean_center(
+  d,
+  cols = c("bidr", "auds", "irma", "ppat", "asco"),
+  scale = TRUE
+)
+```
+
+Continuous person-level predictors were grand-mean centered and, where
+appropriate, standardized (z-scored) to facilitate interpretability and
+comparability across constructs measured on different scales.
+Between-person components of time-varying predictors were grand-mean
+centered. Within-person deviation terms and categorical predictors were
+not standardized.
+
+### Transform for LMMs
+
+```{r}
+rec_outcomes <- recipe(~ ., data = d) %>%
+  step_YeoJohnson(verb, nvrb)
+
+prep_rec <- prep(rec_outcomes, training = d)
+
+d_lmm <- bake(prep_rec, new_data = d) %>%
+  rename(
+    verb_yj = verb,
+    nvrb_yj = nvrb)
+
+names(d_lmm)
+```
+
+### ICCs
+
+#### LMEMs
+
+**Verbal**
+
+```{r}
+v_null <- lmer(verb_yj ~ 1 + (1 | nid), data = d_lmm, REML = TRUE)
+icc_verb <- icc_lmm(v_null, group = "nid")
+within_verb <- 1 - icc_verb
+
+icc_verb
+within_verb
+```
+
+**Nonverbal**
+
+```{r}
+n_null <- lmer(nvrb_yj ~ 1 + (1 | nid), data = d_lmm, REML = TRUE)
+icc_nvrb <- icc_lmm(n_null, group = "nid")
+within_nvrb <- 1 - icc_nvrb
+
+icc_nvrb
+within_nvrb
+```
+
+```{r, echo=FALSE}
+icc_table <- bind_rows(
+  icc_lmm_ci(v_null, group = "nid", R = 2000) %>% mutate(Outcome = "Verbal cues"),
+  icc_lmm_ci(n_null, group = "nid", R = 2000) %>% mutate(Outcome = "Nonverbal cues")
+) %>%
+  mutate(
+    `1 - ICC` = 1 - ICC,
+    ICC = strip0(sprintf("%.3f", ICC)),
+    `95% CI` = strip0(sprintf("[%.3f, %.3f]", ICC_low, ICC_high)),
+    `1 - ICC` = strip0(sprintf("%.3f", `1 - ICC`))
+  ) %>%
+  select(Outcome, ICC, `95% CI`, `1 - ICC`)
+
+saveRDS(icc_table, here::here("objects/icc_table.rds"))
+```
+
+
+#### Cell sizes
+
+For some event-level predictors, within-person variability was limited;
+accordingly, within-person effects are estimated from the subset of
+participants who experienced variation in these characteristics.
+
+```{r}
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(act_varies = n_distinct(s_act, na.rm = TRUE), .groups="drop") %>%
+  count(act_varies)
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(bpa_varies = n_distinct(bpa) > 1) %>%
+  summarise(prop_vary = mean(bpa_varies))
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(prec_varies = n_distinct(prec) > 1) %>%
+  summarise(prop_vary = mean(prec_varies))
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(prec_varies = n_distinct(prec), .groups="drop") %>%
+  count(prec_varies)
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(fam_varies = n_distinct(fam_lev), .groups="drop") %>%
+  count(fam_varies)
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(par_varies = n_distinct(parity_cat)) %>%
+  count(par_varies)
+
+d_lmm %>%
+  group_by(nid) %>%
+  summarise(par_varies = n_distinct(parity_cat), .groups="drop") %>%
+  count(par_varies)
+```
+
+### Time effects
+
+Evaluate study `day` for inclusion in **verbal** models as fixed design
+covariate and assess support for random slope
+
+```{r}
+d_lmm <- d_lmm %>%   # center
+  mutate(day_c = day - mean(day))
+
+v_null <- lmer(verb_yj ~ 1 + 
+                 (1 | nid), data = d_lmm, REML = FALSE)
+
+v_m0 <- lmer(verb_yj ~ day_c +
+               (1 | nid), data = d_lmm, REML = FALSE) # compare to unconditional LMEM
+
+anova(v_null, v_m0) # support for fixed design covariate? No
+
+v_m1 <- lmer(verb_yj ~ day_c + (1 + day_c | nid), data = d_lmm, REML = TRUE)
+
+anova(v_m0, v_m1) # support for random slope? Yes
+
+VarCorr(v_m1)
+as.data.frame(VarCorr(v_m1))
+isSingular(v_m1)
+
+# Unconditional CLMM with random intercepts for participants (`nid`) and no predictors
+v_null_clmm <- clmm(verb_bins ~ 1 + 
+                      (1 | nid), 
+                    data = d_lmm, 
+                    link = "logit", Hess = TRUE)
+
+v_m0_clmm <- clmm(verb_bins ~ day_c + 
+                    (1 | nid), 
+                  data = d_lmm, 
+                  link = "logit", Hess = TRUE)
+
+anova(v_null_clmm, v_m0_clmm)  # support for fixed design covariate? No
+
+v_m1_clmm <- clmm(verb_bins ~ day_c + 
+                    (1 + day_c | nid),
+                  data = d_lmm, 
+                  link = "logit", Hess = TRUE)
+
+anova(v_m0_clmm, v_m1_clmm) # support for random slope? Yes
+summary(v_m1_clmm)
+as.data.frame(VarCorr(v_m1_clmm))
+```
+
+Evaluate study `day` for inclusion in **nonverbal** models as fixed
+design covariate and assess support for random slope
+
+```{r}
+n_null <- lmer(nvrb_yj ~ 1 + 
+                 (1 | nid), data = d_lmm, REML = FALSE)
+
+n_m0 <- lmer(nvrb_yj ~ day_c +
+               (1 | nid), data = d_lmm, REML = FALSE) # compare to unconditional LMEM
+
+anova(n_null, n_m0) # support for fixed design covariate? No
+
+n_m1 <- lmer(nvrb_yj ~ day_c + (1 + day_c | nid), data = d_lmm, REML = FALSE)
+
+anova(n_m0, n_m1) # support for random slope? No
+
+VarCorr(n_m1)
+as.data.frame(VarCorr(n_m1))
+
+# Unconditional CLMM with random intercepts for participants (`nid`) and no predictors
+n_null_clmm <- clmm(nonvb_bins ~ 1 + 
+                      (1 | nid), 
+                    data = d_lmm, 
+                    link = "logit", Hess = TRUE)
+
+n_m0_clmm <- clmm(nonvb_bins ~ day_c + 
+                    (1 | nid), 
+                  data = d_lmm, 
+                  link = "logit", Hess = TRUE)
+
+anova(n_null_clmm, n_m0_clmm)  # support for fixed design covariate? No
+
+n_m1_clmm <- clmm(nonvb_bins ~ day_c + 
+                    (1 + day_c | nid),
+                  data = d_lmm, 
+                  link = "logit", Hess = TRUE)
+
+anova(n_m0_clmm, n_m1_clmm) # support for random slope? No
+summary(n_m1_clmm)
+as.data.frame(VarCorr(n_m1_clmm))
+```
+
+
+### Random slopes
+
+#### Verbal
+
+**Sexual act** — People differ meaningfully in how much their verbal
+consent cue use changes when encounters involve penetration versus
+contact. **Include** random slope.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "act_penetration_wp",
+  pm_c = "act_penetration_pm_c",
+  data = d_lmm)
+```
+
+Verbal consent cue use was significantly higher during penetrative
+sexual encounters compared to encounters that did not progress beyond
+kissing or touching. This effect was observed within individuals,
+indicating that when a given participant engaged in penetrative sexual
+activity, they reported greater use of verbal consent cues than during
+their own contact-only encounters. Although the magnitude of this effect
+varied across individuals, the average within-person association was
+positive.
+
+```{r}
+m_act <- lmer(
+  verb_yj ~ act_penetration_wp + act_penetration_pm_c +
+    (1 + act_penetration_wp + day_c || nid),
+  data = d_lmm,
+  REML = TRUE)
+
+summary(m_act)
+```
+
+**Include** random slope for verbal if using 2-level **familiarity**.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "fam2_more_wp",
+  pm_c = "fam2_more_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for precedent predicting verbal.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "prec_precedent_wp",
+  pm_c = "prec_precedent_pm_c",
+  data = d_lmm
+)
+```
+
+Exclude random slope for drink predicting verbal.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "drink_wp",
+  pm_c = "drink_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for disparity predicting verbal.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "parity_con_wp",
+  pm_c = "parity_con_pm_c",
+  data = d_lmm)
+```
+
+```{r, eval=FALSE}
+# subjective and perceived intoxication
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "intox_wp",
+  pm_c = "intox_pm_c",
+  data = d_lmm)
+
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "p_tox_wp",
+  pm_c = "p_tox_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for bpa predicting verbal.
+
+```{r}
+test_random_slope(
+  outcome = "verb_yj",
+  wp = "bpa_bar_party_wp",
+  pm_c = "bpa_bar_party_pm_c",
+  data = d_lmm)
+```
+
+#### Nonverbal
+
+Exclude random slope for sexual act predicting nonverbal.
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "act_penetration_wp",
+  pm_c = "act_penetration_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for nonverbal if using 2-level familiarity.
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "fam2_more_wp",
+  pm_c = "fam2_more_pm_c",
+  data = d_lmm
+)
+```
+
+Exclude random slope for precedent predicting nonverbal.
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "prec_precedent_wp",
+  pm_c = "prec_precedent_pm_c",
+  data = d_lmm
+)
+```
+
+Exclude random slope for drink predicting nonverbal.
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "drink_wp",
+  pm_c = "drink_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for disparity predicting nonverbal
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "parity_con_wp",
+  pm_c = "parity_con_pm_c",
+  data = d_lmm)
+```
+
+```{r, eval=FALSE}
+# subjective and perceived intoxication
+
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "intox_wp",
+  pm_c = "intox_pm_c",
+  data = d_lmm)
+
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "p_tox_wp",
+  pm_c = "p_tox_pm_c",
+  data = d_lmm)
+```
+
+Exclude random slope for bpa predicting nonverbal.
+
+```{r}
+test_random_slope(
+  outcome = "nvrb_yj",
+  wp = "bpa_bar_party_wp",
+  pm_c = "bpa_bar_party_pm_c",
+  data = d_lmm)
+```
+
+### Export
+```{r}
+saveRDS(
+  d_lmm,
+  here::here(path_ready, "imp1_ana.rds"))
+```

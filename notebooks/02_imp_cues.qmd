@@ -1,5 +1,5 @@
 ---
-title: "3_impute"
+title: "Multiple imputation of missing data"
 output: 
   html_document:
     toc: true 
@@ -7,6 +7,15 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+```{css, echo = FALSE}
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+```
 
 ```{r}
 library(conflicted)
@@ -24,6 +33,7 @@ library(mice)
 library(miceadds)
 library(VIM)
 library(lme4)
+library(purrr)
 
 path_ready <- "_data/data_ready"
 ```
@@ -33,9 +43,9 @@ path_ready <- "_data/data_ready"
 Read in data
 
 ```{r}
-b <- read_csv(here::here(path_ready, "ready_base.csv"), show_col_types = FALSE)
+b <- read_csv(here::here(path_ready, "base_tst.csv"), show_col_types = FALSE)
 
-diary <- read_csv(here::here(path_ready, "diary_sub.csv"), show_col_types = FALSE)
+diary <- read_csv(here::here(path_ready, "diary_tst.csv"), show_col_types = FALSE)
 ```
 
 #### Confirm diary is in long format
@@ -49,7 +59,11 @@ diary %>%
   count(nid) %>%
   count(n)
 ```
-The diary are structured in long format, with one row per event and multiple events nested within participants. A majority of participants (60.5%) contributed more than one event, with a median of two events per participant and up to 19 events for some individuals.
+
+The diary are structured in long format, with one row per event and
+multiple events nested within participants. A majority of participants
+(60.5%) contributed more than one event, with a median of two events per
+participant and up to 19 events for some individuals.
 
 #### Match types and confirm tidy events
 
@@ -88,46 +102,54 @@ d <- diary %>%
 
 ```{r}
 d <- d %>% 
-  select(-c(osb3:traum4, psb_cub, s_life, med1_p:med4_p, cub3:cub6, au_t:au_drg))
+  select(-c(osb3:traum4, med1_p:med4_p, cub3:cub6, au_t:au_drg))
 
 df <- d %>%
-  select(nid, eid, day, bpa, fm_r, s_tx, p_tx, drnk, verb, enon, inon,
-         sact, prec, gend_di, aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8, aud9, 
+  select(nid, eid, day, bpa, fm_r, intox, p_tox, drink, verb, enon, inon,
+         s_act, prec, gend_di, aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8, aud9, 
          aud10, asco, irma, ppat, bidr) %>% glimpse()
 ```
 
 ### Explore missingness
 
-NOTE: n = 1 `nid` (9128298) endorsed "Prefer not to respond" for `bpa`
-- best conceptualized as item nonresponse. 
-- Treat as missing and impute. 
-```{r}
-df %>% select(bpa) %>% map(tabyl)
-
-df <- df %>%
-  mutate(bpa = ifelse(bpa == 3, NA, bpa))
-```
+NOTE: n = 1 `nid` (9128298) endorsed "Prefer not to respond" for `bpa`;
+obs was coded NA to be imputed
 
 ```{r}
 colSums(is.na(df))[colSums(is.na(df)) > 0]
 ```
 
-An examination of missing data patterns indicated that missingness was sparse and localized to a small subset of event-level variables. The majority of observations were complete, and no observation exhibited extensive missingness across variables. Given this pattern, multiple imputation with chained equations will be used to address missing data under a missing-at-random assumption.
+A visual and tabular inspection of missing data patterns indicated that
+missingness was sparse, localized to a small number of event-level
+variables, and not concentrated within specific participants or events.
+
 ```{r}
-md.pattern(df)
+df_subset <- df %>%
+  select(bpa, fm_r, drink, verb, enon, inon, prec, aud2)
+
+md.pattern(df_subset)
 ```
 
-Visual and tabular inspection of missing data indicated that missingness was sparse, localized to a small number of event-level variables, and not concentrated within specific participants or events.
+The majority of observations were complete, and no observation exhibited
+extensive missingness across variables. Given this pattern, multiple
+imputation with chained equations will be used to address missing data
+under a missing-at-random assumption.
+
 ```{r}
 aggr(df, numbers = TRUE)
+
+aggr(df_subset, numbers = TRUE)
 ```
 
-Prepare vars for imputation
+### Imputation
+
+Prepare variables
+
 ```{r}
 df <- df %>%
   mutate(
     across(c(prec, gend_di, bpa), ~ factor(.x, levels = c(0, 1))),
-    sact = factor(sact, levels = c("Contact", "Penetration")))
+    s_act = factor(s_act, levels = c("Contact", "Penetration")))
 
 df_imp <- df %>%
   mutate(                       
@@ -141,9 +163,8 @@ rm(b, d, diary, df)
 df_imp %>% glimpse()
 ```
 
-### Predictor-matrix rules
-
 Initialize
+
 ```{r}
 # create default blocks/methods/predictorMatrix
 ini <- mice(df_imp, maxit = 0, printFlag = FALSE)
@@ -155,7 +176,8 @@ meth   <- ini$method
 ini$loggedEvents
 ```
 
-Declare cluster for 2-level setup and protect structure vars
+Declare cluster for 2-level setup and protect structure
+
 ```{r}
 meth["nid"]   <- ""   # do not impute nid (participant ID) itself
 pred[, "nid"] <- -2   # declare nid the cluster variable for 2l.* methods
@@ -172,15 +194,16 @@ pred["day", ] <- 0   # nid is not predicted by anything
 ```
 
 Specify methods for variables with missingness
+
 ```{r}
-meth["aud2"]        <- "pmm"
-meth["bpa"]        <- "logreg"
-meth["prec"]        <- "logreg"
-meth["fm_r"]        <- "2l.pmm"
-meth["drnk"]      <- "2l.pmm"
-meth["verb"]      <- "2l.pmm"
-meth["enon"]     <- "2l.pmm"
-meth["inon"]     <- "2l.pmm"
+meth["aud2"]    <- "pmm"
+meth["bpa"]     <- "logreg"
+meth["prec"]    <- "logreg"
+meth["fm_r"]    <- "2l.pmm"
+meth["drink"]    <- "2l.pmm"
+meth["verb"]    <- "2l.pmm"
+meth["enon"]    <- "2l.pmm"
+meth["inon"]    <- "2l.pmm"
 
 # don't use nonverbal items to impute verbal
 pred["verb", c("enon", "inon")] <- 0
@@ -225,7 +248,7 @@ imp
 ```{r}
 stripplot(imp, fm_r ~ .imp)
 stripplot(imp, prec ~ .imp)
-stripplot(imp, drnk ~ .imp)
+stripplot(imp, drink ~ .imp)
 stripplot(imp, enon ~ .imp)
 stripplot(imp, inon ~ .imp)
 stripplot(imp, verb ~ .imp)
@@ -235,10 +258,30 @@ stripplot(imp, aud2 ~ .imp)
 ```{r}
 summary(complete(imp, 1)$fm_r) 
 summary(complete(imp, 1)$prec)
-summary(complete(imp, 1)$drnk)
+summary(complete(imp, 1)$drink)
 summary(complete(imp, 1)$enon)
 summary(complete(imp, 1)$inon)
 summary(complete(imp, 1)$verb)
 summary(complete(imp, 1)$aud2)
 ```
 
+```{r}
+completed_list <- mice::complete(imp, action = "all")
+```
+
+Export as a list of completed dataframes
+
+```{r, eval=FALSE}
+saveRDS(
+  completed_list,
+  here::here(path_ready, "imputed_datasets.rds"))
+```
+
+Export individual CSV files (one .csv per imputation)
+
+```{r, eval=FALSE}
+purrr::iwalk(
+  completed_list,
+  ~ write_csv(.x, here::here(path_ready, paste0("imputed_", .y, ".csv")))
+)
+```

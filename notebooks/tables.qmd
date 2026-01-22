@@ -6,14 +6,32 @@ html-table-processing: none
 
 ```{r}
 library(tidyverse)
+library(readr)
 library(kableExtra)
 ```
 
 ```{r}
-#| label: table-1
-#| tbl-cap: Table 1
+icc_table <- readRDS(here::here("objects/icc_table.rds"))
+```
 
 
+```{r}
+#| label: tbl-icc
+#| tbl-cap: Intraclass correlation coefficients for sexual consent cue use.
+
+icc_table <- icc_table %>%
+  mutate(
+    ICC = ICC |> str_replace("^0\\.", "."),
+    `1 - ICC` = `1 - ICC` |> str_replace("^0\\.", "."),
+    `95% CI` = `95% CI` |> str_replace("\\b0\\.", ".")
+  )
+
+icc_table %>%
+  kbl(
+    booktabs = TRUE,
+    align = c("l", "c", "c", "c")
+  ) %>%
+  kable_styling(full_width = FALSE)
 ```
 
 ```{r}

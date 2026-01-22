@@ -27,3 +27,5 @@ index_files/
 # Jupyter artifacts from template
 *.embed.ipynb
 *.out.ipynb
+
+/.quarto/

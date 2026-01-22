@@ -1,6 +1,6 @@
 ---
-title: Verbal and nonverbal sexual consent cue use among university students
-subtitle: A micro-longitudinal investigation
+title: Alcohol and sexual consent communication
+subtitle: A daily diary investigation of verbal and nonverbal cues
 author:
   - name: Stephanie B. Ward 
     orcid: https://orcid.org/0000-0002-8191-0158
@@ -10,9 +10,9 @@ author:
       - Department of Psychology, University of Wisconsin-Madison
 keywords:
   - Sexual consent
+  - Alcohol 
   - Sexual assault
   - College student
-  - Alcohol
 date: last-modified
 bibliography: zotero_lib.bib
 csl: _csl/american-medical-association.csl
@@ -23,109 +23,71 @@ editor:
   wrap: 72
 ---
 
-## SPECIFIC AIMS
+## Introduction
 
 Sexual consent is a complex process involving thoughts, feelings, and
 behaviors used to determine and express willingness to engage in sexual
-activity with a particular person in a particular context; the presence
-of consent distinguishes wanted sexual encounters from sexual assault.
-[@muehlenhardComplexitiesSexualConsent2016] People can communicate
-consent using active consent cues, which may be verbal or nonverbal and
-direct or indirect, ranging from a clear and spoken “yes” to subtle body
-language. [@willisAssociationsInternalExternal2019] Programs designed to
-prevent sexual assault often target consent communication, but a
-substantial gap exists between their curriculum and the varied consent
-practices that young people use during sexual encounters. [@curtis2017]
-Individual factors such as demographics, attitudes,
-[@wardAlcoholUseHostility2025] and typical behavior
-[@marcantonioEffectsTypicalBinge2022] are linked to differences in
-consent cue use. Gender, for instance, is a significant factor,
-[@willisBarriersSuccessAffirmative2018] but there is mixed evidence
-regarding its associations with consent cues. Some research suggests men
-are more likely than women to use verbal cues relative to indirect,
-nonverbal cues, while other studies observe interactions or trends that
-imply gender differences hinge on
-context.[@marcantonioWithinPersonExaminationAlcoholInvolved2024,
-@willisSexualConsentCommitted2021] Unpacking the complexity around
-person-level and situational factors could illuminate more information
-about the conditions under which particular individuals are likely to
-use certain types of consent cues.
+activity.[@muehlenhardComplexitiesSexualConsent2016] Specific behaviors
+used to infer and communicate consent include verbal and nonverbal cues,
+which can be explicit or implicit, ranging from clear spoken dialogue
+("Yes!") to subtle body
+language.[@willisAssociationsInternalExternal2019] The presence of
+consent distinguishes wanted sexual experiences from sexual assault, so
+programs aiming to prevent sexual assault often target consent
+communication. A substantial gap exists between these programs'
+curricula and the varied consent practices that young people use during
+sexual encounters, particularly those involving alcohol
+use.[@curtis2017]
 
-Research on the contexts in which individuals use certain consent cues
-has been limited. This is a problem because situational factors such as
-sexual behavior type, co-occurring intoxication, and feelings of arousal
-and pleasure are linked to within-person differences in consent cue use.
-[@willisInternalExternalSexual2021, @rinioloRoleAlcoholContext2025]
-Within-person variability has been shown to account for more than 70% of
-the variance in sexual consent cues,
-[@willisAssessingWithinPersonVariability2021] indicating that context
-may be more informative than individual differences in how people
-communicate consent in general. Researchers examining situational
-factors related to consent have done so by conducting systematic,
+Alcohol use frequently co-occurs with sexual assault and muddles
+communication dynamics within young adults' consensual sexual
+encounters. A recent scoping review of the alcohol and sexual consent
+literature highlighted the need for more quantitative research in this
+area. The authors called for studies using methods that permit careful
+evaluation of the contextual features of alcohol-involved consent by
+facilitating event-level data collection on individual sexual encounters
+and aspects within them that covary with cue use. This call to action is
+important because contextual factors—such as co-occurring intoxication
+and type of sexual activity—have been linked to within-person
+differences in consent communication. [@rinioloRoleAlcoholContext2025,
+@willisInternalExternalSexual2021]
+
+Researchers studying contextual factors linking alcohol to variance in
+consent communication have done so by conducting systematic,
 within-person comparisons of two matched events,
 [@marcantonioWithinPersonExaminationAlcoholInvolved2024] or by grounding
 responses to each person’s most recent sexual encounter, which could
-have occurred weeks to months in the past.
-[@walshSexualVictimizationEmotion2024] By asking people to remember past
-events, these studies risk greater recall bias relative to
-micro-longitudinal studies, which assess situational factors closer in
-time to when consent communication occurs.
-
-Although diaries and ecological momentary assessment have been used
-extensively in other behavioral science research to illuminate important
-time-varying situational predictors of health-risk behaviors,
+have occurred weeks to months in the past. \[replace citation\] While
+informative, these studies risk greater recall bias by asking people to
+remember past events. In contrast, micro-longitudinal studies assess
+contextual factors closer in time to when consent communication occurs.
+Although ecological momentary assessment and electronic daily diaries
+have been used extensively in other clinical science research to
+illuminate important time-varying predictors of health risk behaviors,
 [@serreEcologicalMomentaryAssessment2015, @rodríguez-blanco2018,
 @bolger2003] only one published investigation of this kind has been
-conducted in the sexual consent research space. Willis and colleagues
-surveyed participants three times per day for 28 days and found that
-those engaging in more intimate sexual behavior  (i.e., vaginal or anal
-penetration) reported more active consent communication than those
-engaging in less intimate behaviors, while no significant event-level
-associations between alcohol use and verbal or nonverbal consent cue use
-were observed. [@willisInternalExternalSexual2021,
-@willisAssessingWithinPersonVariability2021] However, this research
+examined alcohol and sexual consent communication.
+
+Willis and colleagues surveyed participants three times per day for 28
+days and found that within-person variability accounted for more than
+70% of the variance in sexual consent
+communication.[@willisAssessingWithinPersonVariability2021] Participants
+reported greater consent cue use for sexual encounters involving more
+physically intimate sexual behaviors (i.e., vaginal or anal penetration)
+than for encounters involving less intimate behaviors,
+[@willisAssessingWithinPersonVariability2021] but no significant
+event-level associations between alcohol involvement and verbal or
+nonverbal consent were observed in this
+sample.[@willisInternalExternalSexual2021] The previous research
 examined a limited set of predictors and reflected a specific
 subpopulation of adults in committed relationships; the current project
-builds on their findings by probing person- and event-level associations
-with consent cue use among college students while expanding the range of
-possible predictors. Examining these associations in different samples
-and in relation to a wider array of variables is a crucial next step
-toward isolating more actionable targets for consent communication
-interventions. 
-
-To advance the field, this project leverages micro-longitudinal data to
-identify proximal situational correlates of verbal and nonverbal consent
-cues that explain variance above and beyond the effects of significant
-individual factors. I will analyze approximately 500 sexual events
-reported by 152 college students to extend previous research
-investigating between- and within-person variation in consent
-communication, with the goal of informing future research and sexual
-assault prevention efforts focused on changing consent behavior.
-Specifically, I propose the following aims. 
-
-**Primary Aim:** To investigate the cognitive (attitudes, perceptions)
-and behavioral between- and within-person correlates of consent cue
-usage to communicate sexual consent.
-
-*Hypotheses:* (H1a): Permissive individual attitudes toward
-alcohol-involved consent and sexual coercion/rape will be negatively
-related to consent cue use, and this effect will be stronger for events
-involving alcohol use. (H1b) Sexual risk behavior, hazardous alcohol
-use, and adherence to sexual consent norms will be negatively related to
-consent cue use when controlling for sexual precedence. (H1c) Discrepant
-participant-partner intoxication levels ("disparity") will be negatively
-related to consent cue use, and this association will be stronger for
-events involving less-familiar partners relative to current/former
-dating partners. (H1d) Pre-encounter alcohol consumption (-), sexual
-behavior type (+), will be significantly related to verbal consent when
-controlling for social desirability bias, such that lower drink counts
-and more intimate sexual acts (involving penetration \> kissing,
-touching) will positively predict verbal cue use within the concurrent,
-24-hour window.
-
-**Secondary Aim:** To extend primary analyses to consider the role of
-peer influence (e.g., perceived peer attitudes and norm, peer network
-gender diversity).
+builds on their findings by probing encounter- and person-level
+associations with alcohol and consent cue use among university students
+while expanding the range of possible predictors. Examining these
+associations in different samples and in relation to a wider array of
+variables is a crucial next step toward isolating more actionable
+targets for sexual assault prevention efforts focused on changing
+consent behavior.
 
 ## BACKGROUND AND SIGNIFICANCE
 
@@ -280,7 +242,7 @@ alcohol consumption are more likely to take place outside the home and
 involve someone less well known to the victim.
 [@lorenzAlcoholSexualAssault2016]
 
-#### Partner familiarity and sexual precedence
+#### Partner familiarity and sexual precedent
 
 The relationship or degree of familiarity between two people involved in
 a sexual encounter has been related to differences in consent
@@ -301,20 +263,94 @@ patterns observed over time within relationships suggest a complex
 relationship between shared sexual history and consent communication
 that warrants further evaluation. [@willisSexualPrecedentsEffect2019]
 
-### Significance of proposed research
+### Significance of the current research
 
 Conflicting findings and gaps in the literature highlight a pressing
 need for research grounded in real-time lived experiences that can help
 to explain what relational and situational factors are linked to
 differences in the degree to which university students’ use different
 consent cues. Experiential sampling via daily reports can facilitate a
-more nuanced understanding of the contexts that make verbal and
-nonverbal consent communication less likely during students’ sexual
-encounters. Knowledge of these contextual factors can then be used to
-inform ecological momentary interventions designed to be delivered when
-and where the evidence suggests they will be most effective–an approach
-that has shown promise for reducing risk of sexual revictimization among
-college women.[@maloney2024]
+more nuanced understanding of the types of alcohol involvement that
+weaken verbal and nonverbal consent communication during students’
+sexual encounters. Knowledge of these contextual factors can then be
+used to inform ecological momentary interventions designed to be
+delivered when and where the evidence suggests they will be most
+effective–an approach that has shown promise for reducing risk of sexual
+revictimization among college women.[@maloney2024]
+
+### Research goals and hypotheses
+
+**To evaluate relationships between contextual factors and cue use for
+communicating about consent during sexual encounters.** We hypothesized
+that behavior type, partner type, and gender would be significant
+correlates:
+
+-   H0.1: Verbal consent cue use will be greater for encounters
+    involving penetrative sexual behaviors when compared to encounters
+    that did not advance beyond kissing/touching.
+
+-   H0.2: Nonverbal consent cue use will be greater for encounters
+    involving more familiar partners when compared to encounters
+    involving partners with less familiarity.
+
+-   H0.3: Nonverbal consent cue use will be greater for women and gender
+    nonconforming (GNC) individuals when compared to men.
+
+**To examine associations between alcohol and consent cue use during
+sexual encounters.**
+
+-   H1.1: Alcohol consumption (# of drinks) will be significantly,
+    negatively associated with both verbal and nonverbal consent cue
+    use.
+
+-   H1.2: The continuous absolute difference between subjective
+    participant and perceived partner intoxication ("intoxication
+    disparity") will be significantly, negatively associated with verbal
+    cue use.
+
+-   H1.3: Drinking venue attendance will be significantly, negatively
+    associated with both nonverbal and verbal cue use. We expect this
+    negative effect will be more pronounced for nonverbal cues.
+
+-   H1.4: Among alcohol-involved encounters, there will be an inverted-U
+    relationship between both alcohol consumption and subjective
+    intoxication and verbal cue use: low → moderate = verbal consent
+    increases; moderate → high = verbal consent decreases.
+
+**To investigate the moderating role of behavior type, partner
+familiarity, and gender in the associations between alcohol and consent
+cue use.**
+
+-   H2.1: The negative association between alcohol consumption and
+    verbal cue use will be weaker for penetrative behaviors and stronger
+    for encounters involving kissing/touching.
+
+-   H2.2: The negative association between drinking venue attendance and
+    nonverbal cue use will be stronger among less familiar partners.
+
+-   H2:3: The negative association between intoxication disparity and
+    verbal cue use will be stronger among men compared to women and GNC
+    individuals.
+
+**To evaluate the extent to which distal individual factors predict
+consent cue use after controlling for relevant contextual correlates.**
+
+-   H3.1: Social desirability bias and rape myth rejection will be
+    positively associated with verbal cues after controlling for partner
+    familiarity and behavior type.
+
+-   H3.2: Permissive individual and perceived peer attitudes toward
+    alcohol and coercion will be negatively associated with verbal cues
+    after controlling for partner familiarity and behavior type.
+
+-   H3.3: Hazardous alcohol consumption will be negatively associated
+    with both verbal and nonverbal cues after controlling for partner
+    familiarity and behavior type.
+
+-   H3.4: Permissive attitudes toward alcohol and coercion will
+    strengthen the negative association between intoxication disparity
+    and verbal cue use after controlling for partner familiarity and
+    behavior type.
 
 ## Method
 
@@ -379,24 +415,21 @@ research examining sexual consent and assault.
 
 ### Baseline
 
+*Create table*—
+
 Demographic measures assessed gender, age, race, sexual orientation,
 year in school, relationship status, campus involvement (e.g., Greek
 life, athletics), residence (e.g., dormitories), disability status, and
 socioeconomic indicators (e.g., Pell grant recipient). Individual
 attitudes: assessed with the Illinois Rape Myths Acceptance scale (7
-items);[@mcmahonUpdatedMeasureAssessing2011] Sociosexual Orientation
-Inventory (3 items);[@simpsonIndividualDifferencesSociosexuality1991]
-and the subtle coercion subscale of the Process-Based Consent scale.
-[@glaceMovingNewModel2020] Perceived peer attitudes: assessed with the
-Rape Attitudes and Beliefs Scale (2 items)[@burgess2007] and Alcohol and
-Sexual Consent scale (2 items). [@wardAlcoholSexualConsent2012]
-Individual behavior: assessed with the Alcohol Use Disorders
-Identification Test (10 items);[@saundersDevelopmentAlcoholUse1993]
-original and adapted Sexual Risk Behavior Scale (6 items);[@fino2021,
-@davisIntersectionMensSexual2018] and Sexual Consent Scale-Revised (3
-items). [@humphreysSexualConsentScalerevised2010] Trait emotion
-dysregulation was assessed with the Difficulties in Emotion Regulation
-Scale (16 items).[@victor2016]
+items);[@mcmahonUpdatedMeasureAssessing2011] and the subtle coercion
+subscale of the Process-Based Consent scale. [@glaceMovingNewModel2020]
+Perceived peer attitudes: assessed with the Rape Attitudes and Beliefs
+Scale (2 items)[@burgess2007] and Alcohol and Sexual Consent scale (2
+items). [@wardAlcoholSexualConsent2012] Individual behavior assessed
+with the Alcohol Use Disorders Identification Test (10 items) and the
+Sexual Consent Scale-Revised (3 items).
+[@humphreysSexualConsentScalerevised2010]
 
 ### Daily Diary
 
@@ -424,7 +457,7 @@ engage in any sexual activity with another person (including flirting,
 kissing, touching, or intercourse)?” Response options were: Yes (= 1),
 No (= 0), Prefer not to respond (= 3). 
 
-#### Relational
+#### Context
 
 **Partner familiarity:** Participants responded to the question, "How
 did you know this other person?" by selecting one of the following
@@ -432,11 +465,26 @@ familiarity levels from a list of response options: “I didn’t, we just
 met that day;” “They are an acquaintance;” “They are a friend;” and
 “They are my current or past dating/intimate partner.”
 
-**Sexual precedence:** Participants responded to the question, “Had you
+**Sexual precedent:** Participants responded to the question, “Had you
 ever had sexual contact with this person in the past?” with response
 options Yes (=1) and No (=0). 
 
-#### Perceptual
+**Sexual behavior type:** Participants were instructed to select all
+that apply from a list of specific behaviors that captures escalating
+levels of physical intimacy aligned with previously established sexual
+hierarchies: Kissing (=1); Touching (=2); Penetration with fingers or
+fingering (=3); Oral sex (=4); Vaginal sex (=5); and Anal sex
+(=6).[@sanders2010] An additional response option read, “I tried but no
+sexual contact happened,” and encounters for which this was the only
+response will not be included in the present analysis. A dichotomous
+variable comparing events involving Contact (kissing, touching) with
+those involving Penetration will be created, as will an ordinal
+event-level variable if representation across behaviors permits this
+level of granularity. The Contact v. Penetration distinction is what
+differentiates Sexual Assault from Rape in policy and criminal justice
+contexts as well as within the scientific literature.
+
+#### Alcohol
 
 **Perceived intoxication:** Participants rated their own intoxication
 ("How intoxicated did you feel right before or during this sexual
@@ -455,29 +503,14 @@ themselves as more intoxicated (Self-Higher), and for when the
 participant perceived the other person as more intoxicated
 (Partner-Higher). 
 
-#### Behavioral
-
-**Sexual behavior type:** Participants were instructed to select all
-that apply from a list of specific behaviors that captures escalating
-levels of physical intimacy aligned with previously established sexual
-hierarchies: Kissing (=1); Touching (=2); Penetration with fingers or
-fingering (=3); Oral sex (=4); Vaginal sex (=5); and Anal sex
-(=6).[@sanders2010] An additional response option read, “I tried but no
-sexual contact happened,” and encounters for which this was the only
-response will not be included in the present analysis. A dichotomous
-variable comparing events involving Contact (kissing, touching) with
-those involving Penetration will be created, as will an ordinal
-event-level variable if representation across behaviors permits this
-level of granularity. The Contact v. Penetration distinction is what
-differentiates Sexual Assault from Rape in policy and criminal justice
-contexts as well as within the scientific literature.
-
 **Pre-encounter alcohol consumption:** Participants were asked, “How
 many drinks did you consume prior to or during this activity?” with
 response options for the following drink counts: 0; 1-2; 3-4; 5-6; 7-9;
 and 10+ drinks.
 
-### Outcome variables
+**Drinking venue attendance: ...**
+
+### Outcomes
 
 **Consent cue use:** After reading the question stem, “To what extent
 did you do the following during the sexual activity?” participants rated
@@ -495,7 +528,7 @@ survey.](images/cues_mobile.png){width="315"}
 -   **Nonverbal, Indirect:** “Used subtle signals to communicate with
     your partner about consent for the sexual activity.”
 
-### Validity of outcome measures
+#### Validity of outcome measures
 
 Despite the need for and potential benefits of using experience sampling
 methods (ESM) to examine alcohol-involved sexual consent experiences,
@@ -530,7 +563,7 @@ In the sections that follow, I present findings aligned with these
 criteria that offer support for the validity of the brief outcome
 measures used in the current research.
 
-#### 1) Definitional correspondence
+##### 1) Definitional correspondence
 
 Active consent communication is the use of words or behaviors (i.e.,
 cues) to communicate to another person agreement to engage in sexual
@@ -618,7 +651,7 @@ dissertation will examine Nonverbal and Verbal cue use separately.
 Higher scores indicate greater use of each type of cue to communicate
 consent.
 
-#### 2) Situational sensitivity and within-person validity
+##### 2) Situational sensitivity and within-person validity
 
 To meet this criterion, event-level scores should change in predictable
 ways across situations within the same person.
@@ -678,13 +711,12 @@ nonverbal cue use, β = 0.10, SE = 0.04, t(459) = 2.80, p = .005, 95% CI
 that participants’ consent communication varies appropriately with the
 intimacy of the sexual behavior reported.
 
-#### 3) Between-person validity evidence
+##### 3) Between-person validity evidence
 
 To satisfy multi-level validity, evidence should demonstrate that the
-measure functions between persons—distinguishing individuals who
-generally use more vs. fewer cues—and within persons. Section 2 offered
-within-person evidence; here we present between-person evidence and then
-integrate across levels.
+measure functions both within- and between-persons. The previous section
+offered within-person evidence; here we present between-person evidence
+and then integrate across levels.
 
 Recent research by Shi and colleagues offers support for between-person
 concurrent validity in a sample of Chinese adults in mixed-gender
@@ -700,9 +732,9 @@ also report higher sexual satisfaction, consistent with theoretical
 expectations.
 
 To evaluate between-person convergent validity in the current sample,
-participants’ baseline reports of verbal (verbb_ong; “I always ask
-verbally for consent at each step of a sexual encounter”) and nonverbal
-(non_vrb_bsl; “Typically, I communicate sexual consent to my partner
+participants’ baseline reports of verbal (`v_on`; “I always ask verbally
+for consent at each step of a sexual encounter”) and nonverbal
+(`non_vrb_bsl`; “Typically, I communicate sexual consent to my partner
 using nonverbal signals and body language”) consent were correlated with
 person-level aggregates of the same behaviors from the diary (mean
 verbal cue use across events: *verbal_means*; mean nonverbal cue use
@@ -716,53 +748,13 @@ across diary-reported encounters, *r*(152) = .54, *p* \< .001.
 
 **Nonverbal cues.** The corresponding association for nonverbal consent
 cues was smaller but significant, *r*(152) = .20, *p* \< .001,
-indicating a consistent—albeit weaker—relationship between baseline and
-event-level nonverbal consent communication.
+indicating a consistent relationship between baseline and event-level
+nonverbal consent communication.
 
-Collectively, the findings presented in sections 1 and 2 that the
-measures differentiate both individualsand situations in theoretically
-coherent ways—fulfilling the requirement for validation at multiple
-levels.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-# Detect and manage conflicts
-library(conflicted)
-conflict_prefer("filter", "dplyr")
-conflict_prefer("select", "dplyr")
-
-# Load packages
-library(tidyverse)
-library(readr)
-library(dplyr)
-library(ordinal)
-library(glmmTMB)
-library(tidyr)
-library(ggplot2)
-library(lubridate)
-library(janitor)
-library(lme4)
-# library(lmerTest) 
-library(broom)
-library(parameters)
-library(effectsize)
-
-# Set path to data
-path_ready <- "_data/data_ready"
-
-# Read in data
-d <- read_csv(here::here(path_ready, "ready_merg.csv"), show_col_types = FALSE)
-
-# Listwise deletion for preliminary analyses for proposal defense
-d <- d %>% filter(!is.na(psb6))
-
-# Load functions
-source(here::here("_scripts/functions.R"))
-```
-
-#### Outcome distributions
+#### Descriptive distribution checks
 
 The continuous event-level outcome variables representing verbal
-(ver_pc) and nonverbal (non_verb) consent cue use were visually and
+(`verb`) and nonverbal (`nvrb`) consent cue use were visually and
 statistically evaluated for distributional properties. The research team
 that developed the consent cue items elected to measure each variable on
 a unipolar 11-point sliding scale in accordance with preexisting
@@ -771,674 +763,223 @@ measures.[@willisDevelopingValidFeasible2021, @fisher2012] We used the
 same response format, such that each variable was measured on an
 11-point sliding scale (0–10; “Not at all” to “Very much”), reflecting
 how much participants used verbal and nonverbal cues to communicate
-consent during a given sexual encounter.
+consent during a sexual encounter.
 
-Histograms, density plots, and summary statistics were inspected to
-assess normality, skewness, and potential ceiling or floor effects. Both
-ver_pc and non_verb displayed non-normal distributions.
-
-Specifically, bimodality was observed, with many responses clustering
-near the lowest (0) and at upper-most anchor (10).
-
-{{< embed notebooks/fig1.qmd#fig-1 >}}
-
-The distributions were right-skewed, showing pronounced piling at the
-maximum value (10), suggesting limited variability among participants
-reporting high levels of cue use.
+Histograms and summary statistics were inspected to assess normality,
+skewness, and potential ceiling or floor effects. Non-normal
+distributions were observed for both verbal and nonverbal cues.
+Specifically, the distributions were right-skewed, showing pronounced
+piling at the maximum value (10), suggesting limited variability among
+participants reporting high levels of cue use.
 
 {{< embed notebooks/fig1.qmd#fig-3 >}}
 
-Because the response scales were both bounded (0–10) and anchor-labeled
-(“Not at all” to “Very much”), the continuous treatment of these data
-would violate linear model assumptions. To accommodate the non-normal
-distribution, both outcomes were recoded into five ordered categories
-(i.e., Not at all, A little, Somewhat, Quite a bit, Very much).
+Additionally, `verb` displayed bimodality, with responses clustering
+near the lowest (0) as well as the upper-most anchor (10).
 
-```{r}
-d <- d %>%
-  mutate(
-    verb_bins = cut(
-      ver_pc,
-      breaks = c(-Inf, 0, 3, 6, 9, Inf),
-      labels = c("Not at all", "A little", 
-                 "Somewhat", "Quite a bit", "Very much"),
-      right = TRUE,
-      include.lowest = TRUE),
-    verb_bins = ordered(verb_bins,
-                        levels = c("Not at all", "A little", 
-                                   "Somewhat", "Quite a bit", "Very much")))
+{{< embed notebooks/fig1.qmd#fig-1 >}}
 
-# Verify
-is.ordered(d$verb_bins)
-table(d$verb_bins, useNA = "ifany")
-```
+## Analytic Strategy
 
-```{r}
-# Create ordered bins for nonverbal consent cues
-d <- d %>%
-  mutate(
-    nonvb_bins = cut(
-      non_verb,
-      breaks = c(-Inf, 0, 3, 6, 9, Inf),
-      labels = c("Not at all", "A little", 
-                 "Somewhat", "Quite a bit", "Very much"),
-      right = TRUE,
-      include.lowest = TRUE
-    ),
-    nonvb_bins = ordered(nonvb_bins,
-                         levels = c("Not at all", "A little", 
-                                    "Somewhat", "Quite a bit", "Very much")))
-# Verify
-is.ordered(d$nonvb_bins)
-table(d$nonvb_bins, useNA = "ifany")
-```
+Given the non-normality and ordinal structure of the outcome variables,
+analyses were conducted in parallel frameworks. We selected Linear
+Mixed-Effects Models (LMEM) for primary analyses and fit these
+multilevel models using the `lme4` package in R.[@bates2015] We applied
+a Yeo–Johnson power transformation to the bounded 0–10 cue-use outcomes
+to reduce skew and improve adherence to LMEM distributional assumptions.
+The Yeo–Johnson transformation is a monotonic power transformation that
+accommodates zeros and selects an optimal power parameter (λ) based on
+the observed distribution. **\[cite\]**
 
-This recoding produced ordinal variables `verb_bins` and `nonvb_bins`,
-reflecting meaningful, empirically-informed gradations of consent cue
-use consistent with the scale anchors.
+Cumulative Link Mixed Models (CLMMs) were selected for use a secondary
+robustness check. These secondary analyses will be conducted in R using
+`ordinal::clmm()`, which implements maximum-likelihood estimation. CLMMs
+model the cumulative probabilities of being at or above each ordered
+response category and allow for inclusion of random effects to account
+for the nonindependence of repeated observations within persons. This
+approach handles non-normal outcomes appropriately without assuming
+equal intervals between categories. **\[cite\]** Specifically, in the
+current study, outcomes were recoded into ordered categories based on
+anchor-informed cut points reflecting meaningful qualitative differences
+in consent cue use. These categories were not intended to reproduce the
+original 0–10 metric, but rather to align the ordinal models with the
+semantic structure of the response scale. Robustness was evaluated based
+on consistency in the direction and significance of effects across
+modeling frameworks.
 
 {{< embed notebooks/fig1.qmd#fig-2 >}}
 
 {{< embed notebooks/fig1.qmd#fig-4 >}}
 
-## Analytic Strategy
-
-Given the ordinal structure and non-normality of the outcome variables,
-Cumulative Link Mixed Models (CLMMs) were selected for primary analyses.
-CLMMs model the cumulative probabilities of being at or above each
-ordered response category and allow us to include random effects to
-account for the nonindependence of repeated diary observations within
-persons. This approach handles non-normal outcomes appropriately without
-assuming equal intervals between categories, facilitating more accurate
-and interpretable estimation of predictors' effects on the ordered
-likelihood of greater consent cue use.
-
-To demonstrate feasibility and researcher capability, I present
-step-by-step examples at each stage of the analytic plan for estimating
-models predicting consent cue use. This example uses verbal cue use as
-the outcome, though the same plan will be systematically applied across
-analyses, with one exception: preliminary modeling for the dissertation
-proposal defense will use listwise deletion. In contrast, primary models
-will employ multiple imputation to address missing predictor data while
-retaining all available outcome information. Ordinal outcome variables
-will not be imputed.
-
 ### Data structure and ICCs
 
 Each participant received one diary survey per day for 28 consecutive
-days. Responses are not statistically independent because participants
-contributed multiple event-level observations. Diaries capturing sexual
-activity involving physical contact with another person (hereafter
-referred to as sexual events) were retained for analysis (≈499). The
+days. Responses were not statistically independent because participants
+contributed multiple event-level observations. Daily diary reports that
+captured sexual activity involving physical contact with another person
+(hereafter referred to as sexual events) were retained for analysis. The
 full study period spanned approximately 80 days, during which different
 participants sometimes reported sexual events on the same calendar date;
 however, no individual participant contributed more than one event for
-any given day. Consequently, Level 1 units are sexual-event days nested
-within participants (Level 2). All CLMMs will include random intercepts
-for participant `(1|nid)` to model between-person differences in
-baseline cue-use propensity. Random slopes for time-varying predictors
-will be included when supported by identifiable variance; models will be
-compared via likelihood-ratio tests and AIC.
+any given day. Consequently, Level 1 units were sexual-event days nested
+within participants (Level 2). Models included random intercepts for
+participant `(1|nid)` to model between-person differences in baseline
+cue-use propensity. Random slopes for time-varying predictors were
+included when supported by identifiable variance. Preliminary LMEMs were
+fit with and without random slopes for within-person predictors to
+determine the appropriate random-effects structure. Models were compared
+via likelihood-ratio tests (LRTs) and information criteria; those with
+relatively smaller values for the Akaike Index Criterion (AIC) and
+Bayesian Index Criterion (BIC) were considered to fit the data better.
 
 To assess the extent to which participants’ reports of consent cue use
 varied within versus between individuals across sexual encounters,
-intraclass correlation coefficients (ICCs) will be computed using
-unconditional CLMMs. ICCs quantify the proportion of total variance in
-an outcome that is attributable to stable, between-person differences
-(range = 0–1), with the remaining proportion reflecting within-person
-variability across repeated observations. Although ICCs are conceptually
-identical across modeling frameworks, they must be estimated on the
-latent logistic scale for ordinal outcomes analyzed with CLMMs rather
-than on the continuous scale used in linear mixed-effects models (LMMs).
-This distinction is important because ordinal outcomes do not have a
-directly estimated residual variance; instead, the residual variance is
-fixed at $\pi^2 / 3$ on the logistic scale. [@nakagawa2017]
-
-Unconditional CLMMs with random intercepts for participants (`nid`) and
-no predictors will be fit for both types of consent cue use.
-
-```{r}
-clmm_null <- clmm(verb_bins ~ 1 + (1 | nid), data = d, # null CLMM
-                  link = "logit", Hess = TRUE)
-```
-
-The variance of the random intercept ($\sigma^2_{u0}$) will be extracted
-from each model and combined with the fixed residual variance on the
+intraclass correlation coefficients (ICCs) were calculated for LMEMs on
+the transformed outcomes and via unconditional random-intercept CLMMs
+for ordinal outcomes. ICCs quantified the proportion of total variance
+in each outcome that was attributable to stable, between-person
+differences (range = 0–1); the remaining proportion reflected
+within-person variability across repeated observations. Although ICCs
+are conceptually identical across modeling frameworks, they must be
+estimated on the latent logistic scale for ordinal outcomes analyzed
+with CLMMs rather than on the continuous scale used in LMEMs. This
+distinction is important because ordinal outcomes do not have a directly
+estimated residual variance; instead, the residual variance is fixed at
+$\pi^2 / 3$ on the logistic scale. [@nakagawa2017] The variance of the
+random intercept ($\sigma^2_{u0}$) was therefore extracted from each
+unconditional CLMM and combined with the fixed residual variance on the
 latent logistic scale according to the formula presented below.
 
 $$ICC = \frac{\sigma^2_{u0}}{\sigma^2_{u0} + \pi^2 / 3}$$
 
-```{r}
-# --- robust variance extraction ---
-vc <- VarCorr(clmm_null)
-# take the variance matrix for the 'nid' grouping factor
-var_u0 <- as.numeric(vc$nid)
-# combine with the fixed residual variance on the latent logistic scale
-icc_logit <- var_u0 / (var_u0 + (pi^2 / 3))
-
-within_prop <- 1 - icc_logit
-sprintf("ICC (between-person): %.3f; Within-person share: %.3f", icc_logit, within_prop)
-```
-
-For verbal cue use, the ICC was 0.575, indicating that approximately
-57.5% of the total variance was due to between-person differences and
-42.5% to within-person fluctuations across encounters. These results
-confirm that participants’ verbal consent communication varied both
-across individuals and within individuals across contexts, supporting
-the use of multilevel modeling for subsequent analyses.
-
-```{r,eval=FALSE,echo=FALSE}
-if ("conflicted" %in% loadedNamespaces()) {
-  detach("package:conflicted", unload = TRUE, character.only = TRUE)
-}
-library(brms)
-library(posterior)
-
-# m0_b is the unconditional model fit with brm()
-m0_b <- brm(
-  bf(verb_bins ~ 1 + (1 | nid)),
-  data = d,
-  family = cumulative(link = "logit"),
-  chains = 4, iter = 4000, cores = 4,
-  control = list(adapt_delta = 0.95), save_pars = save_pars(all = TRUE)
-)
-
-# extract posterior draws
-draws <- as_draws_df(m0_b)
-
-names(draws)[grepl("^sd_.*__Intercept$", names(draws))]
-sd_u0 <- draws$sd_nid__Intercept
-
-# convert to variance and compute ICC on latent logit scale
-var_u0 <- sd_u0^2
-icc    <- var_u0 / (var_u0 + (pi^2 / 3))
-
-# summarize
-mean_icc <- mean(icc)
-ci_icc   <- quantile(icc, probs = c(.025, .975))
-
-list(
-  icc_mean = mean_icc,
-  icc_ci95 = ci_icc
-)
-```
-
 ### Variable preparation and centering
 
-Time-varying predictors will be decomposed into within-person and
+Time-varying predictors were decomposed into within-person and
 between-person components. Specifically, each time-varying predictor
-$Xij$ (event $i$ for person $j$) will be person-mean centered to compute
-the person-mean deviation $X_{ij}^{c} = X_{ij} - \bar{X}_{.j}$, modeled
-at Level 1.
+$Xij$ (event $i$ for person $j$) was person-mean centered to compute the
+person-mean deviation $X_{ij}^{c} = X_{ij} - \bar{X}_{.j}$, modeled at
+Level 1. Person means $\bar{X}_{.j} = \frac{1}{n_j} \sum_i X_{ij}$ were
+then grand-mean centered for inclusion in models as Level-2 predictors.
+Level-1 categorical variables also were decomposed.
 
-```{r}
-d <- d %>%
-  group_by(nid) %>%
-  mutate(
-    # person mean (Level-2 component)
-    drinks_pm = mean(drinks, na.rm = TRUE),
+Models then included both the within-person effect $X_{ij}^{c}$ (does a
+participant use more consent cues on days when they are above their own
+typical level of $X$?) and the between-person effect $\bar{X}_{.j}$ (do
+participants with higher typical levels of $X$ use more consent cues
+overall?), which yielded separate coefficients. For CLMMs, these
+coefficients represent distinct effects on the cumulative log-odds of
+endorsing higher cue-use categories.
 
-    # within-person deviation (Level-1 component)
-    drinks_wp = drinks - drinks_pm
-  ) %>%
-  ungroup()
+Time-invariant, person-level variables also were grand-mean centered to
+place the model intercept at a meaningful reference and to reduce
+collinearity between intercepts and slopes. Continuous predictors were
+scaled per SD for interpretability. Finally, we dummy-coded nominal
+predictors as factors with a theoretically-neutral referent; ordered
+predictors were treated as ordinal or contrast-coded.
 
-d <- d %>% mutate(psb_act_num = if_else(psb_act == "Penetration", 1, 0))
-d <- d %>%
-  group_by(nid) %>%
-  mutate(
-    # Between-person component (proportion of events that involved penetration)
-    act_pm = mean(psb_act_num, na.rm = TRUE),
+### Diagnostics
 
-    # Within-person deviation (event value minus person mean)
-    act_wp = psb_act_num - act_pm
-  ) %>%
-  ungroup()
-
-d %>% select(drinks_pm, act_pm, drinks_wp, act_wp) %>% head()
-```
-
-Person means $\bar{X}_{.j} = \frac{1}{n_j} \sum_i X_{ij}$ will then be
-grand-mean centered for inclusion in models as Level-2 predictors.
-
-```{r}
-d <- d %>%
-  mutate(
-    drinks_pm_c = drinks_pm - mean(drinks_pm, na.rm = TRUE),
-    act_pm_c    = act_pm - mean(act_pm, na.rm = TRUE))
-```
-
-Level-1 categorical variables also must be decomposed.
-
-```{r}
-d <- decompose_factor(d, id = "nid", var = "parity_cat", 
-                      baseline = "Equal", prefix = "parity")
-
-d %>%
-  group_by(nid) %>%
-  summarise(across(ends_with("_wp"), \(x) mean(x, na.rm = TRUE))) %>%
-  summarise(across(where(is.numeric), \(x) mean(x, na.rm = TRUE)))
-```
-
-The model then includes both the within-person effect $X_{ij}^{c}$ (does
-a participant use more consent cues on days when they are above their
-own typical level of $X$?) and the between-person effect $\bar{X}_{.j}$
-(do participants with higher typical levels of $X$ use more consent cues
-overall?), yielding separate coefficients (effects on the cumulative
-log-odds of higher consent-cue categories).
-
-```{r}
-# check work to confirm person-mean centering was successful
-tol <- 1e-10
-
-per_person_means <- d %>%
-  group_by(nid) %>%
-  summarise(across(ends_with("_wp"), ~ mean(.x, na.rm = TRUE)), .groups = "drop")
-
-# any violations?
-violations <- per_person_means %>%
-  pivot_longer(-nid, names_to = "var", values_to = "mean_wp") %>%
-  filter(!is.na(mean_wp), abs(mean_wp) > tol)
-
-nrow(violations)
-```
-
-Time-invariant, person-level variables (e.g., social-desirability bias)
-will also be grand-mean centered to place the model intercept at a
-meaningful reference (average participant at their average levels) and
-to reduce collinearity between intercepts and slopes. Continuous
-predictors may be scaled (e.g., per SD) for interpretability.
-
-```{r}
-d$bidr_sc <- d$bidr_s - mean(d$bidr_s, na.rm = T) # social desirability bias 
-```
-
-Nominal predictors will be dummy-coded with a theoretically neutral
-referent; ordered predictors will be treated as ordinal or
-contrast-coded depending on theoretical expectations about spacing.
-
-### Diagnostics: Proportional-odds assumption
-
-Analyses will be conducted in R using `ordinal::clmm()`, which
-implements maximum-likelihood estimation. Each model’s proportional-odds
-assumption will be evaluated through statistical and visual diagnostics.
+As preregistered, the raw outcomes were transformed using a Yeo–Johnson
+transformation prior to LMEM fitting. We examined distributional
+properties of the raw outcomes to confirm positive skew and then
+evaluated model assumptions on the transformed scale using residual
+diagnostics and influence analyses at the participant level. No
+substantial deviations from normality or homoscedasticity were observed.
+Temporal autocorrelation of residuals within participants was examined
+and was minimal.
 
 In a CLMM, each predictor is assumed to have a constant effect on the
 cumulative log-odds of endorsing higher outcome categories across all
 response thresholds. Violations occur when a predictor’s influence
 differs for lower versus higher category transitions (e.g., between “Not
-at all → A little” versus “Quite a bit → Very much”). We evaluate this
-assumption using complementary approaches.
+at all → A little” versus “Quite a bit → Very much”). We evaluated this
+proportional-odds assumption using complementary statistical and visual
+diagnostic approaches.
 
-To evaluate the proportional-odds assumption, I will first conduct a
-global `nominal_test()` of the proportional-odds model. Of note, this
-assumption is about the fixed effects, so I will test it using a
-cumulative link model (CLM) without random effects.
+First, we conducted a global `nominal_test()` of the proportional-odds
+model. This assumption concerns fixed effects only, so we tested it
+using a cumulative link model (CLM) without random effects. When a
+predictor was flagged during the global screen, we then fit
+threshold-specific binary logistic mixed models (GLMMs) to examine
+whether fixed-effect slopes varied substantially across cutpoints (e.g.,
+“Not at all → A little,” “A little → Somewhat,” etc.).
 
-```{r}
-# 1) list variables needed for model
-vars_pre <- c(
-  "verb_bins", # outcome
-  "nid", # participant ID
-  "drinks_wp", "drinks_pm_c", # drink count, within- and between-
-  "act_wp","act_pm_c", # sexual behavior type, within- and between-
-  "bidr_sc" # time-invariant, person-level social desirability bias
-)
+Specifically, for average physical intimacy (`act_pm_c`), the estimated
+log-odds were 1.65, 2.07, 1.73, and 1.73 across successive thresholds,
+all p \< .05. Because these coefficients were consistent in direction
+and magnitude across thresholds (differences ≤ 0.4), the
+proportional-odds assumption was considered tenable. A visual inspection
+provided further support for this conclusion.
 
-# 2) build a clean analysis dataset with no missing values on any of these
-d_clm <- d %>%
-  select(all_of(vars_pre)) %>%
-  tidyr::drop_na()
-
-# 3) fit the proportional-odds CLM on the complete-case data
-prop_tst <- clm(
-  verb_bins ~ drinks_pm_c + drinks_wp + act_pm_c + act_wp +
-    bidr_sc, data = d_clm, link = "logit")
-
-# 4) run the proportional-odds diagnostic
-nominal_test(prop_tst)
-```
-
-For predictors flagged during the global screen, such as the
-between-person effect of sexual behavior type (i.e., high v. low level
-of physical intimacy), we will then fit threshold-specific binary
-logistic mixed models (GLMMs) to examine whether fixed-effect slopes
-vary substantially across cutpoints (e.g., “Not at all → A little,” “A
-little → Somewhat,” etc.).
-
-```{r}
-d_thr <- d %>%
-  mutate(bin_num = as.numeric(verb_bins),
-         cum1 = as.integer(bin_num >= 2),
-         cum2 = as.integer(bin_num >= 3),
-         cum3 = as.integer(bin_num >= 4),
-         cum4 = as.integer(bin_num >= 5))
-
-# compare slopes for the between-person effect of sexual behavior type
-m1 <- glmer(cum1 ~ act_pm_c + (1|nid), data = d_thr, family = binomial)
-m2 <- glmer(cum2 ~ act_pm_c + (1|nid), data = d_thr, family = binomial)
-m3 <- glmer(cum3 ~ act_pm_c + (1|nid), data = d_thr, family = binomial)
-m4 <- glmer(cum4 ~ act_pm_c + (1|nid), data = d_thr, family = binomial)
-
-tbl <- bind_rows(
-  fixef_tbl(m1, "≥ A little"),
-  fixef_tbl(m2, "≥ Somewhat"),
-  fixef_tbl(m3, "≥ Quite a bit"),
-  fixef_tbl(m4, "Very much vs below")
-) %>%
-  filter(term == "act_pm_c")
-
-tbl
-```
-
-For average physical intimacy (`act_pm_c`), the estimated log-odds were
-1.65, 2.07, 1.73, and 1.73 across successive thresholds, all p \< .05.
-Because these coefficients were consistent in direction and magnitude
-across thresholds (differences ≤ 0.4), the proportional-odds assumption
-was considered tenable. A visual inspection provided further support for
-this conclusion.
-
-```{r}
-ggplot(tbl, aes(threshold, estimate)) +
-  geom_point() +
-  geom_errorbar(aes(ymin = estimate - 1.96 * std.error,
-                    ymax = estimate + 1.96 * std.error), width = 0.1) +
-  labs(x = "Response Threshold", y = "Slope for act_pm_c",
-       title = "Threshold-specific slopes (proportional-odds check)")
-```
-
-### Model specification and estimation
-
-Following diagnostic checks, I prepared to fit the conditional CLMM
-predicting ordinal verbal consent-cue ratings from within- and
-between-person predictors of encounter-level alcohol consumption
-(`drinks_wp`, `drinks_pm_c`) and sexual behavior type (`act_wp`,
-`act_pm_c`), controlling for social desirability bias (`bidr_sc`).
-
-#### Evaluating time effects
+### Model specification
 
 Each daily survey was distributed between 11:00 AM and 2:00 PM (with a
 reminder two hours later) and asked about experiences *since the
-previous survey*, yielding roughly 24-hour retrospective reports. The
-diary design may have introduced predictable temporal structure (e.g.,
-gradual study fatigue). As such, I will evaluate whether to include a
-time-related variable as fixed covariate to adjust for potential
-design-related patterns that could otherwise inflate between-person
-variance or bias fixed-effect estimates. Participants contributed an
-average of approximately 3.3 event-day entries over the 28-day diary
-study and event spacing was irregular, so this covariate would serve as
-an approximate indicator of temporal context.
+previous survey*, yielding roughly 24-hour retrospective reports.
+Although event spacing was irregular, the daily diary design may have
+introduced predictable temporal structure (e.g., due to gradual study
+fatigue). To assess whether design-related patterns could bias
+fixed-effect estimates, we evaluated whether day on study accounted for
+systematic variation in verbal cue use. A likelihood-ratio test
+comparing models with and without study day as a fixed predictor
+indicated that including study day did not significantly improve model
+fit, $\chi^2(1)= 3.12$, $p = .08$.
 
-Specifically, I will test whether day on study (numeric index of the
-survey day) accounts for systematic variation in the ordinal outcomes.
-To do so, I fit a CLMM predicting ordinal ratings of verbal cue use
-(`verb_bins`). Study day (grand-mean centered; `day_c`) was entered as a
-fixed predictor, and a random intercept for participant (`nid`)
-accounted for repeated measures.
+To evaluate whether temporal trends varied across participants, we
+compared models with and without a random slope for study day. Although
+the average effect of study day on verbal consent cue use was not
+significant, likelihood-ratio tests indicated significant between-person
+variability in day-to-day slopes. Allowing the effect of study day to
+vary across individuals significantly improved model fit,
+$\chi^2(2)= 14.32$, $p < .001$. Accordingly, a random slope for study
+day was retained in all models predicting Yeo-Johnson transformed verbal
+cue use to account for individual differences in temporal trajectories.
 
-```{r}
-d <- d %>%   # grand-mean center study day
-  mutate(day_c = day - mean(day, na.rm = TRUE))
-
-m_day <- clmm(verb_bins ~ day_c + (1 | nid), 
-              data = d, link = "logit", Hess = TRUE)
-
-anova(clmm_null, m_day)
-summary(m_day)
-```
-
-A likelihood-ratio test comparing models with and without the day term
-indicated that inclusion of `day_c` did not significantly improve model
-fit, $\chi^2(1)= 2.28$, $p = .13$. The estimated fixed effect of day was
-positive but nonsignificant ($b= 0.019$, $SE = 0.013$, $z = 1.51$),
-suggesting no reliable linear trend in verbal cue ratings across days.
-
-Visual inspection of mean ordinal verbal scores by study day showed
-minor fluctuations without a consistent upward or downward trajectory.
-
-```{r}
-d %>%
-  group_by(day) %>%
-  summarise(mean_verb = mean(as.numeric(verb_bins), na.rm = TRUE)) %>%
-  ggplot(aes(x = day, y = mean_verb)) +
-  geom_line() +
-  geom_smooth(method = "loess", se = FALSE) +
-  labs(y = "Mean ordinal score (verbal consent)", x = "Study day")
-```
-
-After confirming that the linear effect of day was not significant, I
-examined potential nonlinear change by fitting a model including
-orthogonal polynomial terms for study day up to the cubic order using
-the poly() function (raw = FALSE). The model was specified as:
-
-```{r}
-m_day_poly <- clmm(verb_bins ~ poly(day_c, 3, raw = FALSE) + (1 | nid),
-                   data = d, link = "logit", Hess = TRUE)
-
-anova(clmm_null, m_day_poly)
-summary(m_day_poly)
-```
-
-A likelihood-ratio test comparing the cubic polynomial model to the
-unconditional model indicated that inclusion of the polynomial day terms
-did not significantly improve model fit, $\chi^2(3) = 2.33$, $p = .51$.
-Consistent with this result, none of the individual polynomial
-components were significant ($|z|≤ 1.49$, $p ≥ .13$), suggesting no
-reliable linear, quadratic, or cubic change in verbal cue ratings across
-days.
-
-#### Evaluating random slopes
-
-To determine the appropriate random-effects structure, preliminary CLMMs
-were fit with and without random slopes for within-person predictors
-(`drinks_wp` and `act_wp`). Although clmm() in the ordinal package can
-estimate random slopes via the Laplace approximation, such models can be
-unstable or unidentifiable—particularly with multiple ordinal categories
-or correlated within-person predictors. For this reason, random slopes
-will be explored in clmm() when the model converges cleanly and the
-variance components are estimable. If convergence issues arise, the same
-model will be re-estimated in brms, which provides more flexible and
-robust inference for random slopes in cumulative link mixed models. In
-the case of brms, model comparisons will then rely on leave-one-out
-cross-validation (Bayesian) to assess improvements in fit.
-
-```{r}
-# specify fixed effects
-fe_formula <- verb_bins ~ drinks_wp + act_wp + 
-  drinks_pm_c + act_pm_c + bidr_sc
-
-# 1) Random intercept only (full fixed effects in place)
-m0 <- clmm(update(fe_formula, . ~ . + (1 | nid)),
-           data = d, link = "logit", Hess = TRUE)
-
-# 2) Add random slope for drinks_wp
-m1 <- clmm(update(fe_formula, . ~ . + (1 + drinks_wp | nid)),
-           data = d, link = "logit", Hess = TRUE)
-
-# 3) Add random slope for act_wp
-m2 <- clmm(update(fe_formula, . ~ . + (1 + act_wp | nid)),
-           data = d, link = "logit", Hess = TRUE)
-
-# Compare nested models (fixed effects held constant)
-anova(m0, m1)
-anova(m0, m2)
-```
-
-```{r,eval=FALSE,echo=FALSE}
-m_int  <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
-                   (1 | nid)),
-              data = d, family = cumulative("logit"),
-              chains = 4, iter = 4000, cores = 4, 
-              control = list(adapt_delta = 0.95), save_pars = save_pars(all = TRUE))
-
-m_rs1 <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
-                   (1 + drinks_wp | nid)),
-              data = d, family = cumulative("logit"),
-              chains = 4, iter = 4000, cores = 4, 
-             control = list(adapt_delta = 0.99), save_pars = save_pars(all = TRUE))
-
-m_rs2 <- brm(bf(verb_bins ~ drinks_wp + drinks_pm_c + act_wp + act_pm_c + bidr_sc +
-                   (1 + act_wp | nid)),
-              data = d, family = cumulative("logit"),
-              chains = 4, iter = 4000, cores = 4, 
-             control = list(adapt_delta = 0.99), save_pars = save_pars(all = TRUE))
-
-m_int <- add_criterion(m_int, "loo", moment_match = TRUE, reloo=TRUE) 
-m_rs1 <- add_criterion(m_rs1, "loo", moment_match = TRUE, reloo=TRUE) 
-m_rs2 <- add_criterion(m_rs2, "loo", moment_match = TRUE, reloo=TRUE) 
-
-library(loo)
-loo(m_int, m_rs1, m_rs2) |> loo_compare()
-```
-
-Likelihood-ratio tests indicated that allowing slopes to vary by
-participant did not significantly improve model fit for either predictor
-(both p \> .10). Accordingly, a random-intercept–only structure was
-retained for subsequent analyses to facilitate model convergence and
-interpretability.
-
-#### Conditional effects
-
-I fit a conditional CLMM predicting ordinal verbal consent-cue ratings
-from within- and between-person predictors of encounter-level alcohol
-consumption (`drinks_wp`, `drinks_pm_c`) and sexual behavior type
-(`act_wp`, `act_pm_c`), controlling for social desirability bias
-(`bidr_sc`).
-
-```{r}
-vars_pre <- c(
-  "verb_bins", # outcome
-  "nid", # participant ID
-  "drinks_wp", "drinks_pm_c", # drink count, within- and between-
-  "act_wp","act_pm_c", # sexual behavior type, within- and between-
-  "bidr_sc" # time-invariant, person-level social desirability bias
-)
-
-# create complete case dataframe
-d_cc <- d %>%
-  dplyr::select(all_of(vars_pre)) %>%
-  tidyr::drop_na() # to ensure equal # of obs per model
-
-# refit unconditional model on complete case df
-clmm_null_cc <- clmm(verb_bins ~ 1 + (1 | nid),
-                     data = d_cc, link = "logit", Hess = TRUE)
-
-m_pre <- clmm( # fit conditional model
-  verb_bins ~ 
-    drinks_wp + drinks_pm_c + act_wp + act_pm_c + 
-  bidr_sc + (1 | nid), data = d_cc,
-  link = "logit", Hess = TRUE)
-```
-
-I then compared it to the unconditional (random-intercept-only) model.
-
-```{r}
-anova(clmm_null_cc, m_pre)
-```
-
-A likelihood-ratio test indicated that the inclusion of these
-conditional effects significantly improved model fit,
-$\chi^2(5) = 48.19$, $p < .001$, with a corresponding decrease in AIC
-from 1379.3 to 1341.1. These results suggest that the set of predictors
-collectively explained significant between- and within-person variation
-in ordinal verbal consent cue use.
-
-#### Examining fixed-effects
-
-```{r}
-summary(m_pre)
-performance:::r2(m_pre)
-```
-
-Within-person differences in alcohol consumption were not associated
-with changes in verbal cue use ($b=-0.08$, $p=.40$), but participants
-who generally drank more than others before sexual events reported lower
-verbal cue use overall ($b=-0.42$, $p=.009$). In contrast, encounters
-involving penetrative sexual behavior were associated with markedly
-greater verbal consent-cue use both within ($b=1.41$, $p<.001$) and
-between ($b=1.46$, $p=.006$) persons. Higher social-desirability scores
-also predicted slightly greater reported cue use ($b=0.04$, $p=.005$).
-The marginal $R^2$ = 0.14 and conditional $R^2$ = 0.62 indicate that the
-model’s fixed effects explained about 14% of total variance, with
-substantial additional variation accounted for by individual
-differences.
+To examine predictors of verbal and nonverbal consent cue use while
+accounting for both within- and between-person variability, we fit
+conditional mixed-effects models estimating cue use from person- and
+encounter-level characteristics, as specified in each hypothesis set.
 
 #### Addressing convergence problems
 
 Convergence problems occur when the estimation routine fails to identify
-a stable solution for model parameters (e.g., fixed effects, cutpoints,
-or random-effect variance). Because the primary outcomes are ordinal and
-event-level observations (Level 1) are nested within participants (Level
-2), achieving convergence will be essential to ensure parameters are
-identifiable and that inferences about within- and between-person
-effects are valid.
+a stable solution for model parameters.\[cite\] Our approach to
+addressing potential convergence issues was adapted from a structured
+framework for estimating LMEMs[@brauerLinearMixedeffectsModels2018].
+This framework prioritizes nonintrusive steps that preserve the intended
+model specification before moving to classic or corrective remedies that
+alter the model structure.
 
-Our approach to addressing potential convergence issues will follow the
-structured framework outlined by Brauer and Curtin (2018), adapted from
-LMMs to the CLMM context. This framework prioritizes *preventive* and
-*nonintrusive* steps that preserve the intended model specification
-before moving to *classic* or *corrective* remedies that alter the model
-structure. When convergence difficulties arise, we will proceed through
+In keeping with best-practice recommendations, we used the full, cleaned
+dataset, retained all available cases following multiple imputation, and
+maximized between-person variability through careful data quality
+verification. All predictors and covariates were modeled as fixed
+effects, per Brauer and Curtin. A participant random intercept was
+included in all models to account for nonindependence. As previously
+described, we computed ICCs for each outcome to confirm non-trivial
+between-person variance and justify a mixed-effects framework. Level-1
+predictors were person-mean centered and Level-2 means were grand-mean
+centered.
+
+When convergence difficulties emerged, we re-examined outcomes for
+miscoding, empty or extremely sparse categories, then proceeded through
 the following steps in order.
 
-**Preventive steps**
-
-Because all data for the proposed analyses have already been collected,
-few preventive remedies—those typically implemented at the design or
-data-collection stage—remain relevant. Nevertheless, in keeping with
-Brauer and Curtin’s framework, we will adhere conceptually to preventive
-principles by ensuring that analyses use the full, cleaned dataset,
-retain all available cases following multiple imputation, and maximize
-between-person variability through careful data quality verification.
-
-**Nonintrusive strategies**
-
-We will prioritize nonintrusive strategies that preserve the intended
-model specification, several of which have previously been specified in
-the analytic plan and demonstrated in the exemplar analysis. These steps
-will be repeated and expanded during primary analyses.
-
-1.  **Model specification and random-effects structure.** All predictors
-    and covariates will be modeled as fixed effects (per Brauer &
-    Curtin). A participant random intercept will be included in all
-    models to account for nonindependence. As previously demonstrated
-    for the verbal outcome, we will compute intraclass correlation
-    coefficients (ICCs) for each ordinal outcome to confirm non-trivial
-    between-person variance and justify a mixed-effects framework (i.e.,
-    the random intercept).
-2.  **Centering and rescaling predictors.** As previously described,
-    Level-1 predictors will be person-mean centered and Level-2 means
-    will be grand-mean centered. We will additionally standardize
-    predictors when scale differences impede conditioning.
-3.  **Proportional-odds (PO) diagnostics.** As previously demonstrated,
-    we will first screen PO using ordinal::clm (independence case) via
-    built-in nominal/scale tests and visual checks of predicted vs
-    observed category probabilities. For mixed models, Brant-type tests
-    are not appropriate; if PO appears violated, we will refit with
-    category-specific effects in `brms` (via cs()), then compare
-    fit/predictions to the PO model.
-4.  **Inspection of data and ordered categories.** We will re-examine
-    outcomes for miscoding, empty or extremely sparse categories,
-    and—where justified—collapse adjacent anchor-consistent categories
-    to stabilize estimation. Collapsing rules will respect measurement
-    anchors and be documented; sensitivity checks will compare models
-    with and without collapsing.
-5.  **Optimization and starting values.** For ordinal::clmm() we will
+1.  **Optimization and starting values.** For ordinal::clmm() we will
     increase `maxIter` and tune `gradTol` via `clmm.control()` to
     promote stable convergence; we will also try improved starting
     values for fixed effects/thresholds. If instability persists, we
     will move to brms (HMC with adapt_delta/max_treedepth tuning).
-6.  **Bayesian estimation.** If convergence issues remain, we will fit
+
+2.  **Bayesian estimation.** If convergence issues remain, we will fit
     the same cumulative (logit) model in `brms` with weakly informative
     priors on fixed effects (Normal\[0, 1–2\]), random-effect SDs
     (half-Student-t), and ordered thresholds, and raise adapt_delta
     (and, as needed, max_treedepth). Bayesian regularization can resolve
     near-boundary problems without altering the intended model.
-7.  **Data-level corrections.** We will address data-level issues by
-    correcting miscoding, collapsing adjacent categories when justified,
-    and using multiple imputation for predictors rather than listwise
-    deletion. Ordinal outcomes will not be imputed.
-8.  **Classic & corrective steps (only if-needed)**
+
+    Classic and corrective steps (only if-needed)
+
     1.  **Simplify fixed-effects structure.** If convergence problems
         persist, we will temporarily remove non-focal interactions and
         test them in separate models, retaining the appropriate
@@ -1448,16 +989,175 @@ will be repeated and expanded during primary analyses.
         random slopes are indicated but correlated structures hinder
         convergence, we will first set uncorrelated random effects (\|\|
         syntax). If problems persist, we will retain only the
-        theoretically essential slope(s).
+        theoretically essential slopes.
 
-**Model comparison and checks**
+## Results
 
-For frequentist models we will use LRTs and AIC/BIC; for Bayesian models
-we will use LOO and posterior predictive checks (and Bayes factors where
-appropriate) to evaluate added complexity (e.g., random slopes or
-category-specific effects). All changes will be reported transparently.
+### Descriptive Statistics
 
-#### Limitations and Future Directions
+-   Report overall compliance rate
+-   Participants contributed an average of approximately 3.3 event-day
+    entries over the 28-day study.
+-   At the person level, the mean number of sexual events was XX (SD =
+    YY), ranging from 1 to 19.
+
+### Unconditional Multilevel Models
+
+We tested unconditional multilevel models to estimate the ICCs for
+verbal and nonverbal sexual consent. ICCs for each cue type are
+presented in @tbl-icc.
+
+{{< embed notebooks/tables.qmd#tbl-icc >}}
+
+For ordinal verbal cue use, the ICC was 0.575, indicating that
+approximately 57.5% of the total variance was due to between-person
+differences and 42.5% to within-person fluctuations across encounters.
+These results confirm that participants’ verbal consent communication
+varied both across individuals and within individuals across contexts,
+supporting the use of multilevel modeling for subsequent analyses.
+
+-   Likelihood-ratio tests indicated that allowing slopes to vary by
+    participant was not supported for CLMMs predicting ordered
+    categories of nonverbal cue use. Accordingly, a
+    random-intercept–only structure was retained for subsequent analyses
+    to facilitate model convergence and interpretability.
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(glue)
+
+source(here::here("_scripts/functions.R"))
+
+coef_act <- read_csv(here::here("objects/coef_h01_lmm.csv"),
+                     col_types = cols())
+
+pen_wp <- coef_act |> filter(term == "act_penetration_wp")
+stopifnot(nrow(pen_wp) == 1)
+```
+
+Verbal consent cue use was significantly higher during penetrative
+sexual encounters compared to encounters that did not progress beyond
+kissing or touching. This association emerged at the within-person
+level, such that when a given participant engaged in oral, vaginal, or
+anal sex, they reported greater use of verbal consent cues than during
+their own contact-only encounters ($b$ = `r fmt_b(pen_wp$estimate)`,
+$SE$ = `r fmt_se(pen_wp$std.error)`, $t$ = `r fmt_t(pen_wp$statistic)`,
+$p$ = `r fmt_p(pen_wp$p.value)`). Although the magnitude of this effect
+varied across individuals, the average within-person association was
+positive.
+
+------------------------------------------------------------------------
+
+### Alcohol and consent cue use
+
+**Hypothesis 1.1** predicted that alcohol consumption (indexed by number
+of drinks) would be negatively associated with both verbal and nonverbal
+consent cue use. To test this hypothesis, linear mixed-effects models
+were fit separately for verbal and nonverbal consent outcomes,
+decomposing alcohol consumption into within-person (event-level) and
+between-person (person-mean) components and including random intercepts
+for participants. LMEM results partially supported H1.1 for verbal
+consent. The between-person component of alcohol consumption was
+negatively associated with verbal consent cue use, such that
+participants who generally drank more than others before sexual events
+reported lower verbal cue use overall ($b = 0.42$, $SE = 0.13$, $t$ =
+−3.13, p = ). In contrast, within-person deviations in alcohol
+consumption were not significantly associated with verbal consent cue
+use ($b$ = -0.12, $t$ = 1.36). H1.1 was not supported for nonverbal
+consent. Neither within-person deviations in alcohol consumption ($b$ =
+0.32, $t$ = 1.48) nor between-person alcohol consumption ($b$ = −0.69,
+$t$ = −1.61) were significantly associated with nonverbal consent cue
+use.
+
+To evaluate whether these conclusions were robust to the ordinal
+measurement of verbal consent cue use, we also fit a cumulative link
+mixed model (CLMM) predicting ordinal verbal cue use from the same
+within- and between-person components of alcohol consumption with a
+random intercept for participant (logit link). Consistent with the LMEM,
+the within-person component of alcohol consumption was not significantly
+associated with verbal cue use (*b* = −0.08, SE = 0.10, *z* = −0.78, *p*
+= .436). However, the between-person component was significantly
+negative (*b* = −0.51, SE = 0.16, *z* = −3.25, *p* = .001), indicating
+that participants who typically drank more before sexual encounters had
+lower odds of reporting higher levels of verbal consent cue use across
+events.
+
+**Hypothesis 1.2** predicted that greater intoxication disparity—defined
+as the absolute difference between participants’ subjective intoxication
+and their perception of their partner’s intoxication—would be negatively
+associated with verbal consent cue use. LMEM results partially supported
+this hypothesis. Between-person differences in intoxication disparity
+were significantly associated with lower verbal consent cue use ($b$ =
+−0.09, $SE$ = 0.03, $t$ = −3.47), However, within-person deviations in
+intoxication disparity were not significantly associated with verbal
+consent cue use. This pattern of findings might suggest that individuals
+who routinely find themselves in sexual situations with mismatched
+intoxication levels tend to use less verbal consent in general.
+
+**Hypothesis 1.3** predicted that attendance at bars or parties would be
+negatively associated with both verbal and nonverbal consent cue use,
+with stronger effects expected for nonverbal cues. Results partially
+supported this hypothesis. Across both verbal and nonverbal consent
+outcomes, between-person differences in bar-and-party attendance—but not
+event-level deviations—were associated with lower consent cue use, with
+particularly strong associations observed for nonverbal communication.
+
+### Modifiers of alcohol-consent associations
+
+**Hypothesis 2.1** predicted that the negative association between
+alcohol consumption and verbal consent cue use would be weaker for
+penetrative behaviors and stronger for encounters involving kissing or
+touching. To test this hypothesis, interaction terms between alcohol
+consumption (within-person and between-person components) and sexual
+behavior type were included in mixed-effects models predicting verbal
+consent cue use. Contrary to Hypothesis 2.1, the interaction between
+alcohol consumption and behavior type was not statistically significant
+at either the within-person or between-person level, indicating that the
+association between pre-encounter number of drinks consumed and verbal
+consent cue use did not differ by behavior type.
+
+**Hypothesis 2.2** predicted that the negative association between
+drinking venue attendance and nonverbal consent cue use would be
+stronger among less familiar partners. Mixed-effects models including
+interactions between bar-and-party attendance and partner familiarity
+revealed no statistically significant moderation effects at either the
+within-person or between-person level. Thus, the association between
+drinking venue attendance and nonverbal consent cue use did not differ
+as a function of partner familiarity.
+
+**Hypothesis 2.3** predicted that the negative association between
+intoxication disparity and verbal consent cue use would be stronger
+among men compared to women and gender-nonconforming individuals. LMEM
+results did not support this hypothesis. Interaction terms between
+intoxication disparity and gender were not statistically significant,
+indicating that the association between intoxication disparity and
+verbal consent cue use did not differ by gender in this sample.
+
+### Distal individual factors
+
+Consistent with **Hypothesis 3.1**, higher levels of social desirability
+bias ($b$ = 0.45, *t* = 2.48) and greater rape myth rejection ($b$ =
+0.37, *t* = 2.18) were associated with increased verbal consent cue use,
+controlling for partner familiarity and sexual behavior type.
+Penetrative encounters were also associated with higher levels of verbal
+consent cue use relative to kissing or touching encounters ($b$ = 1.24,
+*t* = 5.65), whereas partner familiarity was not significantly
+associated with verbal consent cue use after accounting for distal
+individual factors and behavior type.
+
+**Hypothesis 3.2**
+
+**Hypothesis 3.3** predicted that hazardous alcohol consumption would be
+negatively associated with both verbal and nonverbal consent cue use
+after controlling for partner familiarity and behavior type. H3.3 was
+not supported by primary analyses. Across both outcomes, hazardous
+drinking did not uniquely predict consent cue use beyond contextual
+factors, whereas sexual behavior type consistently distinguished levels
+of verbal and nonverbal consent communication.
+
+**Hypothesis 3.4**
+
+## Limitations and Future Directions
 
 The proposed research is not without limitations. First, there were
 measures not included in this data collection effort that we intend to
