@@ -11,6 +11,10 @@ library(kableExtra)
 ```
 
 ```{r}
+knitr::opts_chunk$set(dev = "png")
+```
+
+```{r}
 icc_table <- readRDS(here::here("objects/icc_table.rds"))
 ```
 

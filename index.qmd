@@ -333,9 +333,7 @@ and consent cue use during sexual encounters.**
     intoxication and verbal cue use: low → moderate = verbal consent
     increases; moderate → high = verbal consent decreases.
 
-**Aim 2: To investigate the moderating role of sexual event contextual
-factors in the associations between alcohol involvement and consent cue
-use.**
+**Aim 2:** quarto publish gh-pages
 
 -   H2a: The negative association between alcohol consumption and verbal
     cue use will be weaker for penetrative behaviors and stronger for
@@ -830,7 +828,7 @@ estimated residual variance; instead, the residual variance is fixed at
 $\pi^2 / 3$ on the logistic scale. [@nakagawa2017] The variance of the
 random intercept ($\sigma^2_{u0}$) was therefore extracted from each
 unconditional CLMM and combined with the fixed residual variance on the
-latent logistic scale according to the formula presented below.
+latent logistic scale according to the formula below.
 
 $$ICC = \frac{\sigma^2_{u0}}{\sigma^2_{u0} + \pi^2 / 3}$$
 
@@ -964,7 +962,7 @@ regarding sequential corrective steps that researchers can take when
 LMEM convergence fails. Their recommendations prioritize nonintrusive
 steps that preserve the intended model specification before moving on to
 classic or corrective remedies that alter the model
-structure.[@brauerLinearMixedeffectsModels2018].
+structure.[@brauerLinearMixedeffectsModels2018]
 
 Specifically, we used the full, cleaned dataset and retained all
 available cases following multiple imputation and data quality
@@ -992,7 +990,7 @@ observations in key design cells, then addressed these issues by
 collapsing or removing problematic units as needed. Finally, we were
 prepared to rescale predictors and, if necessary, the outcomes to
 improve numerical stability, but all convergence problems were resolved
-before advancing to this step was needed.
+before this remedy was required.
 
 ## Results
 
@@ -1025,8 +1023,9 @@ across encounters. These results confirm that participants’ verbal
 consent communication varied both across individuals and within
 individuals across contexts, supporting the use of multilevel modeling
 for subsequent analyses.
-
-{{< embed notebooks/tables.qmd#tbl-icc >}}
+```{r, echo=FALSE}
+knitr::opts_chunk$set(dev = "png")
+```
 
 ```{r, echo=FALSE}
 library(tidyverse)
@@ -1034,11 +1033,9 @@ library(glue)
 
 source(here::here("_scripts/inline_results.R"))
 coef_env <- read_coef_tables(here::here("objects"))
-
-# coef_env$index %>% filter(model_id == "h01", framework == "lmem")
-# coef_env$coef[["coef_h01_lmem"]] %>% filter(term == "act_penetration_wp")
-# coef_env$coef[["coef_h01_lmem"]] %>% count(term)
 ```
+
+{{< embed notebooks/tables.qmd#tbl-icc >}}
 
 ### Sexual event contextual covariates
 
