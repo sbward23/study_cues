@@ -1,0 +1,1317 @@
+---
+title: "Data cleaning and screening"
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo = FALSE}
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+```
+
+```{r}
+# to detect and warn about conflicts
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+conflicts_prefer(dplyr::slice)
+```
+
+```{r}
+# to read in data
+library(readr)
+
+path_nids <- "_data/data_process"
+path_ready <- "_data/data_ready"
+
+# for data wrangling and cleaning
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(psych)
+
+source(here::here("_scripts/functions.R"))
+```
+
+```{r, warning=FALSE}
+baseline <- read_csv(here::here(path_nids,"baseline_nid.csv"), 
+                     show_col_types = FALSE)
+
+base_sona <- read_csv(here::here(path_nids,"baseline_sona_id.csv"), 
+                     show_col_types = FALSE)
+
+data <- read_csv(here::here(path_nids, "diary_nid.csv"), col_types = cols(
+  StartDate = col_character(),
+  EndDate = col_character(),
+  RecordedDate = col_character(),
+  AuDB4 = col_character(),
+  AuDB4_7_TEXT = col_character(),
+  AuDB5 = col_character(),
+  AuDB5_6_TEXT = col_character(),
+  Q186 = col_character(),
+  Q186_8_TEXT = col_character(),
+  PSB2 = col_character(),
+  Q211 = col_character(),
+  PSB15 = col_character(),
+  OSBB2 = col_character(),
+  OSBB6 = col_character(),
+  OSBB10_11 = col_character(),
+  SSAB3 = col_character(),
+  SSAB6_7 = col_character(),
+  Q215 = col_character())) %>%
+    clean_names() %>%
+    glimpse()
+```
+
+## Initial cleaning
+
+Format dates
+
+```{r}
+data <- data %>% 
+  mutate(start_date = as_datetime(start_date, tz = "America/Chicago"),
+         end_date = as_datetime(end_date, tz = "America/Chicago"),
+         recorded_date = as_datetime(recorded_date, tz = "America/Chicago"),
+         date = date(start_date))
+```
+
+Confirm participant identifiers
+
+```{r}
+nrow(data) # 6928
+length(unique(data$nid)) # 278 - nid derived from sona_id; links baseline to diaries 
+length(unique(data$pid)) # 278 - pid exclusive to daily surveys
+```
+
+### Remove blank surveys
+
+Remove 136 completely blank surveys
+
+```{r}
+data_empty <- data %>% 
+  select(au_db1:e4) 
+
+data_empty_rows <- which(rowSums(is.na(data_empty)) == ncol(data_empty))
+
+length(data_empty_rows)
+
+data <- data %>% 
+  filter(!row_number() %in% data_empty_rows)
+```
+
+### Identify duplicates
+
+255 duplicates (i.e., more than one survey on same day for one pid)
+
+```{r}
+data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n))
+```
+
+Check if responses are same on duplicates
+
+```{r}
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+
+duplicates %>% 
+  distinct() %>% 
+  nrow() 
+
+duplicates %>% 
+  select(-c(4:20)) %>% 
+  distinct() %>% 
+  nrow()
+
+```
+
+Remove duplicates that are same on all columns except survey metadata\
+Will keep first survey so we have start time of first survey that day
+
+```{r}
+duplicate_responses <- which(duplicates %>% 
+  select(-c(4:20)) %>% 
+  duplicated())
+
+duplicate_ids <- duplicates %>% 
+  filter(row_number() %in% duplicate_responses) %>% 
+  pull(response_id)
+
+data <- data %>% 
+  filter(!response_id %in% duplicate_ids)
+```
+
+Left with 197 duplicate surveys
+
+```{r}
+data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n))
+
+
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+```
+
+Check for duplicate surveys with no data other than screening questions
+for branching
+
+```{r}
+data_empty <- duplicates %>% 
+  select(au_db2:e4) 
+
+data_empty_rows <- which(rowSums(is.na(data_empty)) == ncol(data_empty))
+
+duplicates %>% 
+  filter(row_number() %in% data_empty_rows) %>%
+  group_by(nid, date) %>%
+  count() %>% 
+  arrange(desc(n))
+
+# 1 nid has 2 mostly blank duplicates - do they have another survey that day?
+# they do!
+duplicates %>% 
+  filter(nid == "5140108" & date == "2022-11-16")
+```
+
+filter out mostly blank duplicates (i.e., only responded to branching
+questions and have more complete survey on same day)
+
+```{r}
+response_ids <- duplicates %>% 
+  filter(row_number() %in% data_empty_rows) %>% 
+  pull(response_id)
+
+data <- data %>% 
+  filter(!response_id %in% response_ids)
+```
+
+159 duplicates left
+
+```{r}
+data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n))
+
+
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+```
+
+Look at surveys taken at midnight to see if date is incorrect due to
+being slightly after midnight
+
+```{r}
+data %>% 
+  filter(hour(start_date) < 2) %>% 
+  select(nid, start_date)
+```
+
+5/8 Duplicate surveys taken at midnight and later that night and are
+missing survey day before- determined midnight survey was for previous
+day. Correcting new date variable here.
+
+Note: this date variable lines up roughly to day on study
+
+```{r}
+# data %>% 
+#   filter(nid == "9796568") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "9740303") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "6681525") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "3256800") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "9328313") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "2564475") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+# 
+# data %>% 
+#   filter(nid == "8311815") %>% 
+#   select(date, response_id, start_date) %>% 
+#   print(n = Inf)
+
+data <- data %>% 
+  mutate(date = if_else(response_id == "R_28GUR3cJzRXaTPC", date("2022-11-10"), 
+                        date),
+         date = if_else(response_id == "R_3lEREAWesaFQSnG", date("2022-10-28"),
+                        date),
+         date = if_else(response_id == "R_21G38UK4RkS5Ky5", date("2022-10-28"),
+                        date),
+         date = if_else(response_id == "R_2q1tWYtBw0XbZlM", date("2022-11-05"),
+                        date),
+         date = if_else(response_id == "R_2c63k6bRzLwkyJT", date("2022-11-14"),
+                        date))
+```
+
+Look at differences in branching questions among duplicates
+
+```{r}
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+
+duplicates_branch_match <- duplicates %>% 
+  select(nid, date, au_db1:porn_screen_fu) %>% 
+  distinct() %>% 
+  group_by(nid, date) %>% 
+  count() %>% 
+  filter(n == 1) %>% 
+  select(-n) %>% 
+  left_join(duplicates, by = c("nid", "date"))
+```
+
+Look at mental health questions
+
+```{r}
+duplicates_branch_match %>% 
+  filter(au_db1 == 2 & psb1 == 2 & osbb1 == 2 & ssab1 == 2 & 
+                 drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 2) %>% 
+  select(nid, date, response_id, start_date, mis1:e4) %>% 
+  glimpse()
+```
+
+If answers same keep more complete survey then first survey
+
+```{r}
+data <- data %>% 
+  filter(!response_id %in% c("R_3nl1aO9wz2HoliI", "R_3j0cQeVBMt5s0Y0",
+         "R_27UvVfdaNbLQIvA", "R_1roCa7SNA64ll6b", "R_3JjZhfFzAc87KLQ",
+         "R_3eb3ZXUu8ma62HW", "R_1goOMvxm2OO37xE", "R_2anOsrKT0rWfpyh",
+         "R_2v7x6suXsPA7lCE", "R_3n1q190pGvgnJvW", "R_3Mmsiry2UFC250F",
+         "R_1CD8AVjRYbvFOSE", "R_1pGNAcQtKqkDl4Y", "R_1Kp50zwQe1EHJ9A"))
+```
+
+If answers differ only by 1-2 items, keep more complete survey or if
+both complete keep first survey
+
+```{r}
+data <- data %>% 
+  filter(!response_id %in% c("R_2e3FNxw2bfXqVhD", "R_3PuSSFXqM2rg75H",
+                             "R_21jN639l8fmHhv7", "R_24cL375YzQDqcNs",
+                             "R_27InzwQuaYLA91G", "R_2q3iIQW0ju1U0TC",
+                             "R_2aQz1zTeseotOnq", "R_aYqSgHFF1qJem9r",
+                             "R_1mI5Ldgr8fNIDJn", "R_5mZeozvhOLfQHyF",
+                             "R_3G2MmYKXMfOPpw8", "R_12hVYRgqDPJX7KM",
+                             "R_V418rtMyfoi5rTb", "R_1zfPXLu96CO1qfv", 
+                             "R_1FOH5eJeKZKDLaE", "R_vMHmj0vxM2bn98R",
+                             "R_1lt7qIcUoYRj7s2", "R_vAMr55UaumNxt9n",
+                             "R_xbVy68nr7ZEHK01", "R_12QL6qI8bCV2YPL",
+                             "R_3rZiJxcPpT5dgx4", "R_27PDNNBEMijZqxM",
+                             "R_3FJ7693Okhf5xgn", "R_DFXWiS5oKvsSevn",
+                             "R_uxoQLKB3iUwZvJ7", "R_5aMdcpvNUaRgepH",
+                             "R_1GWuG4iIs1EgIdy", "R_3nUxYS964qGdnyn",
+                             "R_1jIj5b2QDOMaSgO", "R_2QFE8b5dMtmd3JL",
+                             "R_ZjK1J5cruthIO6R", "R_1kZV0eMBz42WEFW",
+                             "R_1FfEfAVl19LMXFw", "R_3gZOFZK2937JZqj"))
+```
+
+Look at other matching branch surveys
+
+```{r}
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 1 & psb1 == 2 & osbb1 == 2 & ssab1 == 2 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 2) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 1 & psb1 == 1 & osbb1 == 2 & ssab1 == 2 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 2) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 2 & psb1 == 2 & osbb1 == 1 & ssab1 == 1 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 2) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 2 & psb1 == 2 & osbb1 == 2 & ssab1 == 1 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 2) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 2 & psb1 == 2 & osbb1 == 2 & ssab1 == 1 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 1) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 2 & psb1 == 1 & osbb1 == 2 & ssab1 == 1 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 1) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 1 & psb1 == 2 & osbb1 == 2 & ssab1 == 2 & 
+#                  drugs_screen_fu == 2 & bpa1 == 1 & porn_screen_fu == 2) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+# 
+# duplicates_branch_match %>% 
+#   filter(au_db1 == 2 & psb1 == 2 & osbb1 == 1 & ssab1 == 2 & 
+#                  drugs_screen_fu == 2 & bpa1 == 2 & porn_screen_fu == 1) %>% 
+#   select(nid, date, response_id, start_date, au_db2:e4) %>% 
+#   view()
+```
+
+If answers differ only by 1-2 items (or 3 items if more than one branch
+endorsed and completed), keep more complete survey or if both complete
+keep first survey
+
+```{r}
+data <- data %>% 
+  filter(!response_id %in% c("R_1DYDNJfbNuwRivW", "R_3w9vDPa7Aoq1lFD",
+                             "R_22Gkq3271dAoUP2", "R_1gTtr4rJocjW0Uy",
+                             "R_2uJW6wj5ne3i1wS", "R_3MGuKFZITFIe3NM",
+                             "R_3MDR4RbykC162QV", "R_3Gq3wQfAmpYVFit",
+                             "R_3Mn9DViM1ZJlQ1Q", "R_3dYXmYQcqJbtXbD",
+                             "R_Ww9Ie3dTvQ58QbT", "R_1OVRbIUU6JzciJI",
+                             "R_1P1q8xsYV2BQ3KG", "R_DclSImfNg9xma6B",
+                             "R_3s17B90hYoNIXpy", "R_3Lb7H5oppSanIB0",
+                             "R_Aafzxghrkp8ZNEl"))
+```
+
+Look at non-matching branch surveys
+
+```{r}
+duplicates %>% 
+  filter(!response_id %in% duplicates_branch_match$response_id) %>% 
+  select(nid, date, response_id, start_date, au_db1:e4) %>% 
+  glimpse()
+```
+
+Duplicates by nid
+
+```{r}
+# total duplicates
+duplicates %>% 
+  group_by(nid) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+# days with duplicates
+duplicates %>% 
+  group_by(nid, date) %>%
+  slice(1) %>% 
+  group_by(nid) %>% 
+  count() %>% 
+  arrange(desc(n))
+```
+
+99 duplicates remaining
+
+```{r}
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+
+data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+------------------------------------------------------------------------
+
+Manually inspected remaining duplicates
+
+Check how much time between duplicate surveys
+
+```{r}
+duplicates %>% 
+  group_by(nid, date) %>% 
+  summarize(time_between_dups = max(start_date) - min(start_date)) %>% 
+  arrange(time_between_dups) %>% 
+  print(n = Inf)
+```
+
+Look at duplicates more than 3 hours apart (3600 seconds = 1 hour)
+
+```{r}
+duplicates %>% 
+  group_by(nid, date) %>% 
+  summarize(time_between_dups = max(start_date) - min(start_date)) %>% 
+  arrange(time_between_dups) %>% 
+  filter(time_between_dups > 10800) %>% 
+  print(n = Inf)
+
+duplicates %>% 
+  group_by(nid, date) %>% 
+  summarize(time_between_dups = max(start_date) - min(start_date)) %>% 
+  filter(time_between_dups > 10800) %>% 
+  ungroup() %>% 
+  left_join(duplicates, by = c("nid", "date")) %>% 
+  select(nid, date, response_id, progress, everything()) %>% 
+  glimpse()
+```
+
+```{r}
+data <- data %>% 
+  filter(!response_id %in% c("R_117vFnoNfgFOk4D", "R_d0WuHXIYc3QHGyl",
+                             "R_2OSU9MciQO5OGhT"))
+```
+
+If progress \< 100 and another is 100 remove \< 100 duplicate
+
+```{r}
+data <- data %>% 
+  filter(!response_id %in% c("R_3PzBQDOn70O3RHN", "R_2VgBsuP6FAg18p7", 
+                             "R_2ZQxY4bcYnHkKVT", "R_2ANi9iaiZrRiK7W",
+                             "R_zYcdQAFTkd4Wf85", "R_2RUMEtkgHOoKiU9",
+                             "R_0HP8PsuElUEqq4N", "R_2DZw0MQSQ4Zv2M6",
+                             "R_1Dqyd9EAWF6zkGf", "R_12KJL68mIqMDtil",
+                             "R_3szg3OAQjR1LWAS", "R_2t36lXAL1Zxe8VG",
+                             "R_ZIBMUETiZP7IX2F", "R_1JDaJzJxE3tFhJM",
+                             "R_2s0dOdGygUSWdln", "R_2ysynCwzs7kOGy7",
+                             "R_cIyJ7yF1Re01kC5", "R_3MPXwxSXDlhGQaI"))
+```
+
+```{r}
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+
+data %>% 
+  group_by(nid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+For final ones, keep first survey (no way to determine which one is more
+accurate)
+
+```{r}
+first_surveys <- duplicates %>% 
+  group_by(nid, date) %>% 
+  arrange(date) %>% 
+  slice(1)
+
+
+data <- data %>% 
+  filter((response_id %in% duplicates$response_id & !response_id %in% first_surveys$response_id) | (response_id %in% data$response_id & !response_id %in% duplicates$response_id))
+```
+
+All duplicates resolved
+
+```{r}
+duplicates <- data %>% 
+  group_by(pid, date) %>% 
+  count() %>% 
+  ungroup() %>% 
+  filter(n > 1) %>% 
+  left_join(data, by = c("pid", "date")) %>% 
+  filter(!is.na(n)) 
+
+data %>% 
+  group_by(nid, date) %>% 
+  count() %>% 
+   ungroup() %>% 
+  filter(n > 1) %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+### Check number of surveys per unique participant
+
+```{r}
+data %>% 
+  group_by(nid) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+#### Mean number of surveys completed: 23.5
+
+```{r}
+data %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    total_completed = sum(n_surveys),
+    total_possible  = n() * 28,
+    mean_completed  = mean(n_surveys),
+    completion_rate = mean(n_surveys) / 28
+  )
+
+# double-check mean # of surveys 
+data %>%
+  count(nid) %>%
+  summarise(avg_surveys_completed = mean(n))
+
+# median, SD, min, max 
+data %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    median_surveys = median(n_surveys),
+    sd_surveys     = sd(n_surveys),
+    min_surveys    = min(n_surveys),
+    max_surveys    = max(n_surveys),
+    n_participants = n()
+  )
+```
+
+### Rename variables for consistency
+
+```{r}
+d <- rename_variables(data)
+```
+
+### Remove unnecessary variables
+
+Either added during cleaning for checks or single value metadata columns
+
+```{r}
+d <- d %>% 
+  select(-c(r_date, time, rt, rid, ssid, sms, sig,
+            recipient_last_name, recipient_first_name, recipient_email,
+            external_reference, distribution_channel, user_language)) %>% 
+  relocate(nid, date) %>% 
+  glimpse()
+```
+
+Items from online and solo sexual behavior blocks, which fall beyond the
+scope of current project
+
+```{r}
+d <- d %>% 
+  select(-c(osb2, osb2.txt, osb6:osbb10_11_10_text, osbb15, osbb15_5_text,
+            aro_of, pls_of, pss, exp_o, str_o:er4_o, ssb3, ssb3.txt,
+            ssb6:er4_s, dub2.txt, med1_d:exp_d, dub3_bf.txt, dub3_du.txt,
+            dub3_af.txt, status, q186_8_text, au_l:au_pbs.txt, 
+            start_date:end_date, ip_address, recorded_date, 
+            location_latitude, location_longitude, group, psb5a, psb6a:str_p.txt, 
+            psb7a:psb15_tried_10_text, psb16_10_text:psb16_tried_10_text))
+```
+
+## Recoding for inclusion criteria
+
+### Daily behavioral screeners
+
+1 = Yes, 0 = No, 3 = Prefer not to say
+
+```{r}
+d <- d %>% 
+  mutate(across(aub1:pub1, as.numeric)) %>% 
+  mutate(across(c(aub1:psb1, osb1:ssb1, pub1),
+               ~if_else(.x == 2, 0, .x)))
+
+d <- d %>%  
+  mutate(across(c(dub1:bpa),
+               ~case_when(. == 2 ~ 0, 
+                          . == 4 ~ 3,
+                          TRUE ~ .)))
+
+```
+
+Dichotomous variables
+
+1 = Yes, 0 = No
+
+```{r}
+d <- d %>%
+  mutate(across(
+    c(au_pg, au_dg, prec, er1_p, er2_p, er3_p, er4_p),
+    ~ case_when(
+      . == "1" ~ 1, # Yes
+      . == "2" ~ 0, # No
+      TRUE ~ as.numeric(.)
+    )
+  ))
+```
+
+### Type of sexual activity
+
+`s_act`: What activities occurred? (check all that apply)
+
+Response options:
+
+-   Kissing = 1;
+-   Touching = 2;
+-   Digital penetration (i.e., w/ fingers) = 3;
+-   Oral sex = 4;
+-   Vaginal sex = 5;
+-   Anal sex = 6;
+-   I tried but no sexual contact happened = 7
+
+```{r}
+d %>% select(s_act) %>% map(tabyl)
+
+d <- d %>%
+  mutate(s_act = as.character(s_act),
+         s_act = case_when(
+           s_act %in% c("1", "1,2", "2") ~ "Contact",
+           s_act == "7" ~ "Attempt",
+           grepl("3", s_act) | grepl("4", s_act) | 
+             grepl("5", s_act) | grepl("6", s_act) ~ "Penetration",
+           TRUE ~ as.character(s_act)))
+
+d %>% select(s_act) %>% map(tabyl)
+```
+
+`psb_di` 0 = Attempted sexual contact; 1 = Contact and/or penetration
+
+```{r}
+d$psb_di <- d$s_act
+
+d <- d %>%   
+mutate(across(c(psb_di),
+                ~dplyr::recode(.,
+                               "Attempt" = 0,
+                               "Contact" = 1,
+                               "Penetration" = 1)))
+
+d %>% select(psb_di) %>% map(tabyl)
+```
+
+### Subset diary data
+
+To only include obs for which the partnered sexual behavior daily
+screener (psb1) was endorsed AND sexual contact (psb_di) was reported.
+
+```{r}
+data_subset <- d %>%
+  filter(psb1 == 1 & psb_di == 1)
+
+data_subset %>%
+  summarise(
+    n_obs = n(),
+    n_participants = n_distinct(nid)
+  )
+```
+
+## Descriptive checks
+
+### ANALYTIC SAMPLE: # of surveys per nid 
+
+```{r}
+analytic_ids <- data_subset %>%
+  distinct(nid) %>%
+  pull(nid)
+
+diary_ana_nids <- d %>%
+  filter(nid %in% analytic_ids)
+
+diary_ana_nids %>%
+  summarise(
+    n_obs = n(),
+    n_participants = n_distinct(nid))
+
+diary_ana_nids %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    mean_surveys   = mean(n_surveys),
+    median_surveys = median(n_surveys),
+    sd_surveys     = sd(n_surveys),
+    min_surveys    = min(n_surveys),
+    max_surveys    = max(n_surveys),
+    completion_rate = mean(n_surveys) / 28,
+    n_participants = n()
+  )
+```
+
+```{r}
+data_subset %>% 
+  group_by(nid) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+#### Mean number of surveys completed: 23.5
+
+```{r}
+data_subset %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    total_completed = sum(n_surveys),
+    total_possible  = n() * 28,
+    mean_completed  = mean(n_surveys),
+    completion_rate = mean(n_surveys) / 28
+  )
+
+# double-check mean # of surveys 
+data_subset %>%
+  count(nid) %>%
+  summarise(avg_surveys_completed = mean(n))
+
+# median, SD, min, max 
+data_subset %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    median_surveys = median(n_surveys),
+    sd_surveys     = sd(n_surveys),
+    min_surveys    = min(n_surveys),
+    max_surveys    = max(n_surveys),
+    n_participants = n()
+  )
+```
+
+
+### Missing diary data
+
+```{r}
+d <- data_subset %>%
+  select(nid, date, response_id, s_act, aro_pf, pls_pf, day,
+         verb, enon, inon, prec, fm_r, drink, intox, p_tox, bpa)
+
+colSums(is.na(d))[colSums(is.na(d)) > 0]
+```
+
+
+*Outcomes = Verbal and Nonverbal sexual consent cue use*.
+
+### Verbal consent
+
+To what extent did you do the following during the sexual activity?
+
+`verb`: Directly asked your partner or communicated verbally with your
+partner about consent
+
+```{r}
+psych::describe(d$verb)
+```
+
+```{r}
+d %>% select(verb) %>% map(tabyl)
+
+d %>%
+  pull(verb) %>%
+  hist(main = "Histogram of Verbal Cues",
+       xlab = "Verbal Self-Report",
+       col = "lightblue",
+       breaks = 10)
+```
+
+
+```{r, eval=FALSE}
+#### Verbal - Binned for CLMMs
+
+d <- d %>%
+  mutate(
+    verb_bins = cut(
+      verb,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", 
+                 "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE),
+    verb_bins = ordered(verb_bins,
+                        levels = c("Not at all", "A little", 
+                                   "Somewhat", "Quite a bit", "Very much")))
+
+# Verify
+is.ordered(d$verb_bins)
+table(d$verb_bins, useNA = "ifany")
+```
+
+### Explicit nonverbal
+
+To what extent did you do the following during the sexual activity?
+
+`enon`: Used direct non-verbal signals to communicate with your partner
+about consent for the sexual activity
+
+```{r}
+psych::describe(d$enon)
+```
+
+```{r}
+d %>% select(enon) %>% map(tabyl)
+
+d %>%
+  pull(enon) %>%
+  hist(main = "Histogram of Direct Nonverbal",
+       xlab = "Direct Nonverbal Self-Report",
+       col = "lightblue",
+       breaks = 10)
+```
+
+### Implicit nonverbal
+
+To what extent did you do the following during the sexual activity?
+
+`inon_pc`: Used subtle signals to communicate with your partner about
+consent for the sexual activity
+
+```{r}
+psych::describe(d$inon)
+```
+
+```{r}
+d %>% select(inon) %>% map(tabyl)
+
+d %>%
+  pull(inon) %>%
+  hist(main = "Histogram of Indirect Nonverbal",
+       xlab = "Indirect Nonverbal Self-Report",
+       col = "lightblue",
+       breaks = 10)
+```
+
+#### Correlation: Explicit - Implicit
+
+```{r}
+round(cor(d$enon, d$inon, use = "pairwise.complete.obs"), 2)
+```
+
+The correlation between the `direct` and `indirect nonverbal` consent
+cue items was *r* = .73, indicating a strong positive relationship that
+suggests these items reflect a shared underlying construct. For
+parsimony and theoretical clarity, these items will be averaged to
+create a continuous composite score representing overall nonverbal
+consent communication.
+
+### Nonverbal composite
+
+*Re-calculate post-imputation*
+
+```{r}
+d <- d %>%
+  rowwise() %>%  # calculate mean score
+  mutate(nvrb = mean(c(enon,inon)))
+
+psych::describe(d$nvrb)
+```
+
+#### Correlation: Verbal - Nonverbal
+
+```{r}
+# Check correlation between verbal and nonverbal 
+round(cor(d$verb, d$nvrb, use = "pairwise.complete.obs"), 2)
+```
+
+```{r, eval=FALSE}
+#### Nonverbal - Binned for CLMMs
+# Create ordered bins for nonverbal consent cues
+d <- d %>%
+  mutate(
+    nonvb_bins = cut(
+      nvrb,
+      breaks = c(-Inf, 0, 3, 6, 9, Inf),
+      labels = c("Not at all", "A little", 
+                 "Somewhat", "Quite a bit", "Very much"),
+      right = TRUE,
+      include.lowest = TRUE
+    ),
+    nonvb_bins = ordered(nonvb_bins,
+                         levels = c("Not at all", "A little", 
+                                    "Somewhat", "Quite a bit", "Very much")))
+# Verify
+is.ordered(d$nonvb_bins)
+table(d$nonvb_bins, useNA = "ifany")
+```
+
+### Overview L1 predictors
+
+#### Sexual precedent
+
+`prec`: Had you ever had sexual contact with this person in the past?
+
+No = 0; Yes = 1
+
+```{r}
+d %>% select(prec) %>% map(tabyl)
+```
+
+#### Partner familiarity (raw)
+
+`fm_r`: How did you know this other person?
+
+I didn’t, we just met that day = 1; They are a friend = 2; They are an
+acquaintance = 3;\
+They are my current or past dating/intimate partner = 4
+
+```{r}
+d %>% select(fm_r) %>% map(tabyl)
+```
+
+#### Participant drink count
+
+`drink`: How many drinks did you consume prior to or during this
+activity?
+
+Response options: 0 = 1; 1-2 = 2, 3-4 = 3, 5-6 = 4, 7-9 = 5, 10+ = 6
+
+```{r}
+d %>% select(drink) %>% map(tabyl)
+
+d <- d %>%
+  mutate(drink = recode(
+    drink,
+    `1` = 0,
+    `2` = 1,
+    `3` = 2,
+    `4` = 3,
+    `5` = 4,
+    `6` = 5
+  ))
+
+d %>%
+  pull(drink) %>%
+  hist(main = "Histogram of Participant Drinks",
+       xlab = "Self-Reported Drink Count",
+       col = "lightblue",
+       breaks = 10)
+```
+
+-   Recode `psb_alc` from `drink` such that zero drinks = 0 and \>0
+    drinks = 1
+
+```{r}
+d <- d %>%
+  mutate(psb_alc = if_else(drink == 1, 0, if_else(drink > 1, 1, drink)))
+
+d %>% select(psb_alc) %>% map(tabyl)
+```
+
+Participants endorsed `r nrow(subset(d, psb_alc == 1))` partnered sexual
+events following alcohol consumption.
+
+#### Self-reported intoxication
+
+`intox`: How intoxicated did you feel right before or during this sexual
+activity?
+
+Least intoxicated ever felt in life (0) - Most intoxication ever felt in
+life (100) VAS
+
+```{r}
+d %>%
+  filter(psb_alc == 1) %>%
+  pull(intox) %>%
+  hist(main = "Histogram of Participant Intoxication",
+       xlab = "Self-Reported Intoxication",
+       col = "lightblue",
+       breaks = 10)
+```
+
+#### Perceived partner intoxication
+
+`p_tox`: How intoxicated do you think the other person felt right before
+or during this sexual activity?
+
+Least intoxicated ever felt in life (0) - Most intoxication ever felt in
+life (100) VAS
+
+```{r}
+d %>%
+  filter(p_tox > 0) %>%
+  pull(p_tox) %>%
+  hist(main = "Histogram of Partner Intoxication",
+       xlab = "Perceived Partner Intoxication",
+       col = "lightblue",
+       breaks = 10)
+```
+
+#### Drinking environments
+
+Bar-or-party attendance pre-encounter
+
+-   NOTE: n = 1 nid (9128298) endorsed "Prefer not to respond" for bpa
+-   treat as missing and impute
+
+```{r}
+d %>% select(bpa) %>% map(tabyl)
+
+d <- d %>%
+  mutate(bpa = ifelse(bpa == 3, NA, bpa))
+```
+
+#### Sexual feelings
+
+*Used for measurement validity assessment, not modeled in confirmatory
+analyses.*
+
+To what extent did you feel the following during the sexual activity?
+
+-   `aro_pf`: I felt aroused.
+
+```{r}
+d %>% select(aro_pf) %>% map(tabyl)
+```
+
+-   `pls_pf`: I felt pleasure
+
+```{r}
+d %>% select(pls_pf) %>% map(tabyl)
+```
+
+-   **Correlation** between arousal and pleasure
+
+```{r}
+round(cor(d$aro_pf, d$pls_pf, use = "pairwise.complete.obs"), 3)
+```
+
+-   **Composite** for encounter-level sexual feelings
+
+```{r}
+d <- d %>%
+  rowwise() %>%  # calculate mean score
+  mutate(psb_feel = mean(c(pls_pf,aro_pf)))
+
+psych::describe(d$psb_feel)
+```
+
+## Baseline
+
+Replace sona_id with new ID (`nid`) to ensure data remains
+de-identified.
+
+```{r}
+# names(base_sona)
+
+identical(baseline$response_id, base_sona$response_id)
+
+base_sona_updated <- base_sona %>%
+  left_join(
+    baseline %>% select(response_id, nid),
+    by = "response_id"
+  )
+
+baseline <- base_sona_updated %>% 
+  select(-c(sona_id, sona_id_confirm))
+
+sum(is.na(baseline$nid))
+```
+
+Subset baseline to only include obs for which the same participant ID
+(nid) also appears in the diary data.
+
+```{r}
+baseline_subset <- baseline %>%
+  semi_join(data, by = "nid")
+
+# Check that it worked
+all(baseline_subset$nid %in% data$nid)
+```
+
+Further subset baseline to only include obs for participants who
+reported partnered sexual behavior (psb1) involving sexual contact
+(psb_di) at least once during the daily diary portion of the study by
+removing rows from baseline_subset where that nid does not appear in
+data_subset (i.e., remove participants from baseline with zero psb1 == 1
+& psb_di == 1 events).
+
+```{r}
+base_ana <- baseline_subset %>%
+  semi_join(d, by = "nid")
+```
+
+Remove unnecessary variables
+
+```{r}
+b <- base_ana %>% 
+  select(-c(smu_1:sm_txt, sx_txt, re_txt, ders1:ders18, sd_txt, po_txt, mu_txt,
+            sss1:sss23, cpa1:v_ar6, apb1:apb6, phq8_1:phq8_fu, gad7_1:gad7_7, 
+            pcl_txt:pcl_20, sx_trade1:porn2, au_ven, pcl, sc0, tb2, pcl_s:hyp_c, 
+            ar_txt, v_uc1:v_ar6, v_num, v_rev, v_poly, sss_tf, asrs_1:asrs_6, 
+            ra_txt, cud_6m:cud8, aud_s:rma_s, s_life))
+```
+
+### Check for missing data
+
+NOTE: `aud2` is missing 4 obs 
+NOTE: check variable coding for `race`
+
+```{r}
+colSums(is.na(b))[colSums(is.na(b)) > 0] # aud2 missing 4 obs
+```
+
+## Overview L2 predictors
+
+### Social desirability bias
+
+-   NOTE: items 1, 3, 5, and 8 are already reverse-coded
+-   NOTE: items 9, 11, 12 and 13 are already reverse-coded
+
+```{r}
+## BIDR (a = .73) 
+# (1-8) 1 = totally disagree, 8 = totally agree
+#  Higher scores reflect greater social desirability bias
+
+# create a character vector for the bidr items
+bidr_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5",
+                 "bidr_6","bidr_7","bidr_8","bidr_9","bidr_10",
+                 "bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .73, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, bidr_vector]) 
+
+### Total Scale
+b <- b %>%
+  rowwise() %>%
+  mutate(bidr = sum(bidr_1,bidr_2,bidr_3,bidr_4,bidr_5,
+                    bidr_6,bidr_7,bidr_8,bidr_9,bidr_10,
+                    bidr_11,bidr_12,bidr_13,bidr_14,bidr_15,bidr_16))
+```
+
+### Rape myth rejection
+
+```{r}
+## IRMA (a = .80)
+# 5 = strongly disagree, 4 = Somewhat..., # 3 = Neither disagree nor agree, 
+# 2 = Somewhat..., 1 = strongly agree 
+# Item values summed for total score, with higher scores reflecting 
+# greater rejection of rape myths
+
+# create a character vector for the irma items
+rma_vector <- c("irma1","irma2","irma3","irma4","irma5","irma6","irma7")
+
+# alpha = .80, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, rma_vector]) 
+
+b <- b %>%
+  rowwise() %>%
+  mutate(irma = sum(irma1,irma2,irma3,irma4,irma5,irma6,irma7))
+```
+
+### Alcohol and sexual coercion - Personal attitudes
+
+NOTE: Reverse-coded `asc1` and `asc4`
+
+```{r}
+b %>% select(asc1:asc4) %>% map(tabyl)
+
+# reverse-code items 1 and 4
+b <- b %>%   
+  mutate(across(c(asc1, asc4),
+                ~dplyr::recode(., 
+                               "1" = 7,
+                               "2" = 6,
+                               "3" = 5,
+                               "4" = 4,
+                               "5" = 3,
+                               "6" = 2,
+                               "7" = 1)))
+
+# create a character vector for the alcohol+coercion items
+ascoer_vec <- c("asc2", "asc3", "asc4", 
+                "coer1", "coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .72 > .70 meets standard criterion for reliability
+# increased from .67 after dropping asc1
+psych::alpha(b[, ascoer_vec], check.keys=TRUE) 
+
+b <- b %>%
+  rowwise() %>% # calculate summed score
+  mutate(asco = sum(asc2, asc3, asc4, coer1, coer2, 
+                    coer3, coer4, coer5, coer6))
+
+# create a character vector for just the coercion items
+coer_vec <- c("coer1", "coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .81 > .70 meets standard criterion for reliability
+psych::alpha(b[, coer_vec], check.keys=TRUE) 
+
+b <- b %>%
+  rowwise() %>% # calculate summed score
+  mutate(coer = sum(coer1,coer2,coer3,coer4,coer5,coer6))
+```
+
+
+### Perceived peer attitudes - Alcohol and sexual coercion
+
+```{r}
+# create a character vector
+pa_vec <- c("pa1","pa2","pa3","pa4","pa5","pa6")
+
+# alpha = .65 < .70
+psych::alpha(b[, pa_vec], check.keys=TRUE)
+
+b <- b %>%
+  rowwise() %>%
+  mutate(ppat = sum(pa1, pa2, pa3, pa4, pa5, pa6))
+
+cor.test(b$ppat, b$asco)
+cor.test(b$ppat, b$coer)
+```
+
+## Save updated dataframe
+
+```{r}
+b %>% 
+  write_csv(here::here(path_ready, "base_tst2.csv"))
+
+saveRDS(b, here::here(path_ready, "base_tst2.rds"))
+```
+
+```{r}
+d %>% 
+  write_csv(here::here(path_ready, "diary_tst2.csv"))
+
+saveRDS(d, here::here(path_ready, "diary_tst2.rds"))
+```

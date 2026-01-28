@@ -1,0 +1,636 @@
+---
+title: "Analyses"
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo = FALSE}
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+```
+
+```{r}
+# to detect and warn about conflicts
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+conflicts_prefer(lmerTest::lmer)
+```
+
+```{r}
+# to read in data
+library(readr)
+
+path_ready <- "_data/data_ready"
+path_objects <- "/objects"
+
+# for data wrangling and cleaning
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(psych)
+library(recipes)
+library(dplyr)
+library(lme4)
+library(ordinal)
+library(lmerTest)
+library(kableExtra)
+
+source(here::here("_scripts/functions.R"))
+```
+
+```{r}
+d <- read_rds(here::here(path_ready, "miced_1ana.rds"))
+```
+
+## Analysis
+
+**H0a:** Verbal consent cue use was significantly higher during
+penetrative sexual encounters compared to encounters that did not
+progress beyond kissing or touching. This effect was observed within
+individuals, indicating that when a given participant engaged in
+penetrative sexual activity, they reported greater use of verbal consent
+cues than during their own contact-only encounters. Although the
+magnitude of this effect varied across individuals, the average
+within-person association was positive.
+
+```{r}
+m_h01 <- lmer(
+  verb_yj ~ act_penetration_wp + act_penetration_pm_c +
+    (1 + act_penetration_wp + day_c | nid),
+  data = d,
+  REML = TRUE)
+
+summary(m_h01)
+
+coef_h01_lmem  <- tidy_fixed(m_h01)
+coef_h01_lmem %>% 
+  write_csv(here::here("objects/coef_h01_lmem.csv"))
+```
+
+```{r}
+h01_clmm <- clmm(
+  verb_bins ~ 
+    act_penetration_wp + act_penetration_pm_c +
+    (1 + act_penetration_wp + day_c | nid),
+                  data = d, 
+                  link = "logit", Hess = TRUE)
+
+summary(h01_clmm)
+
+coef_h01_clmm <- tidy_fixed(h01_clmm)
+coef_h01_clmm %>% 
+  write_csv(here::here("objects/coef_h01_clmm.csv"))
+```
+
+**H0b:** Encounters occurring in the context of shared romantic history
+(i.e., past or present dating partner) involved higher nonverbal consent
+cue use than encounters occurring with less familiar partners who met the day 
+of the sexual encounter.
+
+```{r}
+m_h02_lmem <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("fam3_friend_acq_wp", "fam3_romantic_wp",
+                 "fam3_friend_acq_pm_c", "fam3_romantic_pm_c"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(m_h02_lmem)
+
+coef_h02_lmem <- tidy_fixed(m_h02_lmem)
+coef_h02_lmem %>% 
+  write_csv(here::here("objects/coef_h02_lmem.csv"))
+```
+
+```{r}
+h02_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("fam3_friend_acq_wp", "fam3_romantic_wp",
+                 "fam3_friend_acq_pm_c", "fam3_romantic_pm_c"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(h02_clmm)
+
+coef_h02_clmm <- tidy_fixed(h02_clmm)
+coef_h02_clmm %>% 
+  write_csv(here::here("objects/coef_h02_clmm.csv"))
+```
+
+```{r, eval=FALSE}
+m_h02s <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("fam2_more_wp", "fam2_more_pm_c"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(m_h02s)
+
+h02s_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("fam2_more_wp", "fam2_more_pm_c"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(h02s_clmm)
+```
+
+
+**H0c:** Gender was not significantly associated with nonverbal consent
+cue use.
+
+```{r}
+m_h03_lmem <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("gend_di"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(m_h03_lmem)
+coef_h03_lmem <- tidy_fixed(m_h03_lmem)
+coef_h03_lmem %>% 
+  write_csv(here::here("objects/coef_h03_lmem.csv"))
+
+# CLMM
+h03_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("gend_di"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(h03_clmm) # conflicting findings -- gender significant for clmm...
+
+coef_h03_clmm <- tidy_fixed(h03_clmm)
+coef_h03_clmm %>% 
+  write_csv(here::here("objects/coef_h03_clmm.csv"))
+```
+
+To examine associations between alcohol and consent cue use during
+sexual encounters.
+
+-   **H1a:** Alcohol consumption (# of drinks) will be significantly,
+    negatively associated with both verbal and nonverbal consent cue
+    use.
+
+```{r}
+# VERBAL LMEM
+v_h1a_lmem <- fit_mixed_model(
+  outcome    = "verb_yj",
+  predictors = c("drink_wp", "drink_pm_c"),
+  framework  = "lmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(v_h1a_lmem)
+
+coef_vh1a_lmem <- tidy_fixed(v_h1a_lmem)
+coef_vh1a_lmem %>% 
+  write_csv(here::here("objects/coef_vh1a_lmem.csv"))
+
+# VERBAL CLMM
+vh1a_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("drink_wp", "drink_pm_c"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(vh1a_clmm)
+
+coef_vh1a_clmm <- tidy_fixed(vh1a_clmm)
+coef_vh1a_clmm %>% 
+  write_csv(here::here("objects/coef_vh1a_clmm.csv"))
+```
+
+```{r}
+# NONVERBAL LMEM
+nv_h1a_lmem <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("drink_wp", "drink_pm_c"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h1a_lmem)
+
+coef_Nvh1a_lmem <- tidy_fixed(nv_h1a_lmem)
+coef_Nvh1a_lmem %>% 
+  write_csv(here::here("objects/coef_Nvh1a_lmem.csv"))
+
+# NONVERBAL CLMM
+nv_h1a_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("drink_wp", "drink_pm_c"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h1a_clmm)
+
+coef_Nvh1a_clmm <- tidy_fixed(nv_h1a_clmm)
+coef_Nvh1a_clmm %>% 
+  write_csv(here::here("objects/coef_Nvh1a_clmm.csv"))
+```
+
+
+-   **H1b**: The continuous absolute difference between subjective
+    participant and perceived partner intoxication ("intoxication
+    disparity") will be significantly, negatively associated with verbal
+    cue use.
+
+-   Between-person differences in intoxication disparity were associated
+    with lower verbal consent cue use, whereas encounter-level
+    deviations in disparity were unrelated to verbal consent
+    communication.
+
+```{r}
+m_h1b_lmem <- fit_mixed_model(
+  outcome    = "verb_yj",
+  predictors = c("parity_con_wp", "parity_con_pm_c"),
+  framework  = "lmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(m_h1b_lmem)
+
+coef_h1b_lmem <- tidy_fixed(m_h1b_lmem)
+coef_h1b_lmem %>% 
+  write_csv(here::here("objects/coef_h1b_lmem.csv"))
+
+# CLMM
+h1b_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("parity_con_wp", "parity_con_pm_c"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(h1b_clmm)
+
+coef_h1b_clmm <- tidy_fixed(h1b_clmm)
+coef_h1b_clmm %>% 
+  write_csv(here::here("objects/coef_h1b_clmm.csv"))
+```
+
+-   **H1c**: Drinking venue attendance will be significantly, negatively
+    associated with both nonverbal and verbal cue use. We expect this
+    negative effect will be more pronounced for nonverbal cues.
+
+-   Across both verbal and nonverbal consent outcomes, between-person
+    differences in bar-and-party attendance—but not event-level
+    deviations—were associated with lower consent cue use, with
+    particularly strong associations observed for nonverbal
+    communication.
+
+```{r}
+# VERBAL LMEM
+v_h1c <- fit_mixed_model(
+  outcome    = "verb_yj",
+  predictors = c("bpa_true_wp", "bpa_true_pm_c"),
+  framework  = "lmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(v_h1c)
+
+coef_vh1c_lmem <- tidy_fixed(v_h1c)
+coef_vh1c_lmem %>% 
+  write_csv(here::here("objects/coef_vh1c_lmem.csv"))
+
+# VERBAL CLMM
+v_h1c_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("bpa_true_wp", "bpa_true_pm_c"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(v_h1c_clmm)
+
+coef_vh1c_clmm <- tidy_fixed(v_h1c_clmm)
+coef_vh1c_clmm %>% 
+  write_csv(here::here("objects/coef_vh1c_clmm.csv"))
+```
+
+
+```{r}
+# NONVERBAL LMEM
+nv_h1c <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("bpa_true_wp", "bpa_true_pm_c"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h1c)
+
+coef_Nvh1c_lmem <- tidy_fixed(nv_h1c)
+coef_Nvh1c_lmem %>% 
+  write_csv(here::here("objects/coef_Nvh1c_lmem.csv"))
+
+# NONVERBAL CLMM
+nv_h1c_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("bpa_true_wp", "bpa_true_pm_c"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h1c_clmm)
+
+coef_Nvh1c_clmm <- tidy_fixed(nv_h1c_clmm)
+coef_Nvh1c_clmm %>% 
+  write_csv(here::here("objects/coef_Nvh1c_clmm.csv"))
+```
+
+-   H1d: Among alcohol-involved encounters, there will be an inverted-U
+    relationship between both alcohol consumption and subjective
+    intoxication and verbal cue use: low → moderate = verbal consent
+    increases; moderate → high = verbal consent decreases.
+
+NOTE: Need to test H1d
+
+------------------------------------------------------------------------
+    
+Investigate the moderating role of sexual event contextual factors in the 
+associations between alcohol involvement and consent cue use.
+
+-   **H2a**: The negative association between alcohol consumption and
+    verbal cue use will be weaker for penetrative behaviors and stronger
+    for encounters involving kissing/touching.
+
+```{r}
+h2a_lmem <- lmer(
+  verb_yj ~
+    drink_wp * s_act +
+    drink_pm_c * s_act +
+    (1 + act_penetration_wp + day_c | nid),
+  data = d,
+  REML = TRUE)
+
+summary(h2a_lmem)
+coef_h2a_lmem <- tidy_fixed(h2a_lmem)
+coef_h2a_lmem %>% 
+  write_csv(here::here("objects/coef_h2a_lmem.csv"))
+
+h2a_clmm <- clmm(
+  verb_bins ~ 
+    drink_wp * s_act +
+    drink_pm_c * s_act + 
+    (1 + act_penetration_wp + day_c | nid),
+                  data = d, 
+                  link = "logit", Hess = TRUE)
+
+summary(h2a_clmm)
+coef_h2a_clmm <- tidy_fixed(h2a_clmm)
+coef_h2a_clmm %>% 
+  write_csv(here::here("objects/coef_h2a_clmm.csv"))
+```
+
+-   **H2b**: The negative association between drinking venue attendance and
+    nonverbal cue use will be stronger among less familiar partners.
+
+```{r}
+h2b_lmem <- lmer(
+  nvrb_yj ~
+    bpa_true_wp * fam_lev +
+    bpa_true_pm_c * fam_lev +
+    (1 | nid),
+  data = d,
+  REML = TRUE)
+
+summary(h2b_lmem)
+coef_h2b_lmem <- tidy_fixed(h2b_lmem)
+coef_h2b_lmem %>% 
+  write_csv(here::here("objects/coef_h2b_lmem.csv"))
+
+h2b_clmm <- clmm(
+  nonvb_bins ~
+    bpa_true_wp * fam_lev +
+    bpa_true_pm_c * fam_lev +
+    (1 | nid),
+  data = d, 
+  link = "logit", Hess = TRUE)
+
+summary(h2b_clmm)
+coef_h2b_clmm <- tidy_fixed(h2b_clmm)
+coef_h2b_clmm %>% 
+  write_csv(here::here("objects/coef_h2b_clmm.csv"))
+```
+
+-   **H2c**: The negative association between intoxication disparity and
+    verbal cue use will be stronger among men compared to women and GNC
+    individuals.
+
+```{r}
+h2c_lmem <- lmer(
+  verb_yj ~ 
+    parity_con_wp * gend_di + 
+    parity_con_pm_c * gend_di +
+    (1 + day_c | nid),
+  data = d,
+  REML = TRUE)
+
+summary(h2c_lmem)
+coef_h2c_lmem <- tidy_fixed(h2c_lmem)
+coef_h2c_lmem %>% 
+  write_csv(here::here("objects/coef_h2c_lmem.csv"))
+
+h2c_clmm <- clmm(
+  verb_bins ~ 
+    parity_con_wp * gend_di + 
+    parity_con_pm_c * gend_di +
+    (1 + day_c | nid),
+  data = d, 
+  link = "logit", Hess = TRUE)
+
+summary(h2c_clmm)
+coef_h2c_clmm <- tidy_fixed(h2c_clmm)
+coef_h2c_clmm %>% 
+  write_csv(here::here("objects/coef_h2c_clmm.csv"))
+```
+
+Evaluate the extent to which distal individual factors predict
+consent cue use after controlling for relevant contextual correlates.
+
+-   **H3a**: Social desirability bias and rape myth rejection will be
+    positively associated with verbal cues after controlling for partner
+    familiarity and behavior type. *Supported across frameworks*
+
+```{r}
+h3a_lmem <- lmer(
+  verb_yj ~ 
+    bidr_c + irma_c +
+    fam_lev + s_act +
+    (1 + act_penetration_wp + day_c | nid),
+  data = d,
+  REML = TRUE,
+  control = lme4::lmerControl( # used remedies 6 and 7
+    optimizer = "bobyqa", # changed the optimizer
+    optCtrl   = list(maxfun = 2e5) # increased the number of iterations
+  )
+)
+
+summary(h3a_lmem)
+coef_h3a_lmem <- tidy_fixed(h3a_lmem)
+coef_h3a_lmem %>% 
+  write_csv(here::here("objects/coef_h3a_lmem.csv"))
+
+h3a_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("bidr_c", "irma_c", "fam_lev", "s_act"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(h3a_clmm)
+coef_h3a_clmm <- tidy_fixed(h3a_clmm)
+coef_h3a_clmm %>% 
+  write_csv(here::here("objects/coef_h3a_clmm.csv"))
+```
+
+-   **H3b**: Permissive individual and *perceived peer* attitudes toward
+    alcohol and coercion will be negatively associated with verbal cues
+    after controlling for partner familiarity and behavior type.
+    
+```{r}
+# did not converge with both attitude vars, 3-level fam, and both random slopes 
+h3b_lmem <- lmer(
+  verb_yj ~
+    ppat_c + asco_c + fam_lev + s_act +
+    (1 + act_penetration_wp + day_c | nid),
+  data = d,
+  REML = TRUE,
+  control = lme4::lmerControl( # used remedy 6
+    optimizer = "bobyqa")) # changed the optimizer
+
+summary(h3b_lmem)
+coef_h3b_lmem <- tidy_fixed(h3b_lmem)
+coef_h3b_lmem %>% 
+  write_csv(here::here("objects/coef_h3b_lmem.csv"))
+
+h3b_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("ppat_c", "asco_c", "fam_lev", "s_act"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(h3b_clmm)
+coef_h3b_clmm <- tidy_fixed(h3b_clmm)
+coef_h3b_clmm %>% 
+  write_csv(here::here("objects/coef_h3b_clmm.csv"))
+```
+
+
+-   **H3c**: Hazardous alcohol consumption will be negatively associated
+    with both verbal and nonverbal cues after controlling for partner
+    familiarity and behavior type. *Not supported for verbal or nonverbal*
+
+```{r}
+# VERBAL LMEM 
+v_h3c_lmem <- lmer(
+  verb_yj ~ 
+    auds_c + fam_lev + s_act +
+    (1 + act_penetration_wp + day_c | nid),
+                  data = d, 
+                    REML = TRUE)
+
+summary(v_h3c_lmem)
+coef_vh3c_lmem <- tidy_fixed(v_h3c_lmem)
+coef_vh3c_lmem %>% 
+  write_csv(here::here("objects/coef_vh3c_lmem.csv"))
+
+# VERBAL CLMM 
+v_h3c_clmm <- fit_mixed_model(
+  outcome    = "verb_bins",
+  predictors = c("auds_c", "fam_lev", "s_act"),
+  framework  = "clmm",
+  random_slopes = "day_c",
+  data = d)
+
+summary(v_h3c_clmm)
+coef_vh3c_clmm <- tidy_fixed(v_h3c_clmm)
+coef_vh3c_clmm %>% 
+  write_csv(here::here("objects/coef_vh3c_clmm.csv"))
+```
+
+```{r}
+# NONVERBAL LMEM
+nv_h3c_lmem <- fit_mixed_model(
+  outcome    = "nvrb_yj",
+  predictors = c("auds_c", "fam_lev", "s_act"),
+  framework  = "lmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h3c_lmem)
+coef_nvh3c_lmem <- tidy_fixed(nv_h3c_lmem)
+coef_nvh3c_lmem %>% 
+  write_csv(here::here("objects/coef_nvh3c_lmem.csv"))
+
+nv_h3c_clmm <- fit_mixed_model(
+  outcome    = "nonvb_bins",
+  predictors = c("auds_c", "fam_lev", "s_act"),
+  framework  = "clmm",
+  random_slopes = NULL,
+  data = d)
+
+summary(nv_h3c_clmm)
+coef_nvh3c_clmm <- tidy_fixed(nv_h3c_clmm)
+coef_nvh3c_clmm %>% 
+  write_csv(here::here("objects/coef_nvh3c_clmm.csv"))
+```
+
+
+-   **H3d**: Permissive attitudes toward alcohol and coercion will
+    strengthen the negative association between intoxication disparity
+    and verbal cue use after controlling for partner familiarity and
+    behavior type.
+    
+```{r}
+h3d_lmem <- lmer(
+  verb_yj ~ 
+    parity_con_wp * asco_c + 
+    parity_con_pm_c * asco_c +
+    fam_lev + s_act +
+    (1 + day_c | nid),
+  data = d,
+  REML = TRUE)
+
+summary(h3d_lmem)
+coef_h3d_lmem <- tidy_fixed(h3d_lmem)
+coef_h3d_lmem %>% 
+  write_csv(here::here("objects/coef_h3d_lmem.csv"))
+
+h3d_clmm <- clmm(
+  verb_bins ~ 
+    parity_con_wp * asco_c + 
+    parity_con_pm_c * asco_c +
+    fam_lev + s_act +
+    (1 + day_c | nid),
+  data = d, 
+  link = "logit", Hess = TRUE)
+
+summary(h3d_clmm)
+coef_h3d_clmm <- tidy_fixed(h3d_clmm)
+coef_h3d_clmm %>% 
+  write_csv(here::here("objects/coef_h3d_clmm.csv"))
+```
+  

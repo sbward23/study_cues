@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.7.32">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+    <title>Analyses</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
+      }
+      /* CSS for syntax highlighting */
+      html { -webkit-text-size-adjust: 100%; }
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        {   }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+    </style>
+
+    <style>
+      body.hypothesis-enabled #quarto-embed-header {
+        padding-right: 36px;
+      }
+
+      #quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
+
+      #quarto-embed-header h6 {
+        font-size: 1.1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 400;
+      }
+
+      #quarto-embed-header a.quarto-back-link,
+      #quarto-embed-header a.quarto-download-embed {
+        font-size: 0.8em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+
+      .quarto-back-container {
+        padding-left: 0.5em;
+        display: flex;
+      }
+
+      .headroom {
+          will-change: transform;
+          transition: transform 200ms linear;
+      }
+
+      .headroom--pinned {
+          transform: translateY(0%);
+      }
+
+      .headroom--unpinned {
+          transform: translateY(-100%);
+      }      
+    </style>
+
+    <script>
+    window.document.addEventListener("DOMContentLoaded", function () {
+
+      var header = window.document.querySelector("#quarto-embed-header");
+      const titleBannerEl = window.document.querySelector("body > #title-block-header");
+      if (titleBannerEl) {
+        titleBannerEl.style.paddingTop = header.clientHeight + "px";
+      }
+      const contentEl = window.document.getElementById('quarto-content');
+      for (const child of contentEl.children) {
+        child.style.paddingTop = header.clientHeight + "px";
+        child.style.marginTop = "1em";
+      }
+
+      // Use the article root if the `back` call doesn't work. This isn't perfect
+      // but should typically work
+      window.quartoBackToArticle = () => {
+        var currentUrl = window.location.href;
+        window.history.back();
+        setTimeout(() => {
+            // if location was not changed in 100 ms, then there is no history back
+            if(currentUrl === window.location.href){              
+                // redirect to site root
+                window.location.href = "../index.html";
+            }
+        }, 100);
+      }
+
+      const headroom = new window.Headroom(header, {
+        tolerance: 5,
+        onPin: function () {
+        },
+        onUnpin: function () {
+        },
+      });
+      headroom.init();
+    });
+    </script>
+
+    
+<script src="../site_libs/manuscript-notebook/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8a894fcc3cb5e37eb5bf30def131be2f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+     
+      </head>
+
+  <body class="quarto-notebook quarto-light">
+    <div id="quarto-embed-header" class="headroom fixed-top bg-primary">
+      
+      <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link" href=""><i class="bi bi-caret-left"></i> Back to Article</a>
+      <h6><i class="bi bi-journal-code"></i> Analyses</h6>
+
+            <a href="../notebooks/04_ana_cues.qmd" class="btn btn-primary quarto-download-embed" download="04_ana_cues.qmd">Download Source</a>
+          </div>
+
+     <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Analyses</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+        
+        <div class="quarto-title-meta">
+
+                
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link active" data-scroll-target="#analysis">Analysis</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">      
+
+       <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pre<span class="op">,</span> code {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-height</span><span class="ch">:</span> <span class="dv">500</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">overflow-y</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">white-space</span><span class="ch">:</span> <span class="dv">pre</span> <span class="at">!important</span><span class="op">;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">overflow-x</span><span class="ch">:</span> <span class="bu">auto</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<style type="text/css">
+pre, code {
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre !important; 
+  overflow-x: auto
+}
+</style>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to detect and warn about conflicts</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[conflicted] Will prefer dplyr::filter over any other package.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[conflicted] Will prefer dplyr::select over any other package.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(lmerTest<span class="sc">::</span>lmer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[conflicted] Will prefer lmerTest::lmer over any other package.</code></pre>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to read in data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>path_ready <span class="ot">&lt;-</span> <span class="st">"_data/data_ready"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>path_objects <span class="ot">&lt;-</span> <span class="st">"/objects"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for data wrangling and cleaning</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ purrr     1.0.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix
+
+Attaching package: 'Matrix'
+
+The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_scripts/functions.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(path_ready, <span class="st">"miced_1ana.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<p><strong>H0a:</strong> Verbal consent cue use was significantly higher during penetrative sexual encounters compared to encounters that did not progress beyond kissing or touching. This effect was observed within individuals, indicating that when a given participant engaged in penetrative sexual activity, they reported greater use of verbal consent cues than during their own contact-only encounters. Although the magnitude of this effect varied across individuals, the average within-person association was positive.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m_h01 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span> act_penetration_wp <span class="sc">+</span> act_penetration_pm_c <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_h01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+verb_yj ~ act_penetration_wp + act_penetration_pm_c + (1 + act_penetration_wp +  
+    day_c | nid)
+   Data: d
+
+REML criterion at convergence: 2153.8
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.50934 -0.45370  0.07244  0.44908  2.75589 
+
+Random effects:
+ Groups   Name               Variance Std.Dev. Corr       
+ nid      (Intercept)        3.525    1.87746             
+          act_penetration_wp 3.081    1.75533  -0.03      
+          day_c              0.008    0.08944   0.05 -0.18
+ Residual                    2.201    1.48349             
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                     Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)            3.8823     0.1785 144.7433  21.747  &lt; 2e-16 ***
+act_penetration_wp     1.0245     0.3481  36.1822   2.943 0.005649 ** 
+act_penetration_pm_c   1.6164     0.4351 166.1740   3.715 0.000277 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) act_p_
+act_pntrtn_ -0.005       
+act_pntrt__  0.038 -0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>coef_h01_lmem  <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(m_h01)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>coef_h01_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h01_lmem.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>h01_clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  verb_bins <span class="sc">~</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    act_penetration_wp <span class="sc">+</span> act_penetration_pm_c <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> d, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">link =</span> <span class="st">"logit"</span>, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h01_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ act_penetration_wp + act_penetration_pm_c + (1 +  
+    act_penetration_wp + day_c | nid)
+data:    d
+
+ link  threshold nobs logLik  AIC     niter      max.grad cond.H 
+ logit flexible  501  -661.35 1346.69 1229(8214) 2.18e-03 5.8e+03
+
+Random effects:
+ Groups Name               Variance Std.Dev. Corr          
+ nid    (Intercept)        7.20385  2.684                  
+        act_penetration_wp 2.82666  1.681    -0.153        
+        day_c              0.01464  0.121     0.087 -0.091 
+Number of groups:  nid 152 
+
+Coefficients:
+                     Estimate Std. Error z value Pr(&gt;|z|)   
+act_penetration_wp     1.6033     0.6125   2.618  0.00885 **
+act_penetration_pm_c   2.2661     1.2786   1.772  0.07634 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -2.6297     0.4991  -5.269
+A little|Somewhat      -1.3869     0.4021  -3.449
+Somewhat|Quite a bit   -0.3203     0.3352  -0.956
+Quite a bit|Very much   1.3142     0.3105   4.233</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>coef_h01_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h01_clmm)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>coef_h01_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h01_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<p><strong>H0b:</strong> Encounters occurring in the context of shared romantic history (i.e., past or present dating partner) involved higher nonverbal consent cue use than encounters occurring with less familiar partners who met the day of the sexual encounter.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m_h02_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"fam3_friend_acq_wp"</span>, <span class="st">"fam3_romantic_wp"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"fam3_friend_acq_pm_c"</span>, <span class="st">"fam3_romantic_pm_c"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_h02_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 3178.8
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3859 -0.4900  0.1048  0.4648  3.2875 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 38.43    6.199   
+ Residual             20.34    4.510   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                     Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)           14.7589     0.5814 140.7065  25.387  &lt; 2e-16 ***
+fam3_friend_acq_wp    -0.2255     1.1401 349.6845  -0.198  0.84334    
+fam3_romantic_wp      -1.4535     1.3971 349.6845  -1.040  0.29887    
+fam3_friend_acq_pm_c   2.8108     2.3493 186.1042   1.196  0.23304    
+fam3_romantic_pm_c     6.4276     2.0947 175.2869   3.069  0.00249 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) fm3_f__ fm3_r_ f3____
+fm3_frnd_c_ 0.000                       
+fm3_rmntc_w 0.000  0.634                
+fm3_frnd___ 0.050  0.000   0.000        
+fm3_rmntc__ 0.164  0.000   0.000  0.815 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>coef_h02_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(m_h02_lmem)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>coef_h02_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h02_lmem.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>h02_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"fam3_friend_acq_wp"</span>, <span class="st">"fam3_romantic_wp"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"fam3_friend_acq_pm_c"</span>, <span class="st">"fam3_romantic_pm_c"</span>),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h02_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: 
+nonvb_bins ~ fam3_friend_acq_wp + fam3_romantic_wp + fam3_friend_acq_pm_c +  
+    fam3_romantic_pm_c + (1 | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -591.68 1201.36 468(3000) 6.45e-04 2.6e+02
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 6.997    2.645   
+Number of groups:  nid 152 
+
+Coefficients:
+                     Estimate Std. Error z value Pr(&gt;|z|)   
+fam3_friend_acq_wp    -0.3003     0.5115  -0.587  0.55710   
+fam3_romantic_wp      -0.6626     0.6522  -1.016  0.30969   
+fam3_friend_acq_pm_c   1.4010     1.0477   1.337  0.18113   
+fam3_romantic_pm_c     3.0548     0.9548   3.199  0.00138 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -4.5504     0.3909 -11.640
+A little|Somewhat      -3.5046     0.3500 -10.013
+Somewhat|Quite a bit   -1.3298     0.2932  -4.535
+Quite a bit|Very much   1.3400     0.2869   4.671</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>coef_h02_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h02_clmm)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>coef_h02_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h02_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>m_h02s <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"fam2_more_wp"</span>, <span class="st">"fam2_more_pm_c"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_h02s)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>h02s_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"fam2_more_wp"</span>, <span class="st">"fam2_more_pm_c"</span>),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h02s_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<p><strong>H0c:</strong> Gender was not significantly associated with nonverbal consent cue use.</p>
+<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>m_h03_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"gend_di"</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_h03_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 3201.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3656 -0.4448  0.1160  0.4211  3.2253 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 42.72    6.536   
+ Residual             20.29    4.504   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+            Estimate Std. Error      df t value Pr(&gt;|t|)    
+(Intercept)   14.657      0.753 147.844  19.465   &lt;2e-16 ***
+gend_diMen    -1.012      1.218 147.287  -0.831    0.407    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+           (Intr)
+gend_diMen -0.618</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>coef_h03_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(m_h03_lmem)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>coef_h03_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h03_lmem.csv"</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># CLMM</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>h03_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"gend_di"</span>),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h03_clmm) <span class="co"># conflicting findings -- gender significant for clmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: nonvb_bins ~ gend_di + (1 | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -599.45 1210.91 317(2497) 2.75e-04 1.3e+02
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 8.04     2.835   
+Number of groups:  nid 152 
+
+Coefficients:
+           Estimate Std. Error z value Pr(&gt;|z|)
+gend_diMen  -0.4818     0.4566  -1.055    0.291
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -4.5147     0.4634  -9.742
+A little|Somewhat      -3.4665     0.4311  -8.041
+Somewhat|Quite a bit   -1.2976     0.3896  -3.331
+Quite a bit|Very much   1.3774     0.3747   3.676</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>coef_h03_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h03_clmm)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>coef_h03_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h03_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<p>To examine associations between alcohol and consent cue use during sexual encounters.</p>
+<ul>
+<li><strong>H1a:</strong> Alcohol consumption (# of drinks) will be significantly, negatively associated with both verbal and nonverbal consent cue use.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL LMEM</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>v_h1a_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_yj"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"drink_wp"</span>, <span class="st">"drink_pm_c"</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v_h1a_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 2196.7
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.7031 -0.4607  0.1176  0.5048  2.5587 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ nid      (Intercept) 3.378723 1.83813       
+          day_c       0.006183 0.07863  -0.03
+ Residual             2.813676 1.67740       
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept)   3.93776    0.18134 142.68989  21.715  &lt; 2e-16 ***
+drink_wp     -0.11538    0.08498 355.68108  -1.358  0.17543    
+drink_pm_c   -0.41848    0.13348 160.07957  -3.135  0.00204 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+           (Intr) drnk_w
+drink_wp   -0.005       
+drink_pm_c -0.112 -0.002</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>coef_vh1a_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(v_h1a_lmem)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>coef_vh1a_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh1a_lmem.csv"</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL CLMM</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>vh1a_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"drink_wp"</span>, <span class="st">"drink_pm_c"</span>),</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vh1a_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ drink_wp + drink_pm_c + (1 + day_c | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -676.12 1370.25 842(4569) 8.56e-04 6.0e+02
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr  
+ nid    (Intercept) 5.232443 2.28745        
+        day_c       0.007918 0.08898  0.044 
+Number of groups:  nid 152 
+
+Coefficients:
+           Estimate Std. Error z value Pr(&gt;|z|)   
+drink_wp   -0.09416    0.10783  -0.873  0.38256   
+drink_pm_c -0.55293    0.17467  -3.166  0.00155 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -2.3481     0.2920  -8.040
+A little|Somewhat      -1.2636     0.2654  -4.761
+Somewhat|Quite a bit   -0.3448     0.2533  -1.361
+Quite a bit|Very much   1.0623     0.2566   4.140</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>coef_vh1a_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(vh1a_clmm)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>coef_vh1a_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh1a_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NONVERBAL LMEM</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>nv_h1a_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"drink_wp"</span>, <span class="st">"drink_pm_c"</span>),</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h1a_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 3200.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3402 -0.4608  0.0999  0.4533  3.2174 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 42.03    6.483   
+ Residual             20.23    4.498   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+            Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)  14.3901     0.5924 146.0149  24.292   &lt;2e-16 ***
+drink_wp      0.3152     0.2158 350.8577   1.461    0.145    
+drink_pm_c   -0.7018     0.4308 158.4249  -1.629    0.105    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+           (Intr) drnk_w
+drink_wp    0.000       
+drink_pm_c -0.123  0.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>coef_Nvh1a_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h1a_lmem)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>coef_Nvh1a_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_Nvh1a_lmem.csv"</span>))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NONVERBAL CLMM</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>nv_h1a_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"drink_wp"</span>, <span class="st">"drink_pm_c"</span>),</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h1a_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: nonvb_bins ~ drink_wp + drink_pm_c + (1 | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -597.58 1209.15 448(3545) 1.72e-05 6.0e+01
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 7.912    2.813   
+Number of groups:  nid 152 
+
+Coefficients:
+           Estimate Std. Error z value Pr(&gt;|z|)  
+drink_wp    0.11844    0.09553   1.240   0.2150  
+drink_pm_c -0.32906    0.18575  -1.771   0.0765 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -4.4038     0.3877 -11.360
+A little|Somewhat      -3.3545     0.3467  -9.677
+Somewhat|Quite a bit   -1.1789     0.2922  -4.035
+Quite a bit|Very much   1.5027     0.2865   5.245</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>coef_Nvh1a_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h1a_clmm)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>coef_Nvh1a_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_Nvh1a_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><p><strong>H1b</strong>: The continuous absolute difference between subjective participant and perceived partner intoxication (“intoxication disparity”) will be significantly, negatively associated with verbal cue use.</p></li>
+<li><p>Between-person differences in intoxication disparity were associated with lower verbal consent cue use, whereas encounter-level deviations in disparity were unrelated to verbal consent communication.</p></li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m_h1b_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_yj"</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"parity_con_wp"</span>, <span class="st">"parity_con_pm_c"</span>),</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_h1b_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 2204.6
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6956 -0.4274  0.1181  0.5002  2.6472 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ nid      (Intercept) 3.288087 1.81331       
+          day_c       0.006145 0.07839  -0.11
+ Residual             2.834214 1.68351       
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                  Estimate Std. Error         df t value Pr(&gt;|t|)    
+(Intercept)      3.885e+00  1.786e-01  1.432e+02  21.749  &lt; 2e-16 ***
+parity_con_wp    9.538e-05  8.676e-03  3.539e+02   0.011 0.991235    
+parity_con_pm_c -8.654e-02  2.492e-02  1.656e+02  -3.472 0.000659 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prty__
+party_cn_wp 0.000        
+prty_cn_pm_ 0.000  0.001 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>coef_h1b_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(m_h1b_lmem)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>coef_h1b_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h1b_lmem.csv"</span>))</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># CLMM</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>h1b_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"parity_con_wp"</span>, <span class="st">"parity_con_pm_c"</span>),</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h1b_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ parity_con_wp + parity_con_pm_c + (1 + day_c | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -675.70 1369.41 790(4463) 2.44e-05 2.3e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr   
+ nid    (Intercept) 4.999834 2.23603         
+        day_c       0.007633 0.08737  -0.136 
+Number of groups:  nid 152 
+
+Coefficients:
+                 Estimate Std. Error z value Pr(&gt;|z|)    
+parity_con_wp    0.001417   0.009937   0.143 0.886624    
+parity_con_pm_c -0.109549   0.032076  -3.415 0.000637 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -2.2920     0.2829  -8.102
+A little|Somewhat      -1.2166     0.2574  -4.726
+Somewhat|Quite a bit   -0.3000     0.2462  -1.218
+Quite a bit|Very much   1.1055     0.2514   4.398</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>coef_h1b_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h1b_clmm)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>coef_h1b_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h1b_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><p><strong>H1c</strong>: Drinking venue attendance will be significantly, negatively associated with both nonverbal and verbal cue use. We expect this negative effect will be more pronounced for nonverbal cues.</p></li>
+<li><p>Across both verbal and nonverbal consent outcomes, between-person differences in bar-and-party attendance—but not event-level deviations—were associated with lower consent cue use, with particularly strong associations observed for nonverbal communication.</p></li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL LMEM</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>v_h1c <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_yj"</span>,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"bpa_true_wp"</span>, <span class="st">"bpa_true_pm_c"</span>),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v_h1c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 2193.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.7077 -0.4395  0.1077  0.4882  2.6187 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ nid      (Intercept) 3.460971 1.86037      
+          day_c       0.005919 0.07693  0.02
+ Residual             2.820340 1.67939      
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+              Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)     3.9816     0.1853 143.3743  21.486  &lt; 2e-16 ***
+bpa_true_wp    -0.1329     0.2463 357.5472  -0.540  0.58963    
+bpa_true_pm_c  -1.3803     0.4421 171.4961  -3.122  0.00211 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) bp_tr_
+bpa_true_wp -0.005       
+bpa_tr_pm_c -0.200  0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>coef_vh1c_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(v_h1c)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>coef_vh1c_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh1c_lmem.csv"</span>))</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL CLMM</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>v_h1c_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"bpa_true_wp"</span>, <span class="st">"bpa_true_pm_c"</span>),</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v_h1c_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ bpa_true_wp + bpa_true_pm_c + (1 + day_c | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -676.02 1370.05 728(4048) 4.81e-05 1.0e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr  
+ nid    (Intercept) 5.515703 2.34855        
+        day_c       0.007961 0.08922  0.130 
+Number of groups:  nid 152 
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)   
+bpa_true_wp    -0.2963     0.3186  -0.930  0.35237   
+bpa_true_pm_c  -1.8679     0.5961  -3.134  0.00173 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -2.4307     0.3022  -8.044
+A little|Somewhat      -1.3410     0.2748  -4.880
+Somewhat|Quite a bit   -0.4171     0.2615  -1.595
+Quite a bit|Very much   0.9995     0.2621   3.814</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>coef_vh1c_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(v_h1c_clmm)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>coef_vh1c_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh1c_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NONVERBAL LMEM</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>nv_h1c <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"bpa_true_wp"</span>, <span class="st">"bpa_true_pm_c"</span>),</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h1c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 3193.6
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3859 -0.4157  0.1028  0.4641  3.2489 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 40.54    6.367   
+ Residual             20.34    4.510   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+              Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)    14.6107     0.5934 144.3026  24.623  &lt; 2e-16 ***
+bpa_true_wp    -0.2028     0.6303 351.2264  -0.322  0.74783    
+bpa_true_pm_c  -3.6883     1.3911 162.0460  -2.651  0.00881 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) bp_tr_
+bpa_true_wp  0.000       
+bpa_tr_pm_c -0.215  0.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>coef_Nvh1c_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h1c)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>coef_Nvh1c_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_Nvh1c_lmem.csv"</span>))</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NONVERBAL CLMM</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>nv_h1c_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"bpa_true_wp"</span>, <span class="st">"bpa_true_pm_c"</span>),</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h1c_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: nonvb_bins ~ bpa_true_wp + bpa_true_pm_c + (1 | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -595.65 1205.30 582(5138) 1.75e+01 5.1e+04
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 6.821    2.612   
+Number of groups:  nid 152 
+
+Coefficients:
+               Estimate Std. Error  z value Pr(&gt;|z|)    
+bpa_true_wp   -0.207655   0.289162   -0.718    0.473    
+bpa_true_pm_c -1.766067   0.003372 -523.705   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                       Estimate Std. Error   z value
+Not at all|A little   -4.420240   0.003469 -1274.283
+A little|Somewhat     -3.407540   0.003393 -1004.143
+Somewhat|Quite a bit  -1.293021   0.003294  -392.582
+Quite a bit|Very much  1.342412   0.188787     7.111</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>coef_Nvh1c_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h1c_clmm)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>coef_Nvh1c_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_Nvh1c_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li>H1d: Among alcohol-involved encounters, there will be an inverted-U relationship between both alcohol consumption and subjective intoxication and verbal cue use: low → moderate = verbal consent increases; moderate → high = verbal consent decreases.</li>
+</ul>
+<p>NOTE: Need to test H1d</p>
+<hr>
+<p>Investigate the moderating role of sexual event contextual factors in the associations between alcohol involvement and consent cue use.</p>
+<ul>
+<li><strong>H2a</strong>: The negative association between alcohol consumption and verbal cue use will be weaker for penetrative behaviors and stronger for encounters involving kissing/touching.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [16]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>h2a_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    drink_wp <span class="sc">*</span> s_act <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    drink_pm_c <span class="sc">*</span> s_act <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2a_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+verb_yj ~ drink_wp * s_act + drink_pm_c * s_act + (1 + act_penetration_wp +  
+    day_c | nid)
+   Data: d
+
+REML criterion at convergence: 2154.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5769 -0.4434  0.0691  0.4521  2.6492 
+
+Random effects:
+ Groups   Name               Variance Std.Dev. Corr       
+ nid      (Intercept)        3.408807 1.84630             
+          act_penetration_wp 3.022998 1.73868  -0.06      
+          day_c              0.007678 0.08763   0.03 -0.13
+ Residual                    2.199545 1.48309             
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                            Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)                   3.2635     0.2503 108.4537  13.037  &lt; 2e-16 ***
+drink_wp                     -0.2143     0.1357 354.8885  -1.579 0.115220    
+s_actPenetration              1.1266     0.2775  81.4172   4.059 0.000112 ***
+drink_pm_c                   -0.3785     0.1712 141.6081  -2.211 0.028675 *  
+drink_wp:s_actPenetration     0.1074     0.1729 328.7435   0.621 0.534823    
+s_actPenetration:drink_pm_c   0.1056     0.2073 102.6124   0.509 0.611610    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) drnk_w s_ctPn drnk__ dr_:_P
+drink_wp    -0.005                            
+s_actPntrtn -0.696 -0.003                     
+drink_pm_c  -0.291  0.046  0.226              
+drnk_wp:s_P  0.006 -0.794 -0.012 -0.031       
+s_ctPntr:__  0.214 -0.057 -0.141 -0.635  0.019</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>coef_h2a_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2a_lmem)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>coef_h2a_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2a_lmem.csv"</span>))</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>h2a_clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  verb_bins <span class="sc">~</span> </span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    drink_wp <span class="sc">*</span> s_act <span class="sc">+</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>    drink_pm_c <span class="sc">*</span> s_act <span class="sc">+</span> </span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> d, </span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">link =</span> <span class="st">"logit"</span>, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2a_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: 
+verb_bins ~ drink_wp * s_act + drink_pm_c * s_act + (1 + act_penetration_wp +  
+    day_c | nid)
+data:    d
+
+ link  threshold nobs logLik  AIC     niter       max.grad cond.H 
+ logit flexible  501  -656.75 1343.50 1662(10256) 9.06e-04 1.8e+03
+
+Random effects:
+ Groups Name               Variance Std.Dev. Corr          
+ nid    (Intercept)        7.31148  2.7040                 
+        act_penetration_wp 3.70214  1.9241   -0.356        
+        day_c              0.01478  0.1216    0.079 -0.106 
+Number of groups:  nid 152 
+
+Coefficients:
+                            Estimate Std. Error z value Pr(&gt;|z|)    
+drink_wp                    -0.28763    0.19859  -1.448   0.1475    
+s_actPenetration             1.66565    0.42409   3.928 8.58e-05 ***
+drink_pm_c                  -0.55105    0.27634  -1.994   0.0461 *  
+drink_wp:s_actPenetration    0.18633    0.25372   0.734   0.4627    
+s_actPenetration:drink_pm_c  0.01687    0.28795   0.059   0.9533    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -1.7496     0.4245  -4.121
+A little|Somewhat      -0.4908     0.4055  -1.210
+Somewhat|Quite a bit    0.5894     0.4047   1.456
+Quite a bit|Very much   2.2532     0.4303   5.237</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>coef_h2a_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2a_clmm)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>coef_h2a_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2a_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><strong>H2b</strong>: The negative association between drinking venue attendance and nonverbal cue use will be stronger among less familiar partners.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [17]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>h2b_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  nvrb_yj <span class="sc">~</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    bpa_true_wp <span class="sc">*</span> fam_lev <span class="sc">+</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    bpa_true_pm_c <span class="sc">*</span> fam_lev <span class="sc">+</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> nid),</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2b_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: nvrb_yj ~ bpa_true_wp * fam_lev + bpa_true_pm_c * fam_lev + (1 |  
+    nid)
+   Data: d
+
+REML criterion at convergence: 3170.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3684 -0.4604  0.0910  0.4641  3.2038 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 40.56    6.369   
+ Residual             20.49    4.526   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                                Estimate Std. Error      df t value Pr(&gt;|t|)
+(Intercept)                       12.488      3.029 459.623   4.123 4.44e-05
+bpa_true_wp                        5.885      6.219 491.103   0.946    0.344
+fam_levFriend/Acq                  2.136      3.126 467.518   0.683    0.495
+fam_levRomantic                    2.414      3.056 468.031   0.790    0.430
+bpa_true_pm_c                     -1.451      4.902 451.771  -0.296    0.767
+bpa_true_wp:fam_levFriend/Acq     -7.626      6.414 489.669  -1.189    0.235
+bpa_true_wp:fam_levRomantic       -5.646      6.264 490.678  -0.901    0.368
+fam_levFriend/Acq:bpa_true_pm_c   -2.803      5.124 470.614  -0.547    0.585
+fam_levRomantic:bpa_true_pm_c     -1.066      5.077 471.659  -0.210    0.834
+                                   
+(Intercept)                     ***
+bpa_true_wp                        
+fam_levFriend/Acq                  
+fam_levRomantic                    
+bpa_true_pm_c                      
+bpa_true_wp:fam_levFriend/Acq      
+bpa_true_wp:fam_levRomantic        
+fam_levFriend/Acq:bpa_true_pm_c    
+fam_levRomantic:bpa_true_pm_c      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) bp_tr_ fm_F/A fm_lvR bp_t__ b__:_F b__:_R f_F/A:
+bpa_true_wp -0.776                                                 
+fm_lvFrnd/A -0.957  0.798                                          
+fam_lvRmntc -0.974  0.777  0.955                                   
+bpa_tr_pm_c -0.898  0.654  0.872  0.887                            
+bp_tr_:_F/A  0.753 -0.980 -0.771 -0.754 -0.634                     
+bp_tr_wp:_R  0.770 -0.992 -0.792 -0.772 -0.649  0.972              
+fm_lF/A:___  0.869 -0.656 -0.899 -0.870 -0.918  0.638  0.651       
+fm_lvRm:___  0.858 -0.621 -0.836 -0.835 -0.923  0.601  0.616  0.873</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>coef_h2b_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2b_lmem)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>coef_h2b_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2b_lmem.csv"</span>))</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>h2b_clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  nonvb_bins <span class="sc">~</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    bpa_true_wp <span class="sc">*</span> fam_lev <span class="sc">+</span></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    bpa_true_pm_c <span class="sc">*</span> fam_lev <span class="sc">+</span></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> nid),</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d, </span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">link =</span> <span class="st">"logit"</span>, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2b_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: nonvb_bins ~ bpa_true_wp * fam_lev + bpa_true_pm_c * fam_lev +  
+    (1 | nid)
+data:    d
+
+ link  threshold nobs logLik  AIC     niter      max.grad cond.H 
+ logit flexible  501  -593.43 1212.86 1006(9188) 1.71e-05 4.5e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 7.327    2.707   
+Number of groups:  nid 152 
+
+Coefficients:
+                                Estimate Std. Error z value Pr(&gt;|z|)
+bpa_true_wp                      2.14214    2.45336   0.873    0.383
+fam_levFriend/Acq                0.38995    1.24411   0.313    0.754
+fam_levRomantic                  0.80962    1.21638   0.666    0.506
+bpa_true_pm_c                   -1.32698    1.96565  -0.675    0.500
+bpa_true_wp:fam_levFriend/Acq   -3.13063    2.54557  -1.230    0.219
+bpa_true_wp:fam_levRomantic     -2.21229    2.48079  -0.892    0.373
+fam_levFriend/Acq:bpa_true_pm_c -0.40125    2.06898  -0.194    0.846
+fam_levRomantic:bpa_true_pm_c    0.09637    2.05060   0.047    0.963
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -3.8946     1.2350  -3.154
+A little|Somewhat      -2.8354     1.2225  -2.319
+Somewhat|Quite a bit   -0.6599     1.2098  -0.546
+Quite a bit|Very much   2.0124     1.2104   1.663</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>coef_h2b_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2b_clmm)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>coef_h2b_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2b_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><strong>H2c</strong>: The negative association between intoxication disparity and verbal cue use will be stronger among men compared to women and GNC individuals.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [18]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>h2c_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span> </span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    parity_con_wp <span class="sc">*</span> gend_di <span class="sc">+</span> </span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    parity_con_pm_c <span class="sc">*</span> gend_di <span class="sc">+</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2c_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: verb_yj ~ parity_con_wp * gend_di + parity_con_pm_c * gend_di +  
+    (1 + day_c | nid)
+   Data: d
+
+REML criterion at convergence: 2213.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6775 -0.4299  0.1202  0.5038  2.6648 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ nid      (Intercept) 3.282066 1.81165       
+          day_c       0.006293 0.07933  -0.11
+ Residual             2.840591 1.68541       
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                             Estimate Std. Error         df t value Pr(&gt;|t|)
+(Intercept)                  3.779219   0.227357 141.433475  16.622   &lt;2e-16
+parity_con_wp                0.003142   0.012956 348.866697   0.243   0.8085
+gend_diMen                   0.279698   0.367552 139.834770   0.761   0.4480
+parity_con_pm_c             -0.068239   0.031341 184.965437  -2.177   0.0307
+parity_con_wp:gend_diMen    -0.005583   0.017470 351.578918  -0.320   0.7495
+gend_diMen:parity_con_pm_c  -0.049990   0.051700 147.988819  -0.967   0.3352
+                              
+(Intercept)                ***
+parity_con_wp                 
+gend_diMen                    
+parity_con_pm_c            *  
+parity_con_wp:gend_diMen      
+gend_diMen:parity_con_pm_c    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prty__ gnd_dM prt___ p__:_M
+party_cn_wp -0.004                            
+gend_diMen  -0.619  0.002                     
+prty_cn_pm_  0.004 -0.003 -0.003              
+prty_cn_:_M  0.003 -0.742  0.000  0.002       
+gnd_dMn:___ -0.003  0.002 -0.003 -0.606  0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>coef_h2c_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2c_lmem)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>coef_h2c_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2c_lmem.csv"</span>))</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>h2c_clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  verb_bins <span class="sc">~</span> </span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    parity_con_wp <span class="sc">*</span> gend_di <span class="sc">+</span> </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    parity_con_pm_c <span class="sc">*</span> gend_di <span class="sc">+</span></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d, </span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">link =</span> <span class="st">"logit"</span>, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2c_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ parity_con_wp * gend_di + parity_con_pm_c * gend_di +  
+    (1 + day_c | nid)
+data:    d
+
+ link  threshold nobs logLik  AIC     niter      max.grad cond.H 
+ logit flexible  501  -674.63 1373.26 1266(7126) 5.05e-04 6.1e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr   
+ nid    (Intercept) 4.885395 2.2103          
+        day_c       0.007849 0.0886   -0.119 
+Number of groups:  nid 152 
+
+Coefficients:
+                            Estimate Std. Error z value Pr(&gt;|z|)  
+parity_con_wp               0.004814   0.013944   0.345   0.7299  
+gend_diMen                  0.401727   0.472942   0.849   0.3956  
+parity_con_pm_c            -0.082034   0.038657  -2.122   0.0338 *
+parity_con_wp:gend_diMen   -0.006728   0.019924  -0.338   0.7356  
+gend_diMen:parity_con_pm_c -0.075548   0.063515  -1.189   0.2343  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -2.1452     0.3290  -6.520
+A little|Somewhat      -1.0718     0.3092  -3.466
+Somewhat|Quite a bit   -0.1541     0.3024  -0.510
+Quite a bit|Very much   1.2560     0.3112   4.037</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>coef_h2c_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h2c_clmm)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>coef_h2c_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h2c_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<p>Evaluate the extent to which distal individual factors predict consent cue use after controlling for relevant contextual correlates.</p>
+<ul>
+<li><strong>H3a</strong>: Social desirability bias and rape myth rejection will be positively associated with verbal cues after controlling for partner familiarity and behavior type. <em>Supported across frameworks</em></li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [19]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>h3a_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span> </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    bidr_c <span class="sc">+</span> irma_c <span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>    fam_lev <span class="sc">+</span> s_act <span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> lme4<span class="sc">::</span><span class="fu">lmerControl</span>( <span class="co"># used remedies 6 and 7</span></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">optimizer =</span> <span class="st">"bobyqa"</span>, <span class="co"># changed the optimizer</span></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">optCtrl   =</span> <span class="fu">list</span>(<span class="at">maxfun =</span> <span class="fl">2e5</span>) <span class="co"># increased the number of iterations</span></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3a_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+verb_yj ~ bidr_c + irma_c + fam_lev + s_act + (1 + act_penetration_wp +  
+    day_c | nid)
+   Data: d
+Control: 
+lme4::lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
+
+REML criterion at convergence: 2146.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4847 -0.4458  0.0555  0.4546  2.8493 
+
+Random effects:
+ Groups   Name               Variance Std.Dev. Corr       
+ nid      (Intercept)        3.260221 1.80561             
+          act_penetration_wp 2.991356 1.72955   0.06      
+          day_c              0.007319 0.08555   0.06 -0.15
+ Residual                    2.227849 1.49260             
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                    Estimate Std. Error         df t value Pr(&gt;|t|)    
+(Intercept)         2.952540   0.375578 318.169462   7.861 5.94e-14 ***
+bidr_c              0.456889   0.182476 138.770594   2.504   0.0134 *  
+irma_c              0.362551   0.168272 156.795287   2.155   0.0327 *  
+fam_levFriend/Acq  -0.002505   0.375609 464.021536  -0.007   0.9947    
+fam_levRomantic     0.275245   0.405857 423.504894   0.678   0.4980    
+s_actPenetration    1.284378   0.275155  84.145947   4.668 1.14e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) bidr_c irma_c fm_F/A fm_lvR
+bidr_c       0.016                            
+irma_c      -0.007 -0.101                     
+fm_lvFrnd/A -0.700 -0.034 -0.013              
+fam_lvRmntc -0.745 -0.045 -0.011  0.691       
+s_actPntrtn -0.269  0.046  0.074 -0.073 -0.206</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>coef_h3a_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3a_lmem)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>coef_h3a_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3a_lmem.csv"</span>))</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>h3a_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"bidr_c"</span>, <span class="st">"irma_c"</span>, <span class="st">"fam_lev"</span>, <span class="st">"s_act"</span>),</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3a_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ bidr_c + irma_c + fam_lev + s_act + (1 + day_c |      nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter      max.grad cond.H 
+ logit flexible  501  -656.05 1336.10 1016(5723) 1.07e-03 2.7e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr  
+ nid    (Intercept) 5.49299  2.3437         
+        day_c       0.01109  0.1053   0.081 
+Number of groups:  nid 152 
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+bidr_c             0.64970    0.25416   2.556   0.0106 *  
+irma_c             0.52190    0.23609   2.211   0.0271 *  
+fam_levFriend/Acq  0.04225    0.50174   0.084   0.9329    
+fam_levRomantic    0.54159    0.52995   1.022   0.3068    
+s_actPenetration   1.74899    0.31452   5.561 2.68e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little   -1.08381    0.50309  -2.154
+A little|Somewhat      0.08028    0.49784   0.161
+Somewhat|Quite a bit   1.07948    0.50170   2.152
+Quite a bit|Very much  2.60768    0.52211   4.994</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>coef_h3a_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3a_clmm)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>coef_h3a_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3a_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><strong>H3b</strong>: Permissive individual and <em>perceived peer</em> attitudes toward alcohol and coercion will be negatively associated with verbal cues after controlling for partner familiarity and behavior type.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [20]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># did not converge with both attitude vars, 3-level fam, and both random slopes </span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>h3b_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    ppat_c <span class="sc">+</span> asco_c <span class="sc">+</span> fam_lev <span class="sc">+</span> s_act <span class="sc">+</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> lme4<span class="sc">::</span><span class="fu">lmerControl</span>( <span class="co"># used remedy 6</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">optimizer =</span> <span class="st">"bobyqa"</span>)) <span class="co"># changed the optimizer</span></span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3b_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+verb_yj ~ ppat_c + asco_c + fam_lev + s_act + (1 + act_penetration_wp +  
+    day_c | nid)
+   Data: d
+Control: lme4::lmerControl(optimizer = "bobyqa")
+
+REML criterion at convergence: 2146.1
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.50104 -0.45451  0.06054  0.44196  2.73932 
+
+Random effects:
+ Groups   Name               Variance Std.Dev. Corr       
+ nid      (Intercept)        3.2721   1.80891             
+          act_penetration_wp 3.0368   1.74264  -0.07      
+          day_c              0.0078   0.08832   0.12 -0.20
+ Residual                    2.2129   1.48759             
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                  Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)         2.9374     0.3781 324.7421   7.769 1.05e-13 ***
+ppat_c             -0.4947     0.2182 140.5163  -2.267   0.0249 *  
+asco_c             -0.2356     0.2297 127.5367  -1.026   0.3070    
+fam_levFriend/Acq   0.0863     0.3752 462.6519   0.230   0.8182    
+fam_levRomantic     0.2656     0.4070 432.3458   0.653   0.5143    
+s_actPenetration    1.2207     0.2757  87.7788   4.428 2.73e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) ppat_c asco_c fm_F/A fm_lvR
+ppat_c      -0.029                            
+asco_c       0.023 -0.542                     
+fm_lvFrnd/A -0.695 -0.026  0.007              
+fam_lvRmntc -0.737  0.053  0.001  0.688       
+s_actPntrtn -0.287  0.020 -0.053 -0.071 -0.207</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>coef_h3b_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3b_lmem)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>coef_h3b_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3b_lmem.csv"</span>))</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>h3b_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"ppat_c"</span>, <span class="st">"asco_c"</span>, <span class="st">"fam_lev"</span>, <span class="st">"s_act"</span>),</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3b_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ ppat_c + asco_c + fam_lev + s_act + (1 + day_c |      nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter      max.grad cond.H 
+ logit flexible  501  -656.39 1336.78 1156(7111) 5.35e-04 2.6e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr  
+ nid    (Intercept) 5.70272  2.3880         
+        day_c       0.01212  0.1101   0.189 
+Number of groups:  nid 152 
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+ppat_c             -0.6199     0.3070  -2.019   0.0435 *  
+asco_c             -0.4135     0.3183  -1.299   0.1939    
+fam_levFriend/Acq   0.1330     0.5026   0.265   0.7912    
+fam_levRomantic     0.4938     0.5318   0.929   0.3531    
+s_actPenetration    1.7162     0.3152   5.445 5.17e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little   -1.07527    0.50233  -2.141
+A little|Somewhat      0.09605    0.49684   0.193
+Somewhat|Quite a bit   1.10148    0.50084   2.199
+Quite a bit|Very much  2.63329    0.52175   5.047</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>coef_h3b_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3b_clmm)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>coef_h3b_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3b_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><strong>H3c</strong>: Hazardous alcohol consumption will be negatively associated with both verbal and nonverbal cues after controlling for partner familiarity and behavior type. <em>Not supported for verbal or nonverbal</em></li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [21]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL LMEM </span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>v_h3c_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span> </span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>    auds_c <span class="sc">+</span> fam_lev <span class="sc">+</span> s_act <span class="sc">+</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> act_penetration_wp <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> d, </span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v_h3c_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: verb_yj ~ auds_c + fam_lev + s_act + (1 + act_penetration_wp +  
+    day_c | nid)
+   Data: d
+
+REML criterion at convergence: 2154.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.49658 -0.47826  0.07215  0.43774  2.76173 
+
+Random effects:
+ Groups   Name               Variance Std.Dev. Corr       
+ nid      (Intercept)        3.50512  1.87220             
+          act_penetration_wp 3.00404  1.73322  -0.08      
+          day_c              0.00765  0.08747   0.03 -0.20
+ Residual                    2.21654  1.48880             
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                   Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept)         3.03356    0.38822 332.62019   7.814 7.34e-14 ***
+auds_c             -0.30145    0.18351 150.45624  -1.643    0.103    
+fam_levFriend/Acq   0.04056    0.37777 461.02162   0.107    0.915    
+fam_levRomantic     0.23574    0.41744 444.77051   0.565    0.573    
+s_actPenetration    1.17856    0.27790  84.89413   4.241 5.64e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) auds_c fm_F/A fm_lvR
+auds_c      -0.147                     
+fm_lvFrnd/A -0.686  0.017              
+fam_lvRmntc -0.741  0.171  0.681       
+s_actPntrtn -0.287  0.014 -0.071 -0.200</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>coef_vh3c_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(v_h3c_lmem)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>coef_vh3c_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh3c_lmem.csv"</span>))</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VERBAL CLMM </span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>v_h3c_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"verb_bins"</span>,</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"auds_c"</span>, <span class="st">"fam_lev"</span>, <span class="st">"s_act"</span>),</span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="st">"day_c"</span>,</span>
+<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-13"><a href="#cb84-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(v_h3c_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ auds_c + fam_lev + s_act + (1 + day_c | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -660.54 1343.07 943(5741) 7.26e-04 2.9e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr   
+ nid    (Intercept) 6.13369  2.4766          
+        day_c       0.01083  0.1041   -0.055 
+Number of groups:  nid 152 
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+auds_c            -0.50179    0.26190  -1.916   0.0554 .  
+fam_levFriend/Acq  0.04757    0.50691   0.094   0.9252    
+fam_levRomantic    0.39411    0.54949   0.717   0.4732    
+s_actPenetration   1.68849    0.31621   5.340 9.31e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little   -1.24753    0.52223  -2.389
+A little|Somewhat     -0.07705    0.51612  -0.149
+Somewhat|Quite a bit   0.92301    0.51900   1.778
+Quite a bit|Very much  2.45015    0.53730   4.560</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>coef_vh3c_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(v_h3c_clmm)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>coef_vh3c_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_vh3c_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [22]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NONVERBAL LMEM</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>nv_h3c_lmem <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nvrb_yj"</span>,</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"auds_c"</span>, <span class="st">"fam_lev"</span>, <span class="st">"s_act"</span>),</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"lmm"</span>,</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h3c_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: fml
+   Data: data
+
+REML criterion at convergence: 3189.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3771 -0.4555  0.0946  0.4605  3.2625 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ nid      (Intercept) 40.19    6.339   
+ Residual             20.34    4.510   
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                  Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)        12.9140     1.0887 449.5711  11.861  &lt; 2e-16 ***
+auds_c             -0.5983     0.5927 148.6800  -1.010  0.31433    
+fam_levFriend/Acq   0.1868     1.0326 457.7212   0.181  0.85651    
+fam_levRomantic     0.7644     1.1584 495.9939   0.660  0.50965    
+s_actPenetration    1.5505     0.5890 450.2134   2.632  0.00877 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) auds_c fm_F/A fm_lvR
+auds_c      -0.133                     
+fm_lvFrnd/A -0.682  0.014              
+fam_lvRmntc -0.756  0.151  0.687       
+s_actPntrtn -0.176  0.007 -0.091 -0.186</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>coef_nvh3c_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h3c_lmem)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>coef_nvh3c_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_nvh3c_lmem.csv"</span>))</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>nv_h3c_clmm <span class="ot">&lt;-</span> <span class="fu">fit_mixed_model</span>(</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"nonvb_bins"</span>,</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"auds_c"</span>, <span class="st">"fam_lev"</span>, <span class="st">"s_act"</span>),</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">framework  =</span> <span class="st">"clmm"</span>,</span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_slopes =</span> <span class="cn">NULL</span>,</span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d)</span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nv_h3c_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: nonvb_bins ~ auds_c + fam_lev + s_act + (1 | nid)
+data:    data
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  501  -592.54 1203.09 630(5253) 2.99e-03 1.1e+03
+
+Random effects:
+ Groups Name        Variance Std.Dev.
+ nid    (Intercept) 7.347    2.71    
+Number of groups:  nid 152 
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)   
+auds_c             -0.3478     0.2597  -1.339  0.18054   
+fam_levFriend/Acq  -0.1355     0.4718  -0.287  0.77393   
+fam_levRomantic     0.3162     0.5466   0.578  0.56294   
+s_actPenetration    0.8337     0.2792   2.986  0.00283 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -3.7526     0.5040  -7.446
+A little|Somewhat      -2.6933     0.4833  -5.573
+Somewhat|Quite a bit   -0.5026     0.4921  -1.021
+Quite a bit|Very much   2.1758     0.5112   4.256</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>coef_nvh3c_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(nv_h3c_clmm)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>coef_nvh3c_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_nvh3c_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<ul>
+<li><strong>H3d</strong>: Permissive attitudes toward alcohol and coercion will strengthen the negative association between intoxication disparity and verbal cue use after controlling for partner familiarity and behavior type.</li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [23]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>h3d_lmem <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  verb_yj <span class="sc">~</span> </span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    parity_con_wp <span class="sc">*</span> asco_c <span class="sc">+</span> </span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    parity_con_pm_c <span class="sc">*</span> asco_c <span class="sc">+</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>    fam_lev <span class="sc">+</span> s_act <span class="sc">+</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d,</span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3d_lmem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: verb_yj ~ parity_con_wp * asco_c + parity_con_pm_c * asco_c +  
+    fam_lev + s_act + (1 + day_c | nid)
+   Data: d
+
+REML criterion at convergence: 2183
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.51005 -0.46112  0.06975  0.46261  2.71592 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ nid      (Intercept) 3.132377 1.76985       
+          day_c       0.006696 0.08183  -0.02
+ Residual             2.608409 1.61506       
+Number of obs: 501, groups:  nid, 152
+
+Fixed effects:
+                         Estimate Std. Error         df t value Pr(&gt;|t|)    
+(Intercept)              3.027783   0.381389 450.545598   7.939 1.64e-14 ***
+parity_con_wp            0.005514   0.008818 351.256631   0.625   0.5321    
+asco_c                  -0.417646   0.197653 127.103320  -2.113   0.0366 *  
+parity_con_pm_c         -0.054405   0.026443 188.473904  -2.057   0.0410 *  
+fam_levFriend/Acq        0.078176   0.383188 477.681594   0.204   0.8384    
+fam_levRomantic          0.150646   0.420751 478.853245   0.358   0.7205    
+s_actPenetration         1.255686   0.213022 463.271669   5.895 7.24e-09 ***
+parity_con_wp:asco_c    -0.001487   0.006302 359.721368  -0.236   0.8136    
+asco_c:parity_con_pm_c  -0.012921   0.027437 115.509902  -0.471   0.6386    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prty__ asco_c prt___ fm_F/A fm_lvR s_ctPn pr__:_
+party_cn_wp -0.085                                                 
+asco_c       0.047 -0.001                                          
+prty_cn_pm_ -0.225  0.033 -0.168                                   
+fm_lvFrnd/A -0.719  0.025 -0.023  0.136                            
+fam_lvRmntc -0.793  0.083 -0.018  0.279  0.700                     
+s_actPntrtn -0.203  0.071 -0.047  0.061 -0.066 -0.163              
+prty_cn_w:_  0.075 -0.296  0.008 -0.026 -0.051 -0.092  0.001       
+asc_c:pr___ -0.005  0.000 -0.056 -0.205 -0.086 -0.067 -0.034  0.017</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>coef_h3d_lmem <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3d_lmem)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>coef_h3d_lmem <span class="sc">%&gt;%</span> </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3d_lmem.csv"</span>))</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>h3d_clmm <span class="ot">&lt;-</span> <span class="fu">clmm</span>(</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>  verb_bins <span class="sc">~</span> </span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>    parity_con_wp <span class="sc">*</span> asco_c <span class="sc">+</span> </span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>    parity_con_pm_c <span class="sc">*</span> asco_c <span class="sc">+</span></span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>    fam_lev <span class="sc">+</span> s_act <span class="sc">+</span></span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> day_c <span class="sc">|</span> nid),</span>
+<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> d, </span>
+<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">link =</span> <span class="st">"logit"</span>, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h3d_clmm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: verb_bins ~ parity_con_wp * asco_c + parity_con_pm_c * asco_c +  
+    fam_lev + s_act + (1 + day_c | nid)
+data:    d
+
+ link  threshold nobs logLik  AIC     niter       max.grad cond.H 
+ logit flexible  501  -655.49 1340.99 1789(10473) 4.48e-04 1.4e+04
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr  
+ nid    (Intercept) 5.66336  2.3798         
+        day_c       0.01066  0.1033   0.067 
+Number of groups:  nid 152 
+
+Coefficients:
+                        Estimate Std. Error z value Pr(&gt;|z|)    
+parity_con_wp           0.009812   0.010456   0.938   0.3480    
+asco_c                 -0.646422   0.278850  -2.318   0.0204 *  
+parity_con_pm_c        -0.071293   0.036224  -1.968   0.0491 *  
+fam_levFriend/Acq      -0.023582   0.507448  -0.046   0.9629    
+fam_levRomantic         0.285618   0.558079   0.512   0.6088    
+s_actPenetration        1.724514   0.316376   5.451 5.01e-08 ***
+parity_con_wp:asco_c   -0.005121   0.011620  -0.441   0.6594    
+asco_c:parity_con_pm_c -0.015119   0.037659  -0.401   0.6881    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+                      Estimate Std. Error z value
+Not at all|A little    -1.2858     0.5229  -2.459
+A little|Somewhat      -0.1176     0.5176  -0.227
+Somewhat|Quite a bit    0.8866     0.5206   1.703
+Quite a bit|Very much   2.4167     0.5385   4.488</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>coef_h3d_clmm <span class="ot">&lt;-</span> <span class="fu">tidy_fixed</span>(h3d_clmm)</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>coef_h3d_clmm <span class="sc">%&gt;%</span> </span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"objects/coef_h3d_clmm.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+</section>
+     </main>
+<!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>  </div> <!-- /content --> 
+  
+</body></html>
