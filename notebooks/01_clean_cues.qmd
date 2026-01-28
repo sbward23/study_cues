@@ -23,6 +23,7 @@ library(conflicted)
 
 conflict_prefer("filter", "dplyr")
 conflict_prefer("select", "dplyr")
+conflicts_prefer(dplyr::slice)
 ```
 
 ```{r}
@@ -87,7 +88,7 @@ Confirm participant identifiers
 
 ```{r}
 nrow(data) # 6928
-length(unique(data$nid)) # 278 - nid derived from sona_id; links baseline to daily surveys
+length(unique(data$nid)) # 278 - nid derived from sona_id; links baseline to diaries 
 length(unique(data$pid)) # 278 - pid exclusive to daily surveys
 ```
 
@@ -247,42 +248,42 @@ day. Correcting new date variable here.
 Note: this date variable lines up roughly to day on study
 
 ```{r}
-# data |> 
-#   filter(nid == "9796568") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "9796568") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "9740303") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "9740303") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "6681525") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "6681525") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "3256800") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "3256800") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "9328313") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "9328313") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "2564475") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "2564475") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 # 
-# data |> 
-#   filter(nid == "8311815") |> 
-#   select(date, response_id, start_date) |> 
+# data %>% 
+#   filter(nid == "8311815") %>% 
+#   select(date, response_id, start_date) %>% 
 #   print(n = Inf)
 
-data <- data |> 
+data <- data %>% 
   mutate(date = if_else(response_id == "R_28GUR3cJzRXaTPC", date("2022-11-10"), 
                         date),
          date = if_else(response_id == "R_3lEREAWesaFQSnG", date("2022-10-28"),
@@ -656,7 +657,7 @@ d <- d %>%
             psb7a:psb15_tried_10_text, psb16_10_text:psb16_tried_10_text))
 ```
 
-## Recoding for inclusion/exclusion
+## Recoding for inclusion criteria
 
 ### Daily behavioral screeners
 
@@ -754,11 +755,77 @@ data_subset %>%
 
 ## Descriptive checks
 
+### ANALYTIC SAMPLE: # of surveys per nid 
+
+```{r}
+analytic_ids <- data_subset %>%
+  distinct(nid) %>%
+  pull(nid)
+
+diary_ana_nids <- d %>%
+  filter(nid %in% analytic_ids)
+
+diary_ana_nids %>%
+  summarise(
+    n_obs = n(),
+    n_participants = n_distinct(nid))
+
+diary_ana_nids %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    mean_surveys   = mean(n_surveys),
+    median_surveys = median(n_surveys),
+    sd_surveys     = sd(n_surveys),
+    min_surveys    = min(n_surveys),
+    max_surveys    = max(n_surveys),
+    completion_rate = mean(n_surveys) / 28,
+    n_participants = n()
+  )
+```
+
+```{r}
+data_subset %>% 
+  group_by(nid) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  print(n = Inf)
+```
+
+#### Mean number of surveys completed: 23.5
+
+```{r}
+data_subset %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    total_completed = sum(n_surveys),
+    total_possible  = n() * 28,
+    mean_completed  = mean(n_surveys),
+    completion_rate = mean(n_surveys) / 28
+  )
+
+# double-check mean # of surveys 
+data_subset %>%
+  count(nid) %>%
+  summarise(avg_surveys_completed = mean(n))
+
+# median, SD, min, max 
+data_subset %>%
+  count(nid, name = "n_surveys") %>%
+  summarise(
+    median_surveys = median(n_surveys),
+    sd_surveys     = sd(n_surveys),
+    min_surveys    = min(n_surveys),
+    max_surveys    = max(n_surveys),
+    n_participants = n()
+  )
+```
+
+
 ### Missing diary data
 
 ```{r}
 d <- data_subset %>%
-  select(nid, date, response_id, s_act, aro_pf, pls_pf,
+  select(nid, date, response_id, s_act, aro_pf, pls_pf, day,
          verb, enon, inon, prec, fm_r, drink, intox, p_tox, bpa)
 
 colSums(is.na(d))[colSums(is.na(d)) > 0]
@@ -940,7 +1007,18 @@ activity?
 Response options: 0 = 1; 1-2 = 2, 3-4 = 3, 5-6 = 4, 7-9 = 5, 10+ = 6
 
 ```{r}
-d %>% select(drink) %>% glimpse()
+d %>% select(drink) %>% map(tabyl)
+
+d <- d %>%
+  mutate(drink = recode(
+    drink,
+    `1` = 0,
+    `2` = 1,
+    `3` = 2,
+    `4` = 3,
+    `5` = 4,
+    `6` = 5
+  ))
 
 d %>%
   pull(drink) %>%
@@ -1090,7 +1168,7 @@ data_subset (i.e., remove participants from baseline with zero psb1 == 1
 
 ```{r}
 base_ana <- baseline_subset %>%
-  semi_join(data_subset, by = "nid")
+  semi_join(d, by = "nid")
 ```
 
 Remove unnecessary variables
@@ -1125,6 +1203,14 @@ colSums(is.na(b))[colSums(is.na(b)) > 0] # aud2 missing 4 obs
 # (1-8) 1 = totally disagree, 8 = totally agree
 #  Higher scores reflect greater social desirability bias
 
+# create a character vector for the bidr items
+bidr_vector <- c("bidr_1","bidr_2","bidr_3","bidr_4","bidr_5",
+                 "bidr_6","bidr_7","bidr_8","bidr_9","bidr_10",
+                 "bidr_11","bidr_12","bidr_13","bidr_14","bidr_15","bidr_16")
+
+# alpha = .73, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, bidr_vector]) 
+
 ### Total Scale
 b <- b %>%
   rowwise() %>%
@@ -1137,8 +1223,16 @@ b <- b %>%
 
 ```{r}
 ## IRMA (a = .80)
-# 5 = strongly disagree, 4 = Somewhat..., 3 = Neither disagree nor agree, 2 = Somewhat..., 1 = strongly agree 
-# Item values summed for total score, with higher scores reflecting greater rejection of rape myths
+# 5 = strongly disagree, 4 = Somewhat..., # 3 = Neither disagree nor agree, 
+# 2 = Somewhat..., 1 = strongly agree 
+# Item values summed for total score, with higher scores reflecting 
+# greater rejection of rape myths
+
+# create a character vector for the irma items
+rma_vector <- c("irma1","irma2","irma3","irma4","irma5","irma6","irma7")
+
+# alpha = .80, i.e. > .70, meets standard criterion for reliability
+psych::alpha(b[, rma_vector]) 
 
 b <- b %>%
   rowwise() %>%
@@ -1147,16 +1241,44 @@ b <- b %>%
 
 ### Alcohol and sexual coercion - Personal attitudes
 
-NOTE: check reverse-coding
+NOTE: Reverse-coded `asc1` and `asc4`
 
 ```{r}
-b <- b %>%
-  rowwise() %>%
-  mutate(asco = sum(asc1, asc2, asc3, asc4, coer1, coer2, 
-                    coer3, coer4, coer5, coer6))
+b %>% select(asc1:asc4) %>% map(tabyl)
+
+# reverse-code items 1 and 4
+b <- b %>%   
+  mutate(across(c(asc1, asc4),
+                ~dplyr::recode(., 
+                               "1" = 7,
+                               "2" = 6,
+                               "3" = 5,
+                               "4" = 4,
+                               "5" = 3,
+                               "6" = 2,
+                               "7" = 1)))
+
+# create a character vector for the alcohol+coercion items
+ascoer_vec <- c("asc2", "asc3", "asc4", 
+                "coer1", "coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .72 > .70 meets standard criterion for reliability
+# increased from .67 after dropping asc1
+psych::alpha(b[, ascoer_vec], check.keys=TRUE) 
 
 b <- b %>%
-  rowwise() %>%
+  rowwise() %>% # calculate summed score
+  mutate(asco = sum(asc2, asc3, asc4, coer1, coer2, 
+                    coer3, coer4, coer5, coer6))
+
+# create a character vector for just the coercion items
+coer_vec <- c("coer1", "coer2","coer3","coer4","coer5","coer6")
+
+# alpha = .81 > .70 meets standard criterion for reliability
+psych::alpha(b[, coer_vec], check.keys=TRUE) 
+
+b <- b %>%
+  rowwise() %>% # calculate summed score
   mutate(coer = sum(coer1,coer2,coer3,coer4,coer5,coer6))
 ```
 
@@ -1164,19 +1286,32 @@ b <- b %>%
 ### Perceived peer attitudes - Alcohol and sexual coercion
 
 ```{r}
+# create a character vector
+pa_vec <- c("pa1","pa2","pa3","pa4","pa5","pa6")
+
+# alpha = .65 < .70
+psych::alpha(b[, pa_vec], check.keys=TRUE)
+
 b <- b %>%
   rowwise() %>%
   mutate(ppat = sum(pa1, pa2, pa3, pa4, pa5, pa6))
+
+cor.test(b$ppat, b$asco)
+cor.test(b$ppat, b$coer)
 ```
 
 ## Save updated dataframe
 
 ```{r}
-b |> 
-  write_csv(here::here(path_ready, "base_tst.csv"))
+b %>% 
+  write_csv(here::here(path_ready, "base_tst2.csv"))
+
+saveRDS(b, here::here(path_ready, "base_tst2.rds"))
 ```
 
 ```{r}
-data_subset |> 
-  write_csv(here::here(path_ready, "diary_tst.csv"))
+d %>% 
+  write_csv(here::here(path_ready, "diary_tst2.csv"))
+
+saveRDS(d, here::here(path_ready, "diary_tst2.rds"))
 ```

@@ -1,5 +1,5 @@
 ---
-title: "Variable construction and model preparation"
+title: "Variable and model preparation"
 output: 
   html_document:
     toc: true 
@@ -43,12 +43,13 @@ library(lme4)
 library(ordinal)
 library(lmerTest)
 library(kableExtra)
+library(e1071)
 
 source(here::here("_scripts/functions.R"))
 ```
 
 ```{r}
-d <- read_csv(here::here(path_ready, "imputed_1.csv"), show_col_types = FALSE)
+d <- read_csv(here::here(path_ready, "miced_1.csv"), show_col_types = FALSE)
 ```
 
 ### Variable preparation
@@ -194,16 +195,18 @@ psych::alpha(d[, audit_vector], check.keys = T) # alpha = .81
 ### Set factor levels
 
 ```{r}
+d %>% select(prec, bpa, s_act, gend_di) %>% map(tabyl)
+
 d <- d %>%
   mutate(
     # Binary contextual indicators
     prec = factor(prec,
                   levels = c(0, 1),
-                  labels = c("No_history", "Precedent")),
+                  labels = c("No_history", "History")),
     
     bpa  = factor(bpa,
                   levels = c(0, 1),
-                  labels = c("No_venues", "Bar_party")),
+                  labels = c("False", "True")),
     
     # Sexual activity type
     s_act = factor(s_act,
@@ -215,14 +218,7 @@ d <- d %>%
                      labels = c("Women_GNC", "Men"))
   )
 
-# Drinks if ordered factor (likely untenable?)
-d <- d %>%
-  mutate(
-    drk_ord = factor(
-      drink,
-      levels = 1:6,
-      labels = c("0", "1–2", "3–4", "5–6", "7–9", "10+"),
-      ordered = TRUE))
+
 ```
 
 ### Decompose
@@ -233,10 +229,10 @@ d <- d %>%
 d <- decompose_num(
   df   = d,
   id   = "nid",
-  vars = c("intox", "parity_con", "drink","p_tox"))
+  vars = c("intox", "parity_con", "drink", "p_tox"))
 ```
 
-Check decomposition
+Check decomposition (repeated for all four vars)
 
 ```{r}
 d %>%
@@ -265,7 +261,7 @@ d <- decompose_factor_any(
   df       = d,
   id       = "nid",
   var      = "bpa",
-  baseline = "No_venues",
+  baseline = "False",
   prefix   = "bpa"
 )
 ```
@@ -284,16 +280,6 @@ d <- decompose_factor_any(
 d <- decompose_factor_any(
   df       = d,
   id       = "nid",
-  var      = "fam_rank",
-  baseline = "Less",
-  prefix   = "fam2"
-)
-```
-
-```{r}
-d <- decompose_factor_any(
-  df       = d,
-  id       = "nid",
   var      = "fam_lev",
   baseline = "Stranger",
   prefix   = "fam3"
@@ -304,9 +290,19 @@ d <- decompose_factor_any(
 d <- decompose_factor_any(
   df       = d,
   id       = "nid",
+  var      = "fam_rank",
+  baseline = "Less",
+  prefix   = "fam2"
+)
+```
+
+```{r}
+d <- decompose_factor_any(
+  df       = d,
+  id       = "nid",
   var      = "parity_cat",
   baseline = "Equal",
-  prefix   = "par"
+  prefix   = "dis"
 )
 
 levels(d$parity_cat)
@@ -324,7 +320,8 @@ names(d)[grepl("^prec_", names(d))]
 names(d)[grepl("^bpa_",  names(d))]
 names(d)[grepl("^act_", names(d))]
 names(d)[grepl("^fam3_", names(d))]
-names(d)[grepl("^par_", names(d))]
+names(d)[grepl("^fam2_", names(d))]
+names(d)[grepl("^dis_", names(d))]
 ```
 
 #### + Standardize
@@ -353,12 +350,65 @@ rec_outcomes <- recipe(~ ., data = d) %>%
 
 prep_rec <- prep(rec_outcomes, training = d)
 
+prep_rec
+tidy(prep_rec, number = 1)
+
 d_lmm <- bake(prep_rec, new_data = d) %>%
   rename(
     verb_yj = verb,
     nvrb_yj = nvrb)
 
-names(d_lmm)
+psych::describe(d_lmm$verb_yj) # 0 - 6.41
+psych::describe(d_lmm$nvrb_yj) # 0 - 22.886
+```
+
+```{r}
+d_check <- d %>%
+  transmute(
+    verb_orig = verb,
+    nvrb_orig = nvrb
+  ) %>%
+  bind_cols(
+    d_lmm %>% transmute(verb_yj, nvrb_yj)
+  )
+
+with(d_check, cor(verb_orig, verb_yj))
+with(d_check, cor(nvrb_orig, nvrb_yj))
+
+with(d_check, max(abs(verb_orig - verb_yj)))
+with(d_check, max(abs(nvrb_orig - nvrb_yj)))
+
+d_check %>%
+  filter(!is.na(verb_orig)) %>%
+  slice_sample(n = 10) %>%
+  select(verb_orig, verb_yj, nvrb_orig, nvrb_yj)
+```
+
+```{r}
+par(mfrow = c(2,2))
+hist(d_check$verb_orig, main = "verb (orig)")
+hist(d_check$verb_yj,   main = "verb (YJ)")
+hist(d_check$nvrb_orig, main = "nvrb (orig)")
+hist(d_check$nvrb_yj,   main = "nvrb (YJ)")
+par(mfrow = c(1,1))
+```
+
+```{r}
+par(mfrow = c(2,2))
+qqnorm(d_check$verb_orig); qqline(d_check$verb_orig)
+qqnorm(d_check$verb_yj);   qqline(d_check$verb_yj)
+qqnorm(d_check$nvrb_orig); qqline(d_check$nvrb_orig)
+qqnorm(d_check$nvrb_yj);   qqline(d_check$nvrb_yj)
+par(mfrow = c(1,1))
+```
+
+```{r}
+c(
+  verb_skew_orig = skewness(d_check$verb_orig),
+  verb_skew_yj   = skewness(d_check$verb_yj),
+  nvrb_skew_orig = skewness(d_check$nvrb_orig),
+  nvrb_skew_yj   = skewness(d_check$nvrb_yj)
+)
 ```
 
 ### ICCs
@@ -464,7 +514,8 @@ v_m0 <- lmer(verb_yj ~ day_c +
 
 anova(v_null, v_m0) # support for fixed design covariate? No
 
-v_m1 <- lmer(verb_yj ~ day_c + (1 + day_c | nid), data = d_lmm, REML = TRUE)
+v_m1 <- lmer(verb_yj ~ day_c + 
+               (1 + day_c | nid), data = d_lmm, REML = TRUE)
 
 anova(v_m0, v_m1) # support for random slope? Yes
 
@@ -492,29 +543,28 @@ v_m1_clmm <- clmm(verb_bins ~ day_c +
 
 anova(v_m0_clmm, v_m1_clmm) # support for random slope? Yes
 summary(v_m1_clmm)
-as.data.frame(VarCorr(v_m1_clmm))
 ```
 
-Evaluate study `day` for inclusion in **nonverbal** models as fixed
-design covariate and assess support for random slope
+Evaluate study `day` for inclusion in **nonverbal** models as fixed design
+covariate and assess support for random slope
 
 ```{r}
 n_null <- lmer(nvrb_yj ~ 1 + 
                  (1 | nid), data = d_lmm, REML = FALSE)
 
-n_m0 <- lmer(nvrb_yj ~ day_c +
-               (1 | nid), data = d_lmm, REML = FALSE) # compare to unconditional LMEM
+n_m0 <- lmer(nvrb_yj ~ day_c + # compare to unconditional LMEM
+               (1 | nid), data = d_lmm, REML = FALSE)
 
-anova(n_null, n_m0) # support for fixed design covariate? No
+anova(n_null, n_m0) # support for fixed covariate? No
 
-n_m1 <- lmer(nvrb_yj ~ day_c + (1 + day_c | nid), data = d_lmm, REML = FALSE)
+n_m1 <- lmer(nvrb_yj ~ day_c + # support for random slope? No
+               (1 + day_c | nid), data = d_lmm, REML = FALSE)
 
-anova(n_m0, n_m1) # support for random slope? No
+# anova(n_m0, n_m1)
+# VarCorr(n_m1)
+# as.data.frame(VarCorr(n_m1))
 
-VarCorr(n_m1)
-as.data.frame(VarCorr(n_m1))
-
-# Unconditional CLMM with random intercepts for participants (`nid`) and no predictors
+# Unconditional CLMM with random intercepts for participants and no predictors
 n_null_clmm <- clmm(nonvb_bins ~ 1 + 
                       (1 | nid), 
                     data = d_lmm, 
@@ -533,8 +583,8 @@ n_m1_clmm <- clmm(nonvb_bins ~ day_c +
                   link = "logit", Hess = TRUE)
 
 anova(n_m0_clmm, n_m1_clmm) # support for random slope? No
-summary(n_m1_clmm)
-as.data.frame(VarCorr(n_m1_clmm))
+# summary(n_m1_clmm)
+# as.data.frame(VarCorr(n_m1_clmm))
 ```
 
 
@@ -563,17 +613,39 @@ their own contact-only encounters. Although the magnitude of this effect
 varied across individuals, the average within-person association was
 positive.
 
-```{r}
+```{r, eval=FALSE}
 m_act <- lmer(
   verb_yj ~ act_penetration_wp + act_penetration_pm_c +
-    (1 + act_penetration_wp + day_c || nid),
+    (1 + act_penetration_wp + day_c | nid),
   data = d_lmm,
   REML = TRUE)
 
 summary(m_act)
+
+act_raw <- lmer(
+  verb ~ act_penetration_wp + act_penetration_pm_c +
+    (1 + act_penetration_wp + day_c | nid),
+  data = d,
+  REML = TRUE)
 ```
 
-**Include** random slope for verbal if using 2-level **familiarity**.
+Visual inspection of standardized residual Q–Q plots indicated modest improvements in residual normality following Yeo–Johnson transformation, particularly in the upper tail; transformed outcomes were therefore retained for primary LMMs.
+```{r, eval=FALSE}
+par(mfrow = c(1, 2))
+
+qqnorm(scale(resid(act_raw)),
+       main = "Raw outcome (standardized residuals)")
+qqline(scale(resid(act_raw)))
+
+qqnorm(scale(resid(m_act)),
+       main = "YJ outcome (standardized residuals)")
+qqline(scale(resid(m_act)))
+
+par(mfrow = c(1, 1))
+```
+
+
+**Include** random slope for verbal *if* using 2-level **familiarity**.
 
 ```{r}
 test_random_slope(
@@ -588,8 +660,8 @@ Exclude random slope for precedent predicting verbal.
 ```{r}
 test_random_slope(
   outcome = "verb_yj",
-  wp = "prec_precedent_wp",
-  pm_c = "prec_precedent_pm_c",
+  wp = "prec_history_wp",
+  pm_c = "prec_history_pm_c",
   data = d_lmm
 )
 ```
@@ -614,7 +686,7 @@ test_random_slope(
   data = d_lmm)
 ```
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 # subjective and perceived intoxication
 test_random_slope(
   outcome = "verb_yj",
@@ -634,8 +706,8 @@ Exclude random slope for bpa predicting verbal.
 ```{r}
 test_random_slope(
   outcome = "verb_yj",
-  wp = "bpa_bar_party_wp",
-  pm_c = "bpa_bar_party_pm_c",
+  wp = "bpa_true_wp",
+  pm_c = "bpa_true_pm_c",
   data = d_lmm)
 ```
 
@@ -658,8 +730,7 @@ test_random_slope(
   outcome = "nvrb_yj",
   wp = "fam2_more_wp",
   pm_c = "fam2_more_pm_c",
-  data = d_lmm
-)
+  data = d_lmm)
 ```
 
 Exclude random slope for precedent predicting nonverbal.
@@ -667,10 +738,9 @@ Exclude random slope for precedent predicting nonverbal.
 ```{r}
 test_random_slope(
   outcome = "nvrb_yj",
-  wp = "prec_precedent_wp",
-  pm_c = "prec_precedent_pm_c",
-  data = d_lmm
-)
+  wp = "prec_history_wp",
+  pm_c = "prec_history_pm_c",
+  data = d_lmm)
 ```
 
 Exclude random slope for drink predicting nonverbal.
@@ -714,8 +784,8 @@ Exclude random slope for bpa predicting nonverbal.
 ```{r}
 test_random_slope(
   outcome = "nvrb_yj",
-  wp = "bpa_bar_party_wp",
-  pm_c = "bpa_bar_party_pm_c",
+  wp = "bpa_true_wp",
+  pm_c = "bpa_true_pm_c",
   data = d_lmm)
 ```
 
@@ -723,5 +793,5 @@ test_random_slope(
 ```{r}
 saveRDS(
   d_lmm,
-  here::here(path_ready, "imp1_ana.rds"))
+  here::here(path_ready, "miced_1ana.rds"))
 ```

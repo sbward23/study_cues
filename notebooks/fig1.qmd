@@ -1,5 +1,5 @@
 ---
-title: Histograms
+title: Figures
 author: Stephanie Ward
 editor_options: 
   chunk_output_type: console
@@ -54,7 +54,7 @@ table(d$verb_bins, useNA = "ifany")
 
 ```{r}
 #| label: fig-2
-#| fig-cap: "Ordinal, binned verbal consent (anchor-informed)."
+#| fig-cap: "Ordinal, binned verbal consent."
 
 d %>%
   ggplot(aes(x = verb_bins)) +
@@ -100,7 +100,7 @@ table(d$nonvb_bins, useNA = "ifany")
 
 ```{r}
 #| label: fig-4
-#| fig-cap: "Ordinal, binned nonverbal consent (anchor-informed)."
+#| fig-cap: "Ordinal, binned nonverbal consent."
 
 d %>%
   ggplot(aes(x = nonvb_bins)) +

@@ -43,9 +43,11 @@ path_ready <- "_data/data_ready"
 Read in data
 
 ```{r}
-b <- read_csv(here::here(path_ready, "base_tst.csv"), show_col_types = FALSE)
+# b <- read_csv(here::here(path_ready, "base_tst2.csv"), show_col_types = FALSE)
+b <- readRDS(here::here(path_ready, "base_tst2.rds"))
 
-diary <- read_csv(here::here(path_ready, "diary_tst.csv"), show_col_types = FALSE)
+diary <- read_csv(here::here(path_ready, "diary_tst2.csv"), show_col_types = FALSE)
+# diary <- readRDS(here::here(path_ready, "diary_tst2.rds"))
 ```
 
 #### Confirm diary is in long format
@@ -100,10 +102,18 @@ d <- diary %>%
   left_join(b %>% distinct(nid, .keep_all = TRUE), by = "nid")
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 d <- d %>% 
   select(-c(osb3:traum4, med1_p:med4_p, cub3:cub6, au_t:au_drg))
 
+df <- d %>%
+  select(nid, eid, day, bpa, fm_r, intox, p_tox, drink, verb, enon, inon, s_act, prec, 
+         aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8, aud9, aud10, bidr, irma, asco,
+         pa1, pa2, pa3, pa4, pa5, pa6, ppat, gend_di, asc1, asc2, asc3, asc4,
+         coer1, coer2, coer3, coer4, coer5, coer6) %>% glimpse()
+```
+
+```{r}
 df <- d %>%
   select(nid, eid, day, bpa, fm_r, intox, p_tox, drink, verb, enon, inon,
          s_act, prec, gend_di, aud1, aud2, aud3, aud4, aud5, aud6, aud7, aud8, aud9, 
@@ -113,10 +123,12 @@ df <- d %>%
 ### Explore missingness
 
 NOTE: n = 1 `nid` (9128298) endorsed "Prefer not to respond" for `bpa`;
-obs was coded NA to be imputed
+obs was recoded NA to be imputed
 
-```{r}
-colSums(is.na(df))[colSums(is.na(df)) > 0]
+```{r, eval=FALSE}
+df %>% select(bpa) %>% map(tabyl)
+
+df <- df %>% mutate(bpa = ifelse(bpa == 3, NA, bpa))
 ```
 
 A visual and tabular inspection of missing data patterns indicated that
@@ -124,6 +136,8 @@ missingness was sparse, localized to a small number of event-level
 variables, and not concentrated within specific participants or events.
 
 ```{r}
+colSums(is.na(df))[colSums(is.na(df)) > 0]
+
 df_subset <- df %>%
   select(bpa, fm_r, drink, verb, enon, inon, prec, aud2)
 
@@ -259,6 +273,7 @@ stripplot(imp, aud2 ~ .imp)
 summary(complete(imp, 1)$fm_r) 
 summary(complete(imp, 1)$prec)
 summary(complete(imp, 1)$drink)
+summary(complete(imp, 1)$bpa)
 summary(complete(imp, 1)$enon)
 summary(complete(imp, 1)$inon)
 summary(complete(imp, 1)$verb)
@@ -271,17 +286,17 @@ completed_list <- mice::complete(imp, action = "all")
 
 Export as a list of completed dataframes
 
-```{r, eval=FALSE}
+```{r}
 saveRDS(
   completed_list,
-  here::here(path_ready, "imputed_datasets.rds"))
+  here::here(path_ready, "miced_datasets.rds"))
 ```
 
 Export individual CSV files (one .csv per imputation)
 
-```{r, eval=FALSE}
+```{r}
 purrr::iwalk(
   completed_list,
-  ~ write_csv(.x, here::here(path_ready, paste0("imputed_", .y, ".csv")))
+  ~ write_csv(.x, here::here(path_ready, paste0("miced_", .y, ".csv")))
 )
 ```
